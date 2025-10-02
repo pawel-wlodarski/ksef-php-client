@@ -18,7 +18,7 @@ final readonly class OpenRequest extends AbstractRequest implements BodyInterfac
     ) {
     }
 
-    public function toBody(KeyType $keyType = KeyType::Camel): array
+    public function toBody(): array
     {
         return [
             'formCode' => [

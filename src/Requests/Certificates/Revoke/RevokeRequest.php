@@ -19,8 +19,8 @@ final readonly class RevokeRequest extends AbstractRequest implements BodyInterf
     ) {
     }
 
-    public function toBody(KeyType $keyType = KeyType::Camel): array
+    public function toBody(): array
     {
-        return $this->toArray($keyType, ['revocationReason']);
+        return $this->toArray(only: ['revocationReason']);
     }
 }

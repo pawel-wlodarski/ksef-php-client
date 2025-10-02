@@ -12,7 +12,7 @@ use N1ebieski\KSEFClient\Support\ValueObjects\KeyType;
  */
 trait HasToParameters
 {
-    public function toParameters(KeyType $keyType = KeyType::Camel): array
+    public function toParameters(): array
     {
         $parameters = [];
 

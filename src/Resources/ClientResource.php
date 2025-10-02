@@ -107,7 +107,7 @@ final class ClientResource extends AbstractResource implements ClientResourceInt
 
     public function sessions(): SessionsResourceInterface
     {
-        return new SessionsResource($this->client);
+        return new SessionsResource($this->client, $this->config, $this->logger);
     }
 
     public function certificates(): CertificatesResourceInterface

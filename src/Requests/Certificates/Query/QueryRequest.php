@@ -15,7 +15,6 @@ use N1ebieski\KSEFClient\Requests\Certificates\ValueObjects\CertificateType;
 use N1ebieski\KSEFClient\Requests\ValueObjects\PageOffset;
 use N1ebieski\KSEFClient\Requests\ValueObjects\PageSize;
 use N1ebieski\KSEFClient\Support\Optional;
-use N1ebieski\KSEFClient\Support\ValueObjects\KeyType;
 
 final readonly class QueryRequest extends AbstractRequest implements BodyInterface, ParametersInterface
 {
@@ -30,13 +29,13 @@ final readonly class QueryRequest extends AbstractRequest implements BodyInterfa
     ) {
     }
 
-    public function toBody(KeyType $keyType = KeyType::Camel): array
+    public function toBody(): array
     {
-        return $this->toArray($keyType, ['name', 'type', 'status', 'certificateSerialNumber', 'expiresAfter']);
+        return $this->toArray(only: ['name', 'type', 'status', 'certificateSerialNumber', 'expiresAfter']);
     }
 
-    public function toParameters(KeyType $keyType = KeyType::Camel): array
+    public function toParameters(): array
     {
-        return $this->toArray($keyType, ['pageSize', 'pageOffset']);
+        return $this->toArray(only: ['pageSize', 'pageOffset']);
     }
 }

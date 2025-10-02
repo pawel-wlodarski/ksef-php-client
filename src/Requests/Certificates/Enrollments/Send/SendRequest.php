@@ -10,21 +10,19 @@ use N1ebieski\KSEFClient\Contracts\ParametersInterface;
 use N1ebieski\KSEFClient\Requests\AbstractRequest;
 use N1ebieski\KSEFClient\Requests\Certificates\ValueObjects\CertificateName;
 use N1ebieski\KSEFClient\Requests\Certificates\ValueObjects\CertificateType;
+use N1ebieski\KSEFClient\Support\Concerns\HasToBody;
 use N1ebieski\KSEFClient\Support\Optional;
 use N1ebieski\KSEFClient\Support\ValueObjects\KeyType;
 
 final readonly class SendRequest extends AbstractRequest implements BodyInterface
 {
+    use HasToBody;
+
     public function __construct(
         public CertificateName $certificateName,
         public CertificateType $certificateType,
         public string $csr,
         public Optional | DateTime | null $validFrom = new Optional()
     ) {
-    }
-
-    public function toBody(KeyType $keyType = KeyType::Camel): array
-    {
-        return $this->toArray($keyType);
     }
 }

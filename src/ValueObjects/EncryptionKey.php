@@ -5,16 +5,33 @@ declare(strict_types=1);
 namespace N1ebieski\KSEFClient\ValueObjects;
 
 use N1ebieski\KSEFClient\Support\AbstractValueObject;
+use N1ebieski\KSEFClient\Validator\Rules\String\MaxBytesRule;
+use N1ebieski\KSEFClient\Validator\Rules\String\MinBytesRule;
+use N1ebieski\KSEFClient\Validator\Validator;
 use SensitiveParameter;
 
 final readonly class EncryptionKey extends AbstractValueObject
 {
+    #[SensitiveParameter]
+    public readonly string $key;
+
+    #[SensitiveParameter]
+    public readonly string $iv;
+
     public function __construct(
-        #[SensitiveParameter]
-        public string $key,
-        #[SensitiveParameter]
-        public string $iv
+        string $key,
+        string $iv
     ) {
+        Validator::validate([
+            'key' => $key,
+            'iv' => $iv
+        ], [
+            'key' => [new MinBytesRule(32), new MaxBytesRule(32)],
+            'iv' => [new MinBytesRule(16), new MaxBytesRule(16)]
+        ]);
+
+        $this->key = $key;
+        $this->iv = $iv;
     }
 
     public static function from(string $key, string $iv): self

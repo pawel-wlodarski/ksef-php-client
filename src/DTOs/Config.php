@@ -4,22 +4,23 @@ declare(strict_types=1);
 
 namespace N1ebieski\KSEFClient\DTOs;
 
+use N1ebieski\KSEFClient\HttpClient\ValueObjects\BaseUri;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 use N1ebieski\KSEFClient\ValueObjects\AccessToken;
 use N1ebieski\KSEFClient\ValueObjects\EncryptionKey;
-use N1ebieski\KSEFClient\ValueObjects\KSEFPublicKeyPath;
 use N1ebieski\KSEFClient\ValueObjects\RefreshToken;
 use SensitiveParameter;
 
 final readonly class Config extends AbstractDTO
 {
     public function __construct(
-        // public KSEFPublicKeyPath $ksefPublicKeyPath,
-        // public ?EncryptionKey $encryptionKey = null,
+        public BaseUri $baseUri,
         #[SensitiveParameter]
         public ?AccessToken $accessToken = null,
         #[SensitiveParameter]
-        public ?RefreshToken $refreshToken = null
+        public ?RefreshToken $refreshToken = null,
+        #[SensitiveParameter]
+        public ?EncryptionKey $encryptionKey = null
     ) {
     }
 
