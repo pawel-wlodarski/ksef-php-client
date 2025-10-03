@@ -33,4 +33,9 @@ final readonly class NIP extends AbstractValueObject implements FromInterface, S
     {
         return new self($value);
     }
+
+    public function getType(): string
+    {
+        return 'Nip';
+    }
 }

@@ -13,6 +13,7 @@ use N1ebieski\KSEFClient\Contracts\Resources\ClientResourceInterface;
 use N1ebieski\KSEFClient\Contracts\Resources\Security\SecurityResourceInterface;
 use N1ebieski\KSEFClient\Contracts\Resources\Sessions\SessionsResourceInterface;
 use N1ebieski\KSEFClient\Contracts\Resources\Testdata\TestdataResourceInterface;
+use N1ebieski\KSEFClient\Contracts\Resources\Tokens\TokensResourceInterface;
 use N1ebieski\KSEFClient\DTOs\Config;
 use N1ebieski\KSEFClient\Resources\AbstractResource;
 use N1ebieski\KSEFClient\Resources\Auth\AuthResource;
@@ -20,6 +21,7 @@ use N1ebieski\KSEFClient\Resources\Certificates\CertificatesResource;
 use N1ebieski\KSEFClient\Resources\Security\SecurityResource;
 use N1ebieski\KSEFClient\Resources\Sessions\SessionsResource;
 use N1ebieski\KSEFClient\Resources\Testdata\TestdataResource;
+use N1ebieski\KSEFClient\Resources\Tokens\TokensResource;
 use N1ebieski\KSEFClient\ValueObjects\AccessToken;
 use N1ebieski\KSEFClient\ValueObjects\RefreshToken;
 use Psr\Log\LoggerInterface;
@@ -107,6 +109,8 @@ final class ClientResource extends AbstractResource implements ClientResourceInt
 
     public function sessions(): SessionsResourceInterface
     {
+        $this->refreshTokenIfExpired();
+
         return new SessionsResource($this->client, $this->config, $this->logger);
     }
 
@@ -115,6 +119,13 @@ final class ClientResource extends AbstractResource implements ClientResourceInt
         $this->refreshTokenIfExpired();
 
         return new CertificatesResource($this->client);
+    }
+
+    public function tokens(): TokensResourceInterface
+    {
+        $this->refreshTokenIfExpired();
+
+        return new TokensResource($this->client);
     }
 
     public function testdata(): TestdataResourceInterface

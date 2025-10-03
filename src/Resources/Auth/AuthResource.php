@@ -11,6 +11,8 @@ use N1ebieski\KSEFClient\Contracts\HttpClient\ResponseInterface;
 use N1ebieski\KSEFClient\Contracts\Resources\Auth\AuthResourceInterface;
 use N1ebieski\KSEFClient\Contracts\Resources\Auth\Token\TokenResourceInterface;
 use N1ebieski\KSEFClient\Requests\Auth\Challenge\ChallengeHandler;
+use N1ebieski\KSEFClient\Requests\Auth\KsefToken\KsefTokenHandler;
+use N1ebieski\KSEFClient\Requests\Auth\KsefToken\KsefTokenRequest;
 use N1ebieski\KSEFClient\Requests\Auth\Status\StatusHandler;
 use N1ebieski\KSEFClient\Requests\Auth\Status\StatusRequest;
 use N1ebieski\KSEFClient\Requests\Auth\XadesSignature\XadesSignatureHandler;
@@ -22,7 +24,7 @@ use N1ebieski\KSEFClient\Resources\Auth\Token\TokenResource;
 final class AuthResource extends AbstractResource implements AuthResourceInterface
 {
     public function __construct(
-        readonly private HttpClientInterface $client
+        private readonly HttpClientInterface $client
     ) {
     }
 
@@ -41,6 +43,15 @@ final class AuthResource extends AbstractResource implements AuthResourceInterfa
             client: $this->client,
             signDocument: new SignDocumentHandler(new ConvertEcdsaDerToRawHandler())
         )->handle($request);
+    }
+
+    public function ksefToken(KsefTokenRequest | array $request): ResponseInterface
+    {
+        if ($request instanceof KsefTokenRequest === false) {
+            $request = KsefTokenRequest::from($request);
+        }
+
+        return new KsefTokenHandler($this->client)->handle($request);
     }
 
     public function status(StatusRequest | array $request): ResponseInterface

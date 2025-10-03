@@ -34,4 +34,9 @@ final readonly class NipVatUe extends AbstractValueObject implements FromInterfa
     {
         return new self($value);
     }
+
+    public function getType(): string
+    {
+        return 'NipVatUe';
+    }
 }

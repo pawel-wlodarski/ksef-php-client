@@ -11,7 +11,7 @@ use N1ebieski\KSEFClient\Validator\Rules\String\RegexRule;
 use N1ebieski\KSEFClient\Validator\Validator;
 use Stringable;
 
-final readonly class InternalId extends AbstractValueObject implements FromInterface, Stringable, ValueAwareInterface
+final readonly class PeppolId extends AbstractValueObject implements FromInterface, Stringable, ValueAwareInterface
 {
     public string $value;
 
@@ -19,7 +19,7 @@ final readonly class InternalId extends AbstractValueObject implements FromInter
     {
         Validator::validate($value, [
             // @see https://ksef-test.mf.gov.pl/docs/v2/schemas/authv2.xsd
-            new RegexRule('/[1-9]((\d[1-9])|([1-9]\d))\d{7}-\d{5}/'),
+            new RegexRule('/^P[A-Z]{2}[0-9]{6}$/'),
         ]);
 
         $this->value = $value;
@@ -37,6 +37,6 @@ final readonly class InternalId extends AbstractValueObject implements FromInter
 
     public function getType(): string
     {
-        return 'InternalId';
+        return 'PeppolId';
     }
 }

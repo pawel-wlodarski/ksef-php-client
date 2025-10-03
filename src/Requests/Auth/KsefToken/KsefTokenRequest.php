@@ -1,0 +1,35 @@
+<?php
+
+declare(strict_types=1);
+
+namespace N1ebieski\KSEFClient\Requests\Auth\KsefToken;
+
+use N1ebieski\KSEFClient\Contracts\BodyInterface;
+use N1ebieski\KSEFClient\Requests\AbstractRequest;
+use N1ebieski\KSEFClient\Requests\Auth\DTOs\AuthorizationPolicy;
+use N1ebieski\KSEFClient\Requests\Auth\DTOs\ContextIdentifierGroup;
+use N1ebieski\KSEFClient\Requests\Auth\ValueObjects\Challenge;
+use N1ebieski\KSEFClient\Requests\Auth\ValueObjects\EncryptedToken;
+use N1ebieski\KSEFClient\Support\Optional;
+
+final readonly class KsefTokenRequest extends AbstractRequest implements BodyInterface
+{
+    public function __construct(
+        public Challenge $challenge,
+        public ContextIdentifierGroup $contextIdentifierGroup,
+        public EncryptedToken $encryptedToken,
+        public Optional | AuthorizationPolicy $authorizationPolicy = new Optional(),
+    ) {
+    }
+
+    public function toBody(): array
+    {
+        return [
+            ...$this->toArray(only: ['challenge', 'encryptedToken', 'authorizationPolicy']),
+            'contextIdentifier' => [
+                'type' => $this->contextIdentifierGroup->identifierGroup->getValue()->getType(),
+                'value' => (string) $this->contextIdentifierGroup->identifierGroup->getValue()
+            ],
+        ];
+    }
+}

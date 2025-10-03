@@ -20,13 +20,13 @@ final class PublicKeyCertificatesResponse implements ResponseInterface
         $this->baseResponse = $response->baseResponse;
     }
 
-    public function getSymmetricKeyEncryptionCertificate(): ?string
+    public function getFirstByPublicKeyCertificateUsage(PublicKeyCertificateUsage $type): ?string
     {
         /** @var array<int, object{certificate: string, validFrom: string<date-time>, validTo: string<date-time>, usage: array<int, string>}> $certificates */
         $certificates = $this->object();
 
         foreach ($certificates as $certificate) {
-            if ( ! in_array(PublicKeyCertificateUsage::SymmetricKeyEncryption->value, $certificate->usage)) {
+            if ( ! in_array($type->value, $certificate->usage)) {
                 continue;
             }
 

@@ -5,9 +5,12 @@ declare(strict_types=1);
 namespace N1ebieski\KSEFClient\Factories;
 
 use DateTimeInterface;
-use N1ebieski\KSEFClient\Requests\Online\Session\ValueObjects\EncryptedToken;
+use N1ebieski\KSEFClient\Requests\Auth\ValueObjects\EncryptedToken;
+use N1ebieski\KSEFClient\ValueObjects\KsefPublicKey;
 use N1ebieski\KSEFClient\ValueObjects\KsefToken;
-use N1ebieski\KSEFClient\ValueObjects\KSEFPublicKeyPath;
+use phpseclib3\Crypt\PublicKeyLoader;
+use phpseclib3\Crypt\RSA;
+use phpseclib3\Crypt\RSA\PublicKey as RSAPublicKey;
 use RuntimeException;
 use SensitiveParameter;
 
@@ -15,27 +18,32 @@ final readonly class EncryptedTokenFactory extends AbstractFactory
 {
     public static function make(
         #[SensitiveParameter]
-        KsefToken $apiToken,
+        KsefToken $ksefToken,
         #[SensitiveParameter]
         DateTimeInterface $timestamp,
-        KSEFPublicKeyPath $ksefPublicKeyPath,
+        KsefPublicKey $ksefPublicKey,
     ): EncryptedToken {
         $timestampAsMiliseconds = $timestamp->getTimestamp() * 1000;
 
-        $data = "{$apiToken->value}|{$timestampAsMiliseconds}";
+        $data = "{$ksefToken->value}|{$timestampAsMiliseconds}";
 
-        $publicKey = file_get_contents($ksefPublicKeyPath->value);
+        /** @var RSAPublicKey $pub */
+        $pub = PublicKeyLoader::load($ksefPublicKey->value);
 
-        if ($publicKey === false) {
-            throw new RuntimeException("Unable to read public key from the file: {$ksefPublicKeyPath->value}");
+        $pub = $pub
+            ->withPadding(RSA::ENCRYPTION_OAEP)
+            ->withHash('sha256')
+            ->withMGFHash('sha256');
+
+        $encryptedToken = $pub->encrypt($data);
+
+        if ($encryptedToken === false) {
+            throw new RuntimeException('Unable to encrypt token');
         }
 
-        $encryption = openssl_public_encrypt($data, $encryptedToken, $publicKey, OPENSSL_PKCS1_PADDING);
+        /** @var string $encryptedToken */
+        $encryptedToken = base64_encode($encryptedToken);
 
-        if ($encryption === false) {
-            throw new RuntimeException('Unable to encrypt token.');
-        }
-
-        return new EncryptedToken(base64_encode((string) $encryptedToken)); //@phpstan-ignore-line
+        return new EncryptedToken($encryptedToken);
     }
 }

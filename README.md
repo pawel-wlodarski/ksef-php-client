@@ -173,7 +173,7 @@ $authorisationChallengeResponse = $client->auth()->challenge()->object();
 $xml = XadesSignature::from([
     'challenge' => $authorisationChallengeResponse->challenge,
     'contextIdentifierGroup' => [
-        'contextIdentifierTypeGroup' => [
+        'identifierGroup' => [
             'nip' => $nip
         ]
     ],
@@ -591,6 +591,7 @@ use N1ebieski\KSEFClient\Factories\EncryptedKeyFactory;
 use N1ebieski\KSEFClient\Factories\EncryptionKeyFactory;
 use N1ebieski\KSEFClient\Support\Utility;
 use N1ebieski\KSEFClient\Testing\Fixtures\Requests\Sessions\Online\Send\SendFakturaSprzedazyTowaruRequestFixture;
+use N1ebieski\KSEFClient\Requests\Security\PublicKeyCertificates\ValueObjects\PublicKeyCertificateUsage;
 use N1ebieski\KSEFClient\ValueObjects\KsefPublicKey;
 use N1ebieski\KSEFClient\ValueObjects\Mode;
 
@@ -605,7 +606,7 @@ $client = new ClientBuilder()
 $securityResponse = $client->security()->publicKeyCertificates();
 
 $symmetricKeyEncryptionCertificate = base64_decode(
-    $securityResponse->getSymmetricKeyEncryptionCertificate()
+    $securityResponse->getFirstByPublicKeyCertificateUsage(PublicKeyCertificateUsage::SymmetricKeyEncryption)
 );
 
 $certificate = new ConvertDerToPemHandler()->handle(new ConvertDerToPemAction(

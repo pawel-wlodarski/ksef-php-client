@@ -6,14 +6,19 @@ namespace N1ebieski\KSEFClient\Requests\Auth\DTOs;
 
 use DOMDocument;
 use N1ebieski\KSEFClient\Contracts\DomSerializableInterface;
-use N1ebieski\KSEFClient\ValueObjects\InternalId;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
+use N1ebieski\KSEFClient\ValueObjects\InternalId;
 
 final readonly class ContextIdentifierInternalIdGroup extends AbstractDTO implements DomSerializableInterface
 {
     public function __construct(
         public InternalId $internalId,
     ) {
+    }
+
+    public function getValue(): InternalId
+    {
+        return $this->internalId;
     }
 
     public function toDom(): DOMDocument
@@ -24,10 +29,10 @@ final readonly class ContextIdentifierInternalIdGroup extends AbstractDTO implem
         $contextIdentifierInternalIdGroup = $dom->createElement('ContextIdentifierInternalIdGroup');
         $dom->appendChild($contextIdentifierInternalIdGroup);
 
-        $nip = $dom->createElement('InternalId');
-        $nip->appendChild($dom->createTextNode((string) $this->internalId->value));
+        $internalId = $dom->createElement('InternalId');
+        $internalId->appendChild($dom->createTextNode((string) $this->internalId->value));
 
-        $contextIdentifierInternalIdGroup->appendChild($nip);
+        $contextIdentifierInternalIdGroup->appendChild($internalId);
 
         return $dom;
     }

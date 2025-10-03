@@ -11,11 +11,12 @@ use N1ebieski\KSEFClient\Support\AbstractDTO;
 use N1ebieski\KSEFClient\ValueObjects\InternalId;
 use N1ebieski\KSEFClient\ValueObjects\NIP;
 use N1ebieski\KSEFClient\ValueObjects\NipVatUe;
+use N1ebieski\KSEFClient\ValueObjects\PeppolId;
 
 final readonly class ContextIdentifierGroup extends AbstractDTO implements DomSerializableInterface
 {
     public function __construct(
-        public ContextIdentifierNipGroup | ContextIdentifierNipVatUeGroup | ContextIdentifierInternalIdGroup $contextIdentifierTypeGroup
+        public ContextIdentifierNipGroup | ContextIdentifierNipVatUeGroup | ContextIdentifierInternalIdGroup | ContextIdentifierPeppolIdGroup $identifierGroup
     ) {
     }
 
@@ -25,6 +26,7 @@ final readonly class ContextIdentifierGroup extends AbstractDTO implements DomSe
             $identifier instanceof NIP => new self(new ContextIdentifierNipGroup($identifier)),
             $identifier instanceof NipVatUe => new self(new ContextIdentifierNipVatUeGroup($identifier)),
             $identifier instanceof InternalId => new self(new ContextIdentifierInternalIdGroup($identifier)),
+            $identifier instanceof PeppolId => new self(new ContextIdentifierPeppolIdGroup($identifier)),
         };
     }
 
@@ -36,10 +38,10 @@ final readonly class ContextIdentifierGroup extends AbstractDTO implements DomSe
         $contextIdentifierGroup = $dom->createElement('ContextIdentifierGroup');
         $dom->appendChild($contextIdentifierGroup);
 
-        /** @var DOMElement $contextIdentifierTypeGroup */
-        $contextIdentifierTypeGroup = $dom->importNode($this->contextIdentifierTypeGroup->toDom()->documentElement, true);
+        /** @var DOMElement $identifierGroup */
+        $identifierGroup = $dom->importNode($this->identifierGroup->toDom()->documentElement, true);
 
-        foreach ($contextIdentifierTypeGroup->childNodes as $child) {
+        foreach ($identifierGroup->childNodes as $child) {
             $contextIdentifierGroup->appendChild($dom->importNode($child, true));
         }
 

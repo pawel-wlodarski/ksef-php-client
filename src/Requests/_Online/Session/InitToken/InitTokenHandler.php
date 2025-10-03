@@ -27,9 +27,9 @@ final readonly class InitTokenHandler extends AbstractHandler
     public function handle(InitTokenRequest $request): ResponseInterface
     {
         $encryptedToken = EncryptedTokenFactory::make(
-            apiToken: $request->apiToken,
+            ksefToken: $request->apiToken,
             timestamp: $request->initSessionToken->timestamp,
-            ksefPublicKeyPath: $this->config->ksefPublicKeyPath
+            ksefPublicKey: $this->config->ksefPublicKeyPath
         );
 
         $encryptedKey = null;

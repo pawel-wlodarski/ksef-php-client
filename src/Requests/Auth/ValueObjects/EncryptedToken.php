@@ -2,14 +2,15 @@
 
 declare(strict_types=1);
 
-namespace N1ebieski\KSEFClient\Requests\Online\Session\ValueObjects;
+namespace N1ebieski\KSEFClient\Requests\Auth\ValueObjects;
 
+use N1ebieski\KSEFClient\Contracts\FromInterface;
 use N1ebieski\KSEFClient\Contracts\ValueAwareInterface;
 use N1ebieski\KSEFClient\Support\AbstractValueObject;
 use SensitiveParameter;
 use Stringable;
 
-final readonly class EncryptedToken extends AbstractValueObject implements ValueAwareInterface, Stringable
+final readonly class EncryptedToken extends AbstractValueObject implements FromInterface, ValueAwareInterface, Stringable
 {
     public function __construct(
         #[SensitiveParameter]
