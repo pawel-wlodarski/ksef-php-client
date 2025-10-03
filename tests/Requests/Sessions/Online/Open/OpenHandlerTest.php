@@ -2,29 +2,28 @@
 
 declare(strict_types=1);
 
-namespace N1ebieski\KSEFClient\Tests\Requests\Online\Invoice\Status;
+namespace N1ebieski\KSEFClient\Tests\Requests\Sessions\Online\Open;
 
-use N1ebieski\KSEFClient\Requests\Online\Invoice\Status\StatusRequest;
+use N1ebieski\KSEFClient\Requests\Sessions\Online\Open\OpenRequest;
 use N1ebieski\KSEFClient\Testing\AbstractTestCase;
 use N1ebieski\KSEFClient\Testing\Fixtures\Requests\Error\ErrorResponseFixture;
-use N1ebieski\KSEFClient\Testing\Fixtures\Requests\Online\Invoice\Status\StatusRequestFixture;
-use N1ebieski\KSEFClient\Testing\Fixtures\Requests\Online\Invoice\Status\StatusResponseFixture;
+use N1ebieski\KSEFClient\Testing\Fixtures\Requests\Sessions\Online\Open\OpenRequestFixture;
+use N1ebieski\KSEFClient\Testing\Fixtures\Requests\Sessions\Online\Open\OpenResponseFixture;
 use PHPUnit\Framework\Attributes\DataProvider;
 
-final class StatusHandlerTest extends AbstractTestCase
+final class OpenHandlerTest extends AbstractTestCase
 {
     /**
-     * @return array<string, array{StatusRequestFixture, StatusResponseFixture}>
+     * @return array<string, array{OpenRequestFixture, OpenResponseFixture}>
      */
     public static function validResponseProvider(): array
     {
         $requests = [
-            new StatusRequestFixture(),
+            new OpenRequestFixture(),
         ];
 
         $responses = [
-            new StatusResponseFixture(),
-            new StatusResponseFixture()->withEmptyInvoiceStatus()->withName('empty invoice status'),
+            new OpenResponseFixture(),
         ];
 
         $combinations = [];
@@ -35,33 +34,33 @@ final class StatusHandlerTest extends AbstractTestCase
             }
         }
 
-        /** @var array<string, array{StatusRequestFixture, StatusResponseFixture}> */
+        /** @var array<string, array{OpenRequestFixture, OpenResponseFixture}> */
         return $combinations;
     }
 
     #[DataProvider('validResponseProvider')]
-    public function testValidResponse(StatusRequestFixture $requestFixture, StatusResponseFixture $responseFixture): void
+    public function testValidResponse(OpenRequestFixture $requestFixture, OpenResponseFixture $responseFixture): void
     {
         $clientStub = $this->getClientStub($responseFixture);
 
-        $request = StatusRequest::from($requestFixture->data);
+        $request = OpenRequest::from($requestFixture->data);
 
         $this->assertFixture($requestFixture->data, $request);
 
-        $response = $clientStub->online()->invoice()->status($request)->object();
+        $response = $clientStub->sessions()->online()->open($requestFixture->data)->object();
 
         $this->assertFixture($responseFixture->data, $response);
     }
 
     public function testInvalidResponse(): void
     {
-        $requestFixture = new StatusRequestFixture();
+        $requestFixture = new OpenRequestFixture();
         $responseFixture = new ErrorResponseFixture();
 
         $this->assertExceptionFixture($responseFixture->data);
 
         $clientStub = $this->getClientStub($responseFixture);
 
-        $clientStub->online()->invoice()->status($requestFixture->data);
+        $clientStub->sessions()->online()->open($requestFixture->data);
     }
 }

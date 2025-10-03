@@ -8,7 +8,6 @@ use N1ebieski\KSEFClient\Contracts\BodyInterface;
 use N1ebieski\KSEFClient\Requests\AbstractRequest;
 use N1ebieski\KSEFClient\Requests\Sessions\ValueObjects\EncryptedKey;
 use N1ebieski\KSEFClient\Requests\Sessions\ValueObjects\FormCode;
-use N1ebieski\KSEFClient\Support\ValueObjects\KeyType;
 
 final readonly class OpenRequest extends AbstractRequest implements BodyInterface
 {

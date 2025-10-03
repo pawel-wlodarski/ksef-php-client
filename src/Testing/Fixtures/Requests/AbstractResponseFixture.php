@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace N1ebieski\KSEFClient\Testing\Fixtures\Requests;
 
-use InvalidArgumentException;
 use N1ebieski\KSEFClient\Testing\Fixtures\AbstractFixture;
 
 abstract class AbstractResponseFixture extends AbstractFixture
@@ -13,6 +12,6 @@ abstract class AbstractResponseFixture extends AbstractFixture
 
     public function toContents(): string
     {
-        return json_encode($this->data) ?: throw new InvalidArgumentException('Invalid JSON');
+        return json_encode($this->data, JSON_THROW_ON_ERROR);
     }
 }

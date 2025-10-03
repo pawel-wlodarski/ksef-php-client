@@ -65,9 +65,11 @@ trait HasAssertFixture
      */
     public function assertExceptionFixture(array $data): void
     {
+        $firstException = $data['exception']['exceptionDetailList'][0];
+
         $this->expectExceptionObject(new BadRequestException(
             //@phpstan-ignore-next-line
-            message: "{$data['exception']['exceptionDetailList'][0]['exceptionCode']} {$data['exception']['exceptionDetailList'][0]['exceptionDescription']}",
+            message: "{$firstException['exceptionCode']} {$firstException['exceptionDescription']}",
             //@phpstan-ignore-next-line
             code: 400,
             context: (object) $data
