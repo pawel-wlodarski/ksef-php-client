@@ -16,7 +16,7 @@ final readonly class ContextIdentifierNipGroup extends AbstractDTO implements Do
     ) {
     }
 
-    public function getValue(): NIP
+    public function getIdentifier(): NIP
     {
         return $this->nip;
     }

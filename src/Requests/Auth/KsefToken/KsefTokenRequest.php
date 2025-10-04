@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace N1ebieski\KSEFClient\Requests\Auth\KsefToken;
 
 use N1ebieski\KSEFClient\Contracts\BodyInterface;
-use N1ebieski\KSEFClient\Requests\AbstractRequest;
 use N1ebieski\KSEFClient\DTOs\Requests\Auth\AuthorizationPolicy;
 use N1ebieski\KSEFClient\DTOs\Requests\Auth\ContextIdentifierGroup;
+use N1ebieski\KSEFClient\Requests\AbstractRequest;
+use N1ebieski\KSEFClient\Support\Optional;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Auth\Challenge;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Auth\EncryptedToken;
-use N1ebieski\KSEFClient\Support\Optional;
 
 final readonly class KsefTokenRequest extends AbstractRequest implements BodyInterface
 {
@@ -26,10 +26,7 @@ final readonly class KsefTokenRequest extends AbstractRequest implements BodyInt
     {
         return [
             ...$this->toArray(only: ['challenge', 'encryptedToken', 'authorizationPolicy']),
-            'contextIdentifier' => [
-                'type' => $this->contextIdentifierGroup->identifierGroup->getValue()->getType(),
-                'value' => (string) $this->contextIdentifierGroup->identifierGroup->getValue()
-            ],
+            'contextIdentifier' => $this->contextIdentifierGroup->toBody(),
         ];
     }
 }

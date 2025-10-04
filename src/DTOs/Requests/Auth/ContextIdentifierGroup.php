@@ -6,6 +6,7 @@ namespace N1ebieski\KSEFClient\DTOs\Requests\Auth;
 
 use DOMDocument;
 use DOMElement;
+use N1ebieski\KSEFClient\Contracts\BodyInterface;
 use N1ebieski\KSEFClient\Contracts\DomSerializableInterface;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 use N1ebieski\KSEFClient\ValueObjects\InternalId;
@@ -13,7 +14,7 @@ use N1ebieski\KSEFClient\ValueObjects\NIP;
 use N1ebieski\KSEFClient\ValueObjects\NipVatUe;
 use N1ebieski\KSEFClient\ValueObjects\PeppolId;
 
-final readonly class ContextIdentifierGroup extends AbstractDTO implements DomSerializableInterface
+final readonly class ContextIdentifierGroup extends AbstractDTO implements DomSerializableInterface, BodyInterface
 {
     public function __construct(
         public ContextIdentifierNipGroup | ContextIdentifierNipVatUeGroup | ContextIdentifierInternalIdGroup | ContextIdentifierPeppolIdGroup $identifierGroup
@@ -28,6 +29,14 @@ final readonly class ContextIdentifierGroup extends AbstractDTO implements DomSe
             $identifier instanceof InternalId => new self(new ContextIdentifierInternalIdGroup($identifier)),
             $identifier instanceof PeppolId => new self(new ContextIdentifierPeppolIdGroup($identifier)),
         };
+    }
+
+    public function toBody(): array
+    {
+        return [
+            'type' => $this->identifierGroup->getIdentifier()->getType(),
+            'value' => (string) $this->identifierGroup->getIdentifier()
+        ];
     }
 
     public function toDom(): DOMDocument
