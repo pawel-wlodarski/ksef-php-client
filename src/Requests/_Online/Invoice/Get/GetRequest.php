@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace N1ebieski\KSEFClient\Requests\Online\Invoice\Get;
 
 use N1ebieski\KSEFClient\Requests\AbstractRequest;
-use N1ebieski\KSEFClient\Requests\Sessions\Online\ValueObjects\KsefReferenceNumber;
+use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\KsefReferenceNumber;
 
 final readonly class GetRequest extends AbstractRequest
 {

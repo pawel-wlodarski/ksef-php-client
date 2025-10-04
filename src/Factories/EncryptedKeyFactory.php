@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace N1ebieski\KSEFClient\Factories;
 
-use N1ebieski\KSEFClient\Requests\Sessions\ValueObjects\EncryptedKey;
+use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\EncryptedKey;
 use N1ebieski\KSEFClient\ValueObjects\EncryptionKey;
 use N1ebieski\KSEFClient\ValueObjects\KsefPublicKey;
 use phpseclib3\Crypt\PublicKeyLoader;

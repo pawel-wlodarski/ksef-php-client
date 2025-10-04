@@ -8,7 +8,7 @@ use N1ebieski\KSEFClient\Contracts\BodyInterface;
 use N1ebieski\KSEFClient\Requests\ValueObjects\SubjectIdentifierBy;
 use N1ebieski\KSEFClient\Requests\ValueObjects\SubjectIdentifierByCompany;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
-use N1ebieski\KSEFClient\Support\ValueObjects\KeyType;
+use N1ebieski\KSEFClient\ValueObjects\Support\KeyType;
 
 final readonly class SubjectIdentifierByCompanyGroup extends AbstractDTO implements BodyInterface
 {

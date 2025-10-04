@@ -7,7 +7,7 @@ namespace N1ebieski\KSEFClient\Requests\Sessions\Online\Send;
 use N1ebieski\KSEFClient\Contracts\BodyInterface;
 use N1ebieski\KSEFClient\Contracts\XmlSerializableInterface;
 use N1ebieski\KSEFClient\Requests\AbstractRequest;
-use N1ebieski\KSEFClient\Requests\ValueObjects\ReferenceNumber;
+use N1ebieski\KSEFClient\ValueObjects\Requests\ReferenceNumber;
 use N1ebieski\KSEFClient\Support\Optional;
 
 final readonly class SendXmlRequest extends AbstractRequest implements XmlSerializableInterface, BodyInterface

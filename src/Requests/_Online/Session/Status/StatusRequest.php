@@ -8,9 +8,9 @@ use N1ebieski\KSEFClient\Contracts\ParametersInterface;
 use N1ebieski\KSEFClient\Requests\AbstractRequest;
 use N1ebieski\KSEFClient\Requests\Online\Session\ValueObjects\PageOffset;
 use N1ebieski\KSEFClient\Requests\Online\Session\ValueObjects\PageSize;
-use N1ebieski\KSEFClient\Requests\ValueObjects\ReferenceNumber;
+use N1ebieski\KSEFClient\ValueObjects\Requests\ReferenceNumber;
 use N1ebieski\KSEFClient\Support\Optional;
-use N1ebieski\KSEFClient\Support\ValueObjects\KeyType;
+use N1ebieski\KSEFClient\ValueObjects\Support\KeyType;
 
 final readonly class StatusRequest extends AbstractRequest implements ParametersInterface
 {

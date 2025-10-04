@@ -6,9 +6,9 @@ namespace N1ebieski\KSEFClient\Requests\Online\Query\Invoice\Async\Status;
 
 use N1ebieski\KSEFClient\Contracts\HttpClient\HttpClientInterface;
 use N1ebieski\KSEFClient\Contracts\HttpClient\ResponseInterface;
-use N1ebieski\KSEFClient\HttpClient\DTOs\Request;
-use N1ebieski\KSEFClient\HttpClient\ValueObjects\Method;
-use N1ebieski\KSEFClient\HttpClient\ValueObjects\Uri;
+use N1ebieski\KSEFClient\DTOs\HttpClient\Request;
+use N1ebieski\KSEFClient\ValueObjects\HttpClient\Method;
+use N1ebieski\KSEFClient\ValueObjects\HttpClient\Uri;
 use N1ebieski\KSEFClient\Requests\AbstractHandler;
 
 final readonly class StatusHandler extends AbstractHandler

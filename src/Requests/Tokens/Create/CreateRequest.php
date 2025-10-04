@@ -6,7 +6,7 @@ namespace N1ebieski\KSEFClient\Requests\Tokens\Create;
 
 use N1ebieski\KSEFClient\Contracts\BodyInterface;
 use N1ebieski\KSEFClient\Requests\AbstractRequest;
-use N1ebieski\KSEFClient\Requests\Tokens\ValueObjects\TokenPermissionType;
+use N1ebieski\KSEFClient\ValueObjects\Requests\Tokens\TokenPermissionType;
 
 final readonly class CreateRequest extends AbstractRequest implements BodyInterface
 {

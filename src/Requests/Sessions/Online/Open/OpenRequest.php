@@ -6,8 +6,8 @@ namespace N1ebieski\KSEFClient\Requests\Sessions\Online\Open;
 
 use N1ebieski\KSEFClient\Contracts\BodyInterface;
 use N1ebieski\KSEFClient\Requests\AbstractRequest;
-use N1ebieski\KSEFClient\Requests\Sessions\ValueObjects\EncryptedKey;
-use N1ebieski\KSEFClient\Requests\Sessions\ValueObjects\FormCode;
+use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\EncryptedKey;
+use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\FormCode;
 
 final readonly class OpenRequest extends AbstractRequest implements BodyInterface
 {

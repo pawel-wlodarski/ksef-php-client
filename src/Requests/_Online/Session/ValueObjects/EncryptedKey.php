@@ -7,7 +7,7 @@ namespace N1ebieski\KSEFClient\Requests\Online\Session\ValueObjects;
 use DOMDocument;
 use N1ebieski\KSEFClient\Contracts\DomSerializableInterface;
 use N1ebieski\KSEFClient\Contracts\XmlSerializableInterface;
-use N1ebieski\KSEFClient\Requests\ValueObjects\XmlNamespace;
+use N1ebieski\KSEFClient\ValueObjects\Requests\XmlNamespace;
 use N1ebieski\KSEFClient\Support\AbstractValueObject;
 use N1ebieski\KSEFClient\Support\Concerns\HasToXml;
 use SensitiveParameter;

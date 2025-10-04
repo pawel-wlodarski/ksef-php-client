@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace N1ebieski\KSEFClient\Requests\Auth\XadesSignature\Concerns;
 
 use N1ebieski\KSEFClient\Support\Optional;
-use N1ebieski\KSEFClient\Support\ValueObjects\KeyType;
 
 /**
  * @property-read Optional | bool $verifyCertificateChain

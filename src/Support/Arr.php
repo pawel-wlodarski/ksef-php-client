@@ -9,7 +9,7 @@ use DateTimeInterface;
 use N1ebieski\KSEFClient\Contracts\ArrayableInterface;
 use N1ebieski\KSEFClient\Contracts\OriginalInterface;
 use N1ebieski\KSEFClient\Contracts\ValueAwareInterface;
-use N1ebieski\KSEFClient\Support\ValueObjects\KeyType;
+use N1ebieski\KSEFClient\ValueObjects\Support\KeyType;
 
 final class Arr
 {

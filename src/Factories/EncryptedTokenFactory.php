@@ -6,7 +6,7 @@ namespace N1ebieski\KSEFClient\Factories;
 
 use DateTime;
 use DateTimeInterface;
-use N1ebieski\KSEFClient\Requests\Auth\ValueObjects\EncryptedToken;
+use N1ebieski\KSEFClient\ValueObjects\Requests\Auth\EncryptedToken;
 use N1ebieski\KSEFClient\ValueObjects\KsefPublicKey;
 use N1ebieski\KSEFClient\ValueObjects\KsefToken;
 use phpseclib3\Crypt\PublicKeyLoader;

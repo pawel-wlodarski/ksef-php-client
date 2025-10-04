@@ -11,7 +11,7 @@ use N1ebieski\KSEFClient\Requests\Online\Query\Invoice\DTOs\QueryCriteria;
 use N1ebieski\KSEFClient\Requests\Online\Query\Invoice\ValueObjects\PageOffset;
 use N1ebieski\KSEFClient\Requests\Online\Query\Invoice\ValueObjects\PageSize;
 use N1ebieski\KSEFClient\Support\Concerns\HasToBody;
-use N1ebieski\KSEFClient\Support\ValueObjects\KeyType;
+use N1ebieski\KSEFClient\ValueObjects\Support\KeyType;
 
 final readonly class SyncRequest extends AbstractRequest implements BodyInterface, ParametersInterface
 {

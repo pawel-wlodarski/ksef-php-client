@@ -6,10 +6,10 @@ namespace N1ebieski\KSEFClient\Requests\Auth\KsefToken;
 
 use N1ebieski\KSEFClient\Contracts\BodyInterface;
 use N1ebieski\KSEFClient\Requests\AbstractRequest;
-use N1ebieski\KSEFClient\Requests\Auth\DTOs\AuthorizationPolicy;
-use N1ebieski\KSEFClient\Requests\Auth\DTOs\ContextIdentifierGroup;
-use N1ebieski\KSEFClient\Requests\Auth\ValueObjects\Challenge;
-use N1ebieski\KSEFClient\Requests\Auth\ValueObjects\EncryptedToken;
+use N1ebieski\KSEFClient\DTOs\Requests\Auth\AuthorizationPolicy;
+use N1ebieski\KSEFClient\DTOs\Requests\Auth\ContextIdentifierGroup;
+use N1ebieski\KSEFClient\ValueObjects\Requests\Auth\Challenge;
+use N1ebieski\KSEFClient\ValueObjects\Requests\Auth\EncryptedToken;
 use N1ebieski\KSEFClient\Support\Optional;
 
 final readonly class KsefTokenRequest extends AbstractRequest implements BodyInterface

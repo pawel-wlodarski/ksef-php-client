@@ -7,7 +7,7 @@ namespace N1ebieski\KSEFClient\Requests\Online\Query\Invoice\DTOs;
 use N1ebieski\KSEFClient\Contracts\BodyInterface;
 use N1ebieski\KSEFClient\Requests\DTOs\SubjectBy;
 use N1ebieski\KSEFClient\Requests\DTOs\SubjectTo;
-use N1ebieski\KSEFClient\Requests\Sessions\Online\ValueObjects\KsefReferenceNumber;
+use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\KsefReferenceNumber;
 use N1ebieski\KSEFClient\Requests\Online\Query\Invoice\ValueObjects\AmountFrom;
 use N1ebieski\KSEFClient\Requests\Online\Query\Invoice\ValueObjects\AmountTo;
 use N1ebieski\KSEFClient\Requests\Online\Query\Invoice\ValueObjects\AmountType;

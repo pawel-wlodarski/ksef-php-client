@@ -6,7 +6,7 @@ namespace N1ebieski\KSEFClient\Requests\Online\Invoice\Send;
 
 use N1ebieski\KSEFClient\Contracts\XmlSerializableInterface;
 use N1ebieski\KSEFClient\Requests\AbstractRequest;
-use N1ebieski\KSEFClient\Requests\Sessions\Online\DTOs\Faktura;
+use N1ebieski\KSEFClient\DTOs\Requests\Sessions\Online\Faktura;
 use N1ebieski\KSEFClient\ValueObjects\EncryptionKey;
 
 final readonly class SendRequest extends AbstractRequest implements XmlSerializableInterface

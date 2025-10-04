@@ -7,8 +7,8 @@ namespace N1ebieski\KSEFClient\Requests\Security\PublicKeyCertificates;
 use DateTimeImmutable;
 use N1ebieski\KSEFClient\Contracts\HttpClient\ResponseInterface;
 use N1ebieski\KSEFClient\HttpClient\Response;
-use N1ebieski\KSEFClient\Requests\Security\PublicKeyCertificates\ValueObjects\PublicKeyCertificateUsage;
-use N1ebieski\KSEFClient\Support\ValueObjects\KeyType;
+use N1ebieski\KSEFClient\ValueObjects\Support\KeyType;
+use N1ebieski\KSEFClient\ValueObjects\Requests\Security\PublicKeyCertificates\PublicKeyCertificateUsage;
 use Psr\Http\Message\ResponseInterface as BaseResponseInterface;
 
 final class PublicKeyCertificatesResponse implements ResponseInterface
@@ -64,8 +64,8 @@ final class PublicKeyCertificatesResponse implements ResponseInterface
         return $this->response->body();
     }
 
-    public function toArray(KeyType $keyType = KeyType::Camel): array
+    public function toArray(KeyType $keyType = KeyType::Camel, array $only = []): array
     {
-        return $this->response->toArray($keyType);
+        return $this->response->toArray($keyType, $only);
     }
 }

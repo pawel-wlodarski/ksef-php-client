@@ -9,7 +9,7 @@ use DOMDocument;
 use N1ebieski\KSEFClient\Requests\Online\Session\ValueObjects\Challenge;
 use N1ebieski\KSEFClient\Requests\Online\Session\ValueObjects\EncryptedToken;
 use N1ebieski\KSEFClient\Requests\Online\ValueObjects\SystemCode;
-use N1ebieski\KSEFClient\Requests\ValueObjects\XmlNamespace;
+use N1ebieski\KSEFClient\ValueObjects\Requests\XmlNamespace;
 use N1ebieski\KSEFClient\Requests\ValueObjects\SubjectIdentifierByCompany;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 use RuntimeException;
