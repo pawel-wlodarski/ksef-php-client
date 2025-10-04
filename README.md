@@ -5,7 +5,7 @@
 
 > **This package is not production ready yet!**
 
-PHP API client that allows you to interact with the [API Krajowego Systemu e-Faktur](https://www.gov.pl/web/kas/api-krajowego-system-e-faktur)
+PHP API client that allows you to interact with the [Krajowy System e-Faktur KSEF API](https://ksef.podatki.gov.pl)
 
 Main features:
 
@@ -274,7 +274,10 @@ $response = $client->auth()->xadesSignature(
 ```
 </details>
 
-#### Auth Status
+<details>
+    <summary>
+        <h4>Auth Status</h4>
+    </summary>
 
 https://ksef-test.mf.gov.pl/docs/v2/index.html#tag/Uzyskiwanie-dostepu/paths/~1api~1v2~1auth~1%7BreferenceNumber%7D/get
 
@@ -285,40 +288,56 @@ $response = $client->auth()->status(
     new StatusRequest(...)
 )->object();
 ```
+</details>
 
 #### Token
 
-##### Redeem
+<details>
+    <summary>
+        <h5>Redeem</h5>
+    </summary>
 
 https://ksef-test.mf.gov.pl/docs/v2/index.html#tag/Uzyskiwanie-dostepu/paths/~1api~1v2~1auth~1token~1redeem/post
 
 ```php
 $response = $client->auth()->token()->redeem()->object();
 ```
+</details>
 
-##### Refresh
+<details>
+    <summary>
+        <h5>Refresh</h5>
+    </summary>
 
 https://ksef-test.mf.gov.pl/docs/v2/index.html#tag/Uzyskiwanie-dostepu/paths/~1api~1v2~1auth~1token~1refresh/post
 
 ```php
 $response = $client->auth()->token()->refresh()->object();
 ```
+</details>
 
 ### Security
 
-#### Public Key Certificates
+<details>
+    <summary>
+        <h4>Public Key Certificates</h4>
+    </summary>
 
 https://ksef-test.mf.gov.pl/docs/v2/index.html#tag/Certyfikaty-klucza-publicznego/paths/~1api~1v2~1security~1public-key-certificates/get
 
 ```php
 $response = $client->security()->publicKeyCertificates();
 ```
+</details>
 
 ### Sessions
 
 #### Invoices
 
-##### Upo
+<details>
+    <summary>
+        <h5>Upo</h5>
+    </summary>
 
 https://ksef-test.mf.gov.pl/docs/v2/index.html#tag/Status-wysylki-i-UPO/paths/~1api~1v2~1sessions~1%7BreferenceNumber%7D~1invoices~1%7BinvoiceReferenceNumber%7D~1upo/get
 
@@ -329,8 +348,12 @@ $response = $client->sessions()->invoices()->upo(
     new UpoRequest(...)
 )->body();
 ```
+</details>
 
-##### Ksef Upo
+<details>
+    <summary>
+        <h5>Ksef Upo</h5>
+    </summary>
 
 https://ksef-test.mf.gov.pl/docs/v2/index.html#tag/Status-wysylki-i-UPO/paths/~1api~1v2~1sessions~1%7BreferenceNumber%7D~1invoices~1ksef~1%7BksefNumber%7D~1upo/get
 
@@ -341,8 +364,12 @@ $response = $client->sessions()->invoices()->ksefUpo(
     new KsefUpoRequest(...)
 )->body();
 ```
+</details>
 
-##### Invoices Status
+<details>
+    <summary>
+        <h5>Invoices Status</h5>
+    </summary>
 
 https://ksef-test.mf.gov.pl/docs/v2/index.html#tag/Status-wysylki-i-UPO/paths/~1api~1v2~1sessions~1%7BreferenceNumber%7D~1invoices~1%7BinvoiceReferenceNumber%7D/get
 
@@ -353,10 +380,14 @@ $response = $client->sessions()->invoices()->status(
     new StatusRequest(...)
 )->object();
 ```
+</details>
 
 #### Online
 
-##### Open
+<details>
+    <summary>
+        <h5>Open</h5>
+    </summary>
 
 https://ksef-test.mf.gov.pl/docs/v2/index.html#tag/Wysylka-interaktywna/paths/~1api~1v2~1sessions~1online/post
 
@@ -367,8 +398,12 @@ $response = $client->sessions()->online()->open(
     new OpenRequest(...)
 )->object();
 ```
+</details>
 
-##### Close
+<details>
+    <summary>
+        <h5>Close</h5>
+    </summary>
 
 https://ksef-test.mf.gov.pl/docs/v2/index.html#tag/Wysylka-interaktywna/paths/~1api~1v2~1sessions~1online~1%7BreferenceNumber%7D~1close/post
 
@@ -379,8 +414,12 @@ $response = $client->sessions()->online()->close(
     new CloseRequest(...)
 )->status();
 ```
+</details>
 
-##### Invoices send
+<details>
+    <summary>
+        <h5>Invoices send</h5>
+    </summary>
 
 https://ksef-test.mf.gov.pl/docs/v2/index.html#tag/Wysylka-interaktywna/paths/~1api~1v2~1sessions~1online~1%7BreferenceNumber%7D~1invoices/post
 
@@ -403,8 +442,12 @@ $response = $client->sessions()->online()->invoices(
     new InvoicesXmlRequest(...)
 )->object();
 ```
+</details>
 
-#### Sessions Status
+<details>
+    <summary>
+        <h4>Sessions Status</h4>
+    </summary>
 
 https://ksef-test.mf.gov.pl/docs/v2/index.html#tag/Status-wysylki-i-UPO/paths/~1api~1v2~1sessions~1%7BreferenceNumber%7D/get
 
@@ -415,28 +458,40 @@ $response = $client->sessions()->status(
     new StatusRequest(...)
 )->object();
 ```
+</details>
 
 ### Certificates
 
-#### Limits
+<details>
+    <summary>
+        <h4>Limits</h4>
+    </summary>
 
 https://ksef-test.mf.gov.pl/docs/v2/index.html#tag/Certyfikaty/paths/~1api~1v2~1certificates~1limits/get
 
 ```php
 $response = $client->certificates()->limits()->object();
 ```
+</details>
 
 #### Enrollments
 
-##### Enrollments Data
+<details>
+    <summary>
+        <h5>Enrollments Data</h5>
+    </summary>
 
 https://ksef-test.mf.gov.pl/docs/v2/index.html#tag/Certyfikaty/paths/~1api~1v2~1certificates~1enrollments~1data/get
 
 ```php
 $response = $client->certificates()->enrollments()->data()->object();
 ```
+</details>
 
-##### Enrollments Send
+<details>
+    <summary>
+        <h5>Enrollments Send</h5>
+    </summary>
 
 https://ksef-test.mf.gov.pl/docs/v2/index.html#tag/Certyfikaty/paths/~1api~1v2~1certificates~1enrollments/post
 
@@ -447,8 +502,12 @@ $response = $client->certificates()->enrollments()->send(
     new SendRequest(...)
 )->object();
 ```
+</details>
 
-##### Enrollments Status
+<details>
+    <summary>
+        <h5>Enrollments Status</h5>
+    </summary>
 
 https://ksef-test.mf.gov.pl/docs/v2/index.html#tag/Certyfikaty/paths/~1api~1v2~1certificates~1enrollments~1%7BreferenceNumber%7D/get
 
@@ -459,8 +518,12 @@ $response = $client->certificates()->enrollments()->status(
     new StatusRequest(...)
 )->object();
 ```
+</details>
 
-#### Certificates Retrieve
+<details>
+    <summary>
+        <h4>Certificates Retrieve</h4>
+    </summary>
 
 https://ksef-test.mf.gov.pl/docs/v2/index.html#tag/Certyfikaty/paths/~1api~1v2~1certificates~1retrieve/post
 
@@ -471,8 +534,12 @@ $response = $client->certificates()->retrieve(
     new RetrieveRequest(...)
 )->object();
 ```
+</details>
 
-#### Certificates Revoke
+<details>
+    <summary>
+        <h4>Certificates Revoke</h4>
+    </summary>
 
 https://ksef-test.mf.gov.pl/docs/v2/index.html#tag/Certyfikaty/paths/~1api~1v2~1certificates~1%7BcertificateSerialNumber%7D~1revoke/post
 
@@ -483,8 +550,12 @@ $response = $client->certificates()->revoke(
     new RevokeRequest(...)
 )->status();
 ```
+</details>
 
-#### Certificates Query
+<details>
+    <summary>
+        <h4>Certificates Query</h4>
+    </summary>
 
 https://ksef-test.mf.gov.pl/docs/v2/index.html#tag/Certyfikaty/paths/~1api~1v2~1certificates~1query/post
 
@@ -495,12 +566,16 @@ $response = $client->certificates()->query(
     new QueryRequest(...)
 )->object();
 ```
+</details>
 
 ### Testdata
 
 #### Person
 
-##### Person Create
+<details>
+    <summary>
+        <h5>Person Create</h5>
+    </summary>
 
 https://ksef-test.mf.gov.pl/docs/v2/index.html#tag/Dane-testowe/paths/~1api~1v2~1testdata~1person/post
 
@@ -511,8 +586,12 @@ $response = $client->testdata()->person()->create(
     new CreateRequest(...)
 )->status();
 ```
+</details>
 
-##### Person Remove
+<details>
+    <summary>
+        <h5>Person Remove</h5>
+    </summary>
 
 https://ksef-test.mf.gov.pl/docs/v2/index.html#tag/Dane-testowe/paths/~1api~1v2~1testdata~1person~1remove/post
 
@@ -523,6 +602,7 @@ $response = $client->testdata()->person()->remove(
     new RemoveRequest(...)
 )->status();
 ```
+</details>
 
 ## Examples
 
