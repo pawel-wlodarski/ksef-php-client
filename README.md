@@ -328,7 +328,7 @@ $response = $client->auth()->token()->refresh()->object();
 https://ksef-test.mf.gov.pl/docs/v2/index.html#tag/Certyfikaty-klucza-publicznego/paths/~1api~1v2~1security~1public-key-certificates/get
 
 ```php
-$response = $client->security()->publicKeyCertificates();
+$response = $client->security()->publicKeyCertificates()->object();
 ```
 </details>
 
