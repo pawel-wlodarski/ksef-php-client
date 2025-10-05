@@ -781,7 +781,7 @@ $generateQRCodesHandler = new GenerateQRCodesHandler(
 );
 
 /** @var QRCodes $qrCodes */
-$qrCodes = $generateQRCodesHandler->handle(new GenerateQRCodesAction([
+$qrCodes = $generateQRCodesHandler->handle(GenerateQRCodesAction::from([
     'mode' => Mode::Test,
     'nip' => $faktura->podmiot1->daneIdentyfikacyjne->nip,
     'invoiceCreatedAt' => $faktura->fa->p_1->value,
