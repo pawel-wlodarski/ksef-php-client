@@ -436,10 +436,10 @@ $response = $client->sessions()->online()->send(
 for XML invoice:
 
 ```php
-use N1ebieski\KSEFClient\Requests\Sessions\Online\Invoices\InvoicesXmlRequest;
+use N1ebieski\KSEFClient\Requests\Sessions\Online\Send\SendXmlRequest;
 
-$response = $client->sessions()->online()->invoices(
-    new InvoicesXmlRequest(...)
+$response = $client->sessions()->online()->send(
+    new SendXmlRequest(...)
 )->object();
 ```
 </details>
