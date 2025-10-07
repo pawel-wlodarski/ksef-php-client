@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace N1ebieski\KSEFClient\DTOs;
 
-use N1ebieski\KSEFClient\Contracts\WithInterface;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 use N1ebieski\KSEFClient\ValueObjects\AccessToken;
 use N1ebieski\KSEFClient\ValueObjects\Certificate;
