@@ -9,13 +9,13 @@ use N1ebieski\KSEFClient\Contracts\DomSerializableInterface;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\NrKSeFFaZaliczkowej;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 
-final readonly class NrKSeFFaZaliczkowejGroup extends AbstractDTO implements DomSerializableInterface
+final class NrKSeFFaZaliczkowejGroup extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @param NrKSeFFaZaliczkowej $nrKSeFFaZaliczkowej Numer identyfikujący fakturę zaliczkową w KSeF. Pole obowiązkowe w przypadku, gdy faktura zaliczkowa była wystawiona za pomocą KSeF
      */
     public function __construct(
-        public NrKSeFFaZaliczkowej $nrKSeFFaZaliczkowej
+        public readonly NrKSeFFaZaliczkowej $nrKSeFFaZaliczkowej
     ) {
     }
 

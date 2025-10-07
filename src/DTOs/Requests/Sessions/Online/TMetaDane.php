@@ -10,11 +10,11 @@ use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\TKlucz;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\TWartosc;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 
-final readonly class TMetaDane extends AbstractDTO implements DomSerializableInterface
+final class TMetaDane extends AbstractDTO implements DomSerializableInterface
 {
     public function __construct(
-        public TKlucz $tKlucz,
-        public TWartosc $tWartosc,
+        public readonly TKlucz $tKlucz,
+        public readonly TWartosc $tWartosc,
     ) {
     }
 

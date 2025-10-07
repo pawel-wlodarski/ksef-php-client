@@ -6,6 +6,6 @@ namespace N1ebieski\KSEFClient\Actions;
 
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 
-abstract readonly class AbstractAction extends AbstractDTO
+abstract class AbstractAction extends AbstractDTO
 {
 }

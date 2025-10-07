@@ -11,14 +11,14 @@ use N1ebieski\KSEFClient\Support\Optional;
 use N1ebieski\KSEFClient\ValueObjects\NIP;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Testdata\Person\Create\Pesel;
 
-final readonly class CreateRequest extends AbstractRequest implements BodyInterface
+final class CreateRequest extends AbstractRequest implements BodyInterface
 {
     public function __construct(
-        public NIP $nip,
-        public Pesel $pesel,
-        public string $description,
-        public bool $isBailiff = false,
-        public Optional | DateTime | null $createdDate = new Optional(),
+        public readonly NIP $nip,
+        public readonly Pesel $pesel,
+        public readonly string $description,
+        public readonly bool $isBailiff = false,
+        public readonly Optional | DateTime | null $createdDate = new Optional(),
     ) {
     }
 

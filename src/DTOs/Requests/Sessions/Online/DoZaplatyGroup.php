@@ -9,13 +9,13 @@ use N1ebieski\KSEFClient\Contracts\DomSerializableInterface;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\DoZaplaty;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 
-final readonly class DoZaplatyGroup extends AbstractDTO implements DomSerializableInterface
+final class DoZaplatyGroup extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @param DoZaplaty $doZaplaty Kwota należności do zapłaty równa polu P_15 powiększonemu o Obciazenia i pomniejszonemu o Odliczenia
      */
     public function __construct(
-        public DoZaplaty $doZaplaty,
+        public readonly DoZaplaty $doZaplaty,
     ) {
     }
 

@@ -16,12 +16,12 @@ use N1ebieski\KSEFClient\Support\Optional;
 use N1ebieski\KSEFClient\Validator\Rules\Array\MaxRule;
 use N1ebieski\KSEFClient\Validator\Validator;
 
-final readonly class Podmiot3 extends AbstractDTO implements DomSerializableInterface
+final class Podmiot3 extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @var Optional|array<int, DaneKontaktowe>
      */
-    public Optional | array $daneKontaktowe;
+    public readonly Optional | array $daneKontaktowe;
 
     /**
      * @param Optional|IDNabywcy $idNabywcy Unikalny klucz powiązania danych nabywcy na fakturach korygujących, w przypadku gdy dane nabywcy na fakturze korygującej zmieniły się w stosunku do danych na fakturze korygowanej
@@ -33,15 +33,15 @@ final readonly class Podmiot3 extends AbstractDTO implements DomSerializableInte
      * @param Optional|NrKlienta $nrKlienta Numer klienta dla przypadków, w których podmiot wymieniony jako podmiot trzeci posługuje się nim w umowie lub zamówieniu
      */
     public function __construct(
-        public Podmiot3DaneIdentyfikacyjne $daneIdentyfikacyjne,
-        public Adres $adres,
-        public RolaGroup | RolaInnaGroup $rolaGroup,
-        public Optional | IDNabywcy $idNabywcy = new Optional(),
-        public Optional | NrEORI $nrEORI = new Optional(),
-        public Optional | AdresKoresp $adresKoresp = new Optional(),
+        public readonly Podmiot3DaneIdentyfikacyjne $daneIdentyfikacyjne,
+        public readonly Adres $adres,
+        public readonly RolaGroup | RolaInnaGroup $rolaGroup,
+        public readonly Optional | IDNabywcy $idNabywcy = new Optional(),
+        public readonly Optional | NrEORI $nrEORI = new Optional(),
+        public readonly Optional | AdresKoresp $adresKoresp = new Optional(),
         Optional | array $daneKontaktowe = new Optional(),
-        public Optional | Udzial $udzial = new Optional(),
-        public Optional | NrKlienta $nrKlienta = new Optional()
+        public readonly Optional | Udzial $udzial = new Optional(),
+        public readonly Optional | NrKlienta $nrKlienta = new Optional()
     ) {
         Validator::validate([
             'daneKontaktowe' => $daneKontaktowe

@@ -10,9 +10,9 @@ use N1ebieski\KSEFClient\Support\AbstractValueObject;
 use N1ebieski\KSEFClient\Validator\Rules\Number\MinRule;
 use N1ebieski\KSEFClient\Validator\Validator;
 
-final readonly class PageOffset extends AbstractValueObject implements FromInterface, ValueAwareInterface
+final class PageOffset extends AbstractValueObject implements FromInterface, ValueAwareInterface
 {
-    public int $value;
+    public readonly int $value;
 
     public function __construct(int $value)
     {

@@ -9,10 +9,10 @@ use DOMElement;
 use N1ebieski\KSEFClient\Contracts\DomSerializableInterface;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 
-final readonly class NoweSrodkiTransportu extends AbstractDTO implements DomSerializableInterface
+final class NoweSrodkiTransportu extends AbstractDTO implements DomSerializableInterface
 {
     public function __construct(
-        public P_22Group | P_22NGroup $p_22Group = new P_22NGroup(),
+        public readonly P_22Group | P_22NGroup $p_22Group = new P_22NGroup(),
     ) {
     }
 

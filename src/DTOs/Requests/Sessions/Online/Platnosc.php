@@ -12,22 +12,22 @@ use N1ebieski\KSEFClient\Support\Optional;
 use N1ebieski\KSEFClient\Validator\Rules\Array\MaxRule;
 use N1ebieski\KSEFClient\Validator\Validator;
 
-final readonly class Platnosc extends AbstractDTO implements DomSerializableInterface
+final class Platnosc extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @var Optional|array<int, TerminPlatnosci>
      */
-    public Optional | array $terminPlatnosci;
+    public readonly Optional | array $terminPlatnosci;
 
     /**
      * @var Optional|array<int, RachunekBankowy>
      */
-    public Optional | array $rachunekBankowy;
+    public readonly Optional | array $rachunekBankowy;
 
     /**
      * @var Optional|array<int, RachunekBankowyFaktora>
      */
-    public Optional | array $rachunekBankowyFaktora;
+    public readonly Optional | array $rachunekBankowyFaktora;
 
     /**
      * @param Optional|array<int, TerminPlatnosci> $terminPlatnosci
@@ -35,12 +35,12 @@ final readonly class Platnosc extends AbstractDTO implements DomSerializableInte
      * @param Optional|array<int, RachunekBankowyFaktora> $rachunekBankowyFaktora
      */
     public function __construct(
-        public Optional | ZaplataGroup | ZaplataCzesciowaGroup $zaplataGroup = new Optional(),
+        public readonly Optional | ZaplataGroup | ZaplataCzesciowaGroup $zaplataGroup = new Optional(),
         Optional | array $terminPlatnosci = new Optional(),
-        public Optional | FormaPlatnosciGroup | PlatnoscInnaGroup $platnoscGroup = new Optional(),
+        public readonly Optional | FormaPlatnosciGroup | PlatnoscInnaGroup $platnoscGroup = new Optional(),
         Optional | array $rachunekBankowy = new Optional(),
         Optional | array $rachunekBankowyFaktora = new Optional(),
-        public Optional | Skonto $skonto = new Optional()
+        public readonly Optional | Skonto $skonto = new Optional()
     ) {
         Validator::validate([
             'terminPlatnosci' => $terminPlatnosci,

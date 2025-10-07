@@ -11,10 +11,10 @@ use N1ebieski\KSEFClient\ValueObjects\HttpClient\Method;
 use N1ebieski\KSEFClient\ValueObjects\HttpClient\Uri;
 use N1ebieski\KSEFClient\Requests\AbstractHandler;
 
-final readonly class LimitsHandler extends AbstractHandler
+final class LimitsHandler extends AbstractHandler
 {
     public function __construct(
-        private HttpClientInterface $client,
+        private readonly HttpClientInterface $client,
     ) {
     }
 

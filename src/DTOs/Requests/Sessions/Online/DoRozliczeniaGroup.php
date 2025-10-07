@@ -9,13 +9,13 @@ use N1ebieski\KSEFClient\Contracts\DomSerializableInterface;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\DoRozliczenia;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 
-final readonly class DoRozliczeniaGroup extends AbstractDTO implements DomSerializableInterface
+final class DoRozliczeniaGroup extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @param DoRozliczenia $doRozliczenia Kwota nadpłacona do rozliczenia/zwrotu
      */
     public function __construct(
-        public DoRozliczenia $doRozliczenia,
+        public readonly DoRozliczenia $doRozliczenia,
     ) {
     }
 

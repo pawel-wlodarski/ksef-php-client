@@ -32,7 +32,7 @@ use Psr\Http\Message\StreamInterface;
 |
 */
 
-pest()->extend(AbstractTestCase::class)->in('Unit');
+uses(AbstractTestCase::class)->in('Unit');
 
 /*
 |--------------------------------------------------------------------------

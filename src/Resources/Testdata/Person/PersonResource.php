@@ -26,7 +26,7 @@ final class PersonResource extends AbstractResource implements PersonResourceInt
             $request = CreateRequest::from($request);
         }
 
-        return new CreateHandler($this->client)->handle($request);
+        return (new CreateHandler($this->client))->handle($request);
     }
 
     public function remove(RemoveRequest | array $request): ResponseInterface
@@ -35,6 +35,6 @@ final class PersonResource extends AbstractResource implements PersonResourceInt
             $request = RemoveRequest::from($request);
         }
 
-        return new RemoveHandler($this->client)->handle($request);
+        return (new RemoveHandler($this->client))->handle($request);
     }
 }

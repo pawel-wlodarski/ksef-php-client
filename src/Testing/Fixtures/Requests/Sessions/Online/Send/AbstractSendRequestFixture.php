@@ -7,6 +7,9 @@ namespace N1ebieski\KSEFClient\Testing\Fixtures\Requests\Sessions\Online\Send;
 use DateTimeImmutable;
 use N1ebieski\KSEFClient\Testing\Fixtures\Requests\AbstractRequestFixture;
 
+/**
+ * @property array<string, mixed> $data
+ */
 abstract class AbstractSendRequestFixture extends AbstractRequestFixture
 {
     public function getFaktura(): array
@@ -16,7 +19,7 @@ abstract class AbstractSendRequestFixture extends AbstractRequestFixture
 
     public function withTodayDate(): self
     {
-        $todayDate = new DateTimeImmutable()->format('Y-m-d');
+        $todayDate = (new DateTimeImmutable())->format('Y-m-d');
 
         $this->data['faktura']['fa']['p_1'] = $todayDate;
 

@@ -21,14 +21,14 @@ use N1ebieski\KSEFClient\Validator\Rules\Array\MaxRule;
 use N1ebieski\KSEFClient\Validator\Validator;
 use N1ebieski\KSEFClient\ValueObjects\Requests\XmlNamespace;
 
-final readonly class Faktura extends AbstractDTO implements XmlSerializableInterface, DomSerializableInterface
+final class Faktura extends AbstractDTO implements XmlSerializableInterface, DomSerializableInterface
 {
     use HasToXml;
 
     /**
      * @var Optional|array<int, Podmiot3>
      */
-    public Optional | array $podmiot3;
+    public readonly Optional | array $podmiot3;
 
     /**
      * @param Podmiot1 $podmiot1 Dane podatnika. Imię i nazwisko lub nazwa sprzedawcy towarów lub usług
@@ -41,14 +41,14 @@ final readonly class Faktura extends AbstractDTO implements XmlSerializableInter
      * @return void
      */
     public function __construct(
-        public Naglowek $naglowek,
-        public Podmiot1 $podmiot1,
-        public Podmiot2 $podmiot2,
-        public Fa $fa,
+        public readonly Naglowek $naglowek,
+        public readonly Podmiot1 $podmiot1,
+        public readonly Podmiot2 $podmiot2,
+        public readonly Fa $fa,
         Optional | array $podmiot3 = new Optional(),
-        public Optional | PodmiotUpowazniony $podmiotUpowazniony = new Optional(),
-        public Optional | Stopka $stopka = new Optional(),
-        public Optional | Zalacznik $zalacznik = new Optional()
+        public readonly Optional | PodmiotUpowazniony $podmiotUpowazniony = new Optional(),
+        public readonly Optional | Stopka $stopka = new Optional(),
+        public readonly Optional | Zalacznik $zalacznik = new Optional()
     ) {
         Validator::validate([
             'podmiot3' => $podmiot3

@@ -6,15 +6,12 @@ namespace N1ebieski\KSEFClient\ValueObjects;
 
 use N1ebieski\KSEFClient\Support\AbstractValueObject;
 use OpenSSLAsymmetricKey;
-use SensitiveParameter;
 
-final readonly class CSR extends AbstractValueObject
+final class CSR extends AbstractValueObject
 {
     public function __construct(
-        #[SensitiveParameter]
-        public string $raw,
-        #[SensitiveParameter]
-        public OpenSSLAsymmetricKey $privateKey
+        public readonly string $raw,
+        public readonly OpenSSLAsymmetricKey $privateKey
     ) {
     }
 }

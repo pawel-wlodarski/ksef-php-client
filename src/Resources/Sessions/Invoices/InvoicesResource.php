@@ -28,7 +28,7 @@ final class InvoicesResource extends AbstractResource implements InvoicesResourc
             $request = StatusRequest::from($request);
         }
 
-        return new StatusHandler($this->client)->handle($request);
+        return (new StatusHandler($this->client))->handle($request);
     }
 
     public function ksefUpo(KsefUpoRequest | array $request): ResponseInterface
@@ -37,7 +37,7 @@ final class InvoicesResource extends AbstractResource implements InvoicesResourc
             $request = KsefUpoRequest::from($request);
         }
 
-        return new KsefUpoHandler($this->client)->handle($request);
+        return (new KsefUpoHandler($this->client))->handle($request);
     }
 
     public function upo(UpoRequest | array $request): ResponseInterface
@@ -46,6 +46,6 @@ final class InvoicesResource extends AbstractResource implements InvoicesResourc
             $request = UpoRequest::from($request);
         }
 
-        return new UpoHandler($this->client)->handle($request);
+        return (new UpoHandler($this->client))->handle($request);
     }
 }

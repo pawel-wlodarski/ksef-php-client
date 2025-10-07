@@ -13,12 +13,12 @@ use N1ebieski\KSEFClient\Support\Optional;
 use N1ebieski\KSEFClient\Validator\Rules\Array\MaxRule;
 use N1ebieski\KSEFClient\Validator\Validator;
 
-final readonly class WysylkaGroup extends AbstractDTO implements DomSerializableInterface
+final class WysylkaGroup extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @var Optional|array<int, WysylkaPrzez>
      */
-    public Optional | array $wysylkaPrzez;
+    public readonly Optional | array $wysylkaPrzez;
 
     /**
      * @param Optional|DataGodzRozpTransportu $dataGodzRozpTransportu Data i godzina rozpoczęcia transportu
@@ -28,11 +28,11 @@ final readonly class WysylkaGroup extends AbstractDTO implements DomSerializable
      * @param Optional|WysylkaDo $wysylkaDo Adres miejsca docelowego, do którego został zlecony transport
      */
     public function __construct(
-        public Optional | DataGodzRozpTransportu $dataGodzRozpTransportu = new Optional(),
-        public Optional | DataGodzZakTransportu $dataGodzZakTransportu = new Optional(),
-        public Optional | WysylkaZ $wysylkaZ = new Optional(),
+        public readonly Optional | DataGodzRozpTransportu $dataGodzRozpTransportu = new Optional(),
+        public readonly Optional | DataGodzZakTransportu $dataGodzZakTransportu = new Optional(),
+        public readonly Optional | WysylkaZ $wysylkaZ = new Optional(),
         Optional | array $wysylkaPrzez = new Optional(),
-        public Optional | WysylkaDo $wysylkaDo = new Optional(),
+        public readonly Optional | WysylkaDo $wysylkaDo = new Optional(),
     ) {
         Validator::validate([
             'wysylkaPrzez' => $wysylkaPrzez

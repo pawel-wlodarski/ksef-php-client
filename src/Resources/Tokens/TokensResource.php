@@ -30,7 +30,7 @@ final class TokensResource extends AbstractResource implements TokensResourceInt
             $request = CreateRequest::from($request);
         }
 
-        return new CreateHandler($this->client)->handle($request);
+        return (new CreateHandler($this->client))->handle($request);
     }
 
     public function list(ListRequest | array $request): ResponseInterface
@@ -39,7 +39,7 @@ final class TokensResource extends AbstractResource implements TokensResourceInt
             $request = ListRequest::from($request);
         }
 
-        return new ListHandler($this->client)->handle($request);
+        return (new ListHandler($this->client))->handle($request);
     }
 
     public function status(StatusRequest | array $request): ResponseInterface
@@ -48,7 +48,7 @@ final class TokensResource extends AbstractResource implements TokensResourceInt
             $request = StatusRequest::from($request);
         }
 
-        return new StatusHandler($this->client)->handle($request);
+        return (new StatusHandler($this->client))->handle($request);
     }
 
     public function revoke(RevokeRequest | array $request): ResponseInterface
@@ -57,6 +57,6 @@ final class TokensResource extends AbstractResource implements TokensResourceInt
             $request = RevokeRequest::from($request);
         }
 
-        return new RevokeHandler($this->client)->handle($request);
+        return (new RevokeHandler($this->client))->handle($request);
     }
 }

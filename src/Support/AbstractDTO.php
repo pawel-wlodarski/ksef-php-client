@@ -11,7 +11,7 @@ use N1ebieski\KSEFClient\Support\Concerns\HasFromArray;
 use N1ebieski\KSEFClient\Support\Concerns\HasToArray;
 use N1ebieski\KSEFClient\Support\Concerns\HasWith;
 
-abstract readonly class AbstractDTO implements FromArrayInterface, ArrayableInterface, WithInterface
+abstract class AbstractDTO implements FromArrayInterface, ArrayableInterface, WithInterface
 {
     use HasFromArray;
     use HasToArray;

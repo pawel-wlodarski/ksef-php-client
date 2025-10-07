@@ -7,10 +7,11 @@ namespace N1ebieski\KSEFClient\Contracts\HttpClient;
 use N1ebieski\KSEFClient\Contracts\ArrayableInterface;
 use Psr\Http\Message\ResponseInterface as BaseResponseInterface;
 
+/**
+ * @property-read BaseResponseInterface $baseResponse
+ */
 interface ResponseInterface extends ArrayableInterface
 {
-    public BaseResponseInterface $baseResponse { get; }
-
     public function status(): int;
 
     /**

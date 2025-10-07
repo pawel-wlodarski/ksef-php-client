@@ -28,7 +28,7 @@ final class ExportsResource extends AbstractResource implements ExportsResourceI
             $request = InitRequest::from($request);
         }
 
-        return new InitHandler($this->client, $this->config)->handle($request);
+        return (new InitHandler($this->client, $this->config))->handle($request);
     }
 
     public function status(StatusRequest | array $request): ResponseInterface
@@ -37,6 +37,6 @@ final class ExportsResource extends AbstractResource implements ExportsResourceI
             $request = StatusRequest::from($request);
         }
 
-        return new StatusHandler($this->client)->handle($request);
+        return (new StatusHandler($this->client))->handle($request);
     }
 }

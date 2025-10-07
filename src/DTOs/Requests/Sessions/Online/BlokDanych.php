@@ -13,17 +13,17 @@ use N1ebieski\KSEFClient\Validator\Rules\Array\MaxRule;
 use N1ebieski\KSEFClient\Validator\Rules\Array\MinRule;
 use N1ebieski\KSEFClient\Validator\Validator;
 
-final readonly class BlokDanych extends AbstractDTO implements DomSerializableInterface
+final class BlokDanych extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @var array<int, MetaDane>
      */
-    public array $metaDane;
+    public readonly array $metaDane;
 
     /**
      * @var Optional|array<int, Tabela>
      */
-    public Optional | array $tabela;
+    public readonly Optional | array $tabela;
 
     /**
      * @param Optional|ZNaglowek $zNaglowek Nagłówek bloku danych
@@ -34,8 +34,8 @@ final readonly class BlokDanych extends AbstractDTO implements DomSerializableIn
      */
     public function __construct(
         array $metaDane,
-        public Optional | ZNaglowek $zNaglowek = new Optional(),
-        public Optional | Tekst $tekst = new Optional(),
+        public readonly Optional | ZNaglowek $zNaglowek = new Optional(),
+        public readonly Optional | Tekst $tekst = new Optional(),
         Optional | array $tabela = new Optional(),
     ) {
         Validator::validate([

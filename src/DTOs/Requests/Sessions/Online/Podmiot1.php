@@ -14,12 +14,12 @@ use N1ebieski\KSEFClient\Support\Optional;
 use N1ebieski\KSEFClient\Validator\Rules\Array\MaxRule;
 use N1ebieski\KSEFClient\Validator\Validator;
 
-final readonly class Podmiot1 extends AbstractDTO implements DomSerializableInterface
+final class Podmiot1 extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @var Optional|array<int, DaneKontaktowe>
      */
-    public Optional | array $daneKontaktowe;
+    public readonly Optional | array $daneKontaktowe;
 
     /**
      * @param Podmiot1DaneIdentyfikacyjne $daneIdentyfikacyjne Dane identyfikujące podatnika
@@ -30,13 +30,13 @@ final readonly class Podmiot1 extends AbstractDTO implements DomSerializableInte
      * @return void
      */
     public function __construct(
-        public Podmiot1DaneIdentyfikacyjne $daneIdentyfikacyjne,
-        public Adres $adres,
+        public readonly Podmiot1DaneIdentyfikacyjne $daneIdentyfikacyjne,
+        public readonly Adres $adres,
         Optional | array $daneKontaktowe = new Optional(),
-        public Optional | PrefiksPodatnika $prefiksPodatnika = new Optional(),
-        public Optional | NrEORI $nrEORI = new Optional(),
-        public Optional | AdresKoresp $adresKoresp = new Optional(),
-        public Optional | StatusInfoPodatnika $statusInfoPodatnika = new Optional()
+        public readonly Optional | PrefiksPodatnika $prefiksPodatnika = new Optional(),
+        public readonly Optional | NrEORI $nrEORI = new Optional(),
+        public readonly Optional | AdresKoresp $adresKoresp = new Optional(),
+        public readonly Optional | StatusInfoPodatnika $statusInfoPodatnika = new Optional()
     ) {
         Validator::validate([
             'daneKontaktowe' => $daneKontaktowe

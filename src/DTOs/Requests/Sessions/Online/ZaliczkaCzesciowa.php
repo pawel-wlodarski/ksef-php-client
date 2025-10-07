@@ -12,7 +12,7 @@ use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\P_6Z;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 use N1ebieski\KSEFClient\Support\Optional;
 
-final readonly class ZaliczkaCzesciowa extends AbstractDTO implements DomSerializableInterface
+final class ZaliczkaCzesciowa extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @param P_6Z $p_6Z Data otrzymania płatności, o której mowa w art. 106b ust. 1 pkt 4 ustawy
@@ -20,9 +20,9 @@ final readonly class ZaliczkaCzesciowa extends AbstractDTO implements DomSeriali
      * @param Optional|KursWalutyZW $kursWalutyZW Kurs waluty stosowany do wyliczenia kwoty podatku w przypadkach, o których mowa w Dziale VI ustawy
      */
     public function __construct(
-        public P_6Z $p_6Z,
-        public P_15Z $p_15Z,
-        public Optional | KursWalutyZW $kursWalutyZW = new Optional()
+        public readonly P_6Z $p_6Z,
+        public readonly P_15Z $p_15Z,
+        public readonly Optional | KursWalutyZW $kursWalutyZW = new Optional()
     ) {
     }
 

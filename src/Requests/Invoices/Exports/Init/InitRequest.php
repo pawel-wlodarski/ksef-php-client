@@ -8,10 +8,10 @@ use N1ebieski\KSEFClient\Contracts\BodyInterface;
 use N1ebieski\KSEFClient\DTOs\Requests\Invoices\Exports\Filters;
 use N1ebieski\KSEFClient\Requests\AbstractRequest;
 
-final readonly class InitRequest extends AbstractRequest implements BodyInterface
+final class InitRequest extends AbstractRequest implements BodyInterface
 {
     public function __construct(
-        public Filters $filters,
+        public readonly Filters $filters,
     ) {
     }
 

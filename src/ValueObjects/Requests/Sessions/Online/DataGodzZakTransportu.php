@@ -13,9 +13,9 @@ use N1ebieski\KSEFClient\Validator\Rules\Date\BeforeRule;
 use N1ebieski\KSEFClient\Validator\Validator;
 use Stringable;
 
-final readonly class DataGodzZakTransportu extends AbstractValueObject implements ValueAwareInterface, Stringable
+final class DataGodzZakTransportu extends AbstractValueObject implements ValueAwareInterface, Stringable
 {
-    public DateTimeInterface $value;
+    public readonly DateTimeInterface $value;
 
     public function __construct(DateTimeInterface | string $value)
     {

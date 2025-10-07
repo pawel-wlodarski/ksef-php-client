@@ -29,7 +29,7 @@ use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\UU_IDZ;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 use N1ebieski\KSEFClient\Support\Optional;
 
-final readonly class ZamowienieWiersz extends AbstractDTO implements DomSerializableInterface
+final class ZamowienieWiersz extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @param NrWierszaZam $nrWierszaZam Kolejny numer wiersza zamówienia lub umowy
@@ -54,26 +54,26 @@ final readonly class ZamowienieWiersz extends AbstractDTO implements DomSerializ
      * @param Optional|StanPrzedZ $stanPrzedZ Znacznik stanu przed korektą w przypadku faktury korygującej fakturę dokumentującą otrzymanie zapłaty lub jej części przed dokonaniem czynności oraz fakturę wystawioną w związku z art. 106f ust. 4 ustawy, w przypadku gdy korekta dotyczy danych wykazanych w pozycjach zamówienia i jest dokonywana w sposób polegający na wykazaniu danych przed korektą i po korekcie jako osobnych wierszy z odrębną numeracją oraz w przypadku potwierdzania braku zmiany wartości danej pozycji
      */
     public function __construct(
-        public NrWierszaZam $nrWierszaZam,
-        public Optional | UU_IDZ $uu_idZ = new Optional(),
-        public Optional | P_7Z $p_7Z = new Optional(),
-        public Optional | IndeksZ $indeksZ = new Optional(),
-        public Optional | GTINZ $gtinZ = new Optional(),
-        public Optional | PKWiUZ $pkwiuZ = new Optional(),
-        public Optional | CNZ $cnZ = new Optional(),
-        public Optional | PKOBZ $pkobZ = new Optional(),
-        public Optional | P_8AZ $p_8AZ = new Optional(),
-        public Optional | P_8BZ $p_8BZ = new Optional(),
-        public Optional | P_9AZ $p_9AZ = new Optional(),
-        public Optional | P_11NettoZ $p_11NettoZ = new Optional(),
-        public Optional | P_11VatZ $p_11VatZ = new Optional(),
-        public Optional | P_12Z $p_12Z = new Optional(),
-        public Optional | P_12Z_XII $p_12Z_XII = new Optional(),
-        public Optional | P_12Z_Zal_15 $p_12Z_Zal_15 = new Optional(),
-        public Optional | GTUZ $gtuZ = new Optional(),
-        public Optional | ProceduraZ $proceduraZ = new Optional(),
-        public Optional | KwotaAkcyzyZ $kwotaAkcyzyZ = new Optional(),
-        public Optional | StanPrzedZ $stanPrzedZ = new Optional(),
+        public readonly NrWierszaZam $nrWierszaZam,
+        public readonly Optional | UU_IDZ $uu_idZ = new Optional(),
+        public readonly Optional | P_7Z $p_7Z = new Optional(),
+        public readonly Optional | IndeksZ $indeksZ = new Optional(),
+        public readonly Optional | GTINZ $gtinZ = new Optional(),
+        public readonly Optional | PKWiUZ $pkwiuZ = new Optional(),
+        public readonly Optional | CNZ $cnZ = new Optional(),
+        public readonly Optional | PKOBZ $pkobZ = new Optional(),
+        public readonly Optional | P_8AZ $p_8AZ = new Optional(),
+        public readonly Optional | P_8BZ $p_8BZ = new Optional(),
+        public readonly Optional | P_9AZ $p_9AZ = new Optional(),
+        public readonly Optional | P_11NettoZ $p_11NettoZ = new Optional(),
+        public readonly Optional | P_11VatZ $p_11VatZ = new Optional(),
+        public readonly Optional | P_12Z $p_12Z = new Optional(),
+        public readonly Optional | P_12Z_XII $p_12Z_XII = new Optional(),
+        public readonly Optional | P_12Z_Zal_15 $p_12Z_Zal_15 = new Optional(),
+        public readonly Optional | GTUZ $gtuZ = new Optional(),
+        public readonly Optional | ProceduraZ $proceduraZ = new Optional(),
+        public readonly Optional | KwotaAkcyzyZ $kwotaAkcyzyZ = new Optional(),
+        public readonly Optional | StanPrzedZ $stanPrzedZ = new Optional(),
     ) {
     }
 

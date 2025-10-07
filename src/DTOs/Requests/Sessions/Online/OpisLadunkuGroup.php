@@ -9,13 +9,13 @@ use N1ebieski\KSEFClient\Contracts\DomSerializableInterface;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\OpisLadunku;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 
-final readonly class OpisLadunkuGroup extends AbstractDTO implements DomSerializableInterface
+final class OpisLadunkuGroup extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @param OpisLadunku $opisLadunku Rodzaj ładunku
      */
     public function __construct(
-        public OpisLadunku $opisLadunku
+        public readonly OpisLadunku $opisLadunku
     ) {
     }
 

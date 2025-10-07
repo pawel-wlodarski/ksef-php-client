@@ -9,14 +9,14 @@ use N1ebieski\KSEFClient\Contracts\DomSerializableInterface;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\IDWew;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 
-final readonly class IDWewGroup extends AbstractDTO implements DomSerializableInterface
+final class IDWewGroup extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @param IDWew $iDWew Identyfikator wewnętrzny z NIP
      * @return void
      */
     public function __construct(
-        public IDWew $iDWew,
+        public readonly IDWew $iDWew,
     ) {
     }
 

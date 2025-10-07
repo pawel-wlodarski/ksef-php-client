@@ -37,7 +37,7 @@ final class SessionsResource extends AbstractResource implements SessionsResourc
             $request = StatusRequest::from($request);
         }
 
-        return new StatusHandler($this->client)->handle($request);
+        return (new StatusHandler($this->client))->handle($request);
     }
 
     public function invoices(): InvoicesResourceInterface

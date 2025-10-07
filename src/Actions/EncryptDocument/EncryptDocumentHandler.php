@@ -8,10 +8,10 @@ use N1ebieski\KSEFClient\Actions\AbstractHandler;
 use Psr\Log\LoggerInterface;
 use RuntimeException;
 
-final readonly class EncryptDocumentHandler extends AbstractHandler
+final class EncryptDocumentHandler extends AbstractHandler
 {
     public function __construct(
-        private ?LoggerInterface $logger = null
+        private readonly ?LoggerInterface $logger = null
     ) {
     }
 

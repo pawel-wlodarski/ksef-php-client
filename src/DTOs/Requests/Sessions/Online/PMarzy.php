@@ -9,10 +9,10 @@ use DOMElement;
 use N1ebieski\KSEFClient\Contracts\DomSerializableInterface;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 
-final readonly class PMarzy extends AbstractDTO implements DomSerializableInterface
+final class PMarzy extends AbstractDTO implements DomSerializableInterface
 {
     public function __construct(
-        public P_PMarzyGroup | P_PMarzyNGroup $p_PMarzyGroup = new P_PMarzyNGroup(),
+        public readonly P_PMarzyGroup | P_PMarzyNGroup $p_PMarzyGroup = new P_PMarzyNGroup(),
     ) {
     }
 

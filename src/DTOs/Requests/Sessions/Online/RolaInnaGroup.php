@@ -10,7 +10,7 @@ use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\OpisRoli;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\RolaInna;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 
-final readonly class RolaInnaGroup extends AbstractDTO implements DomSerializableInterface
+final class RolaInnaGroup extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @param RolaInna $rolaInna Znacznik innego podmiotu: 1 - Inny podmiot
@@ -18,8 +18,8 @@ final readonly class RolaInnaGroup extends AbstractDTO implements DomSerializabl
      * @return void
      */
     public function __construct(
-        public RolaInna $rolaInna,
-        public OpisRoli $opisRoli,
+        public readonly RolaInna $rolaInna,
+        public readonly OpisRoli $opisRoli,
     ) {
     }
 

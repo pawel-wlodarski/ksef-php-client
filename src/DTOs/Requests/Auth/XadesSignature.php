@@ -13,16 +13,13 @@ use N1ebieski\KSEFClient\ValueObjects\Requests\Auth\Challenge;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Auth\SubjectIdentifierType;
 use N1ebieski\KSEFClient\ValueObjects\Requests\XmlNamespace;
 use RuntimeException;
-use SensitiveParameter;
 
-final readonly class XadesSignature extends AbstractDTO implements XmlSerializableInterface, DomSerializableInterface
+final class XadesSignature extends AbstractDTO implements XmlSerializableInterface, DomSerializableInterface
 {
     public function __construct(
-        #[SensitiveParameter]
-        public Challenge $challenge,
-        #[SensitiveParameter]
-        public ContextIdentifierGroup $contextIdentifierGroup,
-        public SubjectIdentifierType $subjectIdentifierType,
+        public readonly Challenge $challenge,
+        public readonly ContextIdentifierGroup $contextIdentifierGroup,
+        public readonly SubjectIdentifierType $subjectIdentifierType,
     ) {
     }
 

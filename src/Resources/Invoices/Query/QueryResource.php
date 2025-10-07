@@ -24,6 +24,6 @@ final class QueryResource extends AbstractResource implements QueryResourceInter
             $request = MetadataRequest::from($request);
         }
 
-        return new MetadataHandler($this->client)->handle($request);
+        return (new MetadataHandler($this->client))->handle($request);
     }
 }

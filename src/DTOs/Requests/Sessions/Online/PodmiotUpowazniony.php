@@ -13,12 +13,12 @@ use N1ebieski\KSEFClient\Support\Optional;
 use N1ebieski\KSEFClient\Validator\Rules\Array\MaxRule;
 use N1ebieski\KSEFClient\Validator\Validator;
 
-final readonly class PodmiotUpowazniony extends AbstractDTO implements DomSerializableInterface
+final class PodmiotUpowazniony extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @var Optional|array<int, PodmiotUpowaznionyDaneKontaktowe>
      */
-    public Optional | array $daneKontaktowe;
+    public readonly Optional | array $daneKontaktowe;
 
     /**
      * @param PodmiotUpowaznionyDaneIdentyfikacyjne $daneIdentyfikacyjne Dane identyfikujące podmiotu upoważnionego
@@ -28,11 +28,11 @@ final readonly class PodmiotUpowazniony extends AbstractDTO implements DomSerial
      * @param RolaPU $rolaPU Rola podmiotu upoważnionego
      */
     public function __construct(
-        public PodmiotUpowaznionyDaneIdentyfikacyjne $daneIdentyfikacyjne,
-        public Adres $adres,
-        public RolaPU $rolaPU,
-        public Optional | NrEORI $nrEORI = new Optional(),
-        public Optional | AdresKoresp $adresKoresp = new Optional(),
+        public readonly PodmiotUpowaznionyDaneIdentyfikacyjne $daneIdentyfikacyjne,
+        public readonly Adres $adres,
+        public readonly RolaPU $rolaPU,
+        public readonly Optional | NrEORI $nrEORI = new Optional(),
+        public readonly Optional | AdresKoresp $adresKoresp = new Optional(),
         Optional | array $daneKontaktowe = new Optional(),
     ) {
         Validator::validate([

@@ -7,9 +7,12 @@ namespace N1ebieski\KSEFClient\Validator\Rules\String;
 use InvalidArgumentException;
 use N1ebieski\KSEFClient\Validator\Rules\AbstractRule;
 
-final readonly class CountryRule extends AbstractRule
+final class CountryRule extends AbstractRule
 {
-    private const array CODES = [
+    /**
+     * @var mixed[]
+     */
+    private const CODES = [
         'AF', 'AX', 'AL', 'DZ', 'AD', 'AO', 'AI', 'AQ', 'AG', 'AN',
         'SA', 'AR', 'AM', 'AW', 'AU', 'AT', 'AZ', 'BS', 'BH', 'BD',
         'BB', 'BE', 'BZ', 'BJ', 'BM', 'BT', 'BY', 'BO', 'BQ', 'BA',

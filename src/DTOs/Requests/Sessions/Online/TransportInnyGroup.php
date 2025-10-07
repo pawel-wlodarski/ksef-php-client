@@ -10,14 +10,14 @@ use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\OpisInnegoTranspo
 use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\TransportInny;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 
-final readonly class TransportInnyGroup extends AbstractDTO implements DomSerializableInterface
+final class TransportInnyGroup extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @param TransportInny $transportInny Znacznik innego rodzaju transportu: 1 - inny rodzaj transportu
      */
     public function __construct(
-        public OpisInnegoTransportu $opisInnegoTransportu,
-        public TransportInny $transportInny = TransportInny::Default
+        public readonly OpisInnegoTransportu $opisInnegoTransportu,
+        public readonly TransportInny $transportInny = TransportInny::Default
     ) {
     }
 

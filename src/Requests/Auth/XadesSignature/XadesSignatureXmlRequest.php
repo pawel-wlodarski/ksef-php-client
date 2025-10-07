@@ -10,13 +10,13 @@ use N1ebieski\KSEFClient\Requests\AbstractRequest;
 use N1ebieski\KSEFClient\Requests\Auth\XadesSignature\Concerns\HasToParameters;
 use N1ebieski\KSEFClient\Support\Optional;
 
-final readonly class XadesSignatureXmlRequest extends AbstractRequest implements XmlSerializableInterface, ParametersInterface
+final class XadesSignatureXmlRequest extends AbstractRequest implements XmlSerializableInterface, ParametersInterface
 {
     use HasToParameters;
 
     public function __construct(
-        public string $xadesSignature,
-        public Optional | bool $verifyCertificateChain = new Optional()
+        public readonly string $xadesSignature,
+        public readonly Optional | bool $verifyCertificateChain = new Optional()
     ) {
     }
 

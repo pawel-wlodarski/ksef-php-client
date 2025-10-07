@@ -9,10 +9,10 @@ use DOMElement;
 use N1ebieski\KSEFClient\Contracts\DomSerializableInterface;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 
-final readonly class RozliczenieGroup extends AbstractDTO implements DomSerializableInterface
+final class RozliczenieGroup extends AbstractDTO implements DomSerializableInterface
 {
     public function __construct(
-        public DoZaplatyGroup|DoRozliczeniaGroup $doGroup
+        public readonly DoZaplatyGroup|DoRozliczeniaGroup $doGroup
     ) {
     }
 

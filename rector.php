@@ -12,15 +12,11 @@ return \Rector\Config\RectorConfig::configure()
     ])
     ->withSkip([
         \Rector\Carbon\Rector\MethodCall\DateTimeMethodCallToCarbonRector::class,
-        \Rector\Php82\Rector\Class_\ReadOnlyClassRector::class,
         \Rector\DeadCode\Rector\Node\RemoveNonExistingVarAnnotationRector::class,
         \Rector\Php81\Rector\Array_\FirstClassCallableRector::class,
         \Rector\CodingStyle\Rector\Encapsed\EncapsedStringsToSprintfRector::class,
         \Rector\Php74\Rector\Closure\ClosureToArrowFunctionRector::class,
         \Rector\Carbon\Rector\New_\DateTimeInstanceToCarbonRector::class,
-        \Rector\Php84\Rector\MethodCall\NewMethodCallWithoutParenthesesRector::class => [
-            __DIR__ . '/tests/Unit/*'
-        ],
         \Rector\CodeQuality\Rector\If_\ExplicitBoolCompareRector::class => [
             __DIR__ . '/src/Actions/ConvertEcdsaDerToRaw/ConvertEcdsaDerToRawHandler.php'
         ],
@@ -42,4 +38,5 @@ return \Rector\Config\RectorConfig::configure()
         carbon: true,
         phpunitCodeQuality: true
     )
-    ->withPhpSets();
+    ->withDowngradeSets(php81: true)
+    ->withPhpSets(php81: true);

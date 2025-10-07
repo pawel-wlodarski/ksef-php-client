@@ -10,10 +10,10 @@ use N1ebieski\KSEFClient\Contracts\Requests\Auth\IdentifierInterface;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 use N1ebieski\KSEFClient\ValueObjects\NIP;
 
-final readonly class ContextIdentifierNipGroup extends AbstractDTO implements DomSerializableInterface, IdentifierInterface
+final class ContextIdentifierNipGroup extends AbstractDTO implements DomSerializableInterface, IdentifierInterface
 {
     public function __construct(
-        public NIP $nip,
+        public readonly NIP $nip,
     ) {
     }
 

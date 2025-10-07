@@ -10,16 +10,16 @@ use N1ebieski\KSEFClient\Contracts\DomSerializableInterface;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\DataWystFaKorygowanej;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\NrFaKorygowanej;
 
-final readonly class DaneFaKorygowanej implements DomSerializableInterface
+final class DaneFaKorygowanej implements DomSerializableInterface
 {
     /**
      * @param DataWystFaKorygowanej $dataWystFaKorygowanej Data wystawienia faktury korygowanej
      * @param NrFaKorygowanej $nrFaKorygowanej Numer faktury korygowanej
      */
     public function __construct(
-        public DataWystFaKorygowanej $dataWystFaKorygowanej,
-        public NrFaKorygowanej $nrFaKorygowanej,
-        public NrKSeFGroup | NrKSeFNGroup $nrKSeFGroup
+        public readonly DataWystFaKorygowanej $dataWystFaKorygowanej,
+        public readonly NrFaKorygowanej $nrFaKorygowanej,
+        public readonly NrKSeFGroup | NrKSeFNGroup $nrKSeFGroup
     ) {
     }
 

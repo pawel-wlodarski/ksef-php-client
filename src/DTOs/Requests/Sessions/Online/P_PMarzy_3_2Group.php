@@ -9,14 +9,14 @@ use N1ebieski\KSEFClient\Contracts\DomSerializableInterface;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\P_PMarzy_3_2;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 
-final readonly class P_PMarzy_3_2Group extends AbstractDTO implements DomSerializableInterface
+final class P_PMarzy_3_2Group extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @param P_PMarzy_3_2 $p_PMarzy_3_2 Znacznik dostawy dzieł sztuki dla których podstawę opodatkowania stanowi marża, zgodnie z art. 120 ustawy, a faktura dokumentująca dostawę zawiera wyrazy "procedura marży - dzieła sztuki"
      * @return void
      */
     public function __construct(
-        public P_PMarzy_3_2 $p_PMarzy_3_2 = P_PMarzy_3_2::Default,
+        public readonly P_PMarzy_3_2 $p_PMarzy_3_2 = P_PMarzy_3_2::Default,
     ) {
     }
 

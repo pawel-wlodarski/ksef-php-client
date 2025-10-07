@@ -7,7 +7,7 @@ namespace N1ebieski\KSEFClient\DTOs\Requests\Auth;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 use N1ebieski\KSEFClient\Support\Optional;
 
-final readonly class AllowedIps extends AbstractDTO
+final class AllowedIps extends AbstractDTO
 {
     /**
      * @param Optional|array<int, string> $ip4Addresses
@@ -16,9 +16,9 @@ final readonly class AllowedIps extends AbstractDTO
      * @return void
      */
     public function __construct(
-        public Optional | array $ip4Addresses,
-        public Optional | array $ip4Ranges,
-        public Optional | array $ip4Masks
+        public readonly Optional | array $ip4Addresses,
+        public readonly Optional | array $ip4Ranges,
+        public readonly Optional | array $ip4Masks
     ) {
     }
 }

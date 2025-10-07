@@ -16,12 +16,12 @@ use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\JST;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\NrEORI;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\NrKlienta;
 
-final readonly class Podmiot2 extends AbstractDTO implements DomSerializableInterface
+final class Podmiot2 extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @var Optional|array<int, DaneKontaktowe>
      */
-    public Optional | array $daneKontaktowe;
+    public readonly Optional | array $daneKontaktowe;
 
     /**
      * @param Podmiot2DaneIdentyfikacyjne $daneIdentyfikacyjne Dane identyfikujące nabywcę
@@ -35,15 +35,15 @@ final readonly class Podmiot2 extends AbstractDTO implements DomSerializableInte
      * @return void
      */
     public function __construct(
-        public Podmiot2DaneIdentyfikacyjne $daneIdentyfikacyjne,
-        public JST $jst = JST::No,
-        public GV $gv = GV::No,
-        public Optional | NrEORI $nrEORI = new Optional(),
-        public Optional | Adres $adres = new Optional(),
-        public Optional | AdresKoresp $adresKoresp = new Optional(),
+        public readonly Podmiot2DaneIdentyfikacyjne $daneIdentyfikacyjne,
+        public readonly JST $jst = JST::No,
+        public readonly GV $gv = GV::No,
+        public readonly Optional | NrEORI $nrEORI = new Optional(),
+        public readonly Optional | Adres $adres = new Optional(),
+        public readonly Optional | AdresKoresp $adresKoresp = new Optional(),
         Optional | array $daneKontaktowe = new Optional(),
-        public Optional | NrKlienta $nrKlienta = new Optional(),
-        public Optional | IDNabywcy $idNabywcy = new Optional()
+        public readonly Optional | NrKlienta $nrKlienta = new Optional(),
+        public readonly Optional | IDNabywcy $idNabywcy = new Optional()
     ) {
         Validator::validate([
             'daneKontaktowe' => $daneKontaktowe

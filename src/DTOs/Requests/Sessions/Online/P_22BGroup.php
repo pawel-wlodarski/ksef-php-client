@@ -12,16 +12,16 @@ use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\P_22BT;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 use N1ebieski\KSEFClient\Support\Optional;
 
-final readonly class P_22BGroup extends AbstractDTO implements DomSerializableInterface
+final class P_22BGroup extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @param P_22B $p_22B Jeśli dostawa dotyczy pojazdów lądowych, o których mowa w art. 2 pkt 10 lit. a ustawy - należy podać przebieg pojazdu
      * @param Optional|P_22BT $p_22BT Jeśli dostawa dotyczy pojazdów lądowych, o których mowa w art. 2 pkt 10 lit. a ustawy - można podać typ nowego środka transportu
      */
     public function __construct(
-        public P_22B $p_22B,
-        public Optional | P_22B1Group | P_22B2Group | P_22B3Group | P_22B4Group $p_22B1234Group = new Optional(),
-        public Optional | P_22BT $p_22BT = new Optional(),
+        public readonly P_22B $p_22B,
+        public readonly Optional | P_22B1Group | P_22B2Group | P_22B3Group | P_22B4Group $p_22B1234Group = new Optional(),
+        public readonly Optional | P_22BT $p_22BT = new Optional(),
     ) {
     }
 

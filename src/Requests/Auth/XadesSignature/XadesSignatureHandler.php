@@ -14,11 +14,11 @@ use N1ebieski\KSEFClient\Requests\AbstractHandler;
 use N1ebieski\KSEFClient\ValueObjects\HttpClient\Method;
 use N1ebieski\KSEFClient\ValueObjects\HttpClient\Uri;
 
-final readonly class XadesSignatureHandler extends AbstractHandler
+final class XadesSignatureHandler extends AbstractHandler
 {
     public function __construct(
-        private HttpClientInterface $client,
-        private SignDocumentHandler $signDocument
+        private readonly HttpClientInterface $client,
+        private readonly SignDocumentHandler $signDocument
     ) {
     }
 

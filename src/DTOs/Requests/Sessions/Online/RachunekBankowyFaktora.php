@@ -13,13 +13,13 @@ use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\RachunekWlasnyBan
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 use N1ebieski\KSEFClient\Support\Optional;
 
-final readonly class RachunekBankowyFaktora extends AbstractDTO implements DomSerializableInterface
+final class RachunekBankowyFaktora extends AbstractDTO implements DomSerializableInterface
 {
     public function __construct(
-        public NrRBGroup $nrRBGroup,
-        public Optional | RachunekWlasnyBanku $rachunekWlasnyBanku = new Optional(),
-        public Optional | NazwaBanku $nazwaBanku = new Optional(),
-        public Optional | OpisRachunku $opisRachunku = new Optional(),
+        public readonly NrRBGroup $nrRBGroup,
+        public readonly Optional | RachunekWlasnyBanku $rachunekWlasnyBanku = new Optional(),
+        public readonly Optional | NazwaBanku $nazwaBanku = new Optional(),
+        public readonly Optional | OpisRachunku $opisRachunku = new Optional(),
     ) {
     }
 

@@ -11,22 +11,16 @@ use N1ebieski\KSEFClient\ValueObjects\EncryptionKey;
 use N1ebieski\KSEFClient\ValueObjects\HttpClient\BaseUri;
 use N1ebieski\KSEFClient\ValueObjects\RefreshToken;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\EncryptedKey;
-use SensitiveParameter;
 
-final readonly class Config extends AbstractDTO
+final class Config extends AbstractDTO
 {
     public function __construct(
-        public BaseUri $baseUri,
-        #[SensitiveParameter]
-        public ?AccessToken $accessToken = null,
-        #[SensitiveParameter]
-        public ?RefreshToken $refreshToken = null,
-        #[SensitiveParameter]
-        public ?EncryptionKey $encryptionKey = null,
-        #[SensitiveParameter]
-        public ?EncryptedKey $encryptedKey = null,
-        #[SensitiveParameter]
-        public ?Certificate $certificate = null,
+        public readonly BaseUri $baseUri,
+        public readonly ?AccessToken $accessToken = null,
+        public readonly ?RefreshToken $refreshToken = null,
+        public readonly ?EncryptionKey $encryptionKey = null,
+        public readonly ?EncryptedKey $encryptedKey = null,
+        public readonly ?Certificate $certificate = null,
     ) {
     }
 

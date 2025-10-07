@@ -12,12 +12,12 @@ use N1ebieski\KSEFClient\Validator\Rules\Array\MaxRule;
 use N1ebieski\KSEFClient\Validator\Rules\Array\MinRule;
 use N1ebieski\KSEFClient\Validator\Validator;
 
-final readonly class Wiersz extends AbstractDTO implements DomSerializableInterface
+final class Wiersz extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @var array<int, WKom>
      */
-    public array $wKom;
+    public readonly array $wKom;
 
     /**
      * @param array<int, WKom> $wKom Zawartość pola

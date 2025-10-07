@@ -8,11 +8,11 @@ use DOMDocument;
 use N1ebieski\KSEFClient\Contracts\DomSerializableInterface;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 
-final readonly class Przewoznik extends AbstractDTO implements DomSerializableInterface
+final class Przewoznik extends AbstractDTO implements DomSerializableInterface
 {
     public function __construct(
-        public PrzewoznikDaneIdentyfikacyjne $daneIdentyfikacyjne,
-        public AdresPrzewoznika $adresPrzewoznika,
+        public readonly PrzewoznikDaneIdentyfikacyjne $daneIdentyfikacyjne,
+        public readonly AdresPrzewoznika $adresPrzewoznika,
     ) {
     }
 

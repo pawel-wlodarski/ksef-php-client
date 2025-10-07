@@ -11,7 +11,7 @@ use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\NrID;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 use N1ebieski\KSEFClient\Support\Optional;
 
-final readonly class KrajGroup extends AbstractDTO implements DomSerializableInterface
+final class KrajGroup extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @param NrID $nrID Dane identyfikujące nabywcę
@@ -19,8 +19,8 @@ final readonly class KrajGroup extends AbstractDTO implements DomSerializableInt
      * @return void
      */
     public function __construct(
-        public NrID $nrID,
-        public Optional | KodKraju $kodKraju = new Optional()
+        public readonly NrID $nrID,
+        public readonly Optional | KodKraju $kodKraju = new Optional()
     ) {
     }
 

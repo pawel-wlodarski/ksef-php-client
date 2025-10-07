@@ -7,10 +7,10 @@ namespace N1ebieski\KSEFClient\Validator\Rules\Number;
 use InvalidArgumentException;
 use N1ebieski\KSEFClient\Validator\Rules\AbstractRule;
 
-final readonly class MinRule extends AbstractRule
+final class MinRule extends AbstractRule
 {
     public function __construct(
-        private float $min
+        private readonly float $min
     ) {
     }
 

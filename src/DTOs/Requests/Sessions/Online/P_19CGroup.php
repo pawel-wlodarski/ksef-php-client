@@ -9,14 +9,14 @@ use N1ebieski\KSEFClient\Contracts\DomSerializableInterface;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\P_19C;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 
-final readonly class P_19CGroup extends AbstractDTO implements DomSerializableInterface
+final class P_19CGroup extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @param P_19C $p_19C Jeśli pole P_19 równa się "1" - należy wskazać inną podstawę prawną wskazującą na to, że dostawa towarów lub świadczenie usług korzysta ze zwolnienia od podatku
      * @return void
      */
     public function __construct(
-        public P_19C $p_19C,
+        public readonly P_19C $p_19C,
     ) {
     }
 

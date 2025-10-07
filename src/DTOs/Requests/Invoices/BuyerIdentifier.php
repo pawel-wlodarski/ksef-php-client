@@ -8,11 +8,11 @@ use N1ebieski\KSEFClient\Support\AbstractDTO;
 use N1ebieski\KSEFClient\Support\Optional;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Invoices\BuyerIdentifierType;
 
-final readonly class BuyerIdentifier extends AbstractDTO
+final class BuyerIdentifier extends AbstractDTO
 {
     public function __construct(
-        public BuyerIdentifierType $type,
-        public Optional | string $value = new Optional(),
+        public readonly BuyerIdentifierType $type,
+        public readonly Optional | string $value = new Optional(),
     ) {
     }
 }

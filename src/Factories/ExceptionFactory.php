@@ -13,7 +13,7 @@ use N1ebieski\KSEFClient\Exceptions\HttpClient\ServerException;
 use N1ebieski\KSEFClient\Exceptions\HttpClient\UnknownSystemException;
 use N1ebieski\KSEFClient\Support\Utility;
 
-final readonly class ExceptionFactory extends AbstractFactory
+final class ExceptionFactory extends AbstractFactory
 {
     /**
      * @param object{exception: object{exceptionDetailList: array<int, object{exceptionCode: int, exceptionDescription: string}>}} $exceptionResponse

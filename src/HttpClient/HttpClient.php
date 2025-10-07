@@ -15,12 +15,12 @@ use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\EncryptedKey;
 use Psr\Http\Client\ClientInterface;
 use Psr\Log\LoggerInterface;
 
-final readonly class HttpClient implements HttpClientInterface
+final class HttpClient implements HttpClientInterface
 {
     public function __construct(
-        private ClientInterface $client,
-        private Config $config,
-        private ?LoggerInterface $logger = null
+        private readonly ClientInterface $client,
+        private readonly Config $config,
+        private readonly ?LoggerInterface $logger = null
     ) {
     }
 

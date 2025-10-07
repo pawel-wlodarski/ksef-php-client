@@ -23,7 +23,7 @@ final class EnrollmentsResource extends AbstractResource implements EnrollmentsR
 
     public function data(): ResponseInterface
     {
-        return new DataHandler($this->client)->handle();
+        return (new DataHandler($this->client))->handle();
     }
 
     public function send(SendRequest | array $request): ResponseInterface
@@ -32,7 +32,7 @@ final class EnrollmentsResource extends AbstractResource implements EnrollmentsR
             $request = SendRequest::from($request);
         }
 
-        return new SendHandler($this->client)->handle($request);
+        return (new SendHandler($this->client))->handle($request);
     }
 
     public function status(StatusRequest | array $request): ResponseInterface
@@ -41,6 +41,6 @@ final class EnrollmentsResource extends AbstractResource implements EnrollmentsR
             $request = StatusRequest::from($request);
         }
 
-        return new StatusHandler($this->client)->handle($request);
+        return (new StatusHandler($this->client))->handle($request);
     }
 }

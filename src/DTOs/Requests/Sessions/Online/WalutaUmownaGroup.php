@@ -10,15 +10,15 @@ use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\KursUmowny;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\WalutaUmowna;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 
-final readonly class WalutaUmownaGroup extends AbstractDTO implements DomSerializableInterface
+final class WalutaUmownaGroup extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @param KursUmowny $kursUmowny Kurs umowny - w przypadkach, gdy na fakturze znajduje się informacja o kursie, po którym zostały przeliczone kwoty wykazane na fakturze w złotych. Nie dotyczy przypadków, o których mowa w Dziale VI ustawy
      * @param WalutaUmowna $walutaUmowna Waluta umowna - trzyliterowy kod waluty (ISO-4217) w przypadkach, gdy na fakturze znajduje się informacja o kursie, po którym zostały przeliczone kwoty wykazane na fakturze w złotych. Nie dotyczy przypadków, o których mowa w Dziale VI ustawy
      */
     public function __construct(
-        public KursUmowny $kursUmowny,
-        public WalutaUmowna $walutaUmowna
+        public readonly KursUmowny $kursUmowny,
+        public readonly WalutaUmowna $walutaUmowna
     ) {
     }
 

@@ -9,7 +9,7 @@ use N1ebieski\KSEFClient\Requests\AbstractRequest;
 use N1ebieski\KSEFClient\ValueObjects\CertificateSerialNumber;
 use N1ebieski\KSEFClient\Support\Concerns\HasToBody;
 
-final readonly class RetrieveRequest extends AbstractRequest implements BodyInterface
+final class RetrieveRequest extends AbstractRequest implements BodyInterface
 {
     use HasToBody;
 
@@ -17,7 +17,7 @@ final readonly class RetrieveRequest extends AbstractRequest implements BodyInte
      * @param array<int, CertificateSerialNumber> $certificateSerialNumbers
      */
     public function __construct(
-        public array $certificateSerialNumbers,
+        public readonly array $certificateSerialNumbers,
     ) {
     }
 }

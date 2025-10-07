@@ -11,11 +11,11 @@ use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\NrUmowy;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 use N1ebieski\KSEFClient\Support\Optional;
 
-final readonly class Umowy extends AbstractDTO implements DomSerializableInterface
+final class Umowy extends AbstractDTO implements DomSerializableInterface
 {
     public function __construct(
-        public Optional | DataUmowy $dataUmowy = new Optional(),
-        public Optional | NrUmowy $nrUmowy = new Optional(),
+        public readonly Optional | DataUmowy $dataUmowy = new Optional(),
+        public readonly Optional | NrUmowy $nrUmowy = new Optional(),
     ) {
     }
 

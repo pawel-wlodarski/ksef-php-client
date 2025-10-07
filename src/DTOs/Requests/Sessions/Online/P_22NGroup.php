@@ -9,14 +9,14 @@ use N1ebieski\KSEFClient\Contracts\DomSerializableInterface;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\P_22N;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 
-final readonly class P_22NGroup extends AbstractDTO implements DomSerializableInterface
+final class P_22NGroup extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @param P_22N $p_22N Znacznik braku wewnątrzwspólnotowej dostawy nowych środków transportu
      * @return void
      */
     public function __construct(
-        public P_22N $p_22N = P_22N::Default,
+        public readonly P_22N $p_22N = P_22N::Default,
     ) {
     }
 

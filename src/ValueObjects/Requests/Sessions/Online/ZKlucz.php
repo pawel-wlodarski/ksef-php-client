@@ -11,9 +11,9 @@ use N1ebieski\KSEFClient\Validator\Rules\String\MinRule;
 use N1ebieski\KSEFClient\Validator\Validator;
 use Stringable;
 
-final readonly class ZKlucz extends AbstractValueObject implements ValueAwareInterface, Stringable
+final class ZKlucz extends AbstractValueObject implements ValueAwareInterface, Stringable
 {
-    public string $value;
+    public readonly string $value;
 
     public function __construct(string $value)
     {

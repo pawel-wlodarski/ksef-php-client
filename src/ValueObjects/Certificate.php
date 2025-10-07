@@ -8,20 +8,16 @@ use BCMathExtended\BC;
 use N1ebieski\KSEFClient\Support\AbstractValueObject;
 use OpenSSLAsymmetricKey;
 use RuntimeException;
-use SensitiveParameter;
 
-final readonly class Certificate extends AbstractValueObject
+final class Certificate extends AbstractValueObject
 {
     /**
      * @param array{issuer: array<string, string>, serialNumberHex: string} $info
      */
     public function __construct(
-        #[SensitiveParameter]
-        public string $raw,
-        #[SensitiveParameter]
-        public array $info,
-        #[SensitiveParameter]
-        public OpenSSLAsymmetricKey $privateKey,
+        public readonly string $raw,
+        public readonly array $info,
+        public readonly OpenSSLAsymmetricKey $privateKey,
     ) {
     }
 

@@ -9,13 +9,13 @@ use N1ebieski\KSEFClient\Contracts\DomSerializableInterface;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\RodzajTransportu;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 
-final readonly class RodzajTransportuGroup extends AbstractDTO implements DomSerializableInterface
+final class RodzajTransportuGroup extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @param RodzajTransportu $rodzajTransportu Rodzaj zastosowanego transportu w przypadku dokonanej dostawy towarów
      */
     public function __construct(
-        public RodzajTransportu $rodzajTransportu
+        public readonly RodzajTransportu $rodzajTransportu
     ) {
     }
 

@@ -12,12 +12,12 @@ use N1ebieski\KSEFClient\Validator\Rules\Array\MaxRule;
 use N1ebieski\KSEFClient\Validator\Rules\Array\MinRule;
 use N1ebieski\KSEFClient\Validator\Validator;
 
-final readonly class Tekst extends AbstractDTO implements DomSerializableInterface
+final class Tekst extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @var array<int, Akapit>
      */
-    public array $akapit;
+    public readonly array $akapit;
 
     /**
      * @param array<int, Akapit> $akapit Akapit stanowiący część tekstową bloku danych

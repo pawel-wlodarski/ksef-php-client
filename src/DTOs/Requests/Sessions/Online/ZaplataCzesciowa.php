@@ -12,15 +12,15 @@ use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\KwotaZaplatyCzesc
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 use N1ebieski\KSEFClient\Support\Optional;
 
-final readonly class ZaplataCzesciowa extends AbstractDTO implements DomSerializableInterface
+final class ZaplataCzesciowa extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @param DataZaplatyCzesciowej $dataZaplatyCzesciowej Data zapłaty częściowej, jeśli do wystawienia faktury płatność częściowa została dokonana
      */
     public function __construct(
-        public KwotaZaplatyCzesciowej $kwotaZaplatyCzesciowej,
-        public DataZaplatyCzesciowej $dataZaplatyCzesciowej,
-        public Optional | FormaPlatnosciGroup | PlatnoscInnaGroup $platnoscGroup = new Optional(),
+        public readonly KwotaZaplatyCzesciowej $kwotaZaplatyCzesciowej,
+        public readonly DataZaplatyCzesciowej $dataZaplatyCzesciowej,
+        public readonly Optional | FormaPlatnosciGroup | PlatnoscInnaGroup $platnoscGroup = new Optional(),
     ) {
     }
 

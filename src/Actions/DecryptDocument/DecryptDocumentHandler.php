@@ -7,7 +7,7 @@ namespace N1ebieski\KSEFClient\Actions\DecryptDocument;
 use N1ebieski\KSEFClient\Actions\AbstractHandler;
 use RuntimeException;
 
-final readonly class DecryptDocumentHandler extends AbstractHandler
+final class DecryptDocumentHandler extends AbstractHandler
 {
     public function handle(DecryptDocumentAction $action): string
     {

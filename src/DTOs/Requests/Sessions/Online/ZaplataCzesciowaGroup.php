@@ -13,12 +13,12 @@ use N1ebieski\KSEFClient\Validator\Rules\Array\MaxRule;
 use N1ebieski\KSEFClient\Validator\Rules\Array\MinRule;
 use N1ebieski\KSEFClient\Validator\Validator;
 
-final readonly class ZaplataCzesciowaGroup extends AbstractDTO implements DomSerializableInterface
+final class ZaplataCzesciowaGroup extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @var Optional|array<int, ZaplataCzesciowa>
      */
-    public Optional | array $zaplataCzesciowa;
+    public readonly Optional | array $zaplataCzesciowa;
 
     /**
      * @param Optional|array<int, ZaplataCzesciowa> $zaplataCzesciowa Dane zapłat częściowych
@@ -26,7 +26,7 @@ final readonly class ZaplataCzesciowaGroup extends AbstractDTO implements DomSer
      */
     public function __construct(
         Optional | array $zaplataCzesciowa = new Optional(),
-        public ZnacznikZaplatyCzesciowej $znacznikZaplatyCzesciowej = ZnacznikZaplatyCzesciowej::Default
+        public readonly ZnacznikZaplatyCzesciowej $znacznikZaplatyCzesciowej = ZnacznikZaplatyCzesciowej::Default
     ) {
         Validator::validate([
             'zaplataCzesciowa' => $zaplataCzesciowa,

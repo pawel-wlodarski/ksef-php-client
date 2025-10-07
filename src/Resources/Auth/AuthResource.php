@@ -30,7 +30,7 @@ final class AuthResource extends AbstractResource implements AuthResourceInterfa
 
     public function challenge(): ResponseInterface
     {
-        return new ChallengeHandler($this->client)->handle();
+        return (new ChallengeHandler($this->client))->handle();
     }
 
     public function xadesSignature(XadesSignatureRequest | XadesSignatureXmlRequest | array $request): ResponseInterface
@@ -39,10 +39,10 @@ final class AuthResource extends AbstractResource implements AuthResourceInterfa
             $request = XadesSignatureRequest::from($request);
         }
 
-        return new XadesSignatureHandler(
+        return (new XadesSignatureHandler(
             client: $this->client,
             signDocument: new SignDocumentHandler(new ConvertEcdsaDerToRawHandler())
-        )->handle($request);
+        ))->handle($request);
     }
 
     public function ksefToken(KsefTokenRequest | array $request): ResponseInterface
@@ -51,7 +51,7 @@ final class AuthResource extends AbstractResource implements AuthResourceInterfa
             $request = KsefTokenRequest::from($request);
         }
 
-        return new KsefTokenHandler($this->client)->handle($request);
+        return (new KsefTokenHandler($this->client))->handle($request);
     }
 
     public function status(StatusRequest | array $request): ResponseInterface
@@ -60,7 +60,7 @@ final class AuthResource extends AbstractResource implements AuthResourceInterfa
             $request = StatusRequest::from($request);
         }
 
-        return new StatusHandler($this->client)->handle($request);
+        return (new StatusHandler($this->client))->handle($request);
     }
 
     public function token(): TokenResourceInterface

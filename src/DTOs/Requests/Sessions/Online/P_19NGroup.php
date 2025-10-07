@@ -9,14 +9,14 @@ use N1ebieski\KSEFClient\Contracts\DomSerializableInterface;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\P_19N;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 
-final readonly class P_19NGroup extends AbstractDTO implements DomSerializableInterface
+final class P_19NGroup extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @param P_19N $p_19N Znacznik braku dostawy towarów lub świadczenia usług zwolnionych od podatku na podstawie art. 43 ust. 1, art. 113 ust. 1 i 9 ustawy albo przepisów wydanych na podstawie art. 82 ust. 3 ustawy lub na podstawie innych przepisów
      * @return void
      */
     public function __construct(
-        public P_19N $p_19N = P_19N::Default,
+        public readonly P_19N $p_19N = P_19N::Default,
     ) {
     }
 

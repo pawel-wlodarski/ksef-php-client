@@ -11,17 +11,17 @@ use N1ebieski\KSEFClient\Support\Optional;
 use N1ebieski\KSEFClient\Validator\Rules\Array\MaxRule;
 use N1ebieski\KSEFClient\Validator\Validator;
 
-final readonly class Stopka extends AbstractDTO implements DomSerializableInterface
+final class Stopka extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @var Optional|array<int, Informacje>
      */
-    public Optional | array $informacje;
+    public readonly Optional | array $informacje;
 
     /**
      * @var Optional|array<int, Rejestry>
      */
-    public Optional | array $rejestry;
+    public readonly Optional | array $rejestry;
 
     /**
      * @param Optional|array<int, Informacje> $informacje Pozostałe dane

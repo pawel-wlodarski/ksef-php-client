@@ -14,11 +14,11 @@ use N1ebieski\KSEFClient\ValueObjects\HttpClient\Uri;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\EncryptedKey;
 use RuntimeException;
 
-final readonly class InitHandler extends AbstractHandler
+final class InitHandler extends AbstractHandler
 {
     public function __construct(
-        private HttpClientInterface $client,
-        private Config $config
+        private readonly HttpClientInterface $client,
+        private readonly Config $config
     ) {
     }
 

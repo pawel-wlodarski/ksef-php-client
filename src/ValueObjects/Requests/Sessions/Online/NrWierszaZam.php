@@ -10,9 +10,9 @@ use N1ebieski\KSEFClient\Validator\Rules\Number\MaxDigitsRule;
 use N1ebieski\KSEFClient\Validator\Validator;
 use Stringable;
 
-final readonly class NrWierszaZam extends AbstractValueObject implements ValueAwareInterface, Stringable
+final class NrWierszaZam extends AbstractValueObject implements ValueAwareInterface, Stringable
 {
-    public int $value;
+    public readonly int $value;
 
     public function __construct(int $value)
     {

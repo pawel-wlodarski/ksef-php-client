@@ -10,7 +10,7 @@ use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\IDNabywcy;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 use N1ebieski\KSEFClient\Support\Optional;
 
-final readonly class Podmiot2K extends AbstractDTO implements DomSerializableInterface
+final class Podmiot2K extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @param Podmiot2KDaneIdentyfikacyjne $daneIdentyfikacyjne Dane identyfikujące nabywcę
@@ -19,9 +19,9 @@ final readonly class Podmiot2K extends AbstractDTO implements DomSerializableInt
      * @return void
      */
     public function __construct(
-        public Podmiot2KDaneIdentyfikacyjne $daneIdentyfikacyjne,
-        public Optional | Adres $adres = new Optional(),
-        public Optional | IDNabywcy $idNabywcy = new Optional()
+        public readonly Podmiot2KDaneIdentyfikacyjne $daneIdentyfikacyjne,
+        public readonly Optional | Adres $adres = new Optional(),
+        public readonly Optional | IDNabywcy $idNabywcy = new Optional()
     ) {
     }
 

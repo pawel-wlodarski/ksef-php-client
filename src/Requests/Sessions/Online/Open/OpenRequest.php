@@ -8,10 +8,10 @@ use N1ebieski\KSEFClient\Contracts\BodyInterface;
 use N1ebieski\KSEFClient\Requests\AbstractRequest;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\FormCode;
 
-final readonly class OpenRequest extends AbstractRequest implements BodyInterface
+final class OpenRequest extends AbstractRequest implements BodyInterface
 {
     public function __construct(
-        public FormCode $formCode,
+        public readonly FormCode $formCode,
     ) {
     }
 

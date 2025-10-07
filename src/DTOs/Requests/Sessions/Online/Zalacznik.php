@@ -11,12 +11,12 @@ use N1ebieski\KSEFClient\Validator\Rules\Array\MaxRule;
 use N1ebieski\KSEFClient\Validator\Rules\Array\MinRule;
 use N1ebieski\KSEFClient\Validator\Validator;
 
-final readonly class Zalacznik extends AbstractDTO implements DomSerializableInterface
+final class Zalacznik extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @var array<int, BlokDanych>
      */
-    public array $blokDanych;
+    public readonly array $blokDanych;
 
     /**
      * @param array<int, BlokDanych> $blokDanych Szczegółowe dane załącznika do faktury (bloki danych)

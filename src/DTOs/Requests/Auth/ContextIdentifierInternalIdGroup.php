@@ -10,10 +10,10 @@ use N1ebieski\KSEFClient\Contracts\Requests\Auth\IdentifierInterface;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 use N1ebieski\KSEFClient\ValueObjects\InternalId;
 
-final readonly class ContextIdentifierInternalIdGroup extends AbstractDTO implements DomSerializableInterface, IdentifierInterface
+final class ContextIdentifierInternalIdGroup extends AbstractDTO implements DomSerializableInterface, IdentifierInterface
 {
     public function __construct(
-        public InternalId $internalId,
+        public readonly InternalId $internalId,
     ) {
     }
 

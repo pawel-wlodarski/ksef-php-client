@@ -12,24 +12,18 @@ use N1ebieski\KSEFClient\ValueObjects\CertificateSerialNumber;
 use N1ebieski\KSEFClient\ValueObjects\Mode;
 use N1ebieski\KSEFClient\ValueObjects\NIP;
 use N1ebieski\KSEFClient\ValueObjects\Requests\KsefNumber;
-use SensitiveParameter;
 
-final readonly class GenerateQRCodesAction extends AbstractAction
+final class GenerateQRCodesAction extends AbstractAction
 {
     public function __construct(
-        public NIP $nip,
-        public DateTimeInterface $invoiceCreatedAt,
-        #[SensitiveParameter]
-        public string $document,
-        public Mode $mode = Mode::Production,
-        #[SensitiveParameter]
-        public ?KsefNumber $ksefNumber = null,
-        #[SensitiveParameter]
-        public ?Certificate $certificate = null,
-        #[SensitiveParameter]
-        public ?CertificateSerialNumber $certificateSerialNumber = null,
-        #[SensitiveParameter]
-        public ?ContextIdentifierGroup $contextIdentifierGroup = null
+        public readonly NIP $nip,
+        public readonly DateTimeInterface $invoiceCreatedAt,
+        public readonly string $document,
+        public readonly Mode $mode = Mode::Production,
+        public readonly ?KsefNumber $ksefNumber = null,
+        public readonly ?Certificate $certificate = null,
+        public readonly ?CertificateSerialNumber $certificateSerialNumber = null,
+        public readonly ?ContextIdentifierGroup $contextIdentifierGroup = null
     ) {
     }
 }

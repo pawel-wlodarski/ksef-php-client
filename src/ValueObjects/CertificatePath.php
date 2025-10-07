@@ -8,16 +8,14 @@ use N1ebieski\KSEFClient\Support\AbstractValueObject;
 use N1ebieski\KSEFClient\Validator\Rules\File\ExistsRule;
 use N1ebieski\KSEFClient\Validator\Rules\File\ExtensionsRule;
 use N1ebieski\KSEFClient\Validator\Validator;
-use SensitiveParameter;
 
-final readonly class CertificatePath extends AbstractValueObject
+final class CertificatePath extends AbstractValueObject
 {
-    public string $path;
+    public readonly string $path;
 
     public function __construct(
         string $path,
-        #[SensitiveParameter]
-        public ?string $passphrase = null
+        public readonly ?string $passphrase = null
     ) {
         Validator::validate($path, [
             new ExistsRule(),

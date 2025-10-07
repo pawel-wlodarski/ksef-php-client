@@ -11,10 +11,10 @@ use N1ebieski\KSEFClient\Requests\AbstractHandler;
 use N1ebieski\KSEFClient\ValueObjects\HttpClient\Method;
 use N1ebieski\KSEFClient\ValueObjects\HttpClient\Uri;
 
-final readonly class RevokeHandler extends AbstractHandler
+final class RevokeHandler extends AbstractHandler
 {
     public function __construct(
-        private HttpClientInterface $client,
+        private readonly HttpClientInterface $client,
     ) {
     }
 

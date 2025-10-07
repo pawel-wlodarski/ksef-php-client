@@ -7,9 +7,12 @@ namespace N1ebieski\KSEFClient\Validator\Rules\String;
 use InvalidArgumentException;
 use N1ebieski\KSEFClient\Validator\Rules\AbstractRule;
 
-final readonly class CurrencyRule extends AbstractRule
+final class CurrencyRule extends AbstractRule
 {
-    private const array CODES = [
+    /**
+     * @var mixed[]
+     */
+    private const CODES = [
         'AED', 'AFN', 'ALL', 'AMD', 'ANG', 'AOA', 'ARS', 'AUD', 'AWG', 'AZN',
         'BAM', 'BBD', 'BDT', 'BGN', 'BHD', 'BIF', 'BMD', 'BND', 'BOB', 'BOV',
         'BRL', 'BSD', 'BTN', 'BWP', 'BYN', 'BZD', 'CAD', 'CDF', 'CHE', 'CHF',

@@ -10,15 +10,15 @@ use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\LadunekInny;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\OpisInnegoLadunku;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 
-final readonly class LadunekInnyGroup extends AbstractDTO implements DomSerializableInterface
+final class LadunekInnyGroup extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @param OpisInnegoLadunku $opisInnegoLadunku Opis innego ładunku, w tym ładunek mieszany
      * @param LadunekInny $ladunekInny Znacznik innego ładunku: 1 - inny ładunek
      */
     public function __construct(
-        public OpisInnegoLadunku $opisInnegoLadunku,
-        public LadunekInny $ladunekInny = LadunekInny::Default
+        public readonly OpisInnegoLadunku $opisInnegoLadunku,
+        public readonly LadunekInny $ladunekInny = LadunekInny::Default
     ) {
     }
 

@@ -10,9 +10,9 @@ use N1ebieski\KSEFClient\Validator\Rules\String\MinRule;
 use N1ebieski\KSEFClient\Validator\Validator;
 use Stringable;
 
-final readonly class AuthorIdentifier extends AbstractValueObject implements ValueAwareInterface, Stringable
+final class AuthorIdentifier extends AbstractValueObject implements ValueAwareInterface, Stringable
 {
-    public string $value;
+    public readonly string $value;
 
     public function __construct(string $value)
     {

@@ -11,11 +11,11 @@ use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\JednostkaOpakowan
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 use N1ebieski\KSEFClient\Support\Optional;
 
-final readonly class LadunekGroup extends AbstractDTO implements DomSerializableInterface
+final class LadunekGroup extends AbstractDTO implements DomSerializableInterface
 {
     public function __construct(
-        public OpisLadunkuGroup | LadunekInnyGroup $opisLadunkuGroup,
-        public Optional | JednostkaOpakowania $jednostkaOpakowania = new Optional(),
+        public readonly OpisLadunkuGroup | LadunekInnyGroup $opisLadunkuGroup,
+        public readonly Optional | JednostkaOpakowania $jednostkaOpakowania = new Optional(),
     ) {
     }
 

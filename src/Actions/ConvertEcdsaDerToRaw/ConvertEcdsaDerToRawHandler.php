@@ -7,7 +7,7 @@ namespace N1ebieski\KSEFClient\Actions\ConvertEcdsaDerToRaw;
 use InvalidArgumentException;
 use N1ebieski\KSEFClient\Actions\AbstractHandler;
 
-final readonly class ConvertEcdsaDerToRawHandler extends AbstractHandler
+final class ConvertEcdsaDerToRawHandler extends AbstractHandler
 {
     /**
      * Convert ECDSA DER to raw (r||s)

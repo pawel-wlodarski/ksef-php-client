@@ -9,9 +9,9 @@ use N1ebieski\KSEFClient\Support\AbstractValueObject;
 use N1ebieski\KSEFClient\ValueObjects\HttpClient\BaseUri;
 use Stringable;
 
-final readonly class Uri extends AbstractValueObject implements ValueAwareInterface, Stringable
+final class Uri extends AbstractValueObject implements ValueAwareInterface, Stringable
 {
-    public function __construct(public string $value)
+    public function __construct(public readonly string $value)
     {
     }
 

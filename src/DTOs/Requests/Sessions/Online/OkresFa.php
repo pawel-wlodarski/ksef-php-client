@@ -10,7 +10,7 @@ use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\P_6_Do;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\P_6_Od;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 
-final readonly class OkresFa extends AbstractDTO implements DomSerializableInterface
+final class OkresFa extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @param P_6_Od $p_6_Od Data początkowa okresu, którego dotyczy faktura
@@ -18,8 +18,8 @@ final readonly class OkresFa extends AbstractDTO implements DomSerializableInter
      * @return void
      */
     public function __construct(
-        public P_6_Od $p_6_Od,
-        public P_6_Do $p_6_Do
+        public readonly P_6_Od $p_6_Od,
+        public readonly P_6_Do $p_6_Do
     ) {
     }
 

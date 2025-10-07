@@ -10,12 +10,12 @@ use N1ebieski\KSEFClient\ValueObjects\Requests\Invoices\AmountFrom;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Invoices\AmountTo;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Invoices\AmountType;
 
-final readonly class Amount extends AbstractDTO
+final class Amount extends AbstractDTO
 {
     public function __construct(
-        public AmountType $type,
-        public Optional | AmountFrom $from = new Optional(),
-        public Optional | AmountTo $to = new Optional(),
+        public readonly AmountType $type,
+        public readonly Optional | AmountFrom $from = new Optional(),
+        public readonly Optional | AmountTo $to = new Optional(),
     ) {
     }
 }

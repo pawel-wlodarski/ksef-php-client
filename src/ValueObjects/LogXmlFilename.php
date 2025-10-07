@@ -10,9 +10,9 @@ use N1ebieski\KSEFClient\Validator\Rules\File\ExtensionsRule;
 use N1ebieski\KSEFClient\Validator\Validator;
 use Stringable;
 
-final readonly class LogXmlFilename extends AbstractValueObject implements ValueAwareInterface, Stringable
+final class LogXmlFilename extends AbstractValueObject implements ValueAwareInterface, Stringable
 {
-    public string $value;
+    public readonly string $value;
 
     public function __construct(string $value)
     {

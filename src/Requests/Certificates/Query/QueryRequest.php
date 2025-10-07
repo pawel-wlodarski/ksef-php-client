@@ -16,16 +16,16 @@ use N1ebieski\KSEFClient\ValueObjects\Requests\Certificates\CertificateType;
 use N1ebieski\KSEFClient\ValueObjects\Requests\PageOffset;
 use N1ebieski\KSEFClient\ValueObjects\Requests\PageSize;
 
-final readonly class QueryRequest extends AbstractRequest implements BodyInterface, ParametersInterface
+final class QueryRequest extends AbstractRequest implements BodyInterface, ParametersInterface
 {
     public function __construct(
-        public Optional | CertificateName | null $name = new Optional(),
-        public Optional | CertificateType | null $type = new Optional(),
-        public Optional | CertificateStatus | null $status = new Optional(),
-        public Optional | CertificateSerialNumber | null $certificateSerialNumber = new Optional(),
-        public Optional | DateTime | null $expiresAfter = new Optional(),
-        public Optional | PageSize $pageSize = new Optional(),
-        public Optional | PageOffset $pageOffset = new Optional(),
+        public readonly Optional | CertificateName | null $name = new Optional(),
+        public readonly Optional | CertificateType | null $type = new Optional(),
+        public readonly Optional | CertificateStatus | null $status = new Optional(),
+        public readonly Optional | CertificateSerialNumber | null $certificateSerialNumber = new Optional(),
+        public readonly Optional | DateTime | null $expiresAfter = new Optional(),
+        public readonly Optional | PageSize $pageSize = new Optional(),
+        public readonly Optional | PageOffset $pageOffset = new Optional(),
     ) {
     }
 

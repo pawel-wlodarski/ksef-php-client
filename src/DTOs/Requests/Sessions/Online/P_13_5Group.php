@@ -11,7 +11,7 @@ use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\P_14_5;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 use N1ebieski\KSEFClient\Support\Optional;
 
-final readonly class P_13_5Group extends AbstractDTO implements DomSerializableInterface
+final class P_13_5Group extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @param P_13_5 $p_13_5 Suma wartości sprzedaży netto w przypadku procedury szczególnej, o której mowa w dziale XII w rozdziale 6a ustawy. W przypadku faktur zaliczkowych, kwota zaliczki netto. W przypadku faktur korygujących, kwota różnicy, o której mowa w art. 106j ust. 2 pkt 5 ustawy
@@ -19,8 +19,8 @@ final readonly class P_13_5Group extends AbstractDTO implements DomSerializableI
      * @return void
      */
     public function __construct(
-        public P_13_5 $p_13_5,
-        public Optional | P_14_5 $p_14_5 = new Optional(),
+        public readonly P_13_5 $p_13_5,
+        public readonly Optional | P_14_5 $p_14_5 = new Optional(),
     ) {
     }
 

@@ -11,14 +11,14 @@ use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\NrZleceniaTranspo
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 use N1ebieski\KSEFClient\Support\Optional;
 
-final readonly class Transport extends AbstractDTO implements DomSerializableInterface
+final class Transport extends AbstractDTO implements DomSerializableInterface
 {
     public function __construct(
-        public RodzajTransportuGroup | TransportInnyGroup $transportGroup,
-        public LadunekGroup $ladunekGroup,
-        public Optional | Przewoznik $przewoznik = new Optional(),
-        public Optional | NrZleceniaTransportu $nrZleceniaTransportu = new Optional(),
-        public Optional | WysylkaGroup $wysylkaGroup = new Optional(),
+        public readonly RodzajTransportuGroup | TransportInnyGroup $transportGroup,
+        public readonly LadunekGroup $ladunekGroup,
+        public readonly Optional | Przewoznik $przewoznik = new Optional(),
+        public readonly Optional | NrZleceniaTransportu $nrZleceniaTransportu = new Optional(),
+        public readonly Optional | WysylkaGroup $wysylkaGroup = new Optional(),
     ) {
     }
 

@@ -12,13 +12,13 @@ use N1ebieski\KSEFClient\Support\Optional;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Auth\Challenge;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Auth\EncryptedToken;
 
-final readonly class KsefTokenRequest extends AbstractRequest implements BodyInterface
+final class KsefTokenRequest extends AbstractRequest implements BodyInterface
 {
     public function __construct(
-        public Challenge $challenge,
-        public ContextIdentifierGroup $contextIdentifierGroup,
-        public EncryptedToken $encryptedToken,
-        public Optional | AuthorizationPolicy $authorizationPolicy = new Optional(),
+        public readonly Challenge $challenge,
+        public readonly ContextIdentifierGroup $contextIdentifierGroup,
+        public readonly EncryptedToken $encryptedToken,
+        public readonly Optional | AuthorizationPolicy $authorizationPolicy = new Optional(),
     ) {
     }
 

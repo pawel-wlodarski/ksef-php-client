@@ -11,15 +11,15 @@ use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\P_22D;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 use N1ebieski\KSEFClient\Support\Optional;
 
-final readonly class P_22DGroup extends AbstractDTO implements DomSerializableInterface
+final class P_22DGroup extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @param P_22D $p_22D Jeśli dostawa dotyczy statków powietrznych, o których mowa w art. 2 pkt 10 lit. c ustawy, należy podać liczbę godzin roboczych używania nowego środka transportu
      * @param Optional|P_22D1 $p_22D1 Jeśli dostawa dotyczy statków powietrznych, o których mowa w art. 2 pkt 10 lit. c ustawy, można podać numer fabryczny nowego środka transportu
      */
     public function __construct(
-        public P_22D $p_22D,
-        public Optional | P_22D1 $p_22D1 = new Optional(),
+        public readonly P_22D $p_22D,
+        public readonly Optional | P_22D1 $p_22D1 = new Optional(),
     ) {
     }
 

@@ -11,17 +11,15 @@ use N1ebieski\KSEFClient\Requests\AbstractRequest;
 use N1ebieski\KSEFClient\Requests\Auth\XadesSignature\Concerns\HasToParameters;
 use N1ebieski\KSEFClient\Support\Optional;
 use N1ebieski\KSEFClient\ValueObjects\CertificatePath;
-use SensitiveParameter;
 
-final readonly class XadesSignatureRequest extends AbstractRequest implements XmlSerializableInterface, ParametersInterface
+final class XadesSignatureRequest extends AbstractRequest implements XmlSerializableInterface, ParametersInterface
 {
     use HasToParameters;
 
     public function __construct(
-        #[SensitiveParameter]
-        public CertificatePath $certificatePath,
-        public XadesSignature $xadesSignature,
-        public Optional | bool $verifyCertificateChain = new Optional()
+        public readonly CertificatePath $certificatePath,
+        public readonly XadesSignature $xadesSignature,
+        public readonly Optional | bool $verifyCertificateChain = new Optional()
     ) {
     }
 

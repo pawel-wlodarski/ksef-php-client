@@ -13,7 +13,7 @@ use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\P_18A;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\P_23;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 
-final readonly class Adnotacje extends AbstractDTO implements DomSerializableInterface
+final class Adnotacje extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @param P_16 $p_16 W przypadku dostawy towarów lub świadczenia usług, w odniesieniu do których obowiązek podatkowy powstaje zgodnie z art. 19a ust. 5 pkt 1 lub art. 21 ust. 1 ustawy - wyrazy "metoda kasowa", należy podać wartość "1"; w przeciwnym przypadku - wartość "2"
@@ -24,14 +24,14 @@ final readonly class Adnotacje extends AbstractDTO implements DomSerializableInt
      * @return void
      */
     public function __construct(
-        public P_16 $p_16 = P_16::Default,
-        public P_17 $p_17 = P_17::Default,
-        public P_18 $p_18 = P_18::Default,
-        public P_18A $p_18A = P_18A::Default,
-        public Zwolnienie $zwolnienie = new Zwolnienie(),
-        public NoweSrodkiTransportu $noweSrodkiTransportu = new NoweSrodkiTransportu(),
-        public P_23 $p_23 = P_23::Default,
-        public PMarzy $pMarzy = new PMarzy(),
+        public readonly P_16 $p_16 = P_16::Default,
+        public readonly P_17 $p_17 = P_17::Default,
+        public readonly P_18 $p_18 = P_18::Default,
+        public readonly P_18A $p_18A = P_18A::Default,
+        public readonly Zwolnienie $zwolnienie = new Zwolnienie(),
+        public readonly NoweSrodkiTransportu $noweSrodkiTransportu = new NoweSrodkiTransportu(),
+        public readonly P_23 $p_23 = P_23::Default,
+        public readonly PMarzy $pMarzy = new PMarzy(),
     ) {
     }
 

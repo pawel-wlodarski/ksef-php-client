@@ -8,18 +8,15 @@ use N1ebieski\KSEFClient\Support\AbstractValueObject;
 use N1ebieski\KSEFClient\Validator\Rules\String\MaxBytesRule;
 use N1ebieski\KSEFClient\Validator\Rules\String\MinBytesRule;
 use N1ebieski\KSEFClient\Validator\Validator;
-use SensitiveParameter;
 
-final readonly class EncryptionKey extends AbstractValueObject
+final class EncryptionKey extends AbstractValueObject
 {
-    public string $key;
+    public readonly string $key;
 
-    public string $iv;
+    public readonly string $iv;
 
     public function __construct(
-        #[SensitiveParameter]
         string $key,
-        #[SensitiveParameter]
         string $iv
     ) {
         Validator::validate([

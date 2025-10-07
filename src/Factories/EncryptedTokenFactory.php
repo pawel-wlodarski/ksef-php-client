@@ -12,14 +12,11 @@ use phpseclib3\Crypt\PublicKeyLoader;
 use phpseclib3\Crypt\RSA;
 use phpseclib3\Crypt\RSA\PublicKey as RSAPublicKey;
 use RuntimeException;
-use SensitiveParameter;
 
-final readonly class EncryptedTokenFactory extends AbstractFactory
+final class EncryptedTokenFactory extends AbstractFactory
 {
     public static function make(
-        #[SensitiveParameter]
         KsefToken $ksefToken,
-        #[SensitiveParameter]
         DateTimeInterface $timestamp,
         KsefPublicKey $ksefPublicKey,
     ): EncryptedToken {

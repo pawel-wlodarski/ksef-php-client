@@ -14,10 +14,10 @@ use N1ebieski\KSEFClient\ValueObjects\NIP;
 use N1ebieski\KSEFClient\ValueObjects\NipVatUe;
 use N1ebieski\KSEFClient\ValueObjects\PeppolId;
 
-final readonly class ContextIdentifierGroup extends AbstractDTO implements DomSerializableInterface, BodyInterface
+final class ContextIdentifierGroup extends AbstractDTO implements DomSerializableInterface, BodyInterface
 {
     public function __construct(
-        public ContextIdentifierNipGroup | ContextIdentifierNipVatUeGroup | ContextIdentifierInternalIdGroup | ContextIdentifierPeppolIdGroup $identifierGroup
+        public readonly ContextIdentifierNipGroup | ContextIdentifierNipVatUeGroup | ContextIdentifierInternalIdGroup | ContextIdentifierPeppolIdGroup $identifierGroup
     ) {
     }
 

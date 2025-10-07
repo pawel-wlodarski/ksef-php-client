@@ -9,14 +9,14 @@ use N1ebieski\KSEFClient\Contracts\DomSerializableInterface;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\P_19B;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 
-final readonly class P_19BGroup extends AbstractDTO implements DomSerializableInterface
+final class P_19BGroup extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @param P_19B $p_19B Jeśli pole P_19 równa się "1" - należy wskazać przepis dyrektywy 2006/112/WE, który zwalnia od podatku taką dostawę towarów lub takie świadczenie usług
      * @return void
      */
     public function __construct(
-        public P_19B $p_19B,
+        public readonly P_19B $p_19B,
     ) {
     }
 

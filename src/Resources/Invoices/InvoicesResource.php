@@ -30,7 +30,7 @@ final class InvoicesResource extends AbstractResource implements InvoicesResourc
             $request = DownloadRequest::from($request);
         }
 
-        return new DownloadHandler($this->client)->handle($request);
+        return (new DownloadHandler($this->client))->handle($request);
     }
 
     public function query(): QueryResourceInterface

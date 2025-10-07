@@ -11,15 +11,15 @@ use N1ebieski\KSEFClient\Support\Arr;
 use N1ebieski\KSEFClient\ValueObjects\Support\KeyType;
 use Psr\Http\Message\ResponseInterface as BaseResponseInterface;
 
-final readonly class Response implements ResponseInterface
+final class Response implements ResponseInterface
 {
-    private string $contents;
+    private readonly string $contents;
 
-    private int $statusCode;
+    private readonly int $statusCode;
 
     public function __construct(
-        public BaseResponseInterface $baseResponse,
-        private ExceptionHandlerInterface $exceptionHandler
+        public readonly BaseResponseInterface $baseResponse,
+        private readonly ExceptionHandlerInterface $exceptionHandler
     ) {
         $this->contents = $baseResponse->getBody()->getContents();
         $this->statusCode = $baseResponse->getStatusCode();

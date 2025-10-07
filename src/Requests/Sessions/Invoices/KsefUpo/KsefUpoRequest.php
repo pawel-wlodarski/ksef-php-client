@@ -8,11 +8,11 @@ use N1ebieski\KSEFClient\Requests\AbstractRequest;
 use N1ebieski\KSEFClient\ValueObjects\Requests\KsefNumber;
 use N1ebieski\KSEFClient\ValueObjects\Requests\ReferenceNumber;
 
-final readonly class KsefUpoRequest extends AbstractRequest
+final class KsefUpoRequest extends AbstractRequest
 {
     public function __construct(
-        public ReferenceNumber $referenceNumber,
-        public KsefNumber $ksefNumber
+        public readonly ReferenceNumber $referenceNumber,
+        public readonly KsefNumber $ksefNumber
     ) {
     }
 }

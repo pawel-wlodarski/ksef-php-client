@@ -10,9 +10,9 @@ use N1ebieski\KSEFClient\Contracts\ValueAwareInterface;
 use N1ebieski\KSEFClient\Support\AbstractValueObject;
 use Stringable;
 
-final readonly class P_6 extends AbstractValueObject implements ValueAwareInterface, Stringable
+final class P_6 extends AbstractValueObject implements ValueAwareInterface, Stringable
 {
-    public DateTimeInterface $value;
+    public readonly DateTimeInterface $value;
 
     public function __construct(DateTimeInterface | string $value)
     {

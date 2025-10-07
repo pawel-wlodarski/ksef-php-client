@@ -12,9 +12,9 @@ use N1ebieski\KSEFClient\Validator\Rules\String\RegexRule;
 use N1ebieski\KSEFClient\Validator\Validator;
 use Stringable;
 
-final readonly class DoZaplaty extends AbstractValueObject implements ValueAwareInterface, Stringable
+final class DoZaplaty extends AbstractValueObject implements ValueAwareInterface, Stringable
 {
-    public float $value;
+    public readonly float $value;
 
     public function __construct(float $value)
     {

@@ -8,9 +8,9 @@ use N1ebieski\KSEFClient\Contracts\ValueAwareInterface;
 use N1ebieski\KSEFClient\Support\AbstractValueObject;
 use Stringable;
 
-final readonly class ApiUrl extends AbstractValueObject implements ValueAwareInterface, Stringable
+final class ApiUrl extends AbstractValueObject implements ValueAwareInterface, Stringable
 {
-    public Url $value;
+    public readonly Url $value;
 
     public function __construct(Url | string $value)
     {

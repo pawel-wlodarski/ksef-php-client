@@ -11,9 +11,9 @@ use N1ebieski\KSEFClient\Contracts\ValueAwareInterface;
 use N1ebieski\KSEFClient\Support\AbstractValueObject;
 use Stringable;
 
-final readonly class DateRangeTo extends AbstractValueObject implements ValueAwareInterface, Stringable, OriginalInterface
+final class DateRangeTo extends AbstractValueObject implements ValueAwareInterface, Stringable, OriginalInterface
 {
-    public DateTimeInterface $value;
+    public readonly DateTimeInterface $value;
 
     public function __construct(DateTimeInterface | string $value)
     {

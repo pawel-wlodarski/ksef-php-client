@@ -13,17 +13,17 @@ use N1ebieski\KSEFClient\Validator\Rules\Array\MaxRule;
 use N1ebieski\KSEFClient\Validator\Rules\Array\MinRule;
 use N1ebieski\KSEFClient\Validator\Validator;
 
-final readonly class Tabela extends AbstractDTO implements DomSerializableInterface
+final class Tabela extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @var Optional|array<int, TMetaDane>
      */
-    public Optional | array $tMetaDane;
+    public readonly Optional | array $tMetaDane;
 
     /**
      * @var array<int, Wiersz>
      */
-    public array $wiersz;
+    public readonly array $wiersz;
 
     /**
      * @param TNaglowek $tNaglowek Nagłówek tabeli
@@ -32,11 +32,11 @@ final readonly class Tabela extends AbstractDTO implements DomSerializableInterf
      * @return void
      */
     public function __construct(
-        public TNaglowek $tNaglowek,
+        public readonly TNaglowek $tNaglowek,
         array $wiersz,
         Optional | array $tMetaDane = new Optional(),
-        public Optional | Opis $opis = new Optional(),
-        public Optional | Suma $suma = new Optional(),
+        public readonly Optional | Opis $opis = new Optional(),
+        public readonly Optional | Suma $suma = new Optional(),
     ) {
         Validator::validate([
             'tMetaDane' => $tMetaDane,

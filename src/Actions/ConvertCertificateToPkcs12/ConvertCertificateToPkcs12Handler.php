@@ -7,7 +7,7 @@ namespace N1ebieski\KSEFClient\Actions\ConvertCertificateToPkcs12;
 use N1ebieski\KSEFClient\Actions\AbstractHandler;
 use RuntimeException;
 
-final readonly class ConvertCertificateToPkcs12Handler extends AbstractHandler
+final class ConvertCertificateToPkcs12Handler extends AbstractHandler
 {
     public function handle(ConvertCertificateToPkcs12Action $action): string
     {

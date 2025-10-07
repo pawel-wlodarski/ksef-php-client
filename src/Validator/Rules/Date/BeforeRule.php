@@ -8,9 +8,9 @@ use DateTimeInterface;
 use InvalidArgumentException;
 use N1ebieski\KSEFClient\Validator\Rules\AbstractRule;
 
-final readonly class BeforeRule extends AbstractRule
+final class BeforeRule extends AbstractRule
 {
-    public function __construct(private DateTimeInterface $before)
+    public function __construct(private readonly DateTimeInterface $before)
     {
     }
 

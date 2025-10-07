@@ -7,10 +7,10 @@ namespace N1ebieski\KSEFClient\Requests\Invoices\Download;
 use N1ebieski\KSEFClient\Requests\AbstractRequest;
 use N1ebieski\KSEFClient\ValueObjects\Requests\KsefNumber;
 
-final readonly class DownloadRequest extends AbstractRequest
+final class DownloadRequest extends AbstractRequest
 {
     public function __construct(
-        public KsefNumber $ksefNumber
+        public readonly KsefNumber $ksefNumber
     ) {
     }
 }

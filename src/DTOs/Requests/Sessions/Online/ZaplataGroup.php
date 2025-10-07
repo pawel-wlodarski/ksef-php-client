@@ -10,7 +10,7 @@ use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\DataZaplaty;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\Zaplacono;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 
-final readonly class ZaplataGroup extends AbstractDTO implements DomSerializableInterface
+final class ZaplataGroup extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @param Zaplacono $zaplacono Znacznik informujący, że kwota należności wynikająca z faktury została zapłacona: 1 - zapłacono
@@ -18,8 +18,8 @@ final readonly class ZaplataGroup extends AbstractDTO implements DomSerializable
      * @return void
      */
     public function __construct(
-        public DataZaplaty $dataZaplaty,
-        public Zaplacono $zaplacono = Zaplacono::Default,
+        public readonly DataZaplaty $dataZaplaty,
+        public readonly Zaplacono $zaplacono = Zaplacono::Default,
     ) {
     }
 

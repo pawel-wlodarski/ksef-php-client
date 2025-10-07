@@ -10,17 +10,14 @@ use N1ebieski\KSEFClient\Contracts\XmlSerializableInterface;
 use N1ebieski\KSEFClient\Support\AbstractValueObject;
 use N1ebieski\KSEFClient\Support\Concerns\HasToXml;
 use N1ebieski\KSEFClient\ValueObjects\Requests\XmlNamespace;
-use SensitiveParameter;
 
-final readonly class EncryptedKey extends AbstractValueObject implements XmlSerializableInterface, DomSerializableInterface
+final class EncryptedKey extends AbstractValueObject implements XmlSerializableInterface, DomSerializableInterface
 {
     use HasToXml;
 
     public function __construct(
-        #[SensitiveParameter]
-        public string $key,
-        #[SensitiveParameter]
-        public string $iv
+        public readonly string $key,
+        public readonly string $iv
     ) {
     }
 

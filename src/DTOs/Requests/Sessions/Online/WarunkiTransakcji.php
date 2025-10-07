@@ -15,27 +15,27 @@ use N1ebieski\KSEFClient\Support\Optional;
 use N1ebieski\KSEFClient\Validator\Rules\Array\MaxRule;
 use N1ebieski\KSEFClient\Validator\Validator;
 
-final readonly class WarunkiTransakcji extends AbstractDTO implements DomSerializableInterface
+final class WarunkiTransakcji extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @var Optional|array<int, Umowy>
      */
-    public Optional | array $umowy;
+    public readonly Optional | array $umowy;
 
     /**
      * @var Optional|array<int, Zamowienia>
      */
-    public Optional | array $zamowienia;
+    public readonly Optional | array $zamowienia;
 
     /**
      * @var Optional|array<int, NrPartiiTowaru>
      */
-    public Optional | array $nrPartiiTowaru;
+    public readonly Optional | array $nrPartiiTowaru;
 
     /**
      * @var Optional|array<int, Transport>
      */
-    public Optional | array $transport;
+    public readonly Optional | array $transport;
 
     /**
      * @param Optional|array<int, Umowy> $umowy
@@ -50,10 +50,10 @@ final readonly class WarunkiTransakcji extends AbstractDTO implements DomSeriali
         Optional | array $umowy = new Optional(),
         Optional | array $zamowienia = new Optional(),
         Optional | array $nrPartiiTowaru = new Optional(),
-        public Optional | WarunkiDostawy $warunkiDostawy = new Optional(),
-        public Optional | WalutaUmownaGroup $walutaUmownaGroup = new Optional(),
+        public readonly Optional | WarunkiDostawy $warunkiDostawy = new Optional(),
+        public readonly Optional | WalutaUmownaGroup $walutaUmownaGroup = new Optional(),
         Optional | array $transport = new Optional(),
-        public Optional | PodmiotPosredniczacy $podmiotPosredniczacy = new Optional()
+        public readonly Optional | PodmiotPosredniczacy $podmiotPosredniczacy = new Optional()
     ) {
         Validator::validate([
             'umowy' => $umowy,

@@ -7,18 +7,15 @@ namespace N1ebieski\KSEFClient\ValueObjects;
 use DateTimeInterface;
 use N1ebieski\KSEFClient\Support\AbstractValueObject;
 use N1ebieski\KSEFClient\ValueObjects\Concerns\HasExpired;
-use SensitiveParameter;
 use Stringable;
 
-final readonly class RefreshToken extends AbstractValueObject implements Stringable
+final class RefreshToken extends AbstractValueObject implements Stringable
 {
     use HasExpired;
 
     public function __construct(
-        #[SensitiveParameter]
-        public string $token,
-        #[SensitiveParameter]
-        public ?DateTimeInterface $validUntil = null
+        public readonly string $token,
+        public readonly ?DateTimeInterface $validUntil = null
     ) {
     }
 

@@ -7,11 +7,11 @@ namespace N1ebieski\KSEFClient\Validator\Rules\Number;
 use InvalidArgumentException;
 use N1ebieski\KSEFClient\Validator\Rules\AbstractRule;
 
-final readonly class DecimalRule extends AbstractRule
+final class DecimalRule extends AbstractRule
 {
     public function __construct(
-        private int $min,
-        private int $max
+        private readonly int $min,
+        private readonly int $max
     ) {
     }
 

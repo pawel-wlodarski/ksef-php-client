@@ -10,15 +10,15 @@ use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\Termin;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 use N1ebieski\KSEFClient\Support\Optional;
 
-final readonly class TerminPlatnosci extends AbstractDTO implements DomSerializableInterface
+final class TerminPlatnosci extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @param Optional|Termin $termin Termin płatności
      * @param Optional|TerminOpis $terminOpis Opis terminu płatności
      */
     public function __construct(
-        public Optional | Termin $termin = new Optional(),
-        public Optional | TerminOpis $terminOpis = new Optional(),
+        public readonly Optional | Termin $termin = new Optional(),
+        public readonly Optional | TerminOpis $terminOpis = new Optional(),
     ) {
     }
 

@@ -9,10 +9,10 @@ use N1ebieski\KSEFClient\Contracts\DomSerializableInterface;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\Rola;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 
-final readonly class RolaGroup extends AbstractDTO implements DomSerializableInterface
+final class RolaGroup extends AbstractDTO implements DomSerializableInterface
 {
     public function __construct(
-        public Rola $rola,
+        public readonly Rola $rola,
     ) {
     }
 

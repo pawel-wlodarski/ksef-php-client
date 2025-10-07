@@ -10,7 +10,7 @@ use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\PrefiksPodatnika;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 use N1ebieski\KSEFClient\Support\Optional;
 
-final readonly class Podmiot1K extends AbstractDTO implements DomSerializableInterface
+final class Podmiot1K extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @param Podmiot1KDaneIdentyfikacyjne $daneIdentyfikacyjne Dane identyfikujące podatnika
@@ -19,9 +19,9 @@ final readonly class Podmiot1K extends AbstractDTO implements DomSerializableInt
      * @return void
      */
     public function __construct(
-        public Podmiot1KDaneIdentyfikacyjne $daneIdentyfikacyjne,
-        public Adres $adres,
-        public Optional | PrefiksPodatnika $prefiksPodatnika = new Optional(),
+        public readonly Podmiot1KDaneIdentyfikacyjne $daneIdentyfikacyjne,
+        public readonly Adres $adres,
+        public readonly Optional | PrefiksPodatnika $prefiksPodatnika = new Optional(),
     ) {
     }
 

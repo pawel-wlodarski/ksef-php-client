@@ -6,27 +6,18 @@ namespace N1ebieski\KSEFClient\DTOs;
 
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 use N1ebieski\KSEFClient\Support\Optional;
-use SensitiveParameter;
 
-final readonly class DN extends AbstractDTO
+final class DN extends AbstractDTO
 {
     public function __construct(
-        #[SensitiveParameter]
-        public string $commonName,
-        #[SensitiveParameter]
-        public string $countryName,
-        #[SensitiveParameter]
-        public Optional | string | null $givenName = new Optional(),
-        #[SensitiveParameter]
-        public Optional | string | null $surname = new Optional(),
-        #[SensitiveParameter]
-        public Optional | string | null $serialNumber = new Optional(),
-        #[SensitiveParameter]
-        public Optional | string | null $uniqueIdentifier = new Optional(),
-        #[SensitiveParameter]
-        public Optional | string | null $organizationName = new Optional(),
-        #[SensitiveParameter]
-        public Optional | string | null $organizationIdentifier = new Optional(),
+        public readonly string $commonName,
+        public readonly string $countryName,
+        public readonly Optional | string | null $givenName = new Optional(),
+        public readonly Optional | string | null $surname = new Optional(),
+        public readonly Optional | string | null $serialNumber = new Optional(),
+        public readonly Optional | string | null $uniqueIdentifier = new Optional(),
+        public readonly Optional | string | null $organizationName = new Optional(),
+        public readonly Optional | string | null $organizationIdentifier = new Optional(),
     ) {
     }
 }

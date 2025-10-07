@@ -6,7 +6,7 @@ namespace N1ebieski\KSEFClient\Factories;
 
 use N1ebieski\KSEFClient\ValueObjects\EncryptionKey;
 
-final readonly class EncryptionKeyFactory extends AbstractFactory
+final class EncryptionKeyFactory extends AbstractFactory
 {
     public static function makeRandom(): EncryptionKey
     {

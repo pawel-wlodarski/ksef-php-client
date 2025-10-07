@@ -9,9 +9,9 @@ use N1ebieski\KSEFClient\Contracts\ValueAwareInterface;
 use N1ebieski\KSEFClient\Support\AbstractValueObject;
 use Stringable;
 
-final readonly class ContinuationToken extends AbstractValueObject implements ValueAwareInterface, Stringable, FromInterface
+final class ContinuationToken extends AbstractValueObject implements ValueAwareInterface, Stringable, FromInterface
 {
-    public function __construct(public string $value)
+    public function __construct(public readonly string $value)
     {
     }
 

@@ -13,12 +13,12 @@ use N1ebieski\KSEFClient\Validator\Rules\Array\MaxRule;
 use N1ebieski\KSEFClient\Validator\Rules\Array\MinRule;
 use N1ebieski\KSEFClient\Validator\Validator;
 
-final readonly class P_22Group extends AbstractDTO implements DomSerializableInterface
+final class P_22Group extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @var array<int, NowySrodekTransportu>
      */
-    public array $nowySrodekTransportu;
+    public readonly array $nowySrodekTransportu;
 
     /**
      * @param P_22 $p_22 Znacznik wewnątrzwspólnotowej dostawy nowych środków transportu
@@ -27,9 +27,9 @@ final readonly class P_22Group extends AbstractDTO implements DomSerializableInt
      * @return void
      */
     public function __construct(
-        public P_42_5 $p_42_5,
+        public readonly P_42_5 $p_42_5,
         array $nowySrodekTransportu,
-        public P_22 $p_22 = P_22::Default,
+        public readonly P_22 $p_22 = P_22::Default,
     ) {
         Validator::validate([
             'nowySrodekTransportu' => $nowySrodekTransportu

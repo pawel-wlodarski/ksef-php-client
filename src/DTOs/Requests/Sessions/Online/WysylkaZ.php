@@ -13,16 +13,16 @@ use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\AdresL2;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\GLN;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\KodKraju;
 
-final readonly class WysylkaZ extends AbstractDTO implements DomSerializableInterface
+final class WysylkaZ extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @param Optional|GLN $gln Globalny Numer Lokalizacyjny [Global Location Number]
      */
     public function __construct(
-        public AdresL1 $adresL1,
-        public KodKraju $kodKraju = new KodKraju('PL'),
-        public Optional | AdresL2 $adresL2 = new Optional(),
-        public Optional | GLN $gln = new Optional()
+        public readonly AdresL1 $adresL1,
+        public readonly KodKraju $kodKraju = new KodKraju('PL'),
+        public readonly Optional | AdresL2 $adresL2 = new Optional(),
+        public readonly Optional | GLN $gln = new Optional()
     ) {
     }
 

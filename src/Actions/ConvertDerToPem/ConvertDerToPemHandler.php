@@ -6,7 +6,7 @@ namespace N1ebieski\KSEFClient\Actions\ConvertDerToPem;
 
 use N1ebieski\KSEFClient\Actions\AbstractHandler;
 
-final readonly class ConvertDerToPemHandler extends AbstractHandler
+final class ConvertDerToPemHandler extends AbstractHandler
 {
     public function handle(ConvertDerToPemAction $action): string
     {

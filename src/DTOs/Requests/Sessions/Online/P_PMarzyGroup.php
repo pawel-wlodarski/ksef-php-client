@@ -10,15 +10,15 @@ use N1ebieski\KSEFClient\Contracts\DomSerializableInterface;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\P_PMarzy;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 
-final readonly class P_PMarzyGroup extends AbstractDTO implements DomSerializableInterface
+final class P_PMarzyGroup extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @param P_PMarzy $p_PMarzy Znacznik wystąpienia procedur marży, o których mowa w art. 119 lub art. 120 ustawy
      * @return void
      */
     public function __construct(
-        public P_PMarzy_2Group | P_PMarzy_3_1Group | P_PMarzy_3_2Group | P_PMarzy_3_3Group $p_PMarzy_2_3Group,
-        public P_PMarzy $p_PMarzy = P_PMarzy::Default
+        public readonly P_PMarzy_2Group | P_PMarzy_3_1Group | P_PMarzy_3_2Group | P_PMarzy_3_3Group $p_PMarzy_2_3Group,
+        public readonly P_PMarzy $p_PMarzy = P_PMarzy::Default
     ) {
     }
 

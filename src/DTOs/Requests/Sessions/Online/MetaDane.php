@@ -10,11 +10,11 @@ use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\ZKlucz;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\ZWartosc;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 
-final readonly class MetaDane extends AbstractDTO implements DomSerializableInterface
+final class MetaDane extends AbstractDTO implements DomSerializableInterface
 {
     public function __construct(
-        public ZKlucz $zKlucz,
-        public ZWartosc $zWartosc,
+        public readonly ZKlucz $zKlucz,
+        public readonly ZWartosc $zWartosc,
     ) {
     }
 

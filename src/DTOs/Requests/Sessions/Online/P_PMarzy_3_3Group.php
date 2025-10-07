@@ -9,14 +9,14 @@ use N1ebieski\KSEFClient\Contracts\DomSerializableInterface;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\P_PMarzy_3_3;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 
-final readonly class P_PMarzy_3_3Group extends AbstractDTO implements DomSerializableInterface
+final class P_PMarzy_3_3Group extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @param P_PMarzy_3_3 $p_PMarzy_3_3 Znacznik dostawy przedmiotów kolekcjonerskich i antyków, dla których podstawę opodatkowania stanowi marża, zgodnie z art. 120 ustawy, a faktura dokumentująca dostawę zawiera wyrazy "procedura marży - przedmioty kolekcjonerskie i antyki"
      * @return void
      */
     public function __construct(
-        public P_PMarzy_3_3 $p_PMarzy_3_3 = P_PMarzy_3_3::Default,
+        public readonly P_PMarzy_3_3 $p_PMarzy_3_3 = P_PMarzy_3_3::Default,
     ) {
     }
 

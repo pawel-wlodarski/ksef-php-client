@@ -15,18 +15,18 @@ use N1ebieski\KSEFClient\ValueObjects\Requests\Tokens\AuthorIdentifier;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Tokens\AuthorIdentifierType;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Tokens\Description;
 
-final readonly class ListRequest extends AbstractRequest implements ParametersInterface, HeadersInterface
+final class ListRequest extends AbstractRequest implements ParametersInterface, HeadersInterface
 {
     /**
      * @param Optional|array<int, AuthenticationTokenStatus> $status
      */
     public function __construct(
-        public Optional | array $status = new Optional(),
-        public Optional | Description $description = new Optional(),
-        public Optional | AuthorIdentifier $authorIdentifier = new Optional(),
-        public Optional | AuthorIdentifierType $authorIdentifierType = new Optional(),
-        public Optional | PageSize $pageSize = new Optional(),
-        public Optional | ContinuationToken $continuationToken = new Optional(),
+        public readonly Optional | array $status = new Optional(),
+        public readonly Optional | Description $description = new Optional(),
+        public readonly Optional | AuthorIdentifier $authorIdentifier = new Optional(),
+        public readonly Optional | AuthorIdentifierType $authorIdentifierType = new Optional(),
+        public readonly Optional | PageSize $pageSize = new Optional(),
+        public readonly Optional | ContinuationToken $continuationToken = new Optional(),
     ) {
     }
 

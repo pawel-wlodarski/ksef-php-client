@@ -10,13 +10,13 @@ use N1ebieski\KSEFClient\Requests\AbstractRequest;
 use N1ebieski\KSEFClient\Support\Optional;
 use N1ebieski\KSEFClient\ValueObjects\Requests\ReferenceNumber;
 
-final readonly class SendXmlRequest extends AbstractRequest implements XmlSerializableInterface, BodyInterface
+final class SendXmlRequest extends AbstractRequest implements XmlSerializableInterface, BodyInterface
 {
     public function __construct(
-        public ReferenceNumber $referenceNumber,
-        public string $faktura,
-        public Optional | bool $offlineMode = new Optional(),
-        public Optional | bool | null $hashOfCorrectedInvoice = new Optional()
+        public readonly ReferenceNumber $referenceNumber,
+        public readonly string $faktura,
+        public readonly Optional | bool $offlineMode = new Optional(),
+        public readonly Optional | bool | null $hashOfCorrectedInvoice = new Optional()
     ) {
     }
 

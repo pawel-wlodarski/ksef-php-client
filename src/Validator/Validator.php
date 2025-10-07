@@ -7,7 +7,7 @@ namespace N1ebieski\KSEFClient\Validator;
 use N1ebieski\KSEFClient\Support\Optional;
 use N1ebieski\KSEFClient\Validator\Rules\AbstractRule;
 
-final readonly class Validator
+final class Validator
 {
     /**
      * @param array<int, AbstractRule>|array<string, array<int, AbstractRule>> $rules

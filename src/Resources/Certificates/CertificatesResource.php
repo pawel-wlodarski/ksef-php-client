@@ -27,7 +27,7 @@ final class CertificatesResource extends AbstractResource implements Certificate
 
     public function limits(): ResponseInterface
     {
-        return new LimitsHandler($this->client)->handle();
+        return (new LimitsHandler($this->client))->handle();
     }
 
     public function enrollments(): EnrollmentsResourceInterface
@@ -41,7 +41,7 @@ final class CertificatesResource extends AbstractResource implements Certificate
             $request = QueryRequest::from($request);
         }
 
-        return new QueryHandler($this->client)->handle($request);
+        return (new QueryHandler($this->client))->handle($request);
     }
 
     public function revoke(RevokeRequest | array $request): ResponseInterface
@@ -50,7 +50,7 @@ final class CertificatesResource extends AbstractResource implements Certificate
             $request = RevokeRequest::from($request);
         }
 
-        return new RevokeHandler($this->client)->handle($request);
+        return (new RevokeHandler($this->client))->handle($request);
     }
 
     public function retrieve(RetrieveRequest | array $request): ResponseInterface
@@ -59,6 +59,6 @@ final class CertificatesResource extends AbstractResource implements Certificate
             $request = RetrieveRequest::from($request);
         }
 
-        return new RetrieveHandler($this->client)->handle($request);
+        return (new RetrieveHandler($this->client))->handle($request);
     }
 }

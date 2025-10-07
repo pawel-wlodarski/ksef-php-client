@@ -9,14 +9,14 @@ use N1ebieski\KSEFClient\Contracts\DomSerializableInterface;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\BrakID;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 
-final readonly class BrakIDGroup extends AbstractDTO implements DomSerializableInterface
+final class BrakIDGroup extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @param BrakID $brakID Podmiot nie posiada identyfikatora podatkowego lub identyfikator nie występuje na fakturze: 1- tak
      * @return void
      */
     public function __construct(
-        public BrakID $brakID,
+        public readonly BrakID $brakID,
     ) {
     }
 

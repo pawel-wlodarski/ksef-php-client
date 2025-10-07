@@ -7,7 +7,7 @@ namespace N1ebieski\KSEFClient\Validator\Rules\Utility;
 use InvalidArgumentException;
 use N1ebieski\KSEFClient\Validator\Rules\AbstractRule;
 
-final readonly class RequiredRule extends AbstractRule
+final class RequiredRule extends AbstractRule
 {
     public function handle(mixed $value, ?string $attribute = null): void
     {

@@ -10,14 +10,14 @@ use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\WarunkiSkonta;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\WysokoscSkonta;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 
-final readonly class Skonto extends AbstractDTO implements DomSerializableInterface
+final class Skonto extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @param WarunkiSkonta $warunkiSkonta Warunki, które nabywca powinien spełnić aby skorzystać ze skonta
      */
     public function __construct(
-        public WarunkiSkonta $warunkiSkonta,
-        public WysokoscSkonta $wysokoscSkonta
+        public readonly WarunkiSkonta $warunkiSkonta,
+        public readonly WysokoscSkonta $wysokoscSkonta
     ) {
     }
 

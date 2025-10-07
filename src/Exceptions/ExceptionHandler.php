@@ -7,10 +7,10 @@ namespace N1ebieski\KSEFClient\Exceptions;
 use N1ebieski\KSEFClient\Contracts\Exception\ExceptionHandlerInterface;
 use Psr\Log\LoggerInterface;
 
-final readonly class ExceptionHandler implements ExceptionHandlerInterface
+final class ExceptionHandler implements ExceptionHandlerInterface
 {
     public function __construct(
-        private ?LoggerInterface $logger = null
+        private readonly ?LoggerInterface $logger = null
     ) {
     }
 

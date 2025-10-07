@@ -8,9 +8,9 @@ use N1ebieski\KSEFClient\Contracts\ValueAwareInterface;
 use N1ebieski\KSEFClient\Support\AbstractValueObject;
 use Stringable;
 
-final readonly class Ilosc extends AbstractValueObject implements ValueAwareInterface, Stringable
+final class Ilosc extends AbstractValueObject implements ValueAwareInterface, Stringable
 {
-    public function __construct(public int $value)
+    public function __construct(public readonly int $value)
     {
     }
 

@@ -9,10 +9,10 @@ use N1ebieski\KSEFClient\Contracts\DomSerializableInterface;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 use N1ebieski\KSEFClient\ValueObjects\NIP;
 
-final readonly class NIPGroup extends AbstractDTO implements DomSerializableInterface
+final class NIPGroup extends AbstractDTO implements DomSerializableInterface
 {
     public function __construct(
-        public NIP $nip,
+        public readonly NIP $nip,
     ) {
     }
 

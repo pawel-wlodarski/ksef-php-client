@@ -20,11 +20,11 @@ final class TokenResource extends AbstractResource implements TokenResourceInter
 
     public function redeem(): ResponseInterface
     {
-        return new RedeemHandler($this->client)->handle();
+        return (new RedeemHandler($this->client))->handle();
     }
 
     public function refresh(): ResponseInterface
     {
-        return new RefreshHandler($this->client)->handle();
+        return (new RefreshHandler($this->client))->handle();
     }
 }

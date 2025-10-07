@@ -12,7 +12,7 @@ use phpseclib3\Crypt\RSA;
 use phpseclib3\Crypt\RSA\PublicKey as RSAPublicKey;
 use RuntimeException;
 
-final readonly class EncryptedKeyFactory extends AbstractFactory
+final class EncryptedKeyFactory extends AbstractFactory
 {
     public static function make(EncryptionKey $encryptionKey, KsefPublicKey $ksefPublicKey): EncryptedKey
     {

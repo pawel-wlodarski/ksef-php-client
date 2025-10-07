@@ -7,10 +7,10 @@ namespace N1ebieski\KSEFClient\Validator\Rules\String;
 use InvalidArgumentException;
 use N1ebieski\KSEFClient\Validator\Rules\AbstractRule;
 
-final readonly class MinBytesRule extends AbstractRule
+final class MinBytesRule extends AbstractRule
 {
     public function __construct(
-        private int $min
+        private readonly int $min
     ) {
     }
 

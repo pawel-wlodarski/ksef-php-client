@@ -11,9 +11,9 @@ use N1ebieski\KSEFClient\Validator\Rules\String\RegexRule;
 use N1ebieski\KSEFClient\Validator\Validator;
 use Stringable;
 
-final readonly class Pesel extends AbstractValueObject implements FromInterface, Stringable, ValueAwareInterface
+final class Pesel extends AbstractValueObject implements FromInterface, Stringable, ValueAwareInterface
 {
-    public string $value;
+    public readonly string $value;
 
     public function __construct(string $value)
     {

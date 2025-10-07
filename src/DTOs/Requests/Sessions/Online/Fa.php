@@ -31,32 +31,32 @@ use N1ebieski\KSEFClient\Support\Optional;
 use N1ebieski\KSEFClient\Validator\Rules\Array\MaxRule;
 use N1ebieski\KSEFClient\Validator\Validator;
 
-final readonly class Fa extends AbstractDTO implements DomSerializableInterface
+final class Fa extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @var Optional|array<int, WZ>
      */
-    public Optional | array $wz;
+    public readonly Optional | array $wz;
 
     /**
      * @var Optional|array<int, ZaliczkaCzesciowa>
      */
-    public Optional | array $zaliczkaCzesciowa;
+    public readonly Optional | array $zaliczkaCzesciowa;
 
     /**
      * @var Optional|array<int, DodatkowyOpis>
      */
-    public Optional | array $dodatkowyOpis;
+    public readonly Optional | array $dodatkowyOpis;
 
     /**
      * @var Optional|array<int, FakturaZaliczkowa>
      */
-    public Optional | array $fakturaZaliczkowa;
+    public readonly Optional | array $fakturaZaliczkowa;
 
     /**
      * @var Optional|array<int, FaWiersz>
      */
-    public Optional | array $faWiersz;
+    public readonly Optional | array $faWiersz;
 
     /**
      * @param KodWaluty $kodWaluty Trzyliterowy kod waluty (ISO 4217)
@@ -88,41 +88,41 @@ final readonly class Fa extends AbstractDTO implements DomSerializableInterface
      * @param Optional|Zamowienie $zamowienie Zamówienie lub umowa, o których mowa w art. 106f ust. 1 pkt 4 ustawy (dla faktur zaliczkowych) w walucie, w której wystawiono fakturę zaliczkową. W przypadku faktury korygującej fakturę zaliczkową należy wykazać różnice wynikające z korekty poszczególnych pozycji zamówienia lub umowy lub dane pozycji korygowanych w stanie przed korektą i po korekcie jako osobne wiersze, jeśli korekta dotyczy wartości zamówienia lub umowy. W przypadku faktur korygujących faktury zaliczkowe, jeśli korekta nie dotyczy wartości zamówienia lub umowy i jednocześnie zmienia wysokość podstawy opodatkowania lub podatku, należy wprowadzić zapis wg stanu przed korektą i zapis w stanie po korekcie w celu potwierdzenia braku zmiany wartości danej pozycji
      */
     public function __construct(
-        public KodWaluty $kodWaluty,
-        public P_1 $p_1,
-        public P_2 $p_2,
-        public P_15 $p_15,
+        public readonly KodWaluty $kodWaluty,
+        public readonly P_1 $p_1,
+        public readonly P_2 $p_2,
+        public readonly P_15 $p_15,
         Optional | array $wz = new Optional(),
-        public Optional | P_1M $p_1M = new Optional(),
-        public Optional | P_6Group | OkresFaGroup $p_6Group = new Optional(),
-        public Optional | P_13_1Group $p_13_1Group = new Optional(),
-        public Optional | P_13_2Group $p_13_2Group = new Optional(),
-        public Optional | P_13_3Group $p_13_3Group = new Optional(),
-        public Optional | P_13_4Group $p_13_4Group = new Optional(),
-        public Optional | P_13_5Group $p_13_5Group = new Optional(),
-        public Optional | P_13_6_1 $p_13_6_1 = new Optional(),
-        public Optional | P_13_6_2 $p_13_6_2 = new Optional(),
-        public Optional | P_13_6_3 $p_13_6_3 = new Optional(),
-        public Optional | P_13_7 $p_13_7 = new Optional(),
-        public Optional | P_13_8 $p_13_8 = new Optional(),
-        public Optional | P_13_9 $p_13_9 = new Optional(),
-        public Optional | P_13_10 $p_13_10 = new Optional(),
-        public Optional | P_13_11 $p_13_11 = new Optional(),
-        public Optional | KursWalutyZ $kursWalutyZ = new Optional(),
-        public Adnotacje $adnotacje = new Adnotacje(),
-        public RodzajFaktury $rodzajFaktury = RodzajFaktury::Vat,
-        public Optional | KorektaGroup $korektaGroup = new Optional(),
+        public readonly Optional | P_1M $p_1M = new Optional(),
+        public readonly Optional | P_6Group | OkresFaGroup $p_6Group = new Optional(),
+        public readonly Optional | P_13_1Group $p_13_1Group = new Optional(),
+        public readonly Optional | P_13_2Group $p_13_2Group = new Optional(),
+        public readonly Optional | P_13_3Group $p_13_3Group = new Optional(),
+        public readonly Optional | P_13_4Group $p_13_4Group = new Optional(),
+        public readonly Optional | P_13_5Group $p_13_5Group = new Optional(),
+        public readonly Optional | P_13_6_1 $p_13_6_1 = new Optional(),
+        public readonly Optional | P_13_6_2 $p_13_6_2 = new Optional(),
+        public readonly Optional | P_13_6_3 $p_13_6_3 = new Optional(),
+        public readonly Optional | P_13_7 $p_13_7 = new Optional(),
+        public readonly Optional | P_13_8 $p_13_8 = new Optional(),
+        public readonly Optional | P_13_9 $p_13_9 = new Optional(),
+        public readonly Optional | P_13_10 $p_13_10 = new Optional(),
+        public readonly Optional | P_13_11 $p_13_11 = new Optional(),
+        public readonly Optional | KursWalutyZ $kursWalutyZ = new Optional(),
+        public readonly Adnotacje $adnotacje = new Adnotacje(),
+        public readonly RodzajFaktury $rodzajFaktury = RodzajFaktury::Vat,
+        public readonly Optional | KorektaGroup $korektaGroup = new Optional(),
         Optional | array $zaliczkaCzesciowa = new Optional(),
-        public Optional | TP $tp = new Optional(),
-        public Optional | FP $fp = new Optional(),
+        public readonly Optional | TP $tp = new Optional(),
+        public readonly Optional | FP $fp = new Optional(),
         Optional | array $dodatkowyOpis = new Optional(),
         Optional | array $fakturaZaliczkowa = new Optional(),
-        public Optional | ZwrotAkcyzy $zwrotAkcyzy = new Optional(),
+        public readonly Optional | ZwrotAkcyzy $zwrotAkcyzy = new Optional(),
         Optional | array $faWiersz = new Optional(),
-        public Optional | Rozliczenie $rozliczenie = new Optional(),
-        public Optional | Platnosc $platnosc = new Optional(),
-        public Optional | WarunkiTransakcji $warunkiTransakcji = new Optional(),
-        public Optional | Zamowienie $zamowienie = new Optional()
+        public readonly Optional | Rozliczenie $rozliczenie = new Optional(),
+        public readonly Optional | Platnosc $platnosc = new Optional(),
+        public readonly Optional | WarunkiTransakcji $warunkiTransakcji = new Optional(),
+        public readonly Optional | Zamowienie $zamowienie = new Optional()
     ) {
         Validator::validate([
             'wz' => $wz,

@@ -9,14 +9,14 @@ use N1ebieski\KSEFClient\Contracts\DomSerializableInterface;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\P_PMarzy_3_1;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 
-final readonly class P_PMarzy_3_1Group extends AbstractDTO implements DomSerializableInterface
+final class P_PMarzy_3_1Group extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @param P_PMarzy_3_1 $p_PMarzy_3_1 Znacznik dostawy towarów używanych dla których podstawę opodatkowania stanowi marża, zgodnie z art. 120 ustawy, a faktura dokumentująca dostawę zawiera wyrazy "procedura marży - towary używane"
      * @return void
      */
     public function __construct(
-        public P_PMarzy_3_1 $p_PMarzy_3_1 = P_PMarzy_3_1::Default,
+        public readonly P_PMarzy_3_1 $p_PMarzy_3_1 = P_PMarzy_3_1::Default,
     ) {
     }
 

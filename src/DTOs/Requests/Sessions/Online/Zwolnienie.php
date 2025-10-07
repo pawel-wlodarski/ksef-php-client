@@ -9,10 +9,10 @@ use DOMElement;
 use N1ebieski\KSEFClient\Contracts\DomSerializableInterface;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 
-final readonly class Zwolnienie extends AbstractDTO implements DomSerializableInterface
+final class Zwolnienie extends AbstractDTO implements DomSerializableInterface
 {
     public function __construct(
-        public P_19Group | P_19NGroup $p_19Group = new P_19NGroup(),
+        public readonly P_19Group | P_19NGroup $p_19Group = new P_19NGroup(),
     ) {
     }
 

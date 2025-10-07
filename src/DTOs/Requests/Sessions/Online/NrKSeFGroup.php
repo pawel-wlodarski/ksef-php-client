@@ -10,15 +10,15 @@ use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\NrKSeF;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\NrKSeFFaKorygowanej;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 
-final readonly class NrKSeFGroup extends AbstractDTO implements DomSerializableInterface
+final class NrKSeFGroup extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @param NrKSeFFaKorygowanej $nrKSeFFaKorygowanej Numer identyfikujący fakturę korygowaną w KSeF
      * @param NrKSeF $nrKSeF Znacznik numeru KSeF faktury korygowanej
      */
     public function __construct(
-        public NrKSeFFaKorygowanej $nrKSeFFaKorygowanej,
-        public NrKSeF $nrKSeF = NrKSeF::Default
+        public readonly NrKSeFFaKorygowanej $nrKSeFFaKorygowanej,
+        public readonly NrKSeF $nrKSeF = NrKSeF::Default
     ) {
     }
 

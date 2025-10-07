@@ -7,7 +7,7 @@ namespace N1ebieski\KSEFClient\Validator\Rules\String;
 use InvalidArgumentException;
 use N1ebieski\KSEFClient\Validator\Rules\AbstractRule;
 
-final readonly class EmailRule extends AbstractRule
+final class EmailRule extends AbstractRule
 {
     public function handle(string $value, ?string $attribute = null): void
     {

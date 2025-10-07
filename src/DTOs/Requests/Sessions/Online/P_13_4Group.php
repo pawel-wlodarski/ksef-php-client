@@ -12,7 +12,7 @@ use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\P_14_4W;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 use N1ebieski\KSEFClient\Support\Optional;
 
-final readonly class P_13_4Group extends AbstractDTO implements DomSerializableInterface
+final class P_13_4Group extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @param P_13_4 $p_13_4 Suma wartości sprzedaży netto objętej ryczałtem dla taksówek osobowych. W przypadku faktur zaliczkowych, kwota zaliczki netto. W przypadku faktur korygujących, kwota różnicy, o której mowa w art. 106j ust. 2 pkt 5 ustawy
@@ -21,9 +21,9 @@ final readonly class P_13_4Group extends AbstractDTO implements DomSerializableI
      * @return void
      */
     public function __construct(
-        public P_13_4 $p_13_4,
-        public P_14_4 $p_14_4,
-        public Optional | P_14_4W $p_14_4W = new Optional(),
+        public readonly P_13_4 $p_13_4,
+        public readonly P_14_4 $p_14_4,
+        public readonly Optional | P_14_4W $p_14_4W = new Optional(),
     ) {
     }
 

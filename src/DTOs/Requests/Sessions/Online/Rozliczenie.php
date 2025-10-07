@@ -14,17 +14,17 @@ use N1ebieski\KSEFClient\Support\Optional;
 use N1ebieski\KSEFClient\Validator\Rules\Array\MaxRule;
 use N1ebieski\KSEFClient\Validator\Validator;
 
-final readonly class Rozliczenie extends AbstractDTO implements DomSerializableInterface
+final class Rozliczenie extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @var Optional|array<int, Obciazenia>
      */
-    public Optional | array $obciazenia;
+    public readonly Optional | array $obciazenia;
 
     /**
      * @var Optional|array<int, Odliczenia>
      */
-    public Optional | array $odliczenia;
+    public readonly Optional | array $odliczenia;
 
     /**
      * @param Optional|array<int, Obciazenia> $obciazenia
@@ -32,10 +32,10 @@ final readonly class Rozliczenie extends AbstractDTO implements DomSerializableI
      */
     public function __construct(
         Optional | array $obciazenia = new Optional(),
-        public Optional | SumaObciazen $sumaObciazen = new Optional(),
+        public readonly Optional | SumaObciazen $sumaObciazen = new Optional(),
         Optional | array $odliczenia = new Optional(),
-        public Optional | SumaOdliczen $sumaOdliczen = new Optional(),
-        public Optional | RozliczenieGroup $rozliczenieGroup = new Optional()
+        public readonly Optional | SumaOdliczen $sumaOdliczen = new Optional(),
+        public readonly Optional | RozliczenieGroup $rozliczenieGroup = new Optional()
     ) {
         Validator::validate([
             'obciazenia' => $obciazenia,

@@ -10,7 +10,7 @@ use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\OpisPlatnosci;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\PlatnoscInna;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 
-final readonly class PlatnoscInnaGroup extends AbstractDTO implements DomSerializableInterface
+final class PlatnoscInnaGroup extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @param PlatnoscInna $platnoscInna Znacznik innej formy płatności: 1 - inna forma płatności
@@ -18,8 +18,8 @@ final readonly class PlatnoscInnaGroup extends AbstractDTO implements DomSeriali
      * @return void
      */
     public function __construct(
-        public OpisPlatnosci $opisPlatnosci,
-        public PlatnoscInna $platnoscInna = PlatnoscInna::Default,
+        public readonly OpisPlatnosci $opisPlatnosci,
+        public readonly PlatnoscInna $platnoscInna = PlatnoscInna::Default,
     ) {
     }
 

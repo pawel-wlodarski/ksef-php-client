@@ -12,9 +12,9 @@ use N1ebieski\KSEFClient\Validator\Rules\String\RegexRule;
 use N1ebieski\KSEFClient\Validator\Validator;
 use Stringable;
 
-final readonly class P_14_5 extends AbstractValueObject implements ValueAwareInterface, Stringable
+final class P_14_5 extends AbstractValueObject implements ValueAwareInterface, Stringable
 {
-    public float $value;
+    public readonly float $value;
 
     public function __construct(float $value)
     {

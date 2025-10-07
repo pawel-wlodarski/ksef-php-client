@@ -8,10 +8,10 @@ use N1ebieski\KSEFClient\Contracts\BodyInterface;
 use N1ebieski\KSEFClient\Requests\AbstractRequest;
 use N1ebieski\KSEFClient\ValueObjects\NIP;
 
-final readonly class RemoveRequest extends AbstractRequest implements BodyInterface
+final class RemoveRequest extends AbstractRequest implements BodyInterface
 {
     public function __construct(
-        public NIP $nip,
+        public readonly NIP $nip,
     ) {
     }
 

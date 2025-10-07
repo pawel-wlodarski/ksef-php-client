@@ -9,14 +9,14 @@ use N1ebieski\KSEFClient\Contracts\DomSerializableInterface;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\P_PMarzyN;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 
-final readonly class P_PMarzyNGroup extends AbstractDTO implements DomSerializableInterface
+final class P_PMarzyNGroup extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @param P_PMarzyN $p_PMarzyN Znacznik braku wystąpienia procedur marży, o których mowa w art. 119 lub art. 120 ustawy
      * @return void
      */
     public function __construct(
-        public P_PMarzyN $p_PMarzyN = P_PMarzyN::Default,
+        public readonly P_PMarzyN $p_PMarzyN = P_PMarzyN::Default,
     ) {
     }
 

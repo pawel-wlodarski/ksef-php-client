@@ -9,10 +9,10 @@ use DOMElement;
 use N1ebieski\KSEFClient\Contracts\DomSerializableInterface;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 
-final readonly class FakturaZaliczkowa extends AbstractDTO implements DomSerializableInterface
+final class FakturaZaliczkowa extends AbstractDTO implements DomSerializableInterface
 {
     public function __construct(
-        public NrKSeFZNGroup | NrKSeFFaZaliczkowejGroup $nrKSeFZNGroup
+        public readonly NrKSeFZNGroup | NrKSeFFaZaliczkowejGroup $nrKSeFZNGroup
     ) {
     }
 

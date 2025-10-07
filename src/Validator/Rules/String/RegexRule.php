@@ -7,10 +7,10 @@ namespace N1ebieski\KSEFClient\Validator\Rules\String;
 use InvalidArgumentException;
 use N1ebieski\KSEFClient\Validator\Rules\AbstractRule;
 
-final readonly class RegexRule extends AbstractRule
+final class RegexRule extends AbstractRule
 {
     public function __construct(
-        private string $pattern
+        private readonly string $pattern
     ) {
     }
 

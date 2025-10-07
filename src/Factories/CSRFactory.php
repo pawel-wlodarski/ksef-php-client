@@ -11,7 +11,7 @@ use OpenSSLAsymmetricKey;
 use OpenSSLCertificateSigningRequest;
 use RuntimeException;
 
-final readonly class CSRFactory extends AbstractFactory
+final class CSRFactory extends AbstractFactory
 {
     public static function make(DN $dn, PrivateKeyType $type = PrivateKeyType::EC): CSR
     {

@@ -11,12 +11,12 @@ use N1ebieski\KSEFClient\Validator\Rules\Array\MaxRule;
 use N1ebieski\KSEFClient\Validator\Rules\Array\MinRule;
 use N1ebieski\KSEFClient\Validator\Validator;
 
-final readonly class TNaglowek extends AbstractDTO implements DomSerializableInterface
+final class TNaglowek extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @var array<int, Kol>
      */
-    public array $kol;
+    public readonly array $kol;
 
     /**
      * @param array<int, Kol> $kol Zawartość pola

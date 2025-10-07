@@ -34,7 +34,7 @@ use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\UU_ID;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 use N1ebieski\KSEFClient\Support\Optional;
 
-final readonly class FaWiersz extends AbstractDTO implements DomSerializableInterface
+final class FaWiersz extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @param UU_ID|Optional $uu_id Uniwersalny unikalny numer wiersza faktury
@@ -64,31 +64,31 @@ final readonly class FaWiersz extends AbstractDTO implements DomSerializableInte
      * @return void
      */
     public function __construct(
-        public NrWierszaFa $nrWierszaFa,
-        public Optional | UU_ID $uu_id = new Optional(),
-        public Optional | P_6A $p_6A = new Optional(),
-        public Optional | P_7 $p_7 = new Optional(),
-        public Optional | Indeks $indeks = new Optional(),
-        public Optional | GTIN $gtin = new Optional(),
-        public Optional | PKWiU $pkwiu = new Optional(),
-        public Optional | CN $cn = new Optional(),
-        public Optional | PKOB $pkob = new Optional(),
-        public Optional | P_8A $p_8A = new Optional(),
-        public Optional | P_8B $p_8B = new Optional(),
-        public Optional | P_9A $p_9A = new Optional(),
-        public Optional | P_9B $p_9B = new Optional(),
-        public Optional | P_10 $p_10 = new Optional(),
-        public Optional | P_11 $p_11 = new Optional(),
-        public Optional | P_11A $p_11A = new Optional(),
-        public Optional | P_11Vat $p_11Vat = new Optional(),
-        public Optional | P_12 $p_12 = new Optional(),
-        public Optional | P_12_XII $p_12_XII = new Optional(),
-        public Optional | P_12_Zal_15 $p_12_Zal_15 = new Optional(),
-        public Optional | KwotaAkcyzy $kwotaAkcyzy = new Optional(),
-        public Optional | GTU $gtu = new Optional(),
-        public Optional | Procedura $procedura = new Optional(),
-        public Optional | KursWaluty $kursWaluty = new Optional(),
-        public Optional | StanPrzed $stanPrzed = new Optional(),
+        public readonly NrWierszaFa $nrWierszaFa,
+        public readonly Optional | UU_ID $uu_id = new Optional(),
+        public readonly Optional | P_6A $p_6A = new Optional(),
+        public readonly Optional | P_7 $p_7 = new Optional(),
+        public readonly Optional | Indeks $indeks = new Optional(),
+        public readonly Optional | GTIN $gtin = new Optional(),
+        public readonly Optional | PKWiU $pkwiu = new Optional(),
+        public readonly Optional | CN $cn = new Optional(),
+        public readonly Optional | PKOB $pkob = new Optional(),
+        public readonly Optional | P_8A $p_8A = new Optional(),
+        public readonly Optional | P_8B $p_8B = new Optional(),
+        public readonly Optional | P_9A $p_9A = new Optional(),
+        public readonly Optional | P_9B $p_9B = new Optional(),
+        public readonly Optional | P_10 $p_10 = new Optional(),
+        public readonly Optional | P_11 $p_11 = new Optional(),
+        public readonly Optional | P_11A $p_11A = new Optional(),
+        public readonly Optional | P_11Vat $p_11Vat = new Optional(),
+        public readonly Optional | P_12 $p_12 = new Optional(),
+        public readonly Optional | P_12_XII $p_12_XII = new Optional(),
+        public readonly Optional | P_12_Zal_15 $p_12_Zal_15 = new Optional(),
+        public readonly Optional | KwotaAkcyzy $kwotaAkcyzy = new Optional(),
+        public readonly Optional | GTU $gtu = new Optional(),
+        public readonly Optional | Procedura $procedura = new Optional(),
+        public readonly Optional | KursWaluty $kursWaluty = new Optional(),
+        public readonly Optional | StanPrzed $stanPrzed = new Optional(),
     ) {
     }
 

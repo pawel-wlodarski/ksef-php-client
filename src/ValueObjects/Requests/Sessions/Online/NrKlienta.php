@@ -8,9 +8,9 @@ use N1ebieski\KSEFClient\Contracts\ValueAwareInterface;
 use N1ebieski\KSEFClient\Support\AbstractValueObject;
 use Stringable;
 
-final readonly class NrKlienta extends AbstractValueObject implements ValueAwareInterface, Stringable
+final class NrKlienta extends AbstractValueObject implements ValueAwareInterface, Stringable
 {
-    public function __construct(public string $value)
+    public function __construct(public readonly string $value)
     {
     }
 

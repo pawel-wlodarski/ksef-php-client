@@ -10,11 +10,11 @@ use N1ebieski\KSEFClient\ValueObjects\Requests\Security\PublicKeyCertificates\Pu
 use N1ebieski\KSEFClient\ValueObjects\Support\KeyType;
 use Psr\Http\Message\ResponseInterface as BaseResponseInterface;
 
-final readonly class PublicKeyCertificatesResponse implements ResponseInterface
+final class PublicKeyCertificatesResponse implements ResponseInterface
 {
-    public BaseResponseInterface $baseResponse;
+    public readonly BaseResponseInterface $baseResponse;
 
-    public function __construct(private ResponseInterface $response)
+    public function __construct(private readonly ResponseInterface $response)
     {
         $this->baseResponse = $response->baseResponse;
     }

@@ -10,7 +10,7 @@ use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\NKom;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\Typ;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 
-final readonly class Kol extends AbstractDTO implements DomSerializableInterface
+final class Kol extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @param Typ $typ Typ danych w nagłówku tabeli
@@ -18,8 +18,8 @@ final readonly class Kol extends AbstractDTO implements DomSerializableInterface
      * @return void
      */
     public function __construct(
-        public Typ $typ,
-        public NKom $nKom
+        public readonly Typ $typ,
+        public readonly NKom $nKom
     ) {
     }
 

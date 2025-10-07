@@ -11,11 +11,11 @@ use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\TelefonPU;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 use N1ebieski\KSEFClient\Support\Optional;
 
-final readonly class PodmiotUpowaznionyDaneKontaktowe extends AbstractDTO implements DomSerializableInterface
+final class PodmiotUpowaznionyDaneKontaktowe extends AbstractDTO implements DomSerializableInterface
 {
     public function __construct(
-        public Optional | EmailPU $emailPU = new Optional(),
-        public Optional | TelefonPU $telefonPU = new Optional()
+        public readonly Optional | EmailPU $emailPU = new Optional(),
+        public readonly Optional | TelefonPU $telefonPU = new Optional()
     ) {
     }
 

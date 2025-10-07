@@ -13,7 +13,7 @@ use RuntimeException;
  * I could not use their dependency directly, but most of the logic in this class
  * is their authorship
  */
-final readonly class CertificateFactory extends AbstractFactory
+final class CertificateFactory extends AbstractFactory
 {
     public static function make(CertificatePath $certificatePath): Certificate
     {

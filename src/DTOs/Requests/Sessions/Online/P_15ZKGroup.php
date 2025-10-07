@@ -11,15 +11,15 @@ use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\P_15ZK;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 use N1ebieski\KSEFClient\Support\Optional;
 
-final readonly class P_15ZKGroup extends AbstractDTO implements DomSerializableInterface
+final class P_15ZKGroup extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @param P_15ZK $p15ZK W przypadku korekt faktur zaliczkowych, kwota zapłaty przed korektą. W przypadku korekt faktur, o których mowa w art. 106f ust. 3 ustawy, kwota pozostała do zapłaty przed korektą
      * @param Optional|KursWalutyZK $kursWalutyZK Kurs waluty stosowany do wyliczenia kwoty podatku w przypadkach, o których mowa w Dziale VI ustawy przed korektą
      */
     public function __construct(
-        public P_15ZK $p15ZK,
-        public Optional | KursWalutyZK $kursWalutyZK = new Optional(),
+        public readonly P_15ZK $p15ZK,
+        public readonly Optional | KursWalutyZK $kursWalutyZK = new Optional(),
     ) {
     }
 

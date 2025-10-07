@@ -20,6 +20,6 @@ final class SecurityResource extends AbstractResource implements SecurityResourc
     public function publicKeyCertificates(): PublicKeyCertificatesResponse
     {
         /** @var PublicKeyCertificatesResponse */
-        return new PublicKeyCertificatesHandler($this->client)->handle();
+        return (new PublicKeyCertificatesHandler($this->client))->handle();
     }
 }

@@ -10,15 +10,15 @@ use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\NrFaZaliczkowej;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\NrKSeFZN;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 
-final readonly class NrKSeFZNGroup extends AbstractDTO implements DomSerializableInterface
+final class NrKSeFZNGroup extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @param NrFaZaliczkowej $nrFaZaliczkowej Numer faktury zaliczkowej wystawionej poza KSeF. Pole obowiązkowe dla faktury wystawianej po wydaniu towaru lub wykonaniu usługi, o której mowa w art. 106f ust. 3 ustawy i ostatniej z faktur, o której mowa w art. 106f ust. 4 ustawy
      * @param NrKSeFZN $nrKSeFZN Znacznik faktury zaliczkowej wystawionej poza KSeF
      */
     public function __construct(
-        public NrFaZaliczkowej $nrFaZaliczkowej,
-        public NrKSeFZN $nrKSeFZN = NrKSeFZN::Default
+        public readonly NrFaZaliczkowej $nrFaZaliczkowej,
+        public readonly NrKSeFZN $nrKSeFZN = NrKSeFZN::Default
     ) {
     }
 

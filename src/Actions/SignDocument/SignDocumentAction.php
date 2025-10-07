@@ -7,15 +7,12 @@ namespace N1ebieski\KSEFClient\Actions\SignDocument;
 use N1ebieski\KSEFClient\Actions\AbstractAction;
 use N1ebieski\KSEFClient\ValueObjects\Certificate;
 use N1ebieski\KSEFClient\ValueObjects\PrivateKeyType;
-use SensitiveParameter;
 
-final readonly class SignDocumentAction extends AbstractAction
+final class SignDocumentAction extends AbstractAction
 {
     public function __construct(
-        #[SensitiveParameter]
-        public Certificate $certificate,
-        #[SensitiveParameter]
-        public string $document,
+        public readonly Certificate $certificate,
+        public readonly string $document,
     ) {
     }
 

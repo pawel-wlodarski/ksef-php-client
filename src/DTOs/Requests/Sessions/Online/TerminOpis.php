@@ -11,12 +11,12 @@ use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\Jednostka;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\ZdarzeniePoczatkowe;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 
-final readonly class TerminOpis extends AbstractDTO implements DomSerializableInterface
+final class TerminOpis extends AbstractDTO implements DomSerializableInterface
 {
     public function __construct(
-        public Ilosc $ilosc,
-        public Jednostka $jednostka,
-        public ZdarzeniePoczatkowe $zdarzeniePoczatkowe
+        public readonly Ilosc $ilosc,
+        public readonly Jednostka $jednostka,
+        public readonly ZdarzeniePoczatkowe $zdarzeniePoczatkowe
     ) {
     }
 

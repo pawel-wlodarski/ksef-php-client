@@ -7,10 +7,10 @@ namespace N1ebieski\KSEFClient\Validator\Rules\Number;
 use InvalidArgumentException;
 use N1ebieski\KSEFClient\Validator\Rules\AbstractRule;
 
-final readonly class MaxDigitsRule extends AbstractRule
+final class MaxDigitsRule extends AbstractRule
 {
     public function __construct(
-        private int $max
+        private readonly int $max
     ) {
     }
 

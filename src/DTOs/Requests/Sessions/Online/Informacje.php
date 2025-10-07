@@ -10,13 +10,13 @@ use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\StopkaFaktury;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 use N1ebieski\KSEFClient\Support\Optional;
 
-final readonly class Informacje extends AbstractDTO implements DomSerializableInterface
+final class Informacje extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @return void
      */
     public function __construct(
-        public Optional | StopkaFaktury $stopkaFaktury = new Optional(),
+        public readonly Optional | StopkaFaktury $stopkaFaktury = new Optional(),
     ) {
     }
 

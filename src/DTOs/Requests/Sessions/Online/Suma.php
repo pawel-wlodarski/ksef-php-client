@@ -12,12 +12,12 @@ use N1ebieski\KSEFClient\Validator\Rules\Array\MaxRule;
 use N1ebieski\KSEFClient\Validator\Rules\Array\MinRule;
 use N1ebieski\KSEFClient\Validator\Validator;
 
-final readonly class Suma extends AbstractDTO implements DomSerializableInterface
+final class Suma extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @var array<int, SKom>
      */
-    public array $sKom;
+    public readonly array $sKom;
 
     /**
      * @param array<int, SKom> $sKom Zawartość pola

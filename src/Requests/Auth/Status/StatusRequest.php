@@ -6,13 +6,11 @@ namespace N1ebieski\KSEFClient\Requests\Auth\Status;
 
 use N1ebieski\KSEFClient\Requests\AbstractRequest;
 use N1ebieski\KSEFClient\ValueObjects\Requests\ReferenceNumber;
-use SensitiveParameter;
 
-final readonly class StatusRequest extends AbstractRequest
+final class StatusRequest extends AbstractRequest
 {
     public function __construct(
-        #[SensitiveParameter]
-        public ReferenceNumber $referenceNumber,
+        public readonly ReferenceNumber $referenceNumber,
     ) {
     }
 }

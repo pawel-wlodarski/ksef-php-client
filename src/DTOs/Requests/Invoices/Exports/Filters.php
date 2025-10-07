@@ -18,26 +18,26 @@ use N1ebieski\KSEFClient\ValueObjects\Requests\Invoices\InvoicingMode;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Invoices\SubjectType;
 use N1ebieski\KSEFClient\ValueObjects\Requests\KsefNumber;
 
-final readonly class Filters extends AbstractDTO
+final class Filters extends AbstractDTO
 {
     /**
      * @param Optional|array<int, CurrencyCode> $currencyCodes
      * @param Optional|array<int, InvoiceType> $invoiceTypes
      */
     public function __construct(
-        public SubjectType $subjectType,
-        public DateRange $dateRange,
-        public Optional | KsefNumber $ksefNumber = new Optional(),
-        public Optional | InvoiceNumber $invoiceNumber = new Optional(),
-        public Optional | Amount $amount = new Optional(),
-        public Optional | NIP $sellerNip = new Optional(),
-        public Optional | BuyerIdentifier $buyerIdentifier = new Optional(),
-        public Optional | array $currencyCodes = new Optional(),
-        public Optional | InvoicingMode $invoicingMode = new Optional(),
-        public Optional | bool $isSelfInvoicing = new Optional(),
-        public Optional | FormType $formType = new Optional(),
-        public Optional | array $invoiceTypes = new Optional(),
-        public Optional | bool $hasAttachment = new Optional(),
+        public readonly SubjectType $subjectType,
+        public readonly DateRange $dateRange,
+        public readonly Optional | KsefNumber $ksefNumber = new Optional(),
+        public readonly Optional | InvoiceNumber $invoiceNumber = new Optional(),
+        public readonly Optional | Amount $amount = new Optional(),
+        public readonly Optional | NIP $sellerNip = new Optional(),
+        public readonly Optional | BuyerIdentifier $buyerIdentifier = new Optional(),
+        public readonly Optional | array $currencyCodes = new Optional(),
+        public readonly Optional | InvoicingMode $invoicingMode = new Optional(),
+        public readonly Optional | bool $isSelfInvoicing = new Optional(),
+        public readonly Optional | FormType $formType = new Optional(),
+        public readonly Optional | array $invoiceTypes = new Optional(),
+        public readonly Optional | bool $hasAttachment = new Optional(),
     ) {
     }
 }

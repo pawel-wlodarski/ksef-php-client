@@ -16,7 +16,7 @@ Main features:
 - KSeF exception handling
 - QR codes generation
 
-|  KSEF Version  | Branch Version | Release Version |
+|  KSEF Version  |     Branch     | Release Version |
 |:--------------:|:--------------:|:---------------:|
 |       2.0      |      main      |      ^0.3       |
 |       1.0      |      0.2.x     |      0.2.*      |
@@ -86,7 +86,7 @@ Main features:
 
 ## Get Started
 
-> **Requires [PHP 8.4+](https://www.php.net/releases/)**
+> **Requires [PHP 8.1+](https://www.php.net/releases/)**
 
 First, install `ksef-php-client` via the [Composer](https://getcomposer.org/) package manager:
 
@@ -107,7 +107,7 @@ use N1ebieski\KSEFClient\ClientBuilder;
 use N1ebieski\KSEFClient\ValueObjects\Mode;
 use N1ebieski\KSEFClient\Factories\EncryptionKeyFactory;
 
-$client = new ClientBuilder()
+$client = (new ClientBuilder())
     ->withMode(Mode::Production) // Choice between: Test, Demo, Production
     ->withApiUrl($_ENV['KSEF_API_URL']) // Optional, default is set by Mode selection
     ->withHttpClient(new \GuzzleHttp\Client(...)) // Optional PSR-18 implementation, default is set by Psr18ClientDiscovery::find()
@@ -154,7 +154,7 @@ $authorisationStatusResponse = $client->auth()->status([
 ```php
 use N1ebieski\KSEFClient\ClientBuilder;
 
-$client = new ClientBuilder()
+$client = (new ClientBuilder())
     ->withKsefToken($_ENV['KSEF_KEY'])
     ->withIdentifier('NIP_NUMBER')
     ->build();
@@ -171,7 +171,7 @@ $client = new ClientBuilder()
 ```php
 use N1ebieski\KSEFClient\ClientBuilder;
 
-$client = new ClientBuilder()
+$client = (new ClientBuilder())
     ->withCertificatePath($_ENV['PATH_TO_CERTIFICATE'], $_ENV['CERTIFICATE_PASSPHRASE'])
     ->withIdentifier('NIP_NUMBER')
     ->build();
@@ -191,7 +191,7 @@ use N1ebieski\KSEFClient\Support\Utility;
 use N1ebieski\KSEFClient\Requests\Auth\DTOs\XadesSignature;
 use N1ebieski\KSEFClient\Requests\Auth\XadesSignature\XadesSignatureXmlRequest;
 
-$client = new ClientBuilder()->build();
+$client = (new ClientBuilder())->build();
 
 $nip = 'NIP_NUMBER';
 
@@ -780,7 +780,7 @@ use N1ebieski\KSEFClient\ValueObjects\Certificate;
 use N1ebieski\KSEFClient\ValueObjects\Mode;
 use N1ebieski\KSEFClient\ValueObjects\PrivateKeyType;
 
-$client = new ClientBuilder()
+$client = (new ClientBuilder())
     ->withMode(Mode::Test)
     ->withIdentifier('NIP_NUMBER')
     // To generate the KSEF certificate, you have to authorize the qualified certificate the first time
@@ -794,7 +794,7 @@ $dn = DN::from($dataResponse);
 // You can choose beetween EC or RSA private key type
 $csr = CSRFactory::make($dn, PrivateKeyType::EC);
 
-$csrToDer = new ConvertPemToDerHandler()->handle(new ConvertPemToDerAction($csr->raw));
+$csrToDer = (new ConvertPemToDerHandler())->handle(new ConvertPemToDerAction($csr->raw));
 
 $sendResponse = $client->certificates()->enrollments()->send([
     'certificateName' => 'My first certificate',
@@ -825,11 +825,11 @@ $retrieveResponse = $client->certificates()->retrieve([
 
 $certificate = base64_decode($retrieveResponse->certificates[0]->certificate);
 
-$certificateToPem = new ConvertDerToPemHandler()->handle(
+$certificateToPem = (new ConvertDerToPemHandler())->handle(
     new ConvertDerToPemAction($certificate, 'CERTIFICATE')
 );
 
-$certificateToPkcs12 = new ConvertCertificateToPkcs12Handler()->handle(
+$certificateToPkcs12 = (new ConvertCertificateToPkcs12Handler())->handle(
     new ConvertCertificateToPkcs12Action(
         certificate: new Certificate($certificateToPem, [], $csr->privateKey),
         passphrase: 'password'
@@ -864,7 +864,7 @@ use N1ebieski\KSEFClient\ValueObjects\Mode;
 
 $encryptionKey = EncryptionKeyFactory::makeRandom();
 
-$client = new ClientBuilder()
+$client = (new ClientBuilder())
     ->withMode(Mode::Test)
     ->withIdentifier('NIP_NUMBER')
     ->withCertificatePath($_ENV['PATH_TO_CERTIFICATE'], $_ENV['CERTIFICATE_PASSPHRASE'])
@@ -875,7 +875,7 @@ $openResponse = $client->sessions()->online()->open([
     'formCode' => 'FA (3)',
 ])->object();
 
-$fixture = new SendFakturaSprzedazyTowaruRequestFixture()
+$fixture = (new SendFakturaSprzedazyTowaruRequestFixture())
     ->withTodayDate()
     ->withRandomInvoiceNumber();
 
@@ -914,10 +914,9 @@ $upo = $client->sessions()->invoices()->upo([
 $faktura = Faktura::from($fixture->getFaktura());
 
 $generateQRCodesHandler = new GenerateQRCodesHandler(
-    qrCodeBuilder: new QrCodeBuilder(
-        roundBlockSizeMode: RoundBlockSizeMode::Enlarge,
-        labelFont: new OpenSans(size: 12)
-    ),
+    qrCodeBuilder: (new QrCodeBuilder())
+        ->roundBlockSizeMode(RoundBlockSizeMode::Enlarge)
+        ->labelFont(new OpenSans(size: 12)),
     convertEcdsaDerToRawHandler: new ConvertEcdsaDerToRawHandler()
 );
 
@@ -959,21 +958,21 @@ $nip = 'NIP_NUMBER';
 
 // From https://ksef-test.mf.gov.pl/docs/v2/index.html#tag/Certyfikaty/paths/~1api~1v2~1certificates~1query/post
 $certificateSerialNumber = $_ENV['CERTIFICATE_SERIAL_NUMBER'];
+// Remember: this certificate must be "Offline" type, not "Authentication"
 $certificate = CertificateFactory::make(
     CertificatePath::from($_ENV['PATH_TO_CERTIFICATE'], $_ENV['CERTIFICATE_PASSPHRASE'])
 );
 
-$fixture = new SendFakturaSprzedazyTowaruRequestFixture()
+$fixture = (new SendFakturaSprzedazyTowaruRequestFixture())
     ->withTodayDate()
     ->withRandomInvoiceNumber();
 
 $faktura = Faktura::from($fixture->getFaktura());
 
 $generateQRCodesHandler = new GenerateQRCodesHandler(
-    qrCodeBuilder: new QrCodeBuilder(
-        roundBlockSizeMode: RoundBlockSizeMode::Enlarge,
-        labelFont: new OpenSans(size: 12)
-    ),
+    qrCodeBuilder: (new QrCodeBuilder())
+        ->roundBlockSizeMode(RoundBlockSizeMode::Enlarge)
+        ->labelFont(new OpenSans(size: 12)),
     convertEcdsaDerToRawHandler: new ConvertEcdsaDerToRawHandler()
 );
 
@@ -1017,7 +1016,7 @@ use N1ebieski\KSEFClient\ValueObjects\Mode;
 
 $encryptionKey = EncryptionKeyFactory::makeRandom();
 
-$client = new ClientBuilder()
+$client = (new ClientBuilder())
     ->withMode(Mode::Test)
     ->withIdentifier($_ENV['NIP_NUMBER'])
     ->withCertificatePath($_ENV['PATH_TO_CERTIFICATE'], $_ENV['CERTIFICATE_PASSPHRASE'])

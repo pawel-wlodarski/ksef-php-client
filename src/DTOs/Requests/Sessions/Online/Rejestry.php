@@ -13,7 +13,7 @@ use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\REGON;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 use N1ebieski\KSEFClient\Support\Optional;
 
-final readonly class Rejestry extends AbstractDTO implements DomSerializableInterface
+final class Rejestry extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @param KRS|Optional $krs Numer Krajowego Rejestru Sądowego
@@ -21,10 +21,10 @@ final readonly class Rejestry extends AbstractDTO implements DomSerializableInte
      * @return void
      */
     public function __construct(
-        public Optional | PelnaNazwa $pelnaNazwa = new Optional(),
-        public Optional | KRS $krs = new Optional(),
-        public Optional | REGON $regon = new Optional(),
-        public Optional | BDO $bdo = new Optional(),
+        public readonly Optional | PelnaNazwa $pelnaNazwa = new Optional(),
+        public readonly Optional | KRS $krs = new Optional(),
+        public readonly Optional | REGON $regon = new Optional(),
+        public readonly Optional | BDO $bdo = new Optional(),
     ) {
     }
 

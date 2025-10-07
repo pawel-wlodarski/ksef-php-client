@@ -16,12 +16,12 @@ use N1ebieski\KSEFClient\ValueObjects\HttpClient\Method;
 use N1ebieski\KSEFClient\ValueObjects\HttpClient\Uri;
 use RuntimeException;
 
-final readonly class SendHandler extends AbstractHandler
+final class SendHandler extends AbstractHandler
 {
     public function __construct(
-        private HttpClientInterface $client,
-        private EncryptDocumentHandler $encryptDocument,
-        private Config $config
+        private readonly HttpClientInterface $client,
+        private readonly EncryptDocumentHandler $encryptDocument,
+        private readonly Config $config
     ) {
     }
 

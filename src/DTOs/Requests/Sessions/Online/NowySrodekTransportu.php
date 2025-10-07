@@ -17,7 +17,7 @@ use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\P_NrWierszaNST;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 use N1ebieski\KSEFClient\Support\Optional;
 
-final readonly class NowySrodekTransportu extends AbstractDTO implements DomSerializableInterface
+final class NowySrodekTransportu extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @param P_22A $p_22A Data dopuszczenia nowego środka transportu do użytku
@@ -29,14 +29,14 @@ final readonly class NowySrodekTransportu extends AbstractDTO implements DomSeri
      * @param Optional|P_22BRP $p_22BRP Rok produkcji nowego środka transportu
      */
     public function __construct(
-        public P_22A $p_22A,
-        public P_NrWierszaNST $p_nrWierszaNST,
-        public P_22BGroup | P_22CGroup | P_22DGroup $p_22BCDGroup,
-        public Optional | P_22BMK $p_22BMK = new Optional(),
-        public Optional | P_22BMD $p_22BMD = new Optional(),
-        public Optional | P_22BK $p_22BK = new Optional(),
-        public Optional | P_22BNR $p_22BNR = new Optional(),
-        public Optional | P_22BRP $p_22BRP = new Optional(),
+        public readonly P_22A $p_22A,
+        public readonly P_NrWierszaNST $p_nrWierszaNST,
+        public readonly P_22BGroup | P_22CGroup | P_22DGroup $p_22BCDGroup,
+        public readonly Optional | P_22BMK $p_22BMK = new Optional(),
+        public readonly Optional | P_22BMD $p_22BMD = new Optional(),
+        public readonly Optional | P_22BK $p_22BK = new Optional(),
+        public readonly Optional | P_22BNR $p_22BNR = new Optional(),
+        public readonly Optional | P_22BRP $p_22BRP = new Optional(),
     ) {
     }
 

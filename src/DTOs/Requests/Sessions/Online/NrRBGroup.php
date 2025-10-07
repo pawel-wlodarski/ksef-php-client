@@ -11,15 +11,15 @@ use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\SWIFT;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 use N1ebieski\KSEFClient\Support\Optional;
 
-final readonly class NrRBGroup extends AbstractDTO implements DomSerializableInterface
+final class NrRBGroup extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @param NrRB $nrRB Pełny numer rachunku
      * @param Optional|SWIFT $swift Kod SWIFT
      */
     public function __construct(
-        public NrRB $nrRB,
-        public Optional | SWIFT $swift = new Optional(),
+        public readonly NrRB $nrRB,
+        public readonly Optional | SWIFT $swift = new Optional(),
     ) {
     }
 

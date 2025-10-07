@@ -6,14 +6,12 @@ namespace N1ebieski\KSEFClient\ValueObjects;
 
 use N1ebieski\KSEFClient\Contracts\ValueAwareInterface;
 use N1ebieski\KSEFClient\Support\AbstractValueObject;
-use SensitiveParameter;
 use Stringable;
 
-final readonly class CertificateSerialNumber extends AbstractValueObject implements ValueAwareInterface, Stringable
+final class CertificateSerialNumber extends AbstractValueObject implements ValueAwareInterface, Stringable
 {
     public function __construct(
-        #[SensitiveParameter]
-        public string $value
+        public readonly string $value
     ) {
     }
 

@@ -10,11 +10,11 @@ use N1ebieski\KSEFClient\Support\Optional;
 use N1ebieski\KSEFClient\ValueObjects\CertificateSerialNumber;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Certificates\RevocationReason;
 
-final readonly class RevokeRequest extends AbstractRequest implements BodyInterface
+final class RevokeRequest extends AbstractRequest implements BodyInterface
 {
     public function __construct(
-        public CertificateSerialNumber $certificateSerialNumber,
-        public Optional | RevocationReason | null $revocationReason = new Optional()
+        public readonly CertificateSerialNumber $certificateSerialNumber,
+        public readonly Optional | RevocationReason | null $revocationReason = new Optional()
     ) {
     }
 

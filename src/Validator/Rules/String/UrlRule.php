@@ -7,7 +7,7 @@ namespace N1ebieski\KSEFClient\Validator\Rules\String;
 use InvalidArgumentException;
 use N1ebieski\KSEFClient\Validator\Rules\AbstractRule;
 
-final readonly class UrlRule extends AbstractRule
+final class UrlRule extends AbstractRule
 {
     public function handle(string $value, ?string $attribute = null): void
     {

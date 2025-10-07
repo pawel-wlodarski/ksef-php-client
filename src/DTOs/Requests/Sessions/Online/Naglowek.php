@@ -13,16 +13,16 @@ use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\FormCode;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 use N1ebieski\KSEFClient\Support\Optional;
 
-final readonly class Naglowek extends AbstractDTO implements DomSerializableInterface
+final class Naglowek extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @param Optional|SystemInfo $systemInfo Nazwa systemu teleinformatycznego, z którego korzysta podatnik
      * @return void
      */
     public function __construct(
-        public FormCode $wariantFormularza = FormCode::Fa3,
-        public DataWytworzeniaFa $dataWytworzeniaFa = new DataWytworzeniaFa(new DateTimeImmutable()),
-        public Optional | SystemInfo $systemInfo = new Optional(),
+        public readonly FormCode $wariantFormularza = FormCode::Fa3,
+        public readonly DataWytworzeniaFa $dataWytworzeniaFa = new DataWytworzeniaFa(new DateTimeImmutable()),
+        public readonly Optional | SystemInfo $systemInfo = new Optional(),
     ) {
     }
 

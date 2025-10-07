@@ -17,17 +17,17 @@ use N1ebieski\KSEFClient\Validator\Rules\Array\MaxRule;
 use N1ebieski\KSEFClient\Validator\Rules\Array\MinRule;
 use N1ebieski\KSEFClient\Validator\Validator;
 
-final readonly class KorektaGroup extends AbstractDTO implements DomSerializableInterface
+final class KorektaGroup extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @var array<int, DaneFaKorygowanej>
      */
-    public array $daneFaKorygowanej;
+    public readonly array $daneFaKorygowanej;
 
     /**
      * @var Optional|array<int, Podmiot2K>
      */
-    public Optional | array $podmiot2K;
+    public readonly Optional | array $podmiot2K;
 
     /**
      * @param array<int, DaneFaKorygowanej> $daneFaKorygowanej
@@ -39,13 +39,13 @@ final readonly class KorektaGroup extends AbstractDTO implements DomSerializable
      */
     public function __construct(
         array $daneFaKorygowanej,
-        public Optional | PrzyczynaKorekty $przyczynaKorekty = new Optional(),
-        public Optional | TypKorekty $typKorekty = new Optional(),
-        public Optional | OkresFaKorygowanej $okresFaKorygowanej = new Optional(),
-        public Optional | NrFaKorygowany $nrFaKorygowany = new Optional(),
-        public Optional | Podmiot1K $podmiot1K = new Optional(),
+        public readonly Optional | PrzyczynaKorekty $przyczynaKorekty = new Optional(),
+        public readonly Optional | TypKorekty $typKorekty = new Optional(),
+        public readonly Optional | OkresFaKorygowanej $okresFaKorygowanej = new Optional(),
+        public readonly Optional | NrFaKorygowany $nrFaKorygowany = new Optional(),
+        public readonly Optional | Podmiot1K $podmiot1K = new Optional(),
         Optional | array $podmiot2K = new Optional(),
-        public Optional | P_15ZKGroup $p15ZKGroup = new Optional(),
+        public readonly Optional | P_15ZKGroup $p15ZKGroup = new Optional(),
     ) {
         Validator::validate([
             'daneFaKorygowanej' => $daneFaKorygowanej,

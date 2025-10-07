@@ -9,13 +9,13 @@ use N1ebieski\KSEFClient\Contracts\DomSerializableInterface;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\NrKSeFN;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 
-final readonly class NrKSeFNGroup extends AbstractDTO implements DomSerializableInterface
+final class NrKSeFNGroup extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @param NrKSeFN $nrKSeFN Znacznik faktury korygowanej wystawionej poza KSeF
      */
     public function __construct(
-        public NrKSeFN $nrKSeFN = NrKSeFN::Default
+        public readonly NrKSeFN $nrKSeFN = NrKSeFN::Default
     ) {
     }
 

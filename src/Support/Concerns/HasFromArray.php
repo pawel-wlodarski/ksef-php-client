@@ -12,7 +12,7 @@ trait HasFromArray
 {
     public static function from(array $data): static
     {
-        return new MapperBuilder()
+        return (new MapperBuilder())
             ->allowPermissiveTypes()
             ->mapper()
             ->map(static::class, Source::iterable(

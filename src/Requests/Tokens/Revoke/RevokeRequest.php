@@ -7,10 +7,10 @@ namespace N1ebieski\KSEFClient\Requests\Tokens\Revoke;
 use N1ebieski\KSEFClient\Requests\AbstractRequest;
 use N1ebieski\KSEFClient\ValueObjects\Requests\ReferenceNumber;
 
-final readonly class RevokeRequest extends AbstractRequest
+final class RevokeRequest extends AbstractRequest
 {
     public function __construct(
-        public ReferenceNumber $referenceNumber,
+        public readonly ReferenceNumber $referenceNumber,
     ) {
     }
 }

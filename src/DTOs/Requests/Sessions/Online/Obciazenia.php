@@ -10,15 +10,15 @@ use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\Kwota;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\Powod;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 
-final readonly class Obciazenia extends AbstractDTO implements DomSerializableInterface
+final class Obciazenia extends AbstractDTO implements DomSerializableInterface
 {
     /**
      * @param Kwota $kwota Kwota doliczona do kwoty wykazanej w polu P_15
      * @param Powod $powod Powód obciążenia
      */
     public function __construct(
-        public Kwota $kwota,
-        public Powod $powod
+        public readonly Kwota $kwota,
+        public readonly Powod $powod
     ) {
     }
 

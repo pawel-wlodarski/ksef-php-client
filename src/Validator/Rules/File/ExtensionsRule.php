@@ -7,13 +7,13 @@ namespace N1ebieski\KSEFClient\Validator\Rules\File;
 use InvalidArgumentException;
 use N1ebieski\KSEFClient\Validator\Rules\AbstractRule;
 
-final readonly class ExtensionsRule extends AbstractRule
+final class ExtensionsRule extends AbstractRule
 {
     /**
      * @param array<int, string> $extensions
      */
     public function __construct(
-        private array $extensions
+        private readonly array $extensions
     ) {
     }
 

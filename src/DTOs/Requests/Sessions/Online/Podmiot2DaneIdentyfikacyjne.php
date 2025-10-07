@@ -11,11 +11,11 @@ use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\Nazwa;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 use N1ebieski\KSEFClient\Support\Optional;
 
-final readonly class Podmiot2DaneIdentyfikacyjne extends AbstractDTO implements DomSerializableInterface
+final class Podmiot2DaneIdentyfikacyjne extends AbstractDTO implements DomSerializableInterface
 {
     public function __construct(
-        public NIPGroup | UEGroup | KrajGroup | BrakIDGroup $idGroup,
-        public Optional | Nazwa $nazwa = new Optional()
+        public readonly NIPGroup | UEGroup | KrajGroup | BrakIDGroup $idGroup,
+        public readonly Optional | Nazwa $nazwa = new Optional()
     ) {
     }
 

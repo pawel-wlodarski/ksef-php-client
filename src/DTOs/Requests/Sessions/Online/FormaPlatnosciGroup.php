@@ -9,10 +9,10 @@ use N1ebieski\KSEFClient\Contracts\DomSerializableInterface;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Online\FormaPlatnosci;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 
-final readonly class FormaPlatnosciGroup extends AbstractDTO implements DomSerializableInterface
+final class FormaPlatnosciGroup extends AbstractDTO implements DomSerializableInterface
 {
     public function __construct(
-        public FormaPlatnosci $formaPlatnosci,
+        public readonly FormaPlatnosci $formaPlatnosci,
     ) {
     }
 
