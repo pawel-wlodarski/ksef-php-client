@@ -119,7 +119,7 @@ final class HttpClient implements HttpClientInterface
             $clientResponses = $this->client->sendAsyncRequest($clientRequests, $this->config->asyncMaxConcurrency);
 
             $responses = array_map(function (?BaseResponseInterface $response): ?ResponseInterface {
-                if ($response === null) {
+                if (!$response instanceof \Psr\Http\Message\ResponseInterface) {
                     return $response;
                 }
 
@@ -132,7 +132,7 @@ final class HttpClient implements HttpClientInterface
             if ($this->logger instanceof LoggerInterface) {
                 $this->logger->debug(
                     'Received responses from KSEF',
-                    array_map(fn (Response $response): array => $response->toArray(), $responses)
+                    array_map(fn (?Response $response): ?array => $response?->toArray(), $responses)
                 );
             }
 

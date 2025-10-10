@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace N1ebieski\KSEFClient\Requests\Sessions\Batch\Open\Concerns;
+namespace N1ebieski\KSEFClient\Requests\Sessions\Batch\OpenAndSend\Concerns;
 
 use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\FormCode;
 

@@ -478,30 +478,30 @@ https://ksef-test.mf.gov.pl/docs/v2/index.html#tag/Wysylka-wsadowa/paths/~1api~1
 for DTOs invoices:
 
 ```php
-use N1ebieski\KSEFClient\Requests\Sessions\Batch\Open\OpenRequest;
+use N1ebieski\KSEFClient\Requests\Sessions\Batch\OpenAndSend\OpenAndSendRequest;
 
-$response = $client->sessions()->batch()->open(
-    new OpenRequest(...)
+$response = $client->sessions()->batch()->openAndSend(
+    new OpenAndSendRequest(...)
 )->object();
 ```
 
 for XMLs invoices:
 
 ```php
-use N1ebieski\KSEFClient\Requests\Sessions\Batch\Open\OpenXmlRequest;
+use N1ebieski\KSEFClient\Requests\Sessions\Batch\OpenAndSend\OpenAndSendXmlRequest;
 
-$response = $client->sessions()->batch()->open(
-    new OpenXmlRequest(...)
+$response = $client->sessions()->batch()->openAndSend(
+    new OpenAndSendXmlRequest(...)
 )->object();
 ```
 
 for ZIP invoices:
 
 ```php
-use N1ebieski\KSEFClient\Requests\Sessions\Batch\Open\OpenZipRequest;
+use N1ebieski\KSEFClient\Requests\Sessions\Batch\OpenAndSend\OpenAndSendZipRequest;
 
-$response = $client->sessions()->batch()->open(
-    new OpenZipRequest(...)
+$response = $client->sessions()->batch()->openAndSend(
+    new OpenAndSendZipRequest(...)
 )->object();
 ```
 </details>
@@ -1025,13 +1025,13 @@ $faktury = array_map(
         ->withTodayDate()
         ->withRandomInvoiceNumber()
         ->data,
-    range(1, 3)
+    range(1, 100)
 );
 
 // For sending invoices as DTOs use OpenRequest DTO or array
 // For sending invoices as XMLs use OpenXmlRequest DTO
 // For sending invoices as ZIP use OpenZipRequest DTO
-$openResponse = $client->sessions()->batch()->open([
+$openResponse = $client->sessions()->batch()->openAndSend([
     'formCode' => 'FA (3)',
     'faktury' => $faktury
 ])->object();

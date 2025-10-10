@@ -246,10 +246,10 @@ final class ClientBuilder
     {
         $config = new Config(
             baseUri: new BaseUri($this->apiUrl->value),
+            asyncMaxConcurrency: $this->asyncMaxConcurrency,
             accessToken: $this->accessToken,
             refreshToken: $this->refreshToken,
             encryptionKey: $this->encryptionKey,
-            asyncMaxConcurrency: $this->asyncMaxConcurrency,
         );
 
         $httpClient = new HttpClient(

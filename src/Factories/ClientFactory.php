@@ -19,6 +19,7 @@ final class ClientFactory extends AbstractFactory
             default => DefaultHttpAdapter::class
         };
 
+        //@phpstan-ignore-next-line
         return new $clientAdapter($baseClient);
     }
 }

@@ -5,6 +5,7 @@ namespace N1ebieski\KSEFClient\Tests;
 use DateTimeImmutable;
 use DateTimeInterface;
 use Mockery;
+use Mockery\MockInterface;
 use N1ebieski\KSEFClient\Contracts\HttpClient\HttpClientInterface;
 use N1ebieski\KSEFClient\Contracts\Resources\ClientResourceInterface;
 use N1ebieski\KSEFClient\Contracts\ValueAwareInterface;
@@ -124,7 +125,7 @@ function toBeFixture(array $data, ?object $object = null): void
     }
 }
 
-function getClientStub(AbstractResponseFixture $response): ClientResourceInterface
+function getResponseStub(AbstractResponseFixture $response): MockInterface & ResponseInterface
 {
     $streamStub = Mockery::mock(StreamInterface::class);
     $streamStub->shouldReceive('getContents')->andReturn($response->toContents());
@@ -133,14 +134,31 @@ function getClientStub(AbstractResponseFixture $response): ClientResourceInterfa
     $responseStub->shouldReceive('getStatusCode')->andReturn($response->statusCode);
     $responseStub->shouldReceive('getBody')->andReturn($streamStub);
 
+    /** @var MockInterface&ResponseInterface */
+    return $responseStub;
+}
+
+function getHttpClientStub(AbstractResponseFixture $response): MockInterface & HttpClientInterface
+{
     $httpClientStub = Mockery::mock(HttpClientInterface::class);
     $httpClientStub->shouldReceive('withAccessToken')->andReturnSelf();
+    $httpClientStub->shouldReceive('withoutAccessToken')->andReturnSelf();
     $httpClientStub->shouldReceive('withEncryptedKey')->andReturnSelf();
 
-    /** @var ResponseInterface $responseStub */
+    /** @var MockInterface&ResponseInterface $responseStub */
+    $responseStub = getResponseStub($response);
+
     $httpClientStub->shouldReceive('sendRequest')->andReturn(new Response($responseStub, new ExceptionHandler()));
 
-    /** @var HttpClientInterface $httpClientStub */
+    /** @var MockInterface&HttpClientInterface */
+    return $httpClientStub;
+}
+
+function getClientStub(AbstractResponseFixture $response): ClientResourceInterface
+{
+    /** @var MockInterface&HttpClientInterface $httpClientStub */
+    $httpClientStub = getHttpClientStub($response);
+
     return new ClientResource($httpClientStub, new Config(
         baseUri: new BaseUri(Mode::Test->getApiUrl()->value),
         encryptionKey: EncryptionKeyFactory::makeRandom()

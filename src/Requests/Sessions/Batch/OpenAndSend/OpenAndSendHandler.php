@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace N1ebieski\KSEFClient\Requests\Sessions\Batch\Open;
+namespace N1ebieski\KSEFClient\Requests\Sessions\Batch\OpenAndSend;
 
 use N1ebieski\KSEFClient\Actions\EncryptDocument\EncryptDocumentAction;
 use N1ebieski\KSEFClient\Actions\EncryptDocument\EncryptDocumentHandler;
@@ -23,7 +23,7 @@ use N1ebieski\KSEFClient\ValueObjects\HttpClient\Uri;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\EncryptedKey;
 use RuntimeException;
 
-final class OpenHandler extends AbstractHandler
+final class OpenAndSendHandler extends AbstractHandler
 {
     public function __construct(
         private readonly HttpClientInterface $client,
@@ -34,7 +34,7 @@ final class OpenHandler extends AbstractHandler
     ) {
     }
 
-    public function handle(OpenRequest | OpenXmlRequest | OpenZipRequest $request): ResponseInterface
+    public function handle(OpenAndSendRequest | OpenAndSendXmlRequest | OpenAndSendZipRequest $request): ResponseInterface
     {
         if ($this->config->encryptionKey instanceof EncryptionKey === false) {
             throw new RuntimeException('Encryption key is required to send invoice.');
@@ -45,7 +45,7 @@ final class OpenHandler extends AbstractHandler
         }
 
         $documents = match (true) {
-            $request instanceof OpenRequest => array_map(
+            $request instanceof OpenAndSendRequest => array_map(
                 fn (Faktura $faktura): string => $faktura->toXml(),
                 $request->faktury
             ),
@@ -84,7 +84,7 @@ final class OpenHandler extends AbstractHandler
                 'batchFile' => [
                     'fileSize' => $fileSize,
                     'fileHash' => base64_encode(hash('sha256', $zipDocument, true)),
-                    'fileParts' => array_map(function (int $index, string $encryptedPart) {
+                    'fileParts' => array_map(function (int $index, string $encryptedPart): array {
                         $fileName = uniqid('part_', true) . '.zip.aes';
 
                         return [
@@ -107,11 +107,11 @@ final class OpenHandler extends AbstractHandler
 
         $this->client
             ->withoutAccessToken()
-            ->sendAsyncRequest(array_map(fn (object $partUploadRequest) => new Request(
+            ->sendAsyncRequest(array_map(fn (object $partUploadRequest): Request => new Request(
                 method: Method::from($partUploadRequest->method),
                 uri: Uri::from($partUploadRequest->url),
-                body: $encryptedParts[$partUploadRequest->ordinalNumber - 1],
                 headers: (array) $partUploadRequest->headers,
+                body: $encryptedParts[$partUploadRequest->ordinalNumber - 1],
             ), $openResponseToObject->partUploadRequests));
 
         return $openResponse;

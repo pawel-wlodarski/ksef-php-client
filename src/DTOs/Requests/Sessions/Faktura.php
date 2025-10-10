@@ -5,10 +5,8 @@ declare(strict_types=1);
 namespace N1ebieski\KSEFClient\DTOs\Requests\Sessions;
 
 use DOMDocument;
-use N1ebieski\KSEFClient\Contracts\DocumentInterface;
 use N1ebieski\KSEFClient\Contracts\DomSerializableInterface;
 use N1ebieski\KSEFClient\Contracts\XmlSerializableInterface;
-use N1ebieski\KSEFClient\DTOs\Document;
 use N1ebieski\KSEFClient\DTOs\Requests\Sessions\Fa;
 use N1ebieski\KSEFClient\DTOs\Requests\Sessions\Naglowek;
 use N1ebieski\KSEFClient\DTOs\Requests\Sessions\Podmiot1;

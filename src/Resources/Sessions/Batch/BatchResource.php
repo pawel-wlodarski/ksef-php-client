@@ -13,10 +13,10 @@ use N1ebieski\KSEFClient\Contracts\Resources\Sessions\Batch\BatchResourceInterfa
 use N1ebieski\KSEFClient\DTOs\Config;
 use N1ebieski\KSEFClient\Requests\Sessions\Batch\Close\CloseHandler;
 use N1ebieski\KSEFClient\Requests\Sessions\Batch\Close\CloseRequest;
-use N1ebieski\KSEFClient\Requests\Sessions\Batch\Open\OpenHandler;
-use N1ebieski\KSEFClient\Requests\Sessions\Batch\Open\OpenRequest;
-use N1ebieski\KSEFClient\Requests\Sessions\Batch\Open\OpenXmlRequest;
-use N1ebieski\KSEFClient\Requests\Sessions\Batch\Open\OpenZipRequest;
+use N1ebieski\KSEFClient\Requests\Sessions\Batch\OpenAndSend\OpenAndSendHandler;
+use N1ebieski\KSEFClient\Requests\Sessions\Batch\OpenAndSend\OpenAndSendRequest;
+use N1ebieski\KSEFClient\Requests\Sessions\Batch\OpenAndSend\OpenAndSendXmlRequest;
+use N1ebieski\KSEFClient\Requests\Sessions\Batch\OpenAndSend\OpenAndSendZipRequest;
 use N1ebieski\KSEFClient\Resources\AbstractResource;
 use Psr\Log\LoggerInterface;
 
@@ -29,18 +29,18 @@ final class BatchResource extends AbstractResource implements BatchResourceInter
     ) {
     }
 
-    public function open(OpenRequest | OpenXmlRequest | OpenZipRequest | array $request): ResponseInterface
+    public function openAndSend(OpenAndSendRequest | OpenAndSendXmlRequest | OpenAndSendZipRequest | array $request): ResponseInterface
     {
         if (is_array($request)) {
-            $request = OpenRequest::from($request);
+            $request = OpenAndSendRequest::from($request);
         }
 
-        return (new OpenHandler(
+        return (new OpenAndSendHandler(
             client: $this->client,
-            config: $this->config,
             encryptDocumentHandler: new EncryptDocumentHandler($this->logger),
             zipDocumentsHandler: new ZipDocumentsHandler(),
-            splitDocumentIntoPartsHandler: new SplitDocumentIntoPartsHandler()
+            splitDocumentIntoPartsHandler: new SplitDocumentIntoPartsHandler(),
+            config: $this->config
         ))->handle($request);
     }
 

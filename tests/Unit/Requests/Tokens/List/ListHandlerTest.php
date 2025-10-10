@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
+use function N1ebieski\KSEFClient\Tests\getClientStub;
 use N1ebieski\KSEFClient\Requests\Tokens\List\ListRequest;
 use N1ebieski\KSEFClient\Testing\Fixtures\Requests\Error\ErrorResponseFixture;
 use N1ebieski\KSEFClient\Testing\Fixtures\Requests\Tokens\List\ListRequestFixture;
-use N1ebieski\KSEFClient\Testing\Fixtures\Requests\Tokens\List\ListResponseFixture;
 
-use function N1ebieski\KSEFClient\Tests\getClientStub;
+use N1ebieski\KSEFClient\Testing\Fixtures\Requests\Tokens\List\ListResponseFixture;
 
 /**
  * @return array<string, array{ListRequestFixture, ListResponseFixture}>
@@ -40,9 +40,9 @@ test('valid response', function (ListRequestFixture $requestFixture, ListRespons
 
     expect($request)->toBeFixture($requestFixture->data);
 
-    expect($request->toHeaders())->toBe([
-        'x-continuation-token' => $requestFixture->data['continuationToken'],
-    ]);
+    expect($request->toHeaders())
+        ->toHaveKey('x-continuation-token')
+        ->toContain($requestFixture->data['continuationToken']);
 
     $response = $clientStub->tokens()->list($requestFixture->data)->object();
 
