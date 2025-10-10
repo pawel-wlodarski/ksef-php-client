@@ -1029,9 +1029,9 @@ $faktury = array_map(
     range(1, 100)
 );
 
-// For sending invoices as DTOs use OpenRequest DTO or array
-// For sending invoices as XMLs use OpenXmlRequest DTO
-// For sending invoices as ZIP use OpenZipRequest DTO
+// For sending invoices as DTOs use OpenAndSendRequest DTO or array
+// For sending invoices as XMLs use OpenAndSendXmlRequest DTO
+// For sending invoices as ZIP use OpenAndSendZipRequest DTO
 $openResponse = $client->sessions()->batch()->openAndSend([
     'formCode' => 'FA (3)',
     'faktury' => $faktury
