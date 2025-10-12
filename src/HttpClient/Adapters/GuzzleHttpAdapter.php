@@ -37,6 +37,8 @@ final class GuzzleHttpAdapter extends AbstractAdapter
 
     public function sendRequest(RequestInterface $request): ResponseInterface
     {
-        return $this->client->send($request);
+        return $this->client->send($request, [
+            'http_errors' => false
+        ]);
     }
 }

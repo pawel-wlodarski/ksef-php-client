@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace N1ebieski\KSEFClient\Factories;
 
-use N1ebieski\KSEFClient\Factories\AbstractFactory;
 use N1ebieski\KSEFClient\Exceptions\HttpClient\BadRequestException;
 use N1ebieski\KSEFClient\Exceptions\HttpClient\ClientException;
 use N1ebieski\KSEFClient\Exceptions\HttpClient\Exception;
 use N1ebieski\KSEFClient\Exceptions\HttpClient\InternalServerException;
 use N1ebieski\KSEFClient\Exceptions\HttpClient\ServerException;
 use N1ebieski\KSEFClient\Exceptions\HttpClient\UnknownSystemException;
+use N1ebieski\KSEFClient\Factories\AbstractFactory;
 use N1ebieski\KSEFClient\Support\Utility;
 
 final class ExceptionFactory extends AbstractFactory
@@ -49,7 +49,7 @@ final class ExceptionFactory extends AbstractFactory
             default => Exception::class
         };
 
-        throw new $exceptionNamespace(
+        return new $exceptionNamespace(
             message: $message,
             code: $statusCode,
             context: $exceptionResponse
