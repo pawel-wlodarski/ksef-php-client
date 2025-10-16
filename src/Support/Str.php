@@ -39,6 +39,6 @@ final class Str
 
     public static function guid(): string
     {
-        return 'ID-' . Uuid::v4();
+        return str_replace('.', '', uniqid('ID-', true));
     }
 }
