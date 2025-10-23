@@ -26,7 +26,7 @@ final class DateRangeFrom extends AbstractValueObject implements ValueAwareInter
 
     public function __toString(): string
     {
-        return $this->value->format('Y-m-d\TH:i:s');
+        return $this->value->format('Y-m-d\TH:i:s.vP');
     }
 
     public function toOriginal(): string
