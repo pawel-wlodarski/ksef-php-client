@@ -20,6 +20,13 @@ return \Rector\Config\RectorConfig::configure()
         \Rector\CodeQuality\Rector\If_\ExplicitBoolCompareRector::class => [
             __DIR__ . '/src/Actions/ConvertEcdsaDerToRaw/ConvertEcdsaDerToRawHandler.php'
         ],
+        \Rector\CodingStyle\Rector\FuncCall\FunctionFirstClassCallableRector::class => [
+            __DIR__ . '/src/Validator/Rules/Number/NipRule.php'
+        ],
+        \Rector\CodeQuality\Rector\Class_\CompleteDynamicPropertiesRector::class => [
+            __DIR__ . '/src/Testing/Fixtures/Requests/AbstractResponseFixture.php',
+            __DIR__ . '/src/Testing/Fixtures/DTOs/Requests/Sessions/AbstractFakturaFixture.php'
+        ]
     ])
     ->withComposerBased(phpunit: true)
     ->withImportNames(removeUnusedImports: true)
