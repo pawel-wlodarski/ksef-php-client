@@ -1179,7 +1179,7 @@ $qrCodes = $generateQRCodesHandler->handle(new GenerateQRCodesAction(
 ));
 
 // Invoice link
-file_put_contents(Utility::basePath("var/qr/code1.png"), $qrCodes->code1);
+file_put_contents(Utility::basePath("var/qr/code1.png"), $qrCodes->code1->raw);
 ```
 </details>
 
@@ -1313,10 +1313,10 @@ $qrCodes = $generateQRCodesHandler->handle(new GenerateQRCodesAction(
 ));
 
 // Invoice link
-file_put_contents(Utility::basePath("var/qr/code1.png"), $qrCodes->code1);
+file_put_contents(Utility::basePath("var/qr/code1.png"), $qrCodes->code1->raw);
 
 // Certificate verification link
-file_put_contents(Utility::basePath("var/qr/code2.png"), $qrCodes->code2);
+file_put_contents(Utility::basePath("var/qr/code2.png"), $qrCodes->code2->raw);
 ```
 
 </details>

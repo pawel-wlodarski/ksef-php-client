@@ -14,6 +14,7 @@ use N1ebieski\KSEFClient\Support\Str;
 use N1ebieski\KSEFClient\ValueObjects\Certificate;
 use N1ebieski\KSEFClient\ValueObjects\CertificateSerialNumber;
 use N1ebieski\KSEFClient\ValueObjects\PrivateKeyType;
+use N1ebieski\KSEFClient\ValueObjects\QRCode;
 use RuntimeException;
 
 final class GenerateQRCodesHandler extends AbstractHandler
@@ -37,11 +38,13 @@ final class GenerateQRCodesHandler extends AbstractHandler
 
         $invoiceLink = implode('/', $code1Parts);
 
-        $code1 = $this->qrCodeBuilder
+        $raw1 = $this->qrCodeBuilder
             ->data($invoiceLink)
             ->labelText($action->ksefNumber->value ?? 'OFFLINE')
             ->build()
             ->getString();
+
+        $code1 = QRCode::from($raw1, $invoiceLink);
 
         $code2 = null;
 
@@ -59,12 +62,12 @@ final class GenerateQRCodesHandler extends AbstractHandler
                 $invoiceBase64
             ];
 
-            $certificateLink = ltrim(implode('/', $code2Parts), 'https://');
+            $certificateLink = implode('/', $code2Parts);
 
             $signature = '';
 
             $sign = openssl_sign(
-                $certificateLink,
+                ltrim($certificateLink, 'https://'),
                 $signature,
                 $action->certificate->privateKey,
                 $action->certificate->getAlgorithm()
@@ -85,11 +88,13 @@ final class GenerateQRCodesHandler extends AbstractHandler
 
             $certificateLink .= "/{$signature}";
 
-            $code2 = $this->qrCodeBuilder
+            $raw2 = $this->qrCodeBuilder
                 ->data($certificateLink)
                 ->labelText('CERTYFIKAT')
                 ->build()
                 ->getString();
+
+            $code2 = QRCode::from($raw2, $certificateLink);
         }
 
         return new QRCodes($code1, $code2);
