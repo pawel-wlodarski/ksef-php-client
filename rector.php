@@ -26,7 +26,8 @@ return \Rector\Config\RectorConfig::configure()
         \Rector\CodeQuality\Rector\Class_\CompleteDynamicPropertiesRector::class => [
             __DIR__ . '/src/Testing/Fixtures/Requests/AbstractResponseFixture.php',
             __DIR__ . '/src/Testing/Fixtures/DTOs/Requests/Sessions/AbstractFakturaFixture.php'
-        ]
+        ],
+        \Rector\CodingStyle\Rector\Catch_\CatchExceptionNameMatchingTypeRector::class
     ])
     ->withComposerBased(phpunit: true)
     ->withImportNames(removeUnusedImports: true)
