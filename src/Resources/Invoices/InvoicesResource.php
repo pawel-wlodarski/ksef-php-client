@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace N1ebieski\KSEFClient\Resources\Invoices;
 
+use N1ebieski\KSEFClient\Contracts\Exception\ExceptionHandlerInterface;
 use N1ebieski\KSEFClient\Contracts\HttpClient\HttpClientInterface;
 use N1ebieski\KSEFClient\Contracts\HttpClient\ResponseInterface;
 use N1ebieski\KSEFClient\Contracts\Resources\Invoices\Exports\ExportsResourceInterface;
@@ -15,31 +16,45 @@ use N1ebieski\KSEFClient\Requests\Invoices\Download\DownloadRequest;
 use N1ebieski\KSEFClient\Resources\AbstractResource;
 use N1ebieski\KSEFClient\Resources\Invoices\Exports\ExportsResource;
 use N1ebieski\KSEFClient\Resources\Invoices\Query\QueryResource;
+use Throwable;
 
 final class InvoicesResource extends AbstractResource implements InvoicesResourceInterface
 {
     public function __construct(
         private readonly HttpClientInterface $client,
-        private readonly Config $config
+        private readonly Config $config,
+        private readonly ExceptionHandlerInterface $exceptionHandler
     ) {
     }
 
     public function download(DownloadRequest | array $request): ResponseInterface
     {
-        if ($request instanceof DownloadRequest === false) {
-            $request = DownloadRequest::from($request);
-        }
+        try {
+            if ($request instanceof DownloadRequest === false) {
+                $request = DownloadRequest::from($request);
+            }
 
-        return (new DownloadHandler($this->client))->handle($request);
+            return (new DownloadHandler($this->client))->handle($request);
+        } catch (Throwable $exception) {
+            throw $this->exceptionHandler->handle($exception);
+        }
     }
 
     public function query(): QueryResourceInterface
     {
-        return new QueryResource($this->client);
+        try {
+            return new QueryResource($this->client, $this->exceptionHandler);
+        } catch (Throwable $exception) {
+            throw $this->exceptionHandler->handle($exception);
+        }
     }
 
     public function exports(): ExportsResourceInterface
     {
-        return new ExportsResource($this->client, $this->config);
+        try {
+            return new ExportsResource($this->client, $this->config, $this->exceptionHandler);
+        } catch (Throwable $exception) {
+            throw $this->exceptionHandler->handle($exception);
+        }
     }
 }

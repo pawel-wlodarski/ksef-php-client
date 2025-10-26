@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace N1ebieski\KSEFClient\HttpClient;
 
 use JsonException;
-use N1ebieski\KSEFClient\Contracts\Exception\ExceptionHandlerInterface;
 use N1ebieski\KSEFClient\Contracts\HttpClient\ResponseInterface;
 use N1ebieski\KSEFClient\Factories\ExceptionFactory;
 use N1ebieski\KSEFClient\Support\Arr;
@@ -20,7 +19,6 @@ final class Response implements ResponseInterface
 
     public function __construct(
         public readonly BaseResponseInterface $baseResponse,
-        private readonly ExceptionHandlerInterface $exceptionHandler
     ) {
         $this->contents = $baseResponse->getBody()->getContents();
         $this->statusCode = $baseResponse->getStatusCode();
@@ -38,10 +36,10 @@ final class Response implements ResponseInterface
             $exceptionResponse = null;
         }
 
-        $this->exceptionHandler->handle(
-            //@phpstan-ignore-next-line
-            ExceptionFactory::make($this->statusCode, $exceptionResponse)
-        );
+        /** @var object{exception: object{exceptionDetailList: array<int, object{exceptionCode: int, exceptionDescription: string}>}}|null $exceptionResponse */
+        $exception = ExceptionFactory::make($this->statusCode, $exceptionResponse);
+
+        throw $exception;
     }
 
     public function status(): int

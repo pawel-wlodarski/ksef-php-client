@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-use N1ebieski\KSEFClient\Testing\Fixtures\DTOs\Requests\Sessions\AbstractFakturaFixture;
 use N1ebieski\KSEFClient\DTOs\Config;
 use N1ebieski\KSEFClient\Exceptions\ExceptionHandler;
 use N1ebieski\KSEFClient\Factories\EncryptionKeyFactory;
 use N1ebieski\KSEFClient\HttpClient\Response;
 use N1ebieski\KSEFClient\Requests\Sessions\Batch\OpenAndSend\OpenAndSendRequest;
 use N1ebieski\KSEFClient\Resources\ClientResource;
+use N1ebieski\KSEFClient\Testing\Fixtures\DTOs\Requests\Sessions\AbstractFakturaFixture;
 use N1ebieski\KSEFClient\Testing\Fixtures\DTOs\Requests\Sessions\FakturaSprzedazyTowaruFixture;
 use N1ebieski\KSEFClient\Testing\Fixtures\Requests\Error\ErrorResponseFixture;
 use N1ebieski\KSEFClient\Testing\Fixtures\Requests\Sessions\Batch\OpenAndSend\OpenAndSendRequestFixture;
@@ -56,12 +56,16 @@ test('valid response', function (OpenAndSendRequestFixture $requestFixture, Open
 
     $httpClientStub = getHttpClientStub($responseFixture);
     $httpClientStub->shouldReceive('sendAsyncRequest')
-        ->andReturn([new Response(getResponseStub(new SendResponseFixture()), new ExceptionHandler())]);
+        ->andReturn([new Response(getResponseStub(new SendResponseFixture()))]);
 
-    $clientStub = (new ClientResource($httpClientStub, new Config(
-        baseUri: new BaseUri(Mode::Test->getApiUrl()->value),
-        encryptionKey: EncryptionKeyFactory::makeRandom()
-    )))->withEncryptedKey($encryptedKey);
+    $clientStub = (new ClientResource(
+        client: $httpClientStub,
+        config: new Config(
+            baseUri: new BaseUri(Mode::Test->getApiUrl()->value),
+            encryptionKey: EncryptionKeyFactory::makeRandom()
+        ),
+        exceptionHandler: new ExceptionHandler(),
+    ))->withEncryptedKey($encryptedKey);
 
     $request = OpenAndSendRequest::from($requestFixture->data);
 

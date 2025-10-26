@@ -10,8 +10,6 @@ use N1ebieski\KSEFClient\Contracts\HttpClient\HttpClientInterface;
 use N1ebieski\KSEFClient\Contracts\HttpClient\ResponseInterface;
 use N1ebieski\KSEFClient\DTOs\Config;
 use N1ebieski\KSEFClient\DTOs\HttpClient\Request;
-use N1ebieski\KSEFClient\Exceptions\ExceptionHandler;
-use N1ebieski\KSEFClient\Exceptions\XmlValidationException;
 use N1ebieski\KSEFClient\Factories\CertificateFactory;
 use N1ebieski\KSEFClient\Requests\AbstractHandler;
 use N1ebieski\KSEFClient\Support\Utility;
@@ -26,7 +24,6 @@ final class XadesSignatureHandler extends AbstractHandler
     public function __construct(
         private readonly HttpClientInterface $client,
         private readonly SignDocumentHandler $signDocument,
-        private readonly ExceptionHandler $exceptionHandler,
         private readonly Config $config
     ) {
     }
@@ -36,13 +33,9 @@ final class XadesSignatureHandler extends AbstractHandler
         $signedXml = $request->toXml();
 
         if ($this->config->validateXml) {
-            try {
-                Validator::validate($signedXml, [
-                    new SchemaRule(SchemaPath::from(Utility::basePath('resources/xsd/authv2.xsd')))
-                ]);
-            } catch (XmlValidationException $exception) {
-                $this->exceptionHandler->handle($exception);
-            }
+            Validator::validate($signedXml, [
+                new SchemaRule(SchemaPath::from(Utility::basePath('resources/xsd/authv2.xsd')))
+            ]);
         }
 
         if ($request instanceof XadesSignatureRequest) {

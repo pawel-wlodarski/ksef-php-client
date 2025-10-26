@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace N1ebieski\KSEFClient\Resources\Tokens;
 
+use N1ebieski\KSEFClient\Contracts\Exception\ExceptionHandlerInterface;
 use N1ebieski\KSEFClient\Contracts\HttpClient\HttpClientInterface;
 use N1ebieski\KSEFClient\Contracts\HttpClient\ResponseInterface;
 use N1ebieski\KSEFClient\Contracts\Resources\Tokens\TokensResourceInterface;
@@ -16,47 +17,65 @@ use N1ebieski\KSEFClient\Requests\Tokens\Revoke\RevokeRequest;
 use N1ebieski\KSEFClient\Requests\Tokens\Status\StatusHandler;
 use N1ebieski\KSEFClient\Requests\Tokens\Status\StatusRequest;
 use N1ebieski\KSEFClient\Resources\AbstractResource;
+use Throwable;
 
 final class TokensResource extends AbstractResource implements TokensResourceInterface
 {
     public function __construct(
-        private readonly HttpClientInterface $client
+        private readonly HttpClientInterface $client,
+        private readonly ExceptionHandlerInterface $exceptionHandler
     ) {
     }
 
     public function create(CreateRequest | array $request): ResponseInterface
     {
-        if ($request instanceof CreateRequest === false) {
-            $request = CreateRequest::from($request);
-        }
+        try {
+            if ($request instanceof CreateRequest === false) {
+                $request = CreateRequest::from($request);
+            }
 
-        return (new CreateHandler($this->client))->handle($request);
+            return (new CreateHandler($this->client))->handle($request);
+        } catch (Throwable $exception) {
+            throw $this->exceptionHandler->handle($exception);
+        }
     }
 
     public function list(ListRequest | array $request): ResponseInterface
     {
-        if ($request instanceof ListRequest === false) {
-            $request = ListRequest::from($request);
-        }
+        try {
+            if ($request instanceof ListRequest === false) {
+                $request = ListRequest::from($request);
+            }
 
-        return (new ListHandler($this->client))->handle($request);
+            return (new ListHandler($this->client))->handle($request);
+        } catch (Throwable $exception) {
+            throw $this->exceptionHandler->handle($exception);
+        }
     }
 
     public function status(StatusRequest | array $request): ResponseInterface
     {
-        if ($request instanceof StatusRequest === false) {
-            $request = StatusRequest::from($request);
-        }
+        try {
+            if ($request instanceof StatusRequest === false) {
+                $request = StatusRequest::from($request);
+            }
 
-        return (new StatusHandler($this->client))->handle($request);
+            return (new StatusHandler($this->client))->handle($request);
+        } catch (Throwable $exception) {
+            throw $this->exceptionHandler->handle($exception);
+        }
     }
 
     public function revoke(RevokeRequest | array $request): ResponseInterface
     {
-        if ($request instanceof RevokeRequest === false) {
-            $request = RevokeRequest::from($request);
-        }
+        try {
+            if ($request instanceof RevokeRequest === false) {
+                $request = RevokeRequest::from($request);
+            }
 
-        return (new RevokeHandler($this->client))->handle($request);
+            return (new RevokeHandler($this->client))->handle($request);
+        } catch (Throwable $exception) {
+            throw $this->exceptionHandler->handle($exception);
+        }
     }
 }

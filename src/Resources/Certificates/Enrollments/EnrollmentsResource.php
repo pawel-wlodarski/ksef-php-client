@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace N1ebieski\KSEFClient\Resources\Certificates\Enrollments;
 
+use N1ebieski\KSEFClient\Contracts\Exception\ExceptionHandlerInterface;
 use N1ebieski\KSEFClient\Contracts\HttpClient\HttpClientInterface;
 use N1ebieski\KSEFClient\Contracts\HttpClient\ResponseInterface;
 use N1ebieski\KSEFClient\Contracts\Resources\Certificates\Enrollments\EnrollmentsResourceInterface;
@@ -13,34 +14,48 @@ use N1ebieski\KSEFClient\Requests\Certificates\Enrollments\Send\SendRequest;
 use N1ebieski\KSEFClient\Requests\Certificates\Enrollments\Status\StatusHandler;
 use N1ebieski\KSEFClient\Requests\Certificates\Enrollments\Status\StatusRequest;
 use N1ebieski\KSEFClient\Resources\AbstractResource;
+use Throwable;
 
 final class EnrollmentsResource extends AbstractResource implements EnrollmentsResourceInterface
 {
     public function __construct(
-        private readonly HttpClientInterface $client
+        private readonly HttpClientInterface $client,
+        private readonly ExceptionHandlerInterface $exceptionHandler
     ) {
     }
 
     public function data(): ResponseInterface
     {
-        return (new DataHandler($this->client))->handle();
+        try {
+            return (new DataHandler($this->client))->handle();
+        } catch (Throwable $exception) {
+            throw $this->exceptionHandler->handle($exception);
+        }
     }
 
     public function send(SendRequest | array $request): ResponseInterface
     {
-        if ($request instanceof SendRequest === false) {
-            $request = SendRequest::from($request);
-        }
+        try {
+            if ($request instanceof SendRequest === false) {
+                $request = SendRequest::from($request);
+            }
 
-        return (new SendHandler($this->client))->handle($request);
+            return (new SendHandler($this->client))->handle($request);
+        } catch (Throwable $exception) {
+            throw $this->exceptionHandler->handle($exception);
+        }
     }
 
     public function status(StatusRequest | array $request): ResponseInterface
     {
-        if ($request instanceof StatusRequest === false) {
-            $request = StatusRequest::from($request);
-        }
+        try {
+            if ($request instanceof StatusRequest === false) {
+                $request = StatusRequest::from($request);
+            }
 
-        return (new StatusHandler($this->client))->handle($request);
+            return (new StatusHandler($this->client))->handle($request);
+        } catch (Throwable $exception) {
+            throw $this->exceptionHandler->handle($exception);
+        }
     }
 }

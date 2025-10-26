@@ -148,7 +148,7 @@ function getHttpClientStub(AbstractResponseFixture $responseFixture): MockInterf
     /** @var MockInterface&ResponseInterface $responseStub */
     $responseStub = getResponseStub($responseFixture);
 
-    $response = new Response($responseStub, new ExceptionHandler());
+    $response = new Response($responseStub);
     $response->throwExceptionIfError();
 
     $httpClientStub->shouldReceive('sendRequest')->andReturn($response);
@@ -162,8 +162,12 @@ function getClientStub(AbstractResponseFixture $responseFixture): ClientResource
     /** @var MockInterface&HttpClientInterface $httpClientStub */
     $httpClientStub = getHttpClientStub($responseFixture);
 
-    return new ClientResource($httpClientStub, new Config(
-        baseUri: new BaseUri(Mode::Test->getApiUrl()->value),
-        encryptionKey: EncryptionKeyFactory::makeRandom()
-    ));
+    return new ClientResource(
+        client: $httpClientStub,
+        config: new Config(
+            baseUri: new BaseUri(Mode::Test->getApiUrl()->value),
+            encryptionKey: EncryptionKeyFactory::makeRandom()
+        ),
+        exceptionHandler: new ExceptionHandler(),
+    );
 }

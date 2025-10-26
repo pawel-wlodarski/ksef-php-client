@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace N1ebieski\KSEFClient\Resources\Testdata\Limits;
 
+use N1ebieski\KSEFClient\Contracts\Exception\ExceptionHandlerInterface;
 use N1ebieski\KSEFClient\Contracts\HttpClient\HttpClientInterface;
 use N1ebieski\KSEFClient\Contracts\Resources\Testdata\Limits\Context\ContextResourceInterface;
 use N1ebieski\KSEFClient\Contracts\Resources\Testdata\Limits\LimitsResourceInterface;
@@ -11,21 +12,31 @@ use N1ebieski\KSEFClient\Contracts\Resources\Testdata\Limits\Subject\SubjectReso
 use N1ebieski\KSEFClient\Resources\AbstractResource;
 use N1ebieski\KSEFClient\Resources\Testdata\Limits\Context\ContextResource;
 use N1ebieski\KSEFClient\Resources\Testdata\Limits\Subject\SubjectResource;
+use Throwable;
 
 final class LimitsResource extends AbstractResource implements LimitsResourceInterface
 {
     public function __construct(
-        private readonly HttpClientInterface $client
+        private readonly HttpClientInterface $client,
+        private readonly ExceptionHandlerInterface $exceptionHandler
     ) {
     }
 
     public function context(): ContextResourceInterface
     {
-        return new ContextResource($this->client);
+        try {
+            return new ContextResource($this->client, $this->exceptionHandler);
+        } catch (Throwable $exception) {
+            throw $this->exceptionHandler->handle($exception);
+        }
     }
 
     public function subject(): SubjectResourceInterface
     {
-        return new SubjectResource($this->client);
+        try {
+            return new SubjectResource($this->client, $this->exceptionHandler);
+        } catch (Throwable $exception) {
+            throw $this->exceptionHandler->handle($exception);
+        }
     }
 }

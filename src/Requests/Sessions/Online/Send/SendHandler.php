@@ -10,8 +10,6 @@ use N1ebieski\KSEFClient\Contracts\HttpClient\HttpClientInterface;
 use N1ebieski\KSEFClient\Contracts\HttpClient\ResponseInterface;
 use N1ebieski\KSEFClient\DTOs\Config;
 use N1ebieski\KSEFClient\DTOs\HttpClient\Request;
-use N1ebieski\KSEFClient\Exceptions\ExceptionHandler;
-use N1ebieski\KSEFClient\Exceptions\XmlValidationException;
 use N1ebieski\KSEFClient\Requests\AbstractHandler;
 use N1ebieski\KSEFClient\Support\Utility;
 use N1ebieski\KSEFClient\Validator\Rules\Xml\SchemaRule;
@@ -27,7 +25,6 @@ final class SendHandler extends AbstractHandler
     public function __construct(
         private readonly HttpClientInterface $client,
         private readonly EncryptDocumentHandler $encryptDocument,
-        private readonly ExceptionHandler $exceptionHandler,
         private readonly Config $config
     ) {
     }
@@ -41,13 +38,9 @@ final class SendHandler extends AbstractHandler
         $xml = $request->toXml();
 
         if ($this->config->validateXml) {
-            try {
-                Validator::validate($xml, [
-                    new SchemaRule(SchemaPath::from(Utility::basePath('resources/xsd/faktura.xsd')))
-                ]);
-            } catch (XmlValidationException $exception) {
-                $this->exceptionHandler->handle($exception);
-            }
+            Validator::validate($xml, [
+                new SchemaRule(SchemaPath::from(Utility::basePath('resources/xsd/faktura.xsd')))
+            ]);
         }
 
         $encryptedXml = $this->encryptDocument->handle(new EncryptDocumentAction(

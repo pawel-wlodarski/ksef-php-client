@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace N1ebieski\KSEFClient\Resources\Sessions;
 
+use N1ebieski\KSEFClient\Contracts\Exception\ExceptionHandlerInterface;
 use N1ebieski\KSEFClient\Contracts\HttpClient\HttpClientInterface;
 use N1ebieski\KSEFClient\Contracts\HttpClient\ResponseInterface;
 use N1ebieski\KSEFClient\Contracts\Resources\Sessions\Batch\BatchResourceInterface;
@@ -18,37 +19,55 @@ use N1ebieski\KSEFClient\Resources\Sessions\Batch\BatchResource;
 use N1ebieski\KSEFClient\Resources\Sessions\Invoices\InvoicesResource;
 use N1ebieski\KSEFClient\Resources\Sessions\Online\OnlineResource;
 use Psr\Log\LoggerInterface;
+use Throwable;
 
 final class SessionsResource extends AbstractResource implements SessionsResourceInterface
 {
     public function __construct(
         private readonly HttpClientInterface $client,
         private readonly Config $config,
+        private readonly ExceptionHandlerInterface $exceptionHandler,
         private readonly ?LoggerInterface $logger = null
     ) {
     }
 
     public function online(): OnlineResourceInterface
     {
-        return new OnlineResource($this->client, $this->config, $this->logger);
+        try {
+            return new OnlineResource($this->client, $this->config, $this->exceptionHandler, $this->logger);
+        } catch (Throwable $exception) {
+            throw $this->exceptionHandler->handle($exception);
+        }
     }
 
     public function batch(): BatchResourceInterface
     {
-        return new BatchResource($this->client, $this->config, $this->logger);
+        try {
+            return new BatchResource($this->client, $this->config, $this->exceptionHandler, $this->logger);
+        } catch (Throwable $exception) {
+            throw $this->exceptionHandler->handle($exception);
+        }
     }
 
     public function status(StatusRequest | array $request): ResponseInterface
     {
-        if ($request instanceof StatusRequest === false) {
-            $request = StatusRequest::from($request);
-        }
+        try {
+            if ($request instanceof StatusRequest === false) {
+                $request = StatusRequest::from($request);
+            }
 
-        return (new StatusHandler($this->client))->handle($request);
+            return (new StatusHandler($this->client))->handle($request);
+        } catch (Throwable $exception) {
+            throw $this->exceptionHandler->handle($exception);
+        }
     }
 
     public function invoices(): InvoicesResourceInterface
     {
-        return new InvoicesResource($this->client);
+        try {
+            return new InvoicesResource($this->client, $this->exceptionHandler);
+        } catch (Throwable $exception) {
+            throw $this->exceptionHandler->handle($exception);
+        }
     }
 }

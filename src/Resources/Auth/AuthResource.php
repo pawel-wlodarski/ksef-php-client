@@ -6,13 +6,13 @@ namespace N1ebieski\KSEFClient\Resources\Auth;
 
 use N1ebieski\KSEFClient\Actions\ConvertEcdsaDerToRaw\ConvertEcdsaDerToRawHandler;
 use N1ebieski\KSEFClient\Actions\SignDocument\SignDocumentHandler;
+use N1ebieski\KSEFClient\Contracts\Exception\ExceptionHandlerInterface;
 use N1ebieski\KSEFClient\Contracts\HttpClient\HttpClientInterface;
 use N1ebieski\KSEFClient\Contracts\HttpClient\ResponseInterface;
 use N1ebieski\KSEFClient\Contracts\Resources\Auth\AuthResourceInterface;
 use N1ebieski\KSEFClient\Contracts\Resources\Auth\Sessions\SessionsResourceInterface;
 use N1ebieski\KSEFClient\Contracts\Resources\Auth\Token\TokenResourceInterface;
 use N1ebieski\KSEFClient\DTOs\Config;
-use N1ebieski\KSEFClient\Exceptions\ExceptionHandler;
 use N1ebieski\KSEFClient\Requests\Auth\Challenge\ChallengeHandler;
 use N1ebieski\KSEFClient\Requests\Auth\KsefToken\KsefTokenHandler;
 use N1ebieski\KSEFClient\Requests\Auth\KsefToken\KsefTokenRequest;
@@ -24,61 +24,84 @@ use N1ebieski\KSEFClient\Requests\Auth\XadesSignature\XadesSignatureXmlRequest;
 use N1ebieski\KSEFClient\Resources\AbstractResource;
 use N1ebieski\KSEFClient\Resources\Auth\Sessions\SessionsResource;
 use N1ebieski\KSEFClient\Resources\Auth\Token\TokenResource;
-use Psr\Log\LoggerInterface;
+use Throwable;
 
 final class AuthResource extends AbstractResource implements AuthResourceInterface
 {
     public function __construct(
         private readonly HttpClientInterface $client,
         private readonly Config $config,
-        private readonly ?LoggerInterface $logger = null,
+        private readonly ExceptionHandlerInterface $exceptionHandler
     ) {
     }
 
     public function challenge(): ResponseInterface
     {
-        return (new ChallengeHandler($this->client))->handle();
+        try {
+            return (new ChallengeHandler($this->client))->handle();
+        } catch (Throwable $exception) {
+            throw $this->exceptionHandler->handle($exception);
+        }
     }
 
     public function xadesSignature(XadesSignatureRequest | XadesSignatureXmlRequest | array $request): ResponseInterface
     {
-        if (is_array($request)) {
-            $request = XadesSignatureRequest::from($request);
-        }
+        try {
+            if (is_array($request)) {
+                $request = XadesSignatureRequest::from($request);
+            }
 
-        return (new XadesSignatureHandler(
-            client: $this->client,
-            signDocument: new SignDocumentHandler(new ConvertEcdsaDerToRawHandler()),
-            exceptionHandler: new ExceptionHandler($this->logger),
-            config: $this->config
-        ))->handle($request);
+            return (new XadesSignatureHandler(
+                client: $this->client,
+                signDocument: new SignDocumentHandler(new ConvertEcdsaDerToRawHandler()),
+                config: $this->config
+            ))->handle($request);
+        } catch (Throwable $exception) {
+            throw $this->exceptionHandler->handle($exception);
+        }
     }
 
     public function ksefToken(KsefTokenRequest | array $request): ResponseInterface
     {
-        if ($request instanceof KsefTokenRequest === false) {
-            $request = KsefTokenRequest::from($request);
-        }
+        try {
+            if ($request instanceof KsefTokenRequest === false) {
+                $request = KsefTokenRequest::from($request);
+            }
 
-        return (new KsefTokenHandler($this->client))->handle($request);
+            return (new KsefTokenHandler($this->client))->handle($request);
+        } catch (Throwable $exception) {
+            throw $this->exceptionHandler->handle($exception);
+        }
     }
 
     public function status(StatusRequest | array $request): ResponseInterface
     {
-        if ($request instanceof StatusRequest === false) {
-            $request = StatusRequest::from($request);
-        }
+        try {
+            if ($request instanceof StatusRequest === false) {
+                $request = StatusRequest::from($request);
+            }
 
-        return (new StatusHandler($this->client))->handle($request);
+            return (new StatusHandler($this->client))->handle($request);
+        } catch (Throwable $exception) {
+            throw $this->exceptionHandler->handle($exception);
+        }
     }
 
     public function token(): TokenResourceInterface
     {
-        return new TokenResource($this->client);
+        try {
+            return new TokenResource($this->client, $this->exceptionHandler);
+        } catch (Throwable $exception) {
+            throw $this->exceptionHandler->handle($exception);
+        }
     }
 
     public function sessions(): SessionsResourceInterface
     {
-        return new SessionsResource($this->client);
+        try {
+            return new SessionsResource($this->client, $this->exceptionHandler);
+        } catch (Throwable $exception) {
+            throw $this->exceptionHandler->handle($exception);
+        }
     }
 }

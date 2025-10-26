@@ -6,6 +6,8 @@ namespace N1ebieski\KSEFClient\Resources;
 
 use DateTimeImmutable;
 use DateTimeInterface;
+use Exception;
+use N1ebieski\KSEFClient\Contracts\Exception\ExceptionHandlerInterface;
 use N1ebieski\KSEFClient\Contracts\HttpClient\HttpClientInterface;
 use N1ebieski\KSEFClient\Contracts\Resources\Auth\AuthResourceInterface;
 use N1ebieski\KSEFClient\Contracts\Resources\Certificates\CertificatesResourceInterface;
@@ -32,12 +34,14 @@ use N1ebieski\KSEFClient\ValueObjects\RefreshToken;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\EncryptedKey;
 use Psr\Log\LoggerInterface;
 use RuntimeException;
+use Throwable;
 
 final class ClientResource extends AbstractResource implements ClientResourceInterface
 {
     public function __construct(
         private HttpClientInterface $client,
         private Config $config,
+        private readonly ExceptionHandlerInterface $exceptionHandler,
         private readonly ?LoggerInterface $logger = null,
     ) {
     }
@@ -114,53 +118,85 @@ final class ClientResource extends AbstractResource implements ClientResourceInt
 
     public function auth(): AuthResourceInterface
     {
-        $this->refreshTokenIfExpired();
+        try {
+            $this->refreshTokenIfExpired();
 
-        return new AuthResource($this->client, $this->config, $this->logger);
+            return new AuthResource($this->client, $this->config, $this->exceptionHandler);
+        } catch (Throwable $exception) {
+            throw $this->exceptionHandler->handle($exception);
+        }
     }
 
     public function limits(): LimitsResourceInterface
     {
-        $this->refreshTokenIfExpired();
+        try {
+            $this->refreshTokenIfExpired();
 
-        return new LimitsResource($this->client);
+            return new LimitsResource($this->client, $this->exceptionHandler);
+        } catch (Throwable $exception) {
+            throw $this->exceptionHandler->handle($exception);
+        }
     }
 
     public function security(): SecurityResourceInterface
     {
-        return new SecurityResource($this->client);
+        try {
+            return new SecurityResource($this->client, $this->exceptionHandler);
+        } catch (Throwable $exception) {
+            throw $this->exceptionHandler->handle($exception);
+        }
     }
 
     public function sessions(): SessionsResourceInterface
     {
-        $this->refreshTokenIfExpired();
+        try {
+            $this->refreshTokenIfExpired();
 
-        return new SessionsResource($this->client, $this->config, $this->logger);
+            return new SessionsResource($this->client, $this->config, $this->exceptionHandler, $this->logger);
+        } catch (Exception $exception) {
+            throw $this->exceptionHandler->handle($exception);
+        }
     }
 
     public function invoices(): InvoicesResourceInterface
     {
-        $this->refreshTokenIfExpired();
+        try {
+            $this->refreshTokenIfExpired();
 
-        return new InvoicesResource($this->client, $this->config);
+            return new InvoicesResource($this->client, $this->config, $this->exceptionHandler);
+        } catch (Throwable $exception) {
+            throw $this->exceptionHandler->handle($exception);
+        }
     }
 
     public function certificates(): CertificatesResourceInterface
     {
-        $this->refreshTokenIfExpired();
+        try {
+            $this->refreshTokenIfExpired();
 
-        return new CertificatesResource($this->client);
+            return new CertificatesResource($this->client, $this->exceptionHandler);
+        } catch (Throwable $exception) {
+            throw $this->exceptionHandler->handle($exception);
+        }
     }
 
     public function tokens(): TokensResourceInterface
     {
-        $this->refreshTokenIfExpired();
+        try {
+            $this->refreshTokenIfExpired();
 
-        return new TokensResource($this->client);
+            return new TokensResource($this->client, $this->exceptionHandler);
+        } catch (Throwable $exception) {
+            throw $this->exceptionHandler->handle($exception);
+        }
     }
 
     public function testdata(): TestdataResourceInterface
     {
-        return new TestdataResource($this->client);
+        try {
+            return new TestdataResource($this->client, $this->exceptionHandler);
+        } catch (Throwable $exception) {
+            throw $this->exceptionHandler->handle($exception);
+        }
     }
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace N1ebieski\KSEFClient\Resources\Testdata\Limits\Context\Session;
 
+use N1ebieski\KSEFClient\Contracts\Exception\ExceptionHandlerInterface;
 use N1ebieski\KSEFClient\Contracts\HttpClient\HttpClientInterface;
 use N1ebieski\KSEFClient\Contracts\HttpClient\ResponseInterface;
 use N1ebieski\KSEFClient\Contracts\Resources\Testdata\Limits\Context\Session\SessionResourceInterface;
@@ -11,25 +12,35 @@ use N1ebieski\KSEFClient\Requests\Testdata\Limits\Context\Session\Limits\LimitsH
 use N1ebieski\KSEFClient\Requests\Testdata\Limits\Context\Session\Limits\LimitsRequest;
 use N1ebieski\KSEFClient\Requests\Testdata\Limits\Context\Session\Reset\ResetHandler;
 use N1ebieski\KSEFClient\Resources\AbstractResource;
+use Throwable;
 
 final class SessionResource extends AbstractResource implements SessionResourceInterface
 {
     public function __construct(
-        private readonly HttpClientInterface $client
+        private readonly HttpClientInterface $client,
+        private readonly ExceptionHandlerInterface $exceptionHandler
     ) {
     }
 
     public function limits(LimitsRequest | array $request): ResponseInterface
     {
-        if ($request instanceof LimitsRequest === false) {
-            $request = LimitsRequest::from($request);
-        }
+        try {
+            if ($request instanceof LimitsRequest === false) {
+                $request = LimitsRequest::from($request);
+            }
 
-        return (new LimitsHandler($this->client))->handle($request);
+            return (new LimitsHandler($this->client))->handle($request);
+        } catch (Throwable $exception) {
+            throw $this->exceptionHandler->handle($exception);
+        }
     }
 
     public function reset(): ResponseInterface
     {
-        return (new ResetHandler($this->client))->handle();
+        try {
+            return (new ResetHandler($this->client))->handle();
+        } catch (Throwable $exception) {
+            throw $this->exceptionHandler->handle($exception);
+        }
     }
 }

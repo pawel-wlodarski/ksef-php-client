@@ -4,22 +4,29 @@ declare(strict_types=1);
 
 namespace N1ebieski\KSEFClient\Resources\Security;
 
+use N1ebieski\KSEFClient\Contracts\Exception\ExceptionHandlerInterface;
 use N1ebieski\KSEFClient\Contracts\HttpClient\HttpClientInterface;
 use N1ebieski\KSEFClient\Contracts\Resources\Security\SecurityResourceInterface;
 use N1ebieski\KSEFClient\Requests\Security\PublicKeyCertificates\PublicKeyCertificatesHandler;
 use N1ebieski\KSEFClient\Requests\Security\PublicKeyCertificates\PublicKeyCertificatesResponse;
 use N1ebieski\KSEFClient\Resources\AbstractResource;
+use Throwable;
 
 final class SecurityResource extends AbstractResource implements SecurityResourceInterface
 {
     public function __construct(
-        private readonly HttpClientInterface $client
+        private readonly HttpClientInterface $client,
+        private readonly ExceptionHandlerInterface $exceptionHandler
     ) {
     }
 
     public function publicKeyCertificates(): PublicKeyCertificatesResponse
     {
-        /** @var PublicKeyCertificatesResponse */
-        return (new PublicKeyCertificatesHandler($this->client))->handle();
+        try {
+            /** @var PublicKeyCertificatesResponse */
+            return (new PublicKeyCertificatesHandler($this->client))->handle();
+        } catch (Throwable $exception) {
+            throw $this->exceptionHandler->handle($exception);
+        }
     }
 }

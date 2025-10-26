@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace N1ebieski\KSEFClient\Resources\Auth\Sessions;
 
+use N1ebieski\KSEFClient\Contracts\Exception\ExceptionHandlerInterface;
 use N1ebieski\KSEFClient\Contracts\HttpClient\HttpClientInterface;
 use N1ebieski\KSEFClient\Contracts\HttpClient\ResponseInterface;
 use N1ebieski\KSEFClient\Contracts\Resources\Auth\Sessions\SessionsResourceInterface;
@@ -13,34 +14,48 @@ use N1ebieski\KSEFClient\Requests\Auth\Sessions\Revoke\RevokeHandler;
 use N1ebieski\KSEFClient\Requests\Auth\Sessions\Revoke\RevokeRequest;
 use N1ebieski\KSEFClient\Requests\Auth\Sessions\RevokeCurrent\RevokeCurrentHandler;
 use N1ebieski\KSEFClient\Resources\AbstractResource;
+use Throwable;
 
 final class SessionsResource extends AbstractResource implements SessionsResourceInterface
 {
     public function __construct(
-        private readonly HttpClientInterface $client
+        private readonly HttpClientInterface $client,
+        private readonly ExceptionHandlerInterface $exceptionHandler
     ) {
     }
 
     public function list(ListRequest | array $request = []): ResponseInterface
     {
-        if ($request instanceof ListRequest === false) {
-            $request = ListRequest::from($request);
-        }
+        try {
+            if ($request instanceof ListRequest === false) {
+                $request = ListRequest::from($request);
+            }
 
-        return (new ListHandler($this->client))->handle($request);
+            return (new ListHandler($this->client))->handle($request);
+        } catch (Throwable $exception) {
+            throw $this->exceptionHandler->handle($exception);
+        }
     }
 
     public function revokeCurrent(): ResponseInterface
     {
-        return (new RevokeCurrentHandler($this->client))->handle();
+        try {
+            return (new RevokeCurrentHandler($this->client))->handle();
+        } catch (Throwable $exception) {
+            throw $this->exceptionHandler->handle($exception);
+        }
     }
 
     public function revoke(RevokeRequest | array $request): ResponseInterface
     {
-        if ($request instanceof RevokeRequest === false) {
-            $request = RevokeRequest::from($request);
-        }
+        try {
+            if ($request instanceof RevokeRequest === false) {
+                $request = RevokeRequest::from($request);
+            }
 
-        return (new RevokeHandler($this->client))->handle($request);
+            return (new RevokeHandler($this->client))->handle($request);
+        } catch (Throwable $exception) {
+            throw $this->exceptionHandler->handle($exception);
+        }
     }
 }

@@ -10,12 +10,14 @@ use Http\Discovery\Psr18ClientDiscovery;
 use InvalidArgumentException;
 use N1ebieski\KSEFClient\Actions\ConvertDerToPem\ConvertDerToPemAction;
 use N1ebieski\KSEFClient\Actions\ConvertDerToPem\ConvertDerToPemHandler;
+use N1ebieski\KSEFClient\Contracts\Exception\ExceptionHandlerInterface;
 use N1ebieski\KSEFClient\Contracts\HttpClient\ClientInterface;
 use N1ebieski\KSEFClient\Contracts\HttpClient\ResponseInterface;
 use N1ebieski\KSEFClient\Contracts\Resources\ClientResourceInterface;
 use N1ebieski\KSEFClient\DTOs\Config;
 use N1ebieski\KSEFClient\DTOs\Requests\Auth\ContextIdentifierGroup;
 use N1ebieski\KSEFClient\DTOs\Requests\Auth\XadesSignature;
+use N1ebieski\KSEFClient\Exceptions\ExceptionHandler;
 use N1ebieski\KSEFClient\Factories\ClientFactory;
 use N1ebieski\KSEFClient\Factories\EncryptedKeyFactory;
 use N1ebieski\KSEFClient\Factories\EncryptedTokenFactory;
@@ -50,12 +52,15 @@ use Psr\Http\Client\ClientInterface as BaseClientInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
 use RuntimeException;
+use Throwable;
 
 final class ClientBuilder
 {
     private ClientInterface $httpClient;
 
     private ?LoggerInterface $logger = null;
+
+    private ExceptionHandlerInterface $exceptionHandler;
 
     private Mode $mode = Mode::Production;
 
@@ -268,17 +273,28 @@ final class ClientBuilder
             logger: $this->logger
         );
 
-        $client = new ClientResource($httpClient, $config, $this->logger);
+        $this->exceptionHandler = new ExceptionHandler($this->logger);
+
+        $client = new ClientResource(
+            client: $httpClient,
+            config: $config,
+            exceptionHandler: $this->exceptionHandler,
+            logger: $this->logger
+        );
 
         if ($this->encryptionKey instanceof EncryptionKey) {
             $client = $client->withEncryptedKey($this->handleEncryptedKey($client));
         }
 
         if ($this->isAuthorisation()) {
-            $authorisationAccessResponse = match (true) { //@phpstan-ignore-line
-                $this->certificatePath instanceof CertificatePath => $this->handleAuthorisationByCertificate($client),
-                $this->ksefToken instanceof KsefToken => $this->handleAuthorisationByKsefToken($client),
-            };
+            try {
+                $authorisationAccessResponse = match (true) {
+                    $this->certificatePath instanceof CertificatePath => $this->handleAuthorisationByCertificate($client),
+                    $this->ksefToken instanceof KsefToken => $this->handleAuthorisationByKsefToken($client),
+                };
+            } catch (Throwable $exception) {
+                throw $this->exceptionHandler->handle($exception);
+            }
 
             /** @var object{referenceNumber: string, authenticationToken: object{token: string, validUntil: string}} $authorisationAccessResponse */
             $authorisationAccessResponse = $authorisationAccessResponse->object();
@@ -299,10 +315,10 @@ final class ClientBuilder
                 }
 
                 if ($authorisationStatusResponse->status->code >= 400) {
-                    throw new RuntimeException(
+                    throw $this->exceptionHandler->handle(new RuntimeException(
                         $authorisationStatusResponse->status->description,
                         $authorisationStatusResponse->status->code
-                    );
+                    ));
                 }
             });
 
@@ -338,7 +354,8 @@ final class ClientBuilder
 
         $securityResponse = $client->security()->publicKeyCertificates();
 
-        $firstSymmetricKeyEncryptionCertificate = $securityResponse->getFirstByPublicKeyCertificateUsage(PublicKeyCertificateUsage::SymmetricKeyEncryption);
+        $firstSymmetricKeyEncryptionCertificate = $securityResponse
+            ->getFirstByPublicKeyCertificateUsage(PublicKeyCertificateUsage::SymmetricKeyEncryption);
 
         if ($firstSymmetricKeyEncryptionCertificate === null) {
             throw new RuntimeException('Symmetric key encryption certificate is not found');
@@ -389,7 +406,8 @@ final class ClientBuilder
 
         $securityResponse = $client->security()->publicKeyCertificates();
 
-        $firstKsefTokenEncryptionCertificate = $securityResponse->getFirstByPublicKeyCertificateUsage(PublicKeyCertificateUsage::KsefTokenEncryption);
+        $firstKsefTokenEncryptionCertificate = $securityResponse
+            ->getFirstByPublicKeyCertificateUsage(PublicKeyCertificateUsage::KsefTokenEncryption);
 
         if ($firstKsefTokenEncryptionCertificate === null) {
             throw new RuntimeException('KSEF token encryption certificate is not found');

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace N1ebieski\KSEFClient\Resources\Certificates;
 
+use N1ebieski\KSEFClient\Contracts\Exception\ExceptionHandlerInterface;
 use N1ebieski\KSEFClient\Contracts\HttpClient\HttpClientInterface;
 use N1ebieski\KSEFClient\Contracts\HttpClient\ResponseInterface;
 use N1ebieski\KSEFClient\Contracts\Resources\Certificates\CertificatesResourceInterface;
@@ -17,48 +18,70 @@ use N1ebieski\KSEFClient\Requests\Certificates\Revoke\RevokeHandler;
 use N1ebieski\KSEFClient\Requests\Certificates\Revoke\RevokeRequest;
 use N1ebieski\KSEFClient\Resources\AbstractResource;
 use N1ebieski\KSEFClient\Resources\Certificates\Enrollments\EnrollmentsResource;
+use Throwable;
 
 final class CertificatesResource extends AbstractResource implements CertificatesResourceInterface
 {
     public function __construct(
-        private readonly HttpClientInterface $client
+        private readonly HttpClientInterface $client,
+        private readonly ExceptionHandlerInterface $exceptionHandler
     ) {
     }
 
     public function limits(): ResponseInterface
     {
-        return (new LimitsHandler($this->client))->handle();
+        try {
+            return (new LimitsHandler($this->client))->handle();
+        } catch (Throwable $exception) {
+            throw $this->exceptionHandler->handle($exception);
+        }
     }
 
     public function enrollments(): EnrollmentsResourceInterface
     {
-        return new EnrollmentsResource($this->client);
+        try {
+            return new EnrollmentsResource($this->client, $this->exceptionHandler);
+        } catch (Throwable $exception) {
+            throw $this->exceptionHandler->handle($exception);
+        }
     }
 
     public function query(QueryRequest | array $request): ResponseInterface
     {
-        if ($request instanceof QueryRequest === false) {
-            $request = QueryRequest::from($request);
-        }
+        try {
+            if ($request instanceof QueryRequest === false) {
+                $request = QueryRequest::from($request);
+            }
 
-        return (new QueryHandler($this->client))->handle($request);
+            return (new QueryHandler($this->client))->handle($request);
+        } catch (Throwable $exception) {
+            throw $this->exceptionHandler->handle($exception);
+        }
     }
 
     public function revoke(RevokeRequest | array $request): ResponseInterface
     {
-        if ($request instanceof RevokeRequest === false) {
-            $request = RevokeRequest::from($request);
-        }
+        try {
+            if ($request instanceof RevokeRequest === false) {
+                $request = RevokeRequest::from($request);
+            }
 
-        return (new RevokeHandler($this->client))->handle($request);
+            return (new RevokeHandler($this->client))->handle($request);
+        } catch (Throwable $exception) {
+            throw $this->exceptionHandler->handle($exception);
+        }
     }
 
     public function retrieve(RetrieveRequest | array $request): ResponseInterface
     {
-        if ($request instanceof RetrieveRequest === false) {
-            $request = RetrieveRequest::from($request);
-        }
+        try {
+            if ($request instanceof RetrieveRequest === false) {
+                $request = RetrieveRequest::from($request);
+            }
 
-        return (new RetrieveHandler($this->client))->handle($request);
+            return (new RetrieveHandler($this->client))->handle($request);
+        } catch (Throwable $exception) {
+            throw $this->exceptionHandler->handle($exception);
+        }
     }
 }
