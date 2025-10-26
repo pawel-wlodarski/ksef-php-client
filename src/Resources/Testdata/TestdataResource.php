@@ -26,8 +26,8 @@ final class TestdataResource extends AbstractResource implements TestdataResourc
     {
         try {
             return new PersonResource($this->client, $this->exceptionHandler);
-        } catch (Throwable $exception) {
-            throw $this->exceptionHandler->handle($exception);
+        } catch (Throwable $throwable) {
+            throw $this->exceptionHandler->handle($throwable);
         }
     }
 
@@ -35,8 +35,8 @@ final class TestdataResource extends AbstractResource implements TestdataResourc
     {
         try {
             return new LimitsResource($this->client, $this->exceptionHandler);
-        } catch (Throwable $exception) {
-            throw $this->exceptionHandler->handle($exception);
+        } catch (Throwable $throwable) {
+            throw $this->exceptionHandler->handle($throwable);
         }
     }
 }

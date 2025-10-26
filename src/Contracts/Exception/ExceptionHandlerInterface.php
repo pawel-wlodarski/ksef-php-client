@@ -8,5 +8,5 @@ use Throwable;
 
 interface ExceptionHandlerInterface
 {
-    public function handle(Throwable $exception): Throwable;
+    public function handle(Throwable $throwable): Throwable;
 }

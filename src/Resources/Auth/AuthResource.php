@@ -39,8 +39,8 @@ final class AuthResource extends AbstractResource implements AuthResourceInterfa
     {
         try {
             return (new ChallengeHandler($this->client))->handle();
-        } catch (Throwable $exception) {
-            throw $this->exceptionHandler->handle($exception);
+        } catch (Throwable $throwable) {
+            throw $this->exceptionHandler->handle($throwable);
         }
     }
 
@@ -56,8 +56,8 @@ final class AuthResource extends AbstractResource implements AuthResourceInterfa
                 signDocument: new SignDocumentHandler(new ConvertEcdsaDerToRawHandler()),
                 config: $this->config
             ))->handle($request);
-        } catch (Throwable $exception) {
-            throw $this->exceptionHandler->handle($exception);
+        } catch (Throwable $throwable) {
+            throw $this->exceptionHandler->handle($throwable);
         }
     }
 
@@ -69,8 +69,8 @@ final class AuthResource extends AbstractResource implements AuthResourceInterfa
             }
 
             return (new KsefTokenHandler($this->client))->handle($request);
-        } catch (Throwable $exception) {
-            throw $this->exceptionHandler->handle($exception);
+        } catch (Throwable $throwable) {
+            throw $this->exceptionHandler->handle($throwable);
         }
     }
 
@@ -82,8 +82,8 @@ final class AuthResource extends AbstractResource implements AuthResourceInterfa
             }
 
             return (new StatusHandler($this->client))->handle($request);
-        } catch (Throwable $exception) {
-            throw $this->exceptionHandler->handle($exception);
+        } catch (Throwable $throwable) {
+            throw $this->exceptionHandler->handle($throwable);
         }
     }
 
@@ -91,8 +91,8 @@ final class AuthResource extends AbstractResource implements AuthResourceInterfa
     {
         try {
             return new TokenResource($this->client, $this->exceptionHandler);
-        } catch (Throwable $exception) {
-            throw $this->exceptionHandler->handle($exception);
+        } catch (Throwable $throwable) {
+            throw $this->exceptionHandler->handle($throwable);
         }
     }
 
@@ -100,8 +100,8 @@ final class AuthResource extends AbstractResource implements AuthResourceInterfa
     {
         try {
             return new SessionsResource($this->client, $this->exceptionHandler);
-        } catch (Throwable $exception) {
-            throw $this->exceptionHandler->handle($exception);
+        } catch (Throwable $throwable) {
+            throw $this->exceptionHandler->handle($throwable);
         }
     }
 }

@@ -46,8 +46,8 @@ final class BatchResource extends AbstractResource implements BatchResourceInter
                 splitDocumentIntoParts: new SplitDocumentIntoPartsHandler(),
                 config: $this->config
             ))->handle($request);
-        } catch (Throwable $exception) {
-            throw $this->exceptionHandler->handle($exception);
+        } catch (Throwable $throwable) {
+            throw $this->exceptionHandler->handle($throwable);
         }
     }
 
@@ -59,8 +59,8 @@ final class BatchResource extends AbstractResource implements BatchResourceInter
             }
 
             return (new CloseHandler($this->client))->handle($request);
-        } catch (Throwable $exception) {
-            throw $this->exceptionHandler->handle($exception);
+        } catch (Throwable $throwable) {
+            throw $this->exceptionHandler->handle($throwable);
         }
     }
 }

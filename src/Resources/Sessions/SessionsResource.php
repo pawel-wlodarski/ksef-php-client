@@ -35,8 +35,8 @@ final class SessionsResource extends AbstractResource implements SessionsResourc
     {
         try {
             return new OnlineResource($this->client, $this->config, $this->exceptionHandler, $this->logger);
-        } catch (Throwable $exception) {
-            throw $this->exceptionHandler->handle($exception);
+        } catch (Throwable $throwable) {
+            throw $this->exceptionHandler->handle($throwable);
         }
     }
 
@@ -44,8 +44,8 @@ final class SessionsResource extends AbstractResource implements SessionsResourc
     {
         try {
             return new BatchResource($this->client, $this->config, $this->exceptionHandler, $this->logger);
-        } catch (Throwable $exception) {
-            throw $this->exceptionHandler->handle($exception);
+        } catch (Throwable $throwable) {
+            throw $this->exceptionHandler->handle($throwable);
         }
     }
 
@@ -57,8 +57,8 @@ final class SessionsResource extends AbstractResource implements SessionsResourc
             }
 
             return (new StatusHandler($this->client))->handle($request);
-        } catch (Throwable $exception) {
-            throw $this->exceptionHandler->handle($exception);
+        } catch (Throwable $throwable) {
+            throw $this->exceptionHandler->handle($throwable);
         }
     }
 
@@ -66,8 +66,8 @@ final class SessionsResource extends AbstractResource implements SessionsResourc
     {
         try {
             return new InvoicesResource($this->client, $this->exceptionHandler);
-        } catch (Throwable $exception) {
-            throw $this->exceptionHandler->handle($exception);
+        } catch (Throwable $throwable) {
+            throw $this->exceptionHandler->handle($throwable);
         }
     }
 }

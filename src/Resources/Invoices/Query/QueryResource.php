@@ -29,8 +29,8 @@ final class QueryResource extends AbstractResource implements QueryResourceInter
             }
 
             return (new MetadataHandler($this->client))->handle($request);
-        } catch (Throwable $exception) {
-            throw $this->exceptionHandler->handle($exception);
+        } catch (Throwable $throwable) {
+            throw $this->exceptionHandler->handle($throwable);
         }
     }
 }

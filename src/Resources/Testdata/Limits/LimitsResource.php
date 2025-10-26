@@ -26,8 +26,8 @@ final class LimitsResource extends AbstractResource implements LimitsResourceInt
     {
         try {
             return new ContextResource($this->client, $this->exceptionHandler);
-        } catch (Throwable $exception) {
-            throw $this->exceptionHandler->handle($exception);
+        } catch (Throwable $throwable) {
+            throw $this->exceptionHandler->handle($throwable);
         }
     }
 
@@ -35,8 +35,8 @@ final class LimitsResource extends AbstractResource implements LimitsResourceInt
     {
         try {
             return new SubjectResource($this->client, $this->exceptionHandler);
-        } catch (Throwable $exception) {
-            throw $this->exceptionHandler->handle($exception);
+        } catch (Throwable $throwable) {
+            throw $this->exceptionHandler->handle($throwable);
         }
     }
 }

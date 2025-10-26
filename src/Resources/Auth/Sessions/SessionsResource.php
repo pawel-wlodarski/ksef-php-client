@@ -32,8 +32,8 @@ final class SessionsResource extends AbstractResource implements SessionsResourc
             }
 
             return (new ListHandler($this->client))->handle($request);
-        } catch (Throwable $exception) {
-            throw $this->exceptionHandler->handle($exception);
+        } catch (Throwable $throwable) {
+            throw $this->exceptionHandler->handle($throwable);
         }
     }
 
@@ -41,8 +41,8 @@ final class SessionsResource extends AbstractResource implements SessionsResourc
     {
         try {
             return (new RevokeCurrentHandler($this->client))->handle();
-        } catch (Throwable $exception) {
-            throw $this->exceptionHandler->handle($exception);
+        } catch (Throwable $throwable) {
+            throw $this->exceptionHandler->handle($throwable);
         }
     }
 
@@ -54,8 +54,8 @@ final class SessionsResource extends AbstractResource implements SessionsResourc
             }
 
             return (new RevokeHandler($this->client))->handle($request);
-        } catch (Throwable $exception) {
-            throw $this->exceptionHandler->handle($exception);
+        } catch (Throwable $throwable) {
+            throw $this->exceptionHandler->handle($throwable);
         }
     }
 }

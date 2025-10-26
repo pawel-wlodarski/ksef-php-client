@@ -31,8 +31,8 @@ final class PersonResource extends AbstractResource implements PersonResourceInt
             }
 
             return (new CreateHandler($this->client))->handle($request);
-        } catch (Throwable $exception) {
-            throw $this->exceptionHandler->handle($exception);
+        } catch (Throwable $throwable) {
+            throw $this->exceptionHandler->handle($throwable);
         }
     }
 
@@ -44,8 +44,8 @@ final class PersonResource extends AbstractResource implements PersonResourceInt
             }
 
             return (new RemoveHandler($this->client))->handle($request);
-        } catch (Throwable $exception) {
-            throw $this->exceptionHandler->handle($exception);
+        } catch (Throwable $throwable) {
+            throw $this->exceptionHandler->handle($throwable);
         }
     }
 }

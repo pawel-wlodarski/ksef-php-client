@@ -24,8 +24,8 @@ final class SubjectResource extends AbstractResource implements SubjectResourceI
     {
         try {
             return new CertificateResource($this->client, $this->exceptionHandler);
-        } catch (Throwable $exception) {
-            throw $this->exceptionHandler->handle($exception);
+        } catch (Throwable $throwable) {
+            throw $this->exceptionHandler->handle($throwable);
         }
     }
 }

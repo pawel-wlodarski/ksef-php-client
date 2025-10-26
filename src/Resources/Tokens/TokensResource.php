@@ -35,8 +35,8 @@ final class TokensResource extends AbstractResource implements TokensResourceInt
             }
 
             return (new CreateHandler($this->client))->handle($request);
-        } catch (Throwable $exception) {
-            throw $this->exceptionHandler->handle($exception);
+        } catch (Throwable $throwable) {
+            throw $this->exceptionHandler->handle($throwable);
         }
     }
 
@@ -48,8 +48,8 @@ final class TokensResource extends AbstractResource implements TokensResourceInt
             }
 
             return (new ListHandler($this->client))->handle($request);
-        } catch (Throwable $exception) {
-            throw $this->exceptionHandler->handle($exception);
+        } catch (Throwable $throwable) {
+            throw $this->exceptionHandler->handle($throwable);
         }
     }
 
@@ -61,8 +61,8 @@ final class TokensResource extends AbstractResource implements TokensResourceInt
             }
 
             return (new StatusHandler($this->client))->handle($request);
-        } catch (Throwable $exception) {
-            throw $this->exceptionHandler->handle($exception);
+        } catch (Throwable $throwable) {
+            throw $this->exceptionHandler->handle($throwable);
         }
     }
 
@@ -74,8 +74,8 @@ final class TokensResource extends AbstractResource implements TokensResourceInt
             }
 
             return (new RevokeHandler($this->client))->handle($request);
-        } catch (Throwable $exception) {
-            throw $this->exceptionHandler->handle($exception);
+        } catch (Throwable $throwable) {
+            throw $this->exceptionHandler->handle($throwable);
         }
     }
 }

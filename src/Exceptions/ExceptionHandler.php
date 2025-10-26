@@ -16,19 +16,19 @@ final class ExceptionHandler implements ExceptionHandlerInterface
     ) {
     }
 
-    public function handle(Throwable $exception): Throwable
+    public function handle(Throwable $throwable): Throwable
     {
         if ($this->logger instanceof LoggerInterface) {
-            $message = $exception->getCode() > 0
-                ? "{$exception->getCode()} {$exception->getMessage()}"
-                : $exception->getMessage();
+            $message = $throwable->getCode() > 0
+                ? "{$throwable->getCode()} {$throwable->getMessage()}"
+                : $throwable->getMessage();
 
-            $context = $exception instanceof ContextInterface
-                ? (array) $exception->context : [];
+            $context = $throwable instanceof ContextInterface
+                ? (array) $throwable->context : [];
 
             $this->logger->error($message, $context);
         }
 
-        return $exception;
+        return $throwable;
     }
 }

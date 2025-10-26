@@ -292,8 +292,8 @@ final class ClientBuilder
                     $this->certificatePath instanceof CertificatePath => $this->handleAuthorisationByCertificate($client),
                     $this->ksefToken instanceof KsefToken => $this->handleAuthorisationByKsefToken($client),
                 };
-            } catch (Throwable $exception) {
-                throw $this->exceptionHandler->handle($exception);
+            } catch (Throwable $throwable) {
+                throw $this->exceptionHandler->handle($throwable);
             }
 
             /** @var object{referenceNumber: string, authenticationToken: object{token: string, validUntil: string}} $authorisationAccessResponse */

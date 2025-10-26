@@ -33,8 +33,8 @@ final class InvoicesResource extends AbstractResource implements InvoicesResourc
             }
 
             return (new StatusHandler($this->client))->handle($request);
-        } catch (Throwable $exception) {
-            throw $this->exceptionHandler->handle($exception);
+        } catch (Throwable $throwable) {
+            throw $this->exceptionHandler->handle($throwable);
         }
     }
 
@@ -46,8 +46,8 @@ final class InvoicesResource extends AbstractResource implements InvoicesResourc
             }
 
             return (new KsefUpoHandler($this->client))->handle($request);
-        } catch (Throwable $exception) {
-            throw $this->exceptionHandler->handle($exception);
+        } catch (Throwable $throwable) {
+            throw $this->exceptionHandler->handle($throwable);
         }
     }
 
@@ -59,8 +59,8 @@ final class InvoicesResource extends AbstractResource implements InvoicesResourc
             }
 
             return (new UpoHandler($this->client))->handle($request);
-        } catch (Throwable $exception) {
-            throw $this->exceptionHandler->handle($exception);
+        } catch (Throwable $throwable) {
+            throw $this->exceptionHandler->handle($throwable);
         }
     }
 }

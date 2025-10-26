@@ -28,8 +28,8 @@ final class EnrollmentsResource extends AbstractResource implements EnrollmentsR
     {
         try {
             return (new DataHandler($this->client))->handle();
-        } catch (Throwable $exception) {
-            throw $this->exceptionHandler->handle($exception);
+        } catch (Throwable $throwable) {
+            throw $this->exceptionHandler->handle($throwable);
         }
     }
 
@@ -41,8 +41,8 @@ final class EnrollmentsResource extends AbstractResource implements EnrollmentsR
             }
 
             return (new SendHandler($this->client))->handle($request);
-        } catch (Throwable $exception) {
-            throw $this->exceptionHandler->handle($exception);
+        } catch (Throwable $throwable) {
+            throw $this->exceptionHandler->handle($throwable);
         }
     }
 
@@ -54,8 +54,8 @@ final class EnrollmentsResource extends AbstractResource implements EnrollmentsR
             }
 
             return (new StatusHandler($this->client))->handle($request);
-        } catch (Throwable $exception) {
-            throw $this->exceptionHandler->handle($exception);
+        } catch (Throwable $throwable) {
+            throw $this->exceptionHandler->handle($throwable);
         }
     }
 }

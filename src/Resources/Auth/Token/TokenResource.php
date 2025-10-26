@@ -25,8 +25,8 @@ final class TokenResource extends AbstractResource implements TokenResourceInter
     {
         try {
             return (new RedeemHandler($this->client))->handle();
-        } catch (Throwable $exception) {
-            throw $this->exceptionHandler->handle($exception);
+        } catch (Throwable $throwable) {
+            throw $this->exceptionHandler->handle($throwable);
         }
     }
 
@@ -34,8 +34,8 @@ final class TokenResource extends AbstractResource implements TokenResourceInter
     {
         try {
             return (new RefreshHandler($this->client))->handle();
-        } catch (Throwable $exception) {
-            throw $this->exceptionHandler->handle($exception);
+        } catch (Throwable $throwable) {
+            throw $this->exceptionHandler->handle($throwable);
         }
     }
 }

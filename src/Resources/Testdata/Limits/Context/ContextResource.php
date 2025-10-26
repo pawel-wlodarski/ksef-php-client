@@ -24,8 +24,8 @@ final class ContextResource extends AbstractResource implements ContextResourceI
     {
         try {
             return new SessionResource($this->client, $this->exceptionHandler);
-        } catch (Throwable $exception) {
-            throw $this->exceptionHandler->handle($exception);
+        } catch (Throwable $throwable) {
+            throw $this->exceptionHandler->handle($throwable);
         }
     }
 }

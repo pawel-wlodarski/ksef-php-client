@@ -39,8 +39,8 @@ final class OnlineResource extends AbstractResource implements OnlineResourceInt
             }
 
             return (new OpenHandler($this->client, $this->config))->handle($request);
-        } catch (Throwable $exception) {
-            throw $this->exceptionHandler->handle($exception);
+        } catch (Throwable $throwable) {
+            throw $this->exceptionHandler->handle($throwable);
         }
     }
 
@@ -52,8 +52,8 @@ final class OnlineResource extends AbstractResource implements OnlineResourceInt
             }
 
             return (new CloseHandler($this->client))->handle($request);
-        } catch (Throwable $exception) {
-            throw $this->exceptionHandler->handle($exception);
+        } catch (Throwable $throwable) {
+            throw $this->exceptionHandler->handle($throwable);
         }
     }
 
@@ -69,8 +69,8 @@ final class OnlineResource extends AbstractResource implements OnlineResourceInt
                 encryptDocument: new EncryptDocumentHandler($this->logger),
                 config: $this->config
             ))->handle($request);
-        } catch (Throwable $exception) {
-            throw $this->exceptionHandler->handle($exception);
+        } catch (Throwable $throwable) {
+            throw $this->exceptionHandler->handle($throwable);
         }
     }
 }

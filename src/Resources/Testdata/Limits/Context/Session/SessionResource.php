@@ -30,8 +30,8 @@ final class SessionResource extends AbstractResource implements SessionResourceI
             }
 
             return (new LimitsHandler($this->client))->handle($request);
-        } catch (Throwable $exception) {
-            throw $this->exceptionHandler->handle($exception);
+        } catch (Throwable $throwable) {
+            throw $this->exceptionHandler->handle($throwable);
         }
     }
 
@@ -39,8 +39,8 @@ final class SessionResource extends AbstractResource implements SessionResourceI
     {
         try {
             return (new ResetHandler($this->client))->handle();
-        } catch (Throwable $exception) {
-            throw $this->exceptionHandler->handle($exception);
+        } catch (Throwable $throwable) {
+            throw $this->exceptionHandler->handle($throwable);
         }
     }
 }
