@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace N1ebieski\KSEFClient\DTOs\Requests\Sessions;
 
 use DOMDocument;
-use N1ebieski\KSEFClient\ValueObjects\Requests\XmlNamespace;
 use N1ebieski\KSEFClient\Contracts\DomSerializableInterface;
+use N1ebieski\KSEFClient\Support\AbstractDTO;
+use N1ebieski\KSEFClient\Support\Optional;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\CN;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\GTIN;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\GTU;
@@ -32,8 +33,7 @@ use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\PKWiU;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\Procedura;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\StanPrzed;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\UU_ID;
-use N1ebieski\KSEFClient\Support\AbstractDTO;
-use N1ebieski\KSEFClient\Support\Optional;
+use N1ebieski\KSEFClient\ValueObjects\Requests\XmlNamespace;
 
 final class FaWiersz extends AbstractDTO implements DomSerializableInterface
 {
@@ -247,7 +247,7 @@ final class FaWiersz extends AbstractDTO implements DomSerializableInterface
         }
 
         if ($this->gtu instanceof GTU) {
-            $gtu = $dom->createElementNS((string) XmlNamespace::Fa3->value, 'Gtu');
+            $gtu = $dom->createElementNS((string) XmlNamespace::Fa3->value, 'GTU');
             $gtu->appendChild($dom->createTextNode((string) $this->gtu->value));
 
             $faWiersz->appendChild($gtu);
