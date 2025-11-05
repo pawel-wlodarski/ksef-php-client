@@ -59,12 +59,28 @@ test('give InvoiceWrite permission and send invoice', function (): void {
                 'type' => 'InvoiceWrite'
             ]
         ],
-        'description' => 'Give InvoiceWrite permission'
+        'description' => 'Give InvoiceWrite permission TO NIP_1'
     ])->object();
 
-    $this->revokeCurrentSession($client);
+    $statusResponse = Utility::retry(function (int $attempts) use ($client, $grantsResponse) {
+        $statusResponse = $client->permissions()->operations()->status([
+            'referenceNumber' => $grantsResponse->referenceNumber,
+        ])->object();
 
-    sleep(10);
+        try {
+            expect($statusResponse->status->code)->toBe(200);
+
+            return $statusResponse;
+        } catch (Throwable $exception) {
+            if ($attempts > 2) {
+                throw $exception;
+            }
+        }
+    });
+
+    expect($statusResponse->status->code)->toBe(200);
+
+    $this->revokeCurrentSession($client);
 
     $encryptionKey = EncryptionKeyFactory::makeRandom();
 
@@ -93,29 +109,26 @@ test('give InvoiceWrite permission and send invoice', function (): void {
         'referenceNumber' => $openResponse->referenceNumber
     ]);
 
-    $statusResponse = Utility::retry(function () use ($client, $openResponse, $sendResponse) {
+    $statusResponse = Utility::retry(function (int $attempts) use ($client, $openResponse, $sendResponse) {
         $statusResponse = $client->sessions()->invoices()->status([
             'referenceNumber' => $openResponse->referenceNumber,
             'invoiceReferenceNumber' => $sendResponse->referenceNumber
         ])->object();
 
-        if ($statusResponse->status->code === 200) {
-            return $statusResponse;
-        }
+        try {
+            expect($statusResponse->status->code)->toBe(200);
 
-        if ($statusResponse->status->code >= 400) {
-            throw new RuntimeException(
-                $statusResponse->status->description,
-                $statusResponse->status->code
-            );
+            return $statusResponse;
+        } catch (Throwable $exception) {
+            if ($attempts > 2) {
+                throw $exception;
+            }
         }
     });
-
-    expect($statusResponse->status->code)->toBe(200);
 
     // $revokeSession = $client->permissions()->common()->revoke([
 
     // ])->object();
 
     $this->revokeCurrentSession($client);
-})->only();
+});

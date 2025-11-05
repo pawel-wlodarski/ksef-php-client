@@ -11,6 +11,7 @@ use N1ebieski\KSEFClient\Contracts\Resources\Permissions\Common\CommonResourceIn
 use N1ebieski\KSEFClient\Contracts\Resources\Permissions\Entities\EntitiesResourceInterface;
 use N1ebieski\KSEFClient\Contracts\Resources\Permissions\EuEntities\EuEntitiesResourceInterface;
 use N1ebieski\KSEFClient\Contracts\Resources\Permissions\Indirect\IndirectResourceInterface;
+use N1ebieski\KSEFClient\Contracts\Resources\Permissions\Operations\OperationsResourceInterface;
 use N1ebieski\KSEFClient\Contracts\Resources\Permissions\PermissionsResourceInterface;
 use N1ebieski\KSEFClient\Contracts\Resources\Permissions\Persons\PersonsResourceInterface;
 use N1ebieski\KSEFClient\Contracts\Resources\Permissions\Subunits\SubunitsResourceInterface;
@@ -20,6 +21,7 @@ use N1ebieski\KSEFClient\Resources\Permissions\Common\CommonResource;
 use N1ebieski\KSEFClient\Resources\Permissions\Entities\EntitiesResource;
 use N1ebieski\KSEFClient\Resources\Permissions\EuEntities\EuEntitiesResource;
 use N1ebieski\KSEFClient\Resources\Permissions\Indirect\IndirectResource;
+use N1ebieski\KSEFClient\Resources\Permissions\Operations\OperationsResource;
 use N1ebieski\KSEFClient\Resources\Permissions\Persons\PersonsResource;
 use N1ebieski\KSEFClient\Resources\Permissions\Subunits\SubunitsResource;
 use Throwable;
@@ -90,6 +92,15 @@ final class PermissionsResource extends AbstractResource implements PermissionsR
     {
         try {
             return new EuEntitiesResource($this->client, $this->exceptionHandler);
+        } catch (Throwable $throwable) {
+            throw $this->exceptionHandler->handle($throwable);
+        }
+    }
+
+    public function operations(): OperationsResourceInterface
+    {
+        try {
+            return new OperationsResource($this->client, $this->exceptionHandler);
         } catch (Throwable $throwable) {
             throw $this->exceptionHandler->handle($throwable);
         }

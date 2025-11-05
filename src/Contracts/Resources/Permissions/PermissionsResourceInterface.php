@@ -9,12 +9,13 @@ use N1ebieski\KSEFClient\Contracts\Resources\Permissions\Common\CommonResourceIn
 use N1ebieski\KSEFClient\Contracts\Resources\Permissions\Entities\EntitiesResourceInterface;
 use N1ebieski\KSEFClient\Contracts\Resources\Permissions\EuEntities\EuEntitiesResourceInterface;
 use N1ebieski\KSEFClient\Contracts\Resources\Permissions\Indirect\IndirectResourceInterface;
+use N1ebieski\KSEFClient\Contracts\Resources\Permissions\Operations\OperationsResourceInterface;
 use N1ebieski\KSEFClient\Contracts\Resources\Permissions\Persons\PersonsResourceInterface;
 use N1ebieski\KSEFClient\Contracts\Resources\Permissions\Subunits\SubunitsResourceInterface;
 
 interface PermissionsResourceInterface
 {
-    public function common(): CommonResourceInterface;    
+    public function common(): CommonResourceInterface;
 
     public function persons(): PersonsResourceInterface;
 
@@ -27,4 +28,6 @@ interface PermissionsResourceInterface
     public function subunits(): SubunitsResourceInterface;
 
     public function euEntities(): EuEntitiesResourceInterface;
+
+    public function operations(): OperationsResourceInterface;
 }

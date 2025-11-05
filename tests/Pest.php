@@ -2,6 +2,7 @@
 
 namespace N1ebieski\KSEFClient\Tests;
 
+use Closure;
 use DateTimeImmutable;
 use DateTimeInterface;
 use N1ebieski\KSEFClient\ClientBuilder;

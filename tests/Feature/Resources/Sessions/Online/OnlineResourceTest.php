@@ -47,21 +47,20 @@ test('send an invoice, check for UPO and generate QR code', function (): void {
         'referenceNumber' => $openResponse->referenceNumber
     ]);
 
-    $statusResponse = Utility::retry(function () use ($client, $openResponse, $sendResponse) {
+    $statusResponse = Utility::retry(function (int $attempts) use ($client, $openResponse, $sendResponse) {
         $statusResponse = $client->sessions()->invoices()->status([
             'referenceNumber' => $openResponse->referenceNumber,
             'invoiceReferenceNumber' => $sendResponse->referenceNumber
         ])->object();
 
-        if ($statusResponse->status->code === 200) {
-            return $statusResponse;
-        }
+        try {
+            expect($statusResponse->status->code)->toBe(200);
 
-        if ($statusResponse->status->code >= 400) {
-            throw new RuntimeException(
-                $statusResponse->status->description,
-                $statusResponse->status->code
-            );
+            return $statusResponse;
+        } catch (Throwable $exception) {
+            if ($attempts > 2) {
+                throw $exception;
+            }
         }
     });
 
@@ -88,11 +87,15 @@ test('send an invoice, check for UPO and generate QR code', function (): void {
         ksefNumber: $ksefNumber
     ));
 
-    expect($qrCodes)->toBeInstanceOf(QRCodes::class);
-    expect($qrCodes)->toHaveProperty('code1');
-    expect($qrCodes->code1)->toBeInstanceOf(QRCode::class);
-    expect($qrCodes->code1)->toHaveProperty('raw');
+    expect($qrCodes)
+        ->toBeInstanceOf(QRCodes::class)
+        ->toHaveProperty('code1');
+
+    expect($qrCodes->code1)
+        ->toBeInstanceOf(QRCode::class)
+        ->toHaveProperty('raw');
+
     expect($qrCodes->code1->raw)->toBeString();
 
     $this->revokeCurrentSession($client);
-});
+})->only();
