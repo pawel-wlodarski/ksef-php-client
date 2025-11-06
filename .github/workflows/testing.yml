@@ -42,23 +42,36 @@ jobs:
 
       - name: Setup Certificate
         run: |
-          mkdir -p ./scripts
-          mkdir -p ./config/certificates/testing
+            mkdir -p ./scripts
+            mkdir -p ./config/certificates/testing
 
-          echo "${{ vars.SIGNATURE_NIP_1 }}" > ./scripts/signature-nip.txt
-          openssl req -newkey rsa:2048 -nodes -keyout "./config/certificates/testing/6669666921/key.pem" -out "./config/certificates/testing/6669666921/certificate.csr" -config ./scripts/signature-nip.txt
-          openssl x509 -req -in "./config/certificates/testing/6669666921/certificate.csr" -signkey "./config/certificates/testing/6669666921/key.pem" -out "./config/certificates/testing/6669666921/certificate.crt"
-          openssl pkcs12 -export -out "./config/certificates/testing/6669666921/certificate.p12" -inkey "./config/certificates/testing/6669666921/key.pem" -in "./config/certificates/testing/6669666921/certificate.crt" -passout pass:password
+            for i in 1 2 3; do
+              NIP="666966692$i"
+              VAR_NAME="SIGNATURE_NIP_$i"
+              echo "${!VAR_NAME}" > ./scripts/signature-nip.txt
 
-          echo "${{ vars.SIGNATURE_NIP_2 }}" > ./scripts/signature-nip.txt
-          openssl req -newkey rsa:2048 -nodes -keyout "./config/certificates/testing/6669666922/key.pem" -out "./config/certificates/testing/6669666922/certificate.csr" -config ./scripts/signature-nip.txt
-          openssl x509 -req -in "./config/certificates/testing/6669666922/certificate.csr" -signkey "./config/certificates/testing/6669666922/key.pem" -out "./config/certificates/testing/6669666922/certificate.crt"
-          openssl pkcs12 -export -out "./config/certificates/testing/6669666922/certificate.p12" -inkey "./config/certificates/testing/6669666922/key.pem" -in "./config/certificates/testing/6669666922/certificate.crt" -passout pass:password          
+              mkdir -p "./config/certificates/testing/$NIP"
 
-          echo "${{ vars.SIGNATURE_NIP_3 }}" > ./scripts/signature-nip.txt
-          openssl req -newkey rsa:2048 -nodes -keyout "./config/certificates/testing/6669666923/key.pem" -out "./config/certificates/testing/6669666923/certificate.csr" -config ./scripts/signature-nip.txt
-          openssl x509 -req -in "./config/certificates/testing/6669666923/certificate.csr" -signkey "./config/certificates/testing/6669666923/key.pem" -out "./config/certificates/testing/6669666923/certificate.crt"
-          openssl pkcs12 -export -out "./config/certificates/testing/6669666923/certificate.p12" -inkey "./config/certificates/testing/6669666923/key.pem" -in "./config/certificates/testing/6669666923/certificate.crt" -passout pass:password     
+              openssl req -newkey rsa:2048 -nodes \
+                -keyout "./config/certificates/testing/$NIP/key.pem" \
+                -out "./config/certificates/testing/$NIP/certificate.csr" \
+                -config ./scripts/signature-nip.txt
+
+              openssl x509 -req \
+                -in "./config/certificates/testing/$NIP/certificate.csr" \
+                -signkey "./config/certificates/testing/$NIP/key.pem" \
+                -out "./config/certificates/testing/$NIP/certificate.crt"
+
+              openssl pkcs12 -export \
+                -out "./config/certificates/testing/$NIP/certificate.p12" \
+                -inkey "./config/certificates/testing/$NIP/key.pem" \
+                -in "./config/certificates/testing/$NIP/certificate.crt" \
+                -passout pass:password
+            done
+        env:
+          SIGNATURE_NIP_1: ${{ vars.SIGNATURE_NIP_1 }}
+          SIGNATURE_NIP_2: ${{ vars.SIGNATURE_NIP_2 }}
+          SIGNATURE_NIP_3: ${{ vars.SIGNATURE_NIP_3 }}    
 
       - name: Install Composer dependencies
         run: composer update --no-interaction --prefer-dist --optimize-autoloader
