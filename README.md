@@ -69,6 +69,29 @@ Main features:
         - [Invoices Exports](#invoices-exports)
             - [Invoices Exports Init](#invoices-exports-init)
             - [Invoices Exposts Status](#invoices-exports-status)
+    - [Permissions](#permissions)
+        - [Permissions Persons](#permissions-persons)
+            - [Permissions Persons Grants](#permissions-persons-grants)
+        - [Permissions Entities](#permissions-entities)
+            - [Permissions Entities Grants](#permissions-entities-grants)
+        - [Permissions Authorizations](#permissions-authorizations)
+            - [Permissions Authorizations Grants](#permissions-authorizations-grants)
+            - [Permissions Authorizations Grants Revoke](#permissions-authorizations-grants-revoke)
+        - [Permissions Indirect](#permissions-indirect)
+            - [Permissions Indirect Grants](#permissions-indirect-grants)
+        - [Permissions Subunits](#permissions-subunits)
+            - [Permissions Subunits Grants](#permissions-subunits-grants)
+        - [Permissions EuEntities](#permissions-euentities)
+            - [Permissions EuEntities Administration](#permissions-euentities-administration)
+                - [Permissions EuEntities Administration Grants](#permissions-euentities-administration-grants)
+            - [Permissions EuEntities Grants](#permissions-euentities-grants)
+        - [Permissions Common](#permissions-common)
+            - [Permissions Common Grants Revoke](#permissions-common-grants-revoke)
+        - [Permissions Query](#permissions-query)
+            - [Permissions Query Personal](#permissions-querypersonal)
+                - [Permissions Query Personal Grants](#permissions-query-personal-grants)
+        - [Permissions Operations](#permissions-operations)
+            - [Permissions Operations Status](#permissions-operations-status)
     - [Certificates](#certificates)
         - [Certificates Limits](#certificates-limits)
         - [Certificates Enrollments](#certificates-enrollments)
@@ -703,6 +726,206 @@ https://ksef-test.mf.gov.pl/docs/v2/index.html#tag/Pobieranie-faktur/paths/~1api
 use N1ebieski\KSEFClient\Requests\Invoices\Exports\Status\StatusRequest;
 
 $response = $client->invoices()->exports()->status(
+    new StatusRequest(...)
+)->object();
+```
+</details>
+
+### Permissions
+
+#### Permissions Persons
+
+<details>
+    <summary>
+        <h5>Certificates Persons Grants</h5>
+    </summary>
+
+https://ksef-test.mf.gov.pl/docs/v2/index.html#tag/Nadawanie-uprawnien/paths/~1api~1v2~1permissions~1persons~1grants/post
+
+```php
+use N1ebieski\KSEFClient\Requests\Permissions\Persons\Grants\GrantsRequest;
+
+$response = $client->permissions()->persons()->grants(
+    new GrantsRequest(...)
+)->object();
+```
+</details>
+
+#### Permissions Entities
+
+<details>
+    <summary>
+        <h5>Certificates Entities Grants</h5>
+    </summary>
+
+https://ksef-test.mf.gov.pl/docs/v2/index.html#tag/Nadawanie-uprawnien/paths/~1api~1v2~1permissions~1entities~1grants/post
+
+```php
+use N1ebieski\KSEFClient\Requests\Permissions\Entities\Grants\GrantsRequest;
+
+$response = $client->permissions()->entities()->grants(
+    new GrantsRequest(...)
+)->object();
+```
+</details>
+
+#### Permissions Authorizations
+
+<details>
+    <summary>
+        <h5>Certificates Authorizations Grants</h5>
+    </summary>
+
+https://ksef-test.mf.gov.pl/docs/v2/index.html#tag/Nadawanie-uprawnien/paths/~1api~1v2~1permissions~1authorizations~1grants/post
+
+```php
+use N1ebieski\KSEFClient\Requests\Permissions\Authorizations\Grants\GrantsRequest;
+
+$response = $client->permissions()->authorizations()->grants(
+    new GrantsRequest(...)
+)->object();
+```
+</details>
+
+<details>
+    <summary>
+        <h5>Certificates Authorizations Grants Revoke</h5>
+    </summary>
+
+https://ksef-test.mf.gov.pl/docs/v2/index.html#tag/Odbieranie-uprawnien/paths/~1api~1v2~1permissions~1authorizations~1grants~1%7BpermissionId%7D/delete
+
+```php
+use N1ebieski\KSEFClient\Requests\Permissions\Authorizations\Revoke\RevokeRequest;
+
+$response = $client->permissions()->authorizations()->revoke(
+    new RevokeRequest(...)
+)->object();
+```
+</details>
+
+#### Permissions Indirect
+
+<details>
+    <summary>
+        <h5>Certificates Indirect Grants</h5>
+    </summary>
+
+https://ksef-test.mf.gov.pl/docs/v2/index.html#tag/Nadawanie-uprawnien/paths/~1api~1v2~1permissions~1indirect~1grants/post
+
+```php
+use N1ebieski\KSEFClient\Requests\Permissions\Indirect\Grants\GrantsRequest;
+
+$response = $client->permissions()->indirect()->grants(
+    new GrantsRequest(...)
+)->object();
+```
+</details>
+
+#### Permissions Subunits
+
+<details>
+    <summary>
+        <h5>Certificates Subunits Grants</h5>
+    </summary>
+
+https://ksef-test.mf.gov.pl/docs/v2/index.html#tag/Nadawanie-uprawnien/paths/~1api~1v2~1permissions~1subunits~1grants/post
+
+```php
+use N1ebieski\KSEFClient\Requests\Permissions\Subunits\Grants\GrantsRequest;
+
+$response = $client->permissions()->subunits()->grants(
+    new GrantsRequest(...)
+)->object();
+```
+</details>
+
+#### Permissions EuEntities
+
+##### Permissions EuEntities Administration
+
+<details>
+    <summary>
+        <h5>Certificates EuEntities Administration Grants</h5>
+    </summary>
+
+https://ksef-test.mf.gov.pl/docs/v2/index.html#tag/Nadawanie-uprawnien/paths/~1api~1v2~1permissions~1eu-entities~1administration~1grants/post
+
+```php
+use N1ebieski\KSEFClient\Requests\Permissions\EuEntities\Administration\Grants\GrantsRequest;
+
+$response = $client->permissions()->euEntities()->administration()->grants(
+    new GrantsRequest(...)
+)->object();
+```
+</details>
+
+<details>
+    <summary>
+        <h5>Certificates EuEntities Grants</h5>
+    </summary>
+
+https://ksef-test.mf.gov.pl/docs/v2/index.html#tag/Nadawanie-uprawnien/paths/~1api~1v2~1permissions~1eu-entities~1grants/post
+
+```php
+use N1ebieski\KSEFClient\Requests\Permissions\EuEntities\Grants\GrantsRequest;
+
+$response = $client->permissions()->euEntities()->grants(
+    new GrantsRequest(...)
+)->object();
+```
+</details>
+
+#### Permissions Common
+
+<details>
+    <summary>
+        <h5>Certificates Common Grants Revoke</h5>
+    </summary>
+
+https://ksef-test.mf.gov.pl/docs/v2/index.html#tag/Odbieranie-uprawnien/paths/~1api~1v2~1permissions~1common~1grants~1%7BpermissionId%7D/delete
+
+```php
+use N1ebieski\KSEFClient\Requests\Permissions\Common\Revoke\RevokeRequest;
+
+$response = $client->permissions()->common()->revoke(
+    new RevokeRequest(...)
+)->object();
+```
+</details>
+
+#### Permissions Query
+
+##### Permissions Query Personal
+
+<details>
+    <summary>
+        <h5>Permissions Query Personal Grants</h5>
+    </summary>
+
+https://ksef-test.mf.gov.pl/docs/v2/index.html#tag/Wyszukiwanie-nadanych-uprawnien/paths/~1api~1v2~1permissions~1query~1personal~1grants/post
+
+```php
+use N1ebieski\KSEFClient\Requests\Permissions\Query\Personal\Grants\GrantsRequest;
+
+$response = $client->permissions()->query()->personal()->grants(
+    new GrantsRequest(...)
+)->object();
+```
+</details>
+
+#### Permissions Operations
+
+<details>
+    <summary>
+        <h5>Permissions Operations Status</h5>
+    </summary>
+
+https://ksef-test.mf.gov.pl/docs/v2/index.html#tag/Operacje/paths/~1api~1v2~1permissions~1operations~1%7BreferenceNumber%7D/get
+
+```php
+use N1ebieski\KSEFClient\Requests\Permissions\Operations\Status\StatusRequest;
+
+$response = $client->permissions()->operations()->status(
     new StatusRequest(...)
 )->object();
 ```
