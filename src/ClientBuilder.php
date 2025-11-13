@@ -280,7 +280,7 @@ final class ClientBuilder
         return $this;
     }
 
-    public function build(): ClientResourceInterface
+    public function build(): ClientResource
     {
         $config = new Config(
             baseUri: new BaseUri($this->apiUrl->value),
