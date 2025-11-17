@@ -25,6 +25,17 @@ final class Config extends AbstractDTO implements ConfigInterface
     ) {
     }
 
+    public function withEncryptionKey(EncryptionKey $encryptionKey): self
+    {
+        /** @var array<string, mixed> $data */
+        $data = $this->toArray();
+
+        return self::from([
+            ...$data,
+            'encryptionKey' => $encryptionKey
+        ]);
+    }
+
     public function withEncryptedKey(EncryptedKey $encryptedKey): self
     {
         /** @var array<string, mixed> $data */

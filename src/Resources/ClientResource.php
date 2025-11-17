@@ -32,6 +32,7 @@ use N1ebieski\KSEFClient\Resources\Sessions\SessionsResource;
 use N1ebieski\KSEFClient\Resources\Testdata\TestdataResource;
 use N1ebieski\KSEFClient\Resources\Tokens\TokensResource;
 use N1ebieski\KSEFClient\ValueObjects\AccessToken;
+use N1ebieski\KSEFClient\ValueObjects\EncryptionKey;
 use N1ebieski\KSEFClient\ValueObjects\RefreshToken;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\EncryptedKey;
 use Psr\Log\LoggerInterface;
@@ -56,6 +57,14 @@ final class ClientResource extends AbstractResource implements ClientResourceInt
     public function getRefreshToken(): ?RefreshToken
     {
         return $this->config->refreshToken;
+    }
+
+    public function withEncryptionKey(EncryptionKey $encryptionKey): self
+    {
+        $this->client = $this->client->withEncryptionKey($encryptionKey);
+        $this->config = $this->config->withEncryptionKey($encryptionKey);
+
+        return $this;
     }
 
     public function withEncryptedKey(EncryptedKey $encryptedKey): self

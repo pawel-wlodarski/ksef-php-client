@@ -15,6 +15,7 @@ use N1ebieski\KSEFClient\Contracts\Resources\Sessions\SessionsResourceInterface;
 use N1ebieski\KSEFClient\Contracts\Resources\Testdata\TestdataResourceInterface;
 use N1ebieski\KSEFClient\Contracts\Resources\Tokens\TokensResourceInterface;
 use N1ebieski\KSEFClient\ValueObjects\AccessToken;
+use N1ebieski\KSEFClient\ValueObjects\EncryptionKey;
 use N1ebieski\KSEFClient\ValueObjects\RefreshToken;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\EncryptedKey;
 
@@ -23,6 +24,8 @@ interface ClientResourceInterface
     public function getAccessToken(): ?AccessToken;
 
     public function getRefreshToken(): ?RefreshToken;
+
+    public function withEncryptionKey(EncryptionKey $encryptionKey): self;
 
     public function withEncryptedKey(EncryptedKey $encryptedKey): self;
 
