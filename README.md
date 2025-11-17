@@ -52,6 +52,7 @@ Main features:
         - [Security Public Key Certificates](#security-public-key-certificates)
     - [Sessions](#sessions)
         - [Sessions Invoices](#sessions-invoices)
+            - [Sessions Invoices List](#sessions-invoices-list)
             - [Sessions Invoices Upo](#sessions-invoices-upo)
             - [Sessions Invoices Ksef Upo](#sessions-invoices-ksef-upo)
             - [Sessions Invoices Status](#sessions-invoices-status)
@@ -495,6 +496,22 @@ $response = $client->security()->publicKeyCertificates()->object();
 ### Sessions
 
 #### Sessions Invoices
+
+<details>
+    <summary>
+        <h5>Sessions Invoices List</h5>
+    </summary>
+
+https://ksef-test.mf.gov.pl/docs/v2/index.html#tag/Status-wysylki-i-UPO/paths/~1api~1v2~1sessions~1%7BreferenceNumber%7D~1invoices/get
+
+```php
+use N1ebieski\KSEFClient\Requests\Sessions\Invoices\List\ListRequest;
+
+$response = $client->sessions()->invoices()->list(
+    new ListRequest(...)
+)->object();
+```
+</details>
 
 <details>
     <summary>

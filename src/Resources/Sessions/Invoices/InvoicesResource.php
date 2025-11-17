@@ -10,8 +10,10 @@ use N1ebieski\KSEFClient\Contracts\HttpClient\ResponseInterface;
 use N1ebieski\KSEFClient\Contracts\Resources\Sessions\Invoices\InvoicesResourceInterface;
 use N1ebieski\KSEFClient\Requests\Sessions\Invoices\KsefUpo\KsefUpoHandler;
 use N1ebieski\KSEFClient\Requests\Sessions\Invoices\KsefUpo\KsefUpoRequest;
+use N1ebieski\KSEFClient\Requests\Sessions\Invoices\List\ListRequest;
 use N1ebieski\KSEFClient\Requests\Sessions\Invoices\Status\StatusHandler;
 use N1ebieski\KSEFClient\Requests\Sessions\Invoices\Status\StatusRequest;
+use N1ebieski\KSEFClient\Requests\Sessions\Invoices\List\ListHandler;
 use N1ebieski\KSEFClient\Requests\Sessions\Invoices\Upo\UpoHandler;
 use N1ebieski\KSEFClient\Requests\Sessions\Invoices\Upo\UpoRequest;
 use N1ebieski\KSEFClient\Resources\AbstractResource;
@@ -33,6 +35,19 @@ final class InvoicesResource extends AbstractResource implements InvoicesResourc
             }
 
             return (new StatusHandler($this->client))->handle($request);
+        } catch (Throwable $throwable) {
+            throw $this->exceptionHandler->handle($throwable);
+        }
+    }
+
+    public function list(ListRequest | array $request): ResponseInterface
+    {
+        try {
+            if ($request instanceof ListRequest === false) {
+                $request = ListRequest::from($request);
+            }
+
+            return (new ListHandler($this->client))->handle($request);
         } catch (Throwable $throwable) {
             throw $this->exceptionHandler->handle($throwable);
         }
