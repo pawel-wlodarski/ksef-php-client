@@ -13,7 +13,11 @@ trait HasToBody
 {
     public function toBody(): array
     {
+        /** @var array<string, mixed> $data */
+        $data = $this->toArray(only: ['offlineMode']);
+
         return [
+            ...$data,
             'formCode' => [
                 'systemCode' => $this->formCode->value,
                 'schemaVersion' => $this->formCode->getSchemaVersion(),

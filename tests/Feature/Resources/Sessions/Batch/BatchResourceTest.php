@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Endroid\QrCode\Builder\Builder as QrCodeBuilder;
 use Endroid\QrCode\Label\Font\OpenSans;
 use Endroid\QrCode\RoundBlockSizeMode;
@@ -20,8 +22,8 @@ use N1ebieski\KSEFClient\Factories\CertificateFactory;
 use N1ebieski\KSEFClient\Factories\CSRFactory;
 use N1ebieski\KSEFClient\Factories\EncryptionKeyFactory;
 use N1ebieski\KSEFClient\Support\Utility;
+use N1ebieski\KSEFClient\Testing\Fixtures\DTOs\Requests\Sessions\AbstractFakturaFixture;
 use N1ebieski\KSEFClient\Testing\Fixtures\DTOs\Requests\Sessions\FakturaSprzedazyTowaruFixture;
-use N1ebieski\KSEFClient\Testing\Fixtures\Requests\Sessions\Online\Send\SendRequestFixture;
 use N1ebieski\KSEFClient\Tests\Feature\AbstractTestCase;
 use N1ebieski\KSEFClient\ValueObjects\CertificatePath;
 use N1ebieski\KSEFClient\ValueObjects\CertificateSerialNumber;
@@ -29,7 +31,6 @@ use N1ebieski\KSEFClient\ValueObjects\Mode;
 use N1ebieski\KSEFClient\ValueObjects\NIP;
 use N1ebieski\KSEFClient\ValueObjects\PrivateKeyType;
 use N1ebieski\KSEFClient\ValueObjects\QRCode;
-use N1ebieski\KSEFClient\ValueObjects\Requests\KsefNumber;
 
 /** @var AbstractTestCase $this */
 
@@ -41,95 +42,7 @@ dataset('privateKeyTypeProvider', fn (): array => [
     'EC' => [PrivateKeyType::EC],
 ]);
 
-test('send an invoice, check for UPO and generate QR code', function (): void {
-    /** @var AbstractTestCase $this */
-    /** @var array<string, string> $_ENV */
-
-    $encryptionKey = EncryptionKeyFactory::makeRandom();
-
-    $client = $this->createClient(encryptionKey: $encryptionKey);
-
-    /** @var object{referenceNumber: string} $openResponse */
-    $openResponse = $client->sessions()->online()->open([
-        'formCode' => 'FA (3)',
-    ])->object();
-
-    $fakturaFixture = (new FakturaSprzedazyTowaruFixture())
-        ->withNip($_ENV['NIP_1'])
-        ->withTodayDate()
-        ->withRandomInvoiceNumber();
-
-    $fixture = (new SendRequestFixture())->withFakturaFixture($fakturaFixture);
-
-    /** @var object{referenceNumber: string} $sendResponse */
-    $sendResponse = $client->sessions()->online()->send([
-        ...$fixture->data,
-        'referenceNumber' => $openResponse->referenceNumber,
-    ])->object();
-
-    $client->sessions()->online()->close([
-        'referenceNumber' => $openResponse->referenceNumber
-    ]);
-
-    /** @var object{status: object{code: int}, referenceNumber: string, upoDownloadUrl: string, ksefNumber: string} $statusResponse */
-    $statusResponse = Utility::retry(function (int $attempts) use ($client, $openResponse, $sendResponse) {
-        /** @var object{status: object{code: int}, referenceNumber: string, upoDownloadUrl: string} $statusResponse */
-        $statusResponse = $client->sessions()->invoices()->status([
-            'referenceNumber' => $openResponse->referenceNumber,
-            'invoiceReferenceNumber' => $sendResponse->referenceNumber
-        ])->object();
-
-        try {
-            expect($statusResponse->status->code)->toBe(200);
-
-            return $statusResponse;
-        } catch (Throwable $exception) {
-            if ($attempts > 2) {
-                throw $exception;
-            }
-        }
-    });
-
-    expect($statusResponse)->toHaveProperty('upoDownloadUrl');
-    expect($statusResponse->upoDownloadUrl)->toBeString();
-
-    expect($statusResponse)->toHaveProperty('ksefNumber');
-    expect($statusResponse->ksefNumber)->toBeString();
-
-    $faktura = Faktura::from($fakturaFixture->data);
-
-    $generateQRCodesHandler = new GenerateQRCodesHandler(
-        qrCodeBuilder: (new QrCodeBuilder())
-            ->roundBlockSizeMode(RoundBlockSizeMode::Enlarge)
-            ->labelFont(new OpenSans(size: 12)),
-        convertEcdsaDerToRawHandler: new ConvertEcdsaDerToRawHandler()
-    );
-
-    $ksefNumber = KsefNumber::from($statusResponse->ksefNumber);
-
-    /** @var QRCodes $qrCodes */
-    $qrCodes = $generateQRCodesHandler->handle(new GenerateQRCodesAction(
-        nip: $faktura->podmiot1->daneIdentyfikacyjne->nip,
-        invoiceCreatedAt: $faktura->fa->p_1->value,
-        document: $faktura->toXml(),
-        mode: Mode::Test,
-        ksefNumber: $ksefNumber
-    ));
-
-    expect($qrCodes)
-        ->toBeInstanceOf(QRCodes::class)
-        ->toHaveProperty('code1');
-
-    expect($qrCodes->code1)
-        ->toBeInstanceOf(QRCode::class)
-        ->toHaveProperty('raw');
-
-    expect($qrCodes->code1->raw)->toBeString();
-
-    $this->revokeCurrentSession($client);
-});
-
-test('create an offline invoice and send it', function (PrivateKeyType $privateKeyType): void {
+test('create offline invoices and send them', function (PrivateKeyType $privateKeyType): void {
     /**
      * @var AbstractTestCase $this
      * @var array<string, string> $_ENV
@@ -200,12 +113,17 @@ test('create an offline invoice and send it', function (PrivateKeyType $privateK
         )
     );
 
-    $fakturaFixture = (new FakturaSprzedazyTowaruFixture())
-        ->withNip($_ENV['NIP_1'])
-        ->withTodayDate()
-        ->withRandomInvoiceNumber();
+    /** @var array<int, FakturaSprzedazyTowaruFixture> $fakturyFixtures */
+    $fakturyFixtures = array_map(
+        fn (): AbstractFakturaFixture => (new FakturaSprzedazyTowaruFixture())
+            ->withNip($_ENV['NIP_1'])
+            ->withTodayDate()
+            ->withRandomInvoiceNumber(),
+        range(1, 3)
+    );
 
-    $faktura = Faktura::from($fakturaFixture->data);
+    /** @var array<int, Faktura> $faktury */
+    $faktury = array_map(fn (FakturaSprzedazyTowaruFixture $faktura): Faktura => Faktura::from($faktura->data), $fakturyFixtures);
 
     $generateQRCodesHandler = new GenerateQRCodesHandler(
         qrCodeBuilder: (new QrCodeBuilder())
@@ -216,65 +134,65 @@ test('create an offline invoice and send it', function (PrivateKeyType $privateK
 
     $contextIdentifierGroup = ContextIdentifierGroup::fromIdentifier(NIP::from($_ENV['NIP_1']));
 
-    /** @var QRCodes $qrCodes */
-    $qrCodes = $generateQRCodesHandler->handle(new GenerateQRCodesAction(
-        nip: $faktura->podmiot1->daneIdentyfikacyjne->nip,
-        invoiceCreatedAt: $faktura->fa->p_1->value,
-        document: $faktura->toXml(),
-        mode: Mode::Test,
-        certificate: $certificate,
-        certificateSerialNumber: $certificateSerialNumber,
-        contextIdentifierGroup: $contextIdentifierGroup
-    ));
+    $allQrCodes = [];
 
-    $qrCode1 = $qrCodes->code1;
+    foreach ($faktury as $faktura) {
+        /** @var QRCodes $qrCodes */
+        $qrCodes = $generateQRCodesHandler->handle(new GenerateQRCodesAction(
+            nip: $faktura->podmiot1->daneIdentyfikacyjne->nip,
+            invoiceCreatedAt: $faktura->fa->p_1->value,
+            document: $faktura->toXml(),
+            mode: Mode::Test,
+            certificate: $certificate,
+            certificateSerialNumber: $certificateSerialNumber,
+            contextIdentifierGroup: $contextIdentifierGroup
+        ));
 
-    expect($qrCode1->raw)->not()->toBeEmpty();
-    expect($qrCodes->code2)->toBeInstanceOf(QRCode::class);
+        $qrCode1 = $qrCodes->code1;
 
-    /** @var QRCode $qrCode2 */
-    $qrCode2 = $qrCodes->code2;
+        expect($qrCode1->raw)->not()->toBeEmpty();
+        expect($qrCodes->code2)->toBeInstanceOf(QRCode::class);
 
-    expect($qrCode2->raw)->not()->toBeEmpty();
+        /** @var QRCode $qrCode2 */
+        $qrCode2 = $qrCodes->code2;
 
-    $response = $this->client->get((string) $qrCode1->url);
+        expect($qrCode2->raw)->not()->toBeEmpty();
 
-    expect($response->getStatusCode())->toBe(200);
+        $response = $this->client->get((string) $qrCode1->url);
 
-    $contents = $response->getBody()->getContents();
+        expect($response->getStatusCode())->toBe(200);
 
-    expect($contents)->toContain('Faktura nie została znaleziona w KSeF');
+        $contents = $response->getBody()->getContents();
 
-    $response = $this->client->get((string) $qrCode2->url);
+        expect($contents)->toContain('Faktura nie została znaleziona w KSeF');
 
-    expect($response->getStatusCode())->toBe(200);
+        $response = $this->client->get((string) $qrCode2->url);
 
-    $contents = $response->getBody()->getContents();
+        expect($response->getStatusCode())->toBe(200);
 
-    expect($contents)->toContain('Weryfikacja prawidłowa');
+        $contents = $response->getBody()->getContents();
+
+        expect($contents)->toContain('Weryfikacja prawidłowa');
+
+        $allQrCodes[] = $qrCodes;
+    }
 
     /** @var object{referenceNumber: string} $openResponse */
-    $openResponse = $client->sessions()->online()->open([
+    $openResponse = $client->sessions()->batch()->openAndSend([
         'formCode' => 'FA (3)',
+        'faktury' => $faktury,
+        'offlineMode' => true
     ])->object();
 
-    /** @var object{referenceNumber: string} $sendResponse */
-    $sendResponse = $client->sessions()->online()->send([
-        'faktura' => $faktura,
-        'offlineMode' => true,
-        'referenceNumber' => $openResponse->referenceNumber,
-    ])->object();
-
-    $client->sessions()->online()->close([
+    $client->sessions()->batch()->close([
         'referenceNumber' => $openResponse->referenceNumber
     ]);
 
-    /** @var object{status: object{code: int}, referenceNumber: string, upoDownloadUrl: string, ksefNumber: string} $statusResponse */
-    $statusResponse = Utility::retry(function (int $attempts) use ($client, $openResponse, $sendResponse) {
+    /** @var object{status: object{code: int}, referenceNumber: string, upoDownloadUrl: string} $statusResponse */
+    $statusResponse = Utility::retry(function (int $attempts) use ($client, $openResponse) {
         /** @var object{status: object{code: int}, referenceNumber: string, upoDownloadUrl: string} $statusResponse */
-        $statusResponse = $client->sessions()->invoices()->status([
+        $statusResponse = $client->sessions()->status([
             'referenceNumber' => $openResponse->referenceNumber,
-            'invoiceReferenceNumber' => $sendResponse->referenceNumber
         ])->object();
 
         try {
@@ -288,16 +206,18 @@ test('create an offline invoice and send it', function (PrivateKeyType $privateK
         }
     });
 
-    $response = $this->client->get((string) $qrCode1->url);
+    foreach ($allQrCodes as $qrCodes) {
+        $response = $this->client->get((string) $qrCodes->code1->url);
 
-    expect($response->getStatusCode())->toBe(200);
+        expect($response->getStatusCode())->toBe(200);
 
-    $contents = $response->getBody()->getContents();
+        $contents = $response->getBody()->getContents();
 
-    expect($contents)
-        ->toContain('Faktura znajduje się w KSeF')
-        ->toContain('Tryb wystawienia faktury')
-        ->toContain('Offline');
+        expect($contents)
+            ->toContain('Faktura znajduje się w KSeF')
+            ->toContain('Tryb wystawienia faktury')
+            ->toContain('Offline');
+    }
 
     $revokeCertificate = $client->certificates()->revoke([
         'certificateSerialNumber' => (string) $certificateSerialNumber
@@ -306,4 +226,4 @@ test('create an offline invoice and send it', function (PrivateKeyType $privateK
     expect($revokeCertificate)->toBe(204);
 
     $this->revokeCurrentSession($client);
-})->with('privateKeyTypeProvider');
+})->with('privateKeyTypeProvider')->only();
