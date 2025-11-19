@@ -16,7 +16,7 @@ trait HasFromArray
             ->allowPermissiveTypes()
             ->mapper()
             ->map(static::class, Source::iterable(
-                new CamelCaseKeysWithExcept($data, except: ['p_', 'uu_id'])
+                new CamelCaseKeysWithExcept($data, keyTypeExcept: ['p_', 'uu_id'])
             ));
     }
 }
