@@ -226,4 +226,4 @@ test('create offline invoices and send them', function (PrivateKeyType $privateK
     expect($revokeCertificate)->toBe(204);
 
     $this->revokeCurrentSession($client);
-})->with('privateKeyTypeProvider')->only();
+})->with('privateKeyTypeProvider');
