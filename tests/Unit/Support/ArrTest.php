@@ -2,10 +2,9 @@
 
 declare(strict_types=1);
 
-use N1ebieski\KSEFClient\DTOs\Requests\Sessions\Faktura;
 use N1ebieski\KSEFClient\Support\Arr;
 use N1ebieski\KSEFClient\Support\Optional;
-use N1ebieski\KSEFClient\Testing\Fixtures\DTOs\Requests\Sessions\FakturaSprzedazyTowaruFixture;
+use N1ebieski\KSEFClient\ValueObjects\Support\KeyType;
 
 test('filter recursive', function (): void {
     $array = [
@@ -33,32 +32,37 @@ test('filter recursive', function (): void {
     $result = Arr::filterRecursive($array, fn (mixed $value): bool => ! $value instanceof Optional);
 
     expect($result)->toBe($expectedArray);
-})->only();
+});
 
-// test('array with key type except', function (): void {
-//     $fakturaFixture = (new FakturaSprzedazyTowaruFixture())
-//         ->withTodayDate()
-//         ->withNip($_ENV['NIP_1'])
-//         ->withRandomInvoiceNumber();
+test('array with key type except', function (): void {
+    $array = [
+        'camelCase' => 'camelCase',
+        'p_1' => 'p_1',
+        'snake_case' => [
+            'uu_id' => 'uu_id',
+            'p_2' => 'p_2',
+        ],
+    ];
 
-//     $faktura = Faktura::from($fakturaFixture->data);
+    $result = Arr::normalize($array, KeyType::Camel, ['p_', 'uu_id']);
 
-//     $found = [];
+    $scan = function (array $data, array $search) use (&$scan): bool {
+        /** @var array<int, string> $search */
+        $found = [];
 
-//     $scan = function ($data) use (&$scan, &$found) {
-//         var_dump($data);
-//         foreach ($data as $key => $value) {
-//             if (str_starts_with($key, 'p_') || str_starts_with($key, 'uu_id')) {
-//                 $found[] = $key;
-//             }
+        foreach ($data as $key => $value) {
+            if (is_string($key) && array_filter($search, fn (string $s): bool => str_starts_with($key, $s)) !== []) {
+                $found[] = $key;
+            }
 
-//             if (is_array($value)) {
-//                 $scan($value);
-//             }
-//         }
-//     };
+            if (is_array($value)) {
+                $scan($value, $search);
+            }
+        }
 
-//     $scan($faktura->toArray());
+        return $found !== [];
+    };
 
-//     expect($found)->not->toBeEmpty();
-// })->only();
+    expect($scan($result, ['p_', 'uu_id']))->toBeTrue();
+    expect($scan($result, ['snake_case']))->toBeFalse();
+});

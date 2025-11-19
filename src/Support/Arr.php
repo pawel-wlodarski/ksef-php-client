@@ -43,11 +43,16 @@ final class Arr
 
     /**
      * @param array<string|int, mixed> $array
+     * @param array<int, string> $keyTypeExcept
      * @param array<int, string> $only
      * @return array<string|int, mixed>
      */
-    public static function normalize(array $array, KeyType $keyType = KeyType::Camel, array $keyTypeExcept = [], array $only = []): array
-    {
+    public static function normalize(
+        array $array,
+        KeyType $keyType = KeyType::Camel,
+        array $keyTypeExcept = [],
+        array $only = []
+    ): array {
         $newArray = [];
 
         if ($only !== []) {
@@ -59,7 +64,7 @@ final class Arr
                 continue;
             }
 
-            $name = is_string($key) && ! in_array($key, $keyTypeExcept)
+            $name = is_string($key) && (array_filter($keyTypeExcept, fn (string $except): bool => str_starts_with($key, $except)) === [])
                 ? match ($keyType) {
                     KeyType::Camel => Str::camel($key),
                     KeyType::Snake => Str::snake($key)
