@@ -734,7 +734,7 @@ $response = $client->sessions()->status(
 
 <details>
     <summary>
-        <h4>Sessions Invoices Upo</h4>
+        <h4>Sessions Upo</h4>
     </summary>
 
 https://ksef-test.mf.gov.pl/docs/v2/index.html#tag/Status-wysylki-i-UPO/paths/~1api~1v2~1sessions~1%7BreferenceNumber%7D~1upo~1%7BupoReferenceNumber%7D/get
