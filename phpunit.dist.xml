@@ -15,13 +15,13 @@
         </include>
     </source>
     <php>
-        <env name="NIP_1" value="6669666921" />
+        <env name="NIP_1" value="6669666924" />
         <env name="PESEL_1" value="90051701234" />
-        <env name="CERTIFICATE_PATH_1" value="config/certificates/testing/6669666921/certificate.p12" />
+        <env name="CERTIFICATE_PATH_1" value="config/certificates/testing/6669666924/certificate.p12" />
         <env name="CERTIFICATE_PASSPHRASE_1" value="password" />
-        <env name="KSEF_AUTH_CERTIFICATE_PATH_1" value="config/certificates/testing/6669666921/ksef-auth-certificate.p12" />
+        <env name="KSEF_AUTH_CERTIFICATE_PATH_1" value="config/certificates/testing/6669666924/ksef-auth-certificate.p12" />
         <env name="KSEF_AUTH_CERTIFICATE_PASSPHRASE_1" value="password" />
-        <env name="KSEF_OFFLINE_CERTIFICATE_PATH_1" value="config/certificates/testing/6669666921/ksef-offline-certificate.p12" />
+        <env name="KSEF_OFFLINE_CERTIFICATE_PATH_1" value="config/certificates/testing/6669666924/ksef-offline-certificate.p12" />
         <env name="KSEF_OFFLINE_CERTIFICATE_PASSPHRASE_1" value="password" />        
 
         <env name="NIP_2" value="6669666922" />

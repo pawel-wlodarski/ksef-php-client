@@ -127,8 +127,10 @@ Main features:
     - [Conversion of the KSEF certificate and private key from MCU to a .p12 file](#conversion-of-the-ksef-certificate-and-private-key-from-mcu-to-a-p12-file)
     - [Generate a KSEF certificate and convert to .p12 file](#generate-a-ksef-certificate-and-convert-to-a-p12-file)
     - [Send an invoice, check for UPO and generate QR code](#send-an-invoice-check-for-upo-and-generate-qr-code)
+    - [Generate PDF for the invoice and the UPO file](#generate-pdf-for-the-invoice-and-the-upo-file)
     - [Batch async send multiple invoices and check for UPO](#batch-async-send-multiple-invoices-and-check-for-upo)
     - [Create an offline invoice and generate both QR codes](#create-an-offline-invoice-and-generate-both-qr-codes)
+    - [Generate PDF for the offline invoice file with both QR codes](#generate-pdf-for-the-offline-invoice-file-with-both-qr-codes)
     - [Download and decrypt invoices using the encryption key](#download-and-decrypt-invoices-using-the-encryption-key)
 - [Testing](#testing)
 - [Roadmap](#roadmap)
@@ -1470,6 +1472,43 @@ file_put_contents(Utility::basePath("var/qr/code1.png"), $qrCodes->code1->raw);
 
 <details>
     <summary>
+        <h3>Generate PDF for the invoice and the UPO file</h3>
+    </summary>
+
+1. Install [lukasz-wojtanowski-softvig/ksef-pdf-generator](https://github.com/lukasz-wojtanowski-softvig/ksef-pdf-generator/tree/feature/cli)
+2. Install [Setasign/FPDI](https://github.com/Setasign/FPDI)
+
+```php
+use N1ebieski\KSEFClient\Actions\GeneratePDF\GeneratePDFAction;
+use N1ebieski\KSEFClient\Actions\GeneratePDF\GeneratePDFHandler;
+use N1ebieski\KSEFClient\Support\Utility;
+use N1ebieski\KSEFClient\ValueObjects\KsefFeInvoiceConverterPath;
+use setasign\Fpdi\Fpdi;
+
+// Send an invoice using example https://github.com/N1ebieski/ksef-php-client?tab=readme-ov-file#send-an-invoice-check-for-upo-and-generate-qr-code
+
+// and then...
+
+$ksefFeInvoiceConverterPath = KsefFeInvoiceConverterPath::from(Utility::basePath('../ksef-fe-invoice-converter/dist/cli/index.js'));
+
+$pdfs = (new GeneratePDFHandler(new Fpdi()))->handle(
+    new GeneratePDFAction(
+        invoiceDocument $faktura->toXml(),
+        upoDocument: $upo,
+        ksefFeInvoiceConverterPath: $ksefFeInvoiceConverterPath,
+        qrCodes: $qrCodes,
+        ksefNumber: $ksefNumber
+    )
+);
+
+file_put_contents(Utility::basePath("var/pdf/{$ksefNumber->value}.pdf"), $pdfs->invoice);
+file_put_contents(Utility::basePath("var/pdf/UPO-{$sendResponse->referenceNumber}.pdf"), $pdfs->upo);
+```
+
+</details>
+
+<details>
+    <summary>
         <h3>Batch async send multiple invoices and check for UPO</h3>
     </summary>
 
@@ -1608,6 +1647,40 @@ file_put_contents(Utility::basePath("var/qr/code2.png"), $qrCodes->code2->raw);
 
 <details>
     <summary>
+        <h3>Generate PDF for the offline invoice file with both QR codes</h3>
+    </summary>
+
+1. Install [lukasz-wojtanowski-softvig/ksef-pdf-generator](https://github.com/lukasz-wojtanowski-softvig/ksef-pdf-generator/tree/feature/cli)
+2. Install [Setasign/FPDI](https://github.com/Setasign/FPDI)
+
+```php
+use N1ebieski\KSEFClient\Actions\GeneratePDF\GeneratePDFAction;
+use N1ebieski\KSEFClient\Actions\GeneratePDF\GeneratePDFHandler;
+use N1ebieski\KSEFClient\Support\Utility;
+use N1ebieski\KSEFClient\ValueObjects\KsefFeInvoiceConverterPath;
+use setasign\Fpdi\Fpdi;
+
+// Create an offline invoice using example https://github.com/N1ebieski/ksef-php-client?tab=readme-ov-file#create-an-offline-invoice-and-generate-both-qr-codes
+
+// and then...
+
+$ksefFeInvoiceConverterPath = KsefFeInvoiceConverterPath::from(Utility::basePath('../ksef-fe-invoice-converter/dist/cli/index.js'));
+
+$pdfs = (new GeneratePDFHandler(new Fpdi()))->handle(
+    new GeneratePDFAction(
+        invoiceDocument: $faktura->toXml(),
+        ksefFeInvoiceConverterPath: $ksefFeInvoiceConverterPath,
+        qrCodes: $qrCodes
+    )
+);
+
+file_put_contents(Utility::basePath("var/pdf/{$faktura->fa->p_2->value}.pdf"), $pdfs->invoice);
+```
+
+</details>
+
+<details>
+    <summary>
         <h3>Download and decrypt invoices using the encryption key</h3>
     </summary>
 
@@ -1709,3 +1782,4 @@ Special thanks to:
 
 - all the helpful people on the [4programmers.net](https://4programmers.net/Forum/Nietuzinkowe_tematy/355933-krajowy_system_e_faktur) forum
 - authors of the repository [grafinet/xades-tools](https://github.com/grafinet/xades-tools) for the Xades document signing tool
+- Łukasz Wojtanowski - author of a modification of the official ksef-pdf-generator, available in the repository [lukasz-wojtanowski-softvig/ksef-pdf-generator](https://github.com/lukasz-wojtanowski-softvig/ksef-pdf-generator/tree/feature/cli), which enables generating invoices and UPOs via CLI

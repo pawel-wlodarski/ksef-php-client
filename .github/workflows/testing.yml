@@ -45,7 +45,7 @@ jobs:
             mkdir -p ./scripts
             mkdir -p ./config/certificates/testing
 
-            for i in 1 2 3; do
+            for i in 2 3 4; do
               NIP="666966692$i"
               VAR_NAME="SIGNATURE_NIP_$i"
               echo "${!VAR_NAME}" > ./scripts/signature-nip.txt
