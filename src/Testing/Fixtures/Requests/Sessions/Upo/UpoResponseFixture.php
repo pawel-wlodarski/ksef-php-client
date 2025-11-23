@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace N1ebieski\KSEFClient\Testing\Fixtures\Requests\Sessions\Invoices\Upo;
+namespace N1ebieski\KSEFClient\Testing\Fixtures\Requests\Sessions\Upo;
 
 use N1ebieski\KSEFClient\Testing\Fixtures\Requests\AbstractResponseFixture;
 

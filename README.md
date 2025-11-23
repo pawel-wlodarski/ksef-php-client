@@ -51,8 +51,10 @@ Main features:
     - [Security](#security)
         - [Security Public Key Certificates](#security-public-key-certificates)
     - [Sessions](#sessions)
+        - [Sessions List](#sessions-list)
         - [Sessions Invoices](#sessions-invoices)
             - [Sessions Invoices List](#sessions-invoices-list)
+            - [Sessions Invoices Failed](#sessions-invoices-failed)
             - [Sessions Invoices Upo](#sessions-invoices-upo)
             - [Sessions Invoices Ksef Upo](#sessions-invoices-ksef-upo)
             - [Sessions Invoices Status](#sessions-invoices-status)
@@ -64,6 +66,7 @@ Main features:
             - [Sessions Batch Open (and send multiple invoices)](#sessions-batch-open-and-send-multiple-invoices)
             - [Sessions Batch Close](#sessions-batch-close)
         - [Sessions Status](#sessions-status)
+        - [Sessions Upo](#sessions-upo)
     - [Invoices](#invoices)
         - [Invoices Download](#invoices-download)
         - [Invoices Query](#invoices-query)
@@ -497,6 +500,22 @@ $response = $client->security()->publicKeyCertificates()->object();
 
 ### Sessions
 
+<details>
+    <summary>
+        <h4>Sessions List</h4>
+    </summary>
+
+https://ksef-test.mf.gov.pl/docs/v2/index.html#tag/Status-wysylki-i-UPO/paths/~1api~1v2~1sessions/get
+
+```php
+use N1ebieski\KSEFClient\Requests\Sessions\List\ListRequest;
+
+$response = $client->sessions()->list(
+    new ListRequest(...)
+)->object();
+```
+</details>
+
 #### Sessions Invoices
 
 <details>
@@ -511,6 +530,22 @@ use N1ebieski\KSEFClient\Requests\Sessions\Invoices\List\ListRequest;
 
 $response = $client->sessions()->invoices()->list(
     new ListRequest(...)
+)->object();
+```
+</details>
+
+<details>
+    <summary>
+        <h5>Sessions Invoices Failed</h5>
+    </summary>
+
+https://ksef-test.mf.gov.pl/docs/v2/index.html#tag/Status-wysylki-i-UPO/paths/~1api~1v2~1sessions~1%7BreferenceNumber%7D~1invoices~1failed/get
+
+```php
+use N1ebieski\KSEFClient\Requests\Sessions\Invoices\Failed\FailedRequest;
+
+$response = $client->sessions()->invoices()->failed(
+    new FailedRequest(...)
 )->object();
 ```
 </details>
@@ -694,6 +729,22 @@ use N1ebieski\KSEFClient\Requests\Sessions\Status\StatusRequest;
 $response = $client->sessions()->status(
     new StatusRequest(...)
 )->object();
+```
+</details>
+
+<details>
+    <summary>
+        <h4>Sessions Invoices Upo</h4>
+    </summary>
+
+https://ksef-test.mf.gov.pl/docs/v2/index.html#tag/Status-wysylki-i-UPO/paths/~1api~1v2~1sessions~1%7BreferenceNumber%7D~1upo~1%7BupoReferenceNumber%7D/get
+
+```php
+use N1ebieski\KSEFClient\Requests\Sessions\Upo\UpoRequest;
+
+$response = $client->sessions()->upo(
+    new UpoRequest(...)
+)->body();
 ```
 </details>
 

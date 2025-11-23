@@ -12,8 +12,12 @@ use N1ebieski\KSEFClient\Contracts\Resources\Sessions\Invoices\InvoicesResourceI
 use N1ebieski\KSEFClient\Contracts\Resources\Sessions\Online\OnlineResourceInterface;
 use N1ebieski\KSEFClient\Contracts\Resources\Sessions\SessionsResourceInterface;
 use N1ebieski\KSEFClient\DTOs\Config;
+use N1ebieski\KSEFClient\Requests\Sessions\List\ListHandler;
+use N1ebieski\KSEFClient\Requests\Sessions\List\ListRequest;
 use N1ebieski\KSEFClient\Requests\Sessions\Status\StatusHandler;
 use N1ebieski\KSEFClient\Requests\Sessions\Status\StatusRequest;
+use N1ebieski\KSEFClient\Requests\Sessions\Upo\UpoHandler;
+use N1ebieski\KSEFClient\Requests\Sessions\Upo\UpoRequest;
 use N1ebieski\KSEFClient\Resources\AbstractResource;
 use N1ebieski\KSEFClient\Resources\Sessions\Batch\BatchResource;
 use N1ebieski\KSEFClient\Resources\Sessions\Invoices\InvoicesResource;
@@ -62,10 +66,36 @@ final class SessionsResource extends AbstractResource implements SessionsResourc
         }
     }
 
+    public function list(ListRequest | array $request): ResponseInterface
+    {
+        try {
+            if ($request instanceof ListRequest === false) {
+                $request = ListRequest::from($request);
+            }
+
+            return (new ListHandler($this->client))->handle($request);
+        } catch (Throwable $throwable) {
+            throw $this->exceptionHandler->handle($throwable);
+        }
+    }
+
     public function invoices(): InvoicesResourceInterface
     {
         try {
             return new InvoicesResource($this->client, $this->exceptionHandler);
+        } catch (Throwable $throwable) {
+            throw $this->exceptionHandler->handle($throwable);
+        }
+    }
+
+    public function upo(UpoRequest | array $request): ResponseInterface
+    {
+        try {
+            if ($request instanceof UpoRequest === false) {
+                $request = UpoRequest::from($request);
+            }
+
+            return (new UpoHandler($this->client))->handle($request);
         } catch (Throwable $throwable) {
             throw $this->exceptionHandler->handle($throwable);
         }
