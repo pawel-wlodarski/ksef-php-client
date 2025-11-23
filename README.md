@@ -1833,4 +1833,4 @@ Special thanks to:
 
 - all the helpful people on the [4programmers.net](https://4programmers.net/Forum/Nietuzinkowe_tematy/355933-krajowy_system_e_faktur) forum
 - authors of the repository [grafinet/xades-tools](https://github.com/grafinet/xades-tools) for the Xades document signing tool
-- Łukasz Wojtanowski - author of a modification of the official ksef-pdf-generator, available in the repository [lukasz-wojtanowski-softvig/ksef-pdf-generator](https://github.com/lukasz-wojtanowski-softvig/ksef-pdf-generator/tree/feature/cli), which enables generating PDFs for invoices and UPOs via CLI
+- Łukasz Wojtanowski - author of a modified version of the official ksef-pdf-generator, available at [lukasz-wojtanowski-softvig/ksef-pdf-generator](https://github.com/lukasz-wojtanowski-softvig/ksef-pdf-generator/tree/feature/cli), which adds support for generating invoice and UPO PDFs via CLI
