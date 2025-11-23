@@ -21,7 +21,7 @@ final class KsefFeInvoiceConverterPath extends AbstractValueObject implements Fr
     ) {
         Validator::validate($value, [
             new ExistsRule(),
-            new ExtensionsRule(['js']),
+            new ExtensionsRule(['js', 'exe']),
         ]);
 
         $this->value = $value;
