@@ -177,17 +177,17 @@ test('create offline invoices and send them', function (PrivateKeyType $privateK
         $allQrCodes[] = $qrCodes;
     }
 
-    /** @var object{referenceNumber: string} $openResponse */
     $openAndSendResponse = $client->sessions()->batch()->openAndSend([
         'formCode' => 'FA (3)',
         'faktury' => $faktury,
         'offlineMode' => true
     ]);
 
+    /** @var object{referenceNumber: string} $openResponse */
     $openResponse = $openAndSendResponse->object();
 
     foreach ($openAndSendResponse->partUploadResponses as $partUploadResponse) {
-        expect($partUploadResponse->status())->toBe(201);
+        expect($partUploadResponse?->status())->toBe(201);
     }
 
     $client->sessions()->batch()->close([
