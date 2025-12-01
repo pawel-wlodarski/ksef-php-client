@@ -9,6 +9,7 @@ use N1ebieski\KSEFClient\Contracts\XmlSerializableInterface;
 use N1ebieski\KSEFClient\Requests\AbstractRequest;
 use N1ebieski\KSEFClient\Support\Optional;
 use N1ebieski\KSEFClient\ValueObjects\Requests\ReferenceNumber;
+use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\HashOfCorrectedInvoice;
 
 final class SendXmlRequest extends AbstractRequest implements XmlSerializableInterface, BodyInterface
 {
@@ -16,7 +17,7 @@ final class SendXmlRequest extends AbstractRequest implements XmlSerializableInt
         public readonly ReferenceNumber $referenceNumber,
         public readonly string $faktura,
         public readonly Optional | bool $offlineMode = new Optional(),
-        public readonly Optional | bool | null $hashOfCorrectedInvoice = new Optional()
+        public readonly Optional | HashOfCorrectedInvoice $hashOfCorrectedInvoice = new Optional()
     ) {
     }
 
