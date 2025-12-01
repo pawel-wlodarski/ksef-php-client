@@ -116,7 +116,7 @@ final class OpenAndSendHandler extends AbstractHandler
         /** @var object{referenceNumber: string, partUploadRequests: array<int, object{ordinalNumber: int, method: string, url: string, headers: array<string, string>}>} */
         $openResponseToObject = $openResponse->object();
 
-        $partuploadResponses = $this->client
+        $partUploadResponses = $this->client
             ->withoutAccessToken()
             ->sendAsyncRequest(array_map(fn (object $partUploadRequest): Request => new Request(
                 method: Method::from($partUploadRequest->method),
@@ -125,6 +125,6 @@ final class OpenAndSendHandler extends AbstractHandler
                 body: $encryptedParts[$partUploadRequest->ordinalNumber - 1],
             ), $openResponseToObject->partUploadRequests));
 
-        return new OpenAndSendResponse($openResponse, $partuploadResponses);
+        return new OpenAndSendResponse($openResponse, $partUploadResponses);
     }
 }
