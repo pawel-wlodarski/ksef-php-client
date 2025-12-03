@@ -17,6 +17,7 @@ use N1ebieski\KSEFClient\Requests\AbstractRequest;
 use N1ebieski\KSEFClient\Support\Concerns\HasToBody;
 use N1ebieski\KSEFClient\Support\Optional;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Description;
+use N1ebieski\KSEFClient\ValueObjects\Requests\Permissions\Subunits\SubunitName;
 
 final class GrantsRequest extends AbstractRequest implements BodyInterface
 {
@@ -28,7 +29,7 @@ final class GrantsRequest extends AbstractRequest implements BodyInterface
         public readonly SubjectIdentifierNipGroup | SubjectIdentifierPeselGroup | SubjectIdentifierFingerprintGroup $subjectIdentifierGroup,
         public readonly ContextIdentifierNipGroup | ContextIdentifierInternalIdGroup $contextIdentifierGroup,
         public readonly Description $description,
-        public readonly string $subunitName,
+        public readonly SubunitName $subunitName,
         public readonly Optional | PersonByIdentifierGroup | PersonByFingerprintWithIdentifierGroup | PersonByFingerprintWithoutIdentifierGroup $subjectDetails = new Optional(),
     ) {
     }

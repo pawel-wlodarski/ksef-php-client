@@ -18,8 +18,8 @@ final class MetadataRequestFixture extends AbstractRequestFixture
             'from' => '2019-08-24T14:15:22Z',
             'to' => '2019-08-24T14:15:22Z',
         ],
-        'ksefNumber' => 'string',
-        'invoiceNumber' => 'string',
+        'ksefNumber' => '5265877635-20250626-010080DD2B5E-26',
+        'invoiceNumber' => 'FA/XPWIC-7900685789/06/2025',
         'amount' => [
             'type' => 'Brutto',
             'from' => 0.1,

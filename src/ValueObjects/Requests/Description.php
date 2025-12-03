@@ -7,6 +7,7 @@ namespace N1ebieski\KSEFClient\ValueObjects\Requests;
 use N1ebieski\KSEFClient\Contracts\ValueAwareInterface;
 use N1ebieski\KSEFClient\Support\AbstractValueObject;
 use N1ebieski\KSEFClient\Validator\Rules\String\MaxRule;
+use N1ebieski\KSEFClient\Validator\Rules\String\MinRule;
 use N1ebieski\KSEFClient\Validator\Validator;
 use Stringable;
 
@@ -17,6 +18,7 @@ final class Description extends AbstractValueObject implements ValueAwareInterfa
     public function __construct(string $value)
     {
         Validator::validate($value, [
+            new MinRule(5),
             new MaxRule(256),
         ]);
 

@@ -12,6 +12,6 @@ final class StatusRequestFixture extends AbstractRequestFixture
      * @var array<string, mixed>
      */
     public array $data = [
-        'referenceNumber' => 'string'
+        'referenceNumber' => '20250918-EE-2F15D39000-242207E5C4-1B'
     ];
 }

@@ -6,12 +6,23 @@ namespace N1ebieski\KSEFClient\ValueObjects\Requests;
 
 use N1ebieski\KSEFClient\Contracts\FromInterface;
 use N1ebieski\KSEFClient\Support\AbstractValueObject;
+use N1ebieski\KSEFClient\Validator\Rules\String\MaxRule;
+use N1ebieski\KSEFClient\Validator\Rules\String\MinRule;
+use N1ebieski\KSEFClient\Validator\Validator;
 use Stringable;
 
 final class ReferenceNumber extends AbstractValueObject implements Stringable, FromInterface
 {
-    public function __construct(public readonly string $value)
+    public readonly string $value;
+
+    public function __construct(string $value)
     {
+        Validator::validate($value, [
+            new MinRule(36),
+            new MaxRule(36),
+        ]);
+
+        $this->value = $value;
     }
 
     public function __toString(): string

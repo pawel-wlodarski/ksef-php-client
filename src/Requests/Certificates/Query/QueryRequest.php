@@ -13,8 +13,8 @@ use N1ebieski\KSEFClient\ValueObjects\CertificateSerialNumber;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Certificates\CertificateName;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Certificates\CertificateStatus;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Certificates\CertificateType;
+use N1ebieski\KSEFClient\ValueObjects\Requests\Certificates\PageSize;
 use N1ebieski\KSEFClient\ValueObjects\Requests\PageOffset;
-use N1ebieski\KSEFClient\ValueObjects\Requests\PageSize;
 
 final class QueryRequest extends AbstractRequest implements BodyInterface, ParametersInterface
 {

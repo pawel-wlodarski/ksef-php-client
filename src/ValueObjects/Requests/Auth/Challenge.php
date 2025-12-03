@@ -7,13 +7,24 @@ namespace N1ebieski\KSEFClient\ValueObjects\Requests\Auth;
 use N1ebieski\KSEFClient\Contracts\FromInterface;
 use N1ebieski\KSEFClient\Contracts\ValueAwareInterface;
 use N1ebieski\KSEFClient\Support\AbstractValueObject;
+use N1ebieski\KSEFClient\Validator\Rules\String\MaxRule;
+use N1ebieski\KSEFClient\Validator\Rules\String\MinRule;
+use N1ebieski\KSEFClient\Validator\Validator;
 use Stringable;
 
 final class Challenge extends AbstractValueObject implements FromInterface, ValueAwareInterface, Stringable
 {
+    public readonly string $value;
+
     public function __construct(
-        public readonly string $value
+        string $value
     ) {
+        Validator::validate($value, [
+            new MinRule(36),
+            new MaxRule(36),
+        ]);
+
+        $this->value = $value;
     }
 
     public function __toString(): string

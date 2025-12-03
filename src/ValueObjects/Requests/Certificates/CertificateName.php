@@ -6,13 +6,25 @@ namespace N1ebieski\KSEFClient\ValueObjects\Requests\Certificates;
 
 use N1ebieski\KSEFClient\Contracts\ValueAwareInterface;
 use N1ebieski\KSEFClient\Support\AbstractValueObject;
+use N1ebieski\KSEFClient\Validator\Rules\String\MaxRule;
+use N1ebieski\KSEFClient\Validator\Rules\String\MinRule;
+use N1ebieski\KSEFClient\Validator\Rules\String\RegexRule;
+use N1ebieski\KSEFClient\Validator\Validator;
 use Stringable;
 
 final class CertificateName extends AbstractValueObject implements ValueAwareInterface, Stringable
 {
-    public function __construct(
-        public readonly string $value
-    ) {
+    public readonly string $value;
+
+    public function __construct(string $value)
+    {
+        Validator::validate($value, [
+            new RegexRule('/^[a-zA-Z0-9_\-\ ąćęłńóśźżĄĆĘŁŃÓŚŹŻ]+$/'),
+            new MinRule(5),
+            new MaxRule(100)
+        ]);
+
+        $this->value = $value;
     }
 
     public function __toString(): string

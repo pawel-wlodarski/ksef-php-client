@@ -13,6 +13,6 @@ final class UpoRequestFixture extends AbstractRequestFixture
      */
     public array $data = [
         'referenceNumber' => '20250625-EE-319D7EE000-B67F415CDC-2C',
-        'upoReferenceNumber' => '0250625-EE-319D7EE000-B67F415CDC-CA'
+        'upoReferenceNumber' => '20250625-EE-319D7EE000-B67F415CDC-CA'
     ];
 }
