@@ -96,11 +96,8 @@ final class OpenAndSendHandler extends AbstractHandler
                     'fileSize' => $fileSize,
                     'fileHash' => base64_encode(hash('sha256', $zipDocument, true)),
                     'fileParts' => array_map(function (int $index, string $encryptedPart): array {
-                        $fileName = uniqid('part_', true) . '.zip.aes';
-
                         return [
                             'ordinalNumber' => $index + 1,
-                            'fileName' => $fileName,
                             'fileSize' => strlen($encryptedPart),
                             'fileHash' => base64_encode(hash('sha256', $encryptedPart, true)),
                         ];
