@@ -95,7 +95,7 @@ final class OpenAndSendHandler extends AbstractHandler
                 'batchFile' => [
                     'fileSize' => $fileSize,
                     'fileHash' => base64_encode(hash('sha256', $zipDocument, true)),
-                    'fileParts' => array_map(fn(int $index, string $encryptedPart): array => [
+                    'fileParts' => array_map(fn (int $index, string $encryptedPart): array => [
                         'ordinalNumber' => $index + 1,
                         'fileSize' => strlen($encryptedPart),
                         'fileHash' => base64_encode(hash('sha256', $encryptedPart, true)),
