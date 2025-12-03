@@ -10,6 +10,7 @@ use N1ebieski\KSEFClient\Contracts\Resources\Testdata\TestdataResourceInterface;
 use N1ebieski\KSEFClient\Resources\AbstractResource;
 use N1ebieski\KSEFClient\Resources\Testdata\Limits\LimitsResource;
 use N1ebieski\KSEFClient\Resources\Testdata\Person\PersonResource;
+use N1ebieski\KSEFClient\Resources\Testdata\RateLimits\RateLimitsResource;
 use N1ebieski\KSEFClient\Resources\Testdata\Subject\SubjectResource;
 use Throwable;
 
@@ -43,6 +44,15 @@ final class TestdataResource extends AbstractResource implements TestdataResourc
     {
         try {
             return new LimitsResource($this->client, $this->exceptionHandler);
+        } catch (Throwable $throwable) {
+            throw $this->exceptionHandler->handle($throwable);
+        }
+    }
+
+    public function rateLimits(): RateLimitsResource
+    {
+        try {
+            return new RateLimitsResource($this->client, $this->exceptionHandler);
         } catch (Throwable $throwable) {
             throw $this->exceptionHandler->handle($throwable);
         }

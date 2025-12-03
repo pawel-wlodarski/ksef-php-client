@@ -6,6 +6,7 @@ namespace N1ebieski\KSEFClient\Contracts\Resources\Testdata;
 
 use N1ebieski\KSEFClient\Contracts\Resources\Testdata\Limits\LimitsResourceInterface;
 use N1ebieski\KSEFClient\Contracts\Resources\Testdata\Person\PersonResourceInterface;
+use N1ebieski\KSEFClient\Contracts\Resources\Testdata\RateLimits\RateLimitsResourceInterface;
 use N1ebieski\KSEFClient\Contracts\Resources\Testdata\Subject\SubjectResourceInterface;
 
 interface TestdataResourceInterface
@@ -15,4 +16,6 @@ interface TestdataResourceInterface
     public function person(): PersonResourceInterface;
 
     public function limits(): LimitsResourceInterface;
+
+    public function rateLimits(): RateLimitsResourceInterface;
 }

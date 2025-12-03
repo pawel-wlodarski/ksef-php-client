@@ -64,7 +64,10 @@ test('send invoice as NIP_2 when NIP_2 gave InvoiceWrite permission', function (
                 'type' => 'InvoiceWrite'
             ]
         ],
-        'description' => 'Give InvoiceWrite permission to NIP_1'
+        'description' => 'Give InvoiceWrite permission to NIP_1',
+        'subjectDetails' => [
+            'fullName' => 'Jan Kowalski'
+        ]
     ])->object();
 
     Utility::retry(function (int $attempts) use ($clientNip2, $grantsResponse) {
@@ -193,7 +196,10 @@ test('send invoice as NIP_3 when NIP_3 gave canDelegate InvoiceWrite permission'
                 'canDelegate' => true
             ]
         ],
-        'description' => 'Give InvoiceWrite permission to NIP_2'
+        'description' => 'Give InvoiceWrite permission to NIP_2',
+        'subjectDetails' => [
+            'fullName' => 'Bożydar Kowalski'
+        ]
     ])->object();
 
     Utility::retry(function (int $attempts) use ($clientNip3, $grantsResponse) {
@@ -230,7 +236,13 @@ test('send invoice as NIP_3 when NIP_3 gave canDelegate InvoiceWrite permission'
         'permissions' => [
             'InvoiceWrite'
         ],
-        'description' => 'Give NIP_3 InvoiceWrite permission to NIP_1'
+        'description' => 'Give NIP_3 InvoiceWrite permission to NIP_1',
+        'subjectDetails' => [
+            'personById' => [
+                'firstName' => 'Jan',
+                'lastName' => 'Kowalski'
+            ]
+        ]
     ])->object();
 
     Utility::retry(function (int $attempts) use ($clientNip2, $grantsResponse) {

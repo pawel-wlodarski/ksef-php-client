@@ -7,26 +7,36 @@ namespace N1ebieski\KSEFClient\Requests\Permissions\Subunits\Grants;
 use N1ebieski\KSEFClient\Contracts\BodyInterface;
 use N1ebieski\KSEFClient\DTOs\Requests\Permissions\ContextIdentifierInternalIdGroup;
 use N1ebieski\KSEFClient\DTOs\Requests\Permissions\ContextIdentifierNipGroup;
+use N1ebieski\KSEFClient\DTOs\Requests\Permissions\PersonByFingerprintWithIdentifierGroup;
+use N1ebieski\KSEFClient\DTOs\Requests\Permissions\PersonByFingerprintWithoutIdentifierGroup;
+use N1ebieski\KSEFClient\DTOs\Requests\Permissions\PersonByIdentifierGroup;
 use N1ebieski\KSEFClient\DTOs\Requests\Permissions\SubjectIdentifierFingerprintGroup;
 use N1ebieski\KSEFClient\DTOs\Requests\Permissions\SubjectIdentifierNipGroup;
 use N1ebieski\KSEFClient\DTOs\Requests\Permissions\SubjectIdentifierPeselGroup;
 use N1ebieski\KSEFClient\Requests\AbstractRequest;
+use N1ebieski\KSEFClient\Support\Concerns\HasToBody;
+use N1ebieski\KSEFClient\Support\Optional;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Description;
 
 final class GrantsRequest extends AbstractRequest implements BodyInterface
 {
+    use HasToBody {
+        HasToBody::toBody as baseToBody;
+    }
+
     public function __construct(
         public readonly SubjectIdentifierNipGroup | SubjectIdentifierPeselGroup | SubjectIdentifierFingerprintGroup $subjectIdentifierGroup,
         public readonly ContextIdentifierNipGroup | ContextIdentifierInternalIdGroup $contextIdentifierGroup,
         public readonly Description $description,
-        public readonly string $subunitName
+        public readonly string $subunitName,
+        public readonly Optional | PersonByIdentifierGroup | PersonByFingerprintWithIdentifierGroup | PersonByFingerprintWithoutIdentifierGroup $subjectDetails = new Optional(),
     ) {
     }
 
     public function toBody(): array
     {
         /** @var array<string, mixed> $data */
-        $data = $this->toArray();
+        $data = $this->baseToBody();
 
         return [
             ...$data,

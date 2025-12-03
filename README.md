@@ -124,7 +124,11 @@ Main features:
             - [Testdata Limits Subject](#testdata-limits-subject)
                 - [Testdata Limits Subject Certificate](#testdata-limits-subject-certificate)
                     - [Testdata Limits Subject Certificate Limits](#testdata-limits-subject-certificate-limits)
-                    - [Testdata Limits Subject Certificate Reset](#testdata-limits-subject-certificate-reset)            
+                    - [Testdata Limits Subject Certificate Reset](#testdata-limits-subject-certificate-reset)
+        - [Testdata Rate Limits](#testdata-rate-limits)
+            - [Testdata Rate Limits Limits](#testdata-rate-limits-limits)
+            - [Testdata Rate Limits Reset](#testdata-rate-limits-reset)
+            - [Testdata Rate Limits Production](#testdata-rate-limits-production)
 
 - [Examples](#examples)
     - [Integration with a frontend application using certificate-based authentication](#integration-with-a-frontend-application-using-certificate-based-authentication)
@@ -1299,6 +1303,56 @@ use N1ebieski\KSEFClient\Requests\Testdata\Limits\Subject\Certificate\Reset\Rese
 
 $response = $client->testdata()->limits()->subject()->certificate()->reset(
     new ResetRequest(...)
+)->status();
+```
+</details>
+
+#### Testdata Rate Limits
+
+<details>
+    <summary>
+        <h5>Testdata Rate Limits Limits</h5>
+    </summary>
+
+https://ksef-test.mf.gov.pl/docs/v2/index.html#tag/Limity-i-ograniczenia/paths/~1api~1v2~1testdata~1rate-limits/post
+
+```php
+use N1ebieski\KSEFClient\Requests\Testdata\RateLimits\Limits\LimitsRequest;
+
+$response = $client->testdata()->rateLimits()->limits(
+    new LimitsRequest(...)
+)->status();
+```
+</details>
+
+<details>
+    <summary>
+        <h5>Testdata Rate Limits Reset</h5>
+    </summary>
+
+https://ksef-test.mf.gov.pl/docs/v2/index.html#tag/Limity-i-ograniczenia/paths/~1api~1v2~1testdata~1rate-limits/delete
+
+```php
+use N1ebieski\KSEFClient\Requests\Testdata\RateLimits\Reset\ResetRequest;
+
+$response = $client->testdata()->rateLimits()->reset(
+    new ResetRequest(...)
+)->status();
+```
+</details>
+
+<details>
+    <summary>
+        <h5>Testdata Rate Limits Production</h5>
+    </summary>
+
+https://ksef-test.mf.gov.pl/docs/v2/index.html#tag/Limity-i-ograniczenia/paths/~1api~1v2~1testdata~1rate-limits/delete
+
+```php
+use N1ebieski\KSEFClient\Requests\Testdata\RateLimits\Production\ProductionRequest;
+
+$response = $client->testdata()->rateLimits()->production(
+    new ProductionRequest(...)
 )->status();
 ```
 </details>

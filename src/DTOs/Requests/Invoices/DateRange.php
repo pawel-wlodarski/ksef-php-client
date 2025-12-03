@@ -16,6 +16,7 @@ final class DateRange extends AbstractDTO
         public readonly DateType $dateType,
         public readonly DateRangeFrom $from,
         public readonly Optional | DateRangeTo $to = new Optional(),
+        public readonly Optional | bool $restrictToPermanentStorageHwmDate = new Optional(),
     ) {
     }
 }

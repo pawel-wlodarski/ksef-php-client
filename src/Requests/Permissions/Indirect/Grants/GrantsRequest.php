@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace N1ebieski\KSEFClient\Requests\Permissions\Indirect\Grants;
 
 use N1ebieski\KSEFClient\Contracts\BodyInterface;
+use N1ebieski\KSEFClient\DTOs\Requests\Permissions\PersonByFingerprintWithIdentifierGroup;
+use N1ebieski\KSEFClient\DTOs\Requests\Permissions\PersonByFingerprintWithoutIdentifierGroup;
+use N1ebieski\KSEFClient\DTOs\Requests\Permissions\PersonByIdentifierGroup;
 use N1ebieski\KSEFClient\DTOs\Requests\Permissions\SubjectIdentifierFingerprintGroup;
 use N1ebieski\KSEFClient\DTOs\Requests\Permissions\SubjectIdentifierNipGroup;
 use N1ebieski\KSEFClient\DTOs\Requests\Permissions\SubjectIdentifierPeselGroup;
@@ -12,12 +15,17 @@ use N1ebieski\KSEFClient\DTOs\Requests\Permissions\TargetIdentifierInternalIdGro
 use N1ebieski\KSEFClient\DTOs\Requests\Permissions\TargetIdentifierNipGroup;
 use N1ebieski\KSEFClient\DTOs\Requests\Permissions\TargetIdentifierTypeGroup;
 use N1ebieski\KSEFClient\Requests\AbstractRequest;
+use N1ebieski\KSEFClient\Support\Concerns\HasToBody;
 use N1ebieski\KSEFClient\Support\Optional;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Description;
 use N1ebieski\KSEFClient\ValueObjects\Requests\Permissions\Indirect\IndirectPermissionType;
 
 final class GrantsRequest extends AbstractRequest implements BodyInterface
 {
+    use HasToBody {
+        HasToBody::toBody as baseToBody;
+    }
+
     /**
      * @param array<int, IndirectPermissionType> $permissions
      */
@@ -26,13 +34,14 @@ final class GrantsRequest extends AbstractRequest implements BodyInterface
         public readonly array $permissions,
         public readonly Description $description,
         public readonly Optional | TargetIdentifierNipGroup | TargetIdentifierInternalIdGroup | TargetIdentifierTypeGroup $targetIdentifierGroup = new Optional(),
+        public readonly Optional | PersonByIdentifierGroup | PersonByFingerprintWithIdentifierGroup | PersonByFingerprintWithoutIdentifierGroup $subjectDetails = new Optional(),
     ) {
     }
 
     public function toBody(): array
     {
         /** @var array<string, mixed> $data */
-        $data = $this->toArray();
+        $data = $this->baseToBody();
 
         if ( ! $this->targetIdentifierGroup instanceof Optional) {
             $data['targetIdentifier'] = [
