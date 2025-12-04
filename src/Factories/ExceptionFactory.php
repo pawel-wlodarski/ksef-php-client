@@ -8,6 +8,7 @@ use N1ebieski\KSEFClient\Exceptions\HttpClient\BadRequestException;
 use N1ebieski\KSEFClient\Exceptions\HttpClient\ClientException;
 use N1ebieski\KSEFClient\Exceptions\HttpClient\Exception;
 use N1ebieski\KSEFClient\Exceptions\HttpClient\InternalServerException;
+use N1ebieski\KSEFClient\Exceptions\HttpClient\RateLimitException;
 use N1ebieski\KSEFClient\Exceptions\HttpClient\ServerException;
 use N1ebieski\KSEFClient\Exceptions\HttpClient\UnknownSystemException;
 use N1ebieski\KSEFClient\Factories\AbstractFactory;
@@ -16,23 +17,17 @@ use N1ebieski\KSEFClient\Support\Utility;
 final class ExceptionFactory extends AbstractFactory
 {
     /**
-     * @param object{exception: object{exceptionDetailList: array<int, object{exceptionCode: int, exceptionDescription: string}>}} $exceptionResponse
+     * @param null|object{exception?: object{exceptionDetailList: array<int, object{exceptionCode: int, exceptionDescription: string}>}, status?: object{code: int, description: string, details: array<int, string>}} $exceptionResponse
      */
     public static function make(
         int $statusCode,
         ?object $exceptionResponse
     ): Exception {
-        $message = null;
-
-        if ($exceptionResponse !== null) {
-            $exceptions = $exceptionResponse->exception->exceptionDetailList;
-
-            $firstException = $exceptions[0] ?? null;
-
-            if ($firstException !== null) {
-                $message = "{$firstException->exceptionCode} {$firstException->exceptionDescription}";
-            }
-        }
+        $message = match (true) {
+            isset($exceptionResponse->exception) => self::getExceptionMessage($exceptionResponse),
+            isset($exceptionResponse->status) => self::getStatusMessage($exceptionResponse),
+            default => null
+        };
 
         /** @var class-string<Exception> $exceptionNamespace */
         $exceptionNamespace = match (true) {
@@ -49,6 +44,7 @@ final class ExceptionFactory extends AbstractFactory
 
                 return ClientException::class;
             }),
+            $statusCode === 429 => RateLimitException::class,
             $statusCode > 400 && $statusCode < 500 => ClientException::class,
             $statusCode > 500 => ServerException::class,
             default => Exception::class
@@ -59,5 +55,30 @@ final class ExceptionFactory extends AbstractFactory
             code: $statusCode,
             context: $exceptionResponse
         );
+    }
+
+    /**
+     *
+     * @param object{status: object{code: int, description: string, details: array<int, string>}} $exceptionResponse
+     */
+    private static function getStatusMessage(object $exceptionResponse): string
+    {
+        return "{$exceptionResponse->status->code} {$exceptionResponse->status->description}";
+    }
+
+    /**
+     * @param object{exception: object{exceptionDetailList: array<int, object{exceptionCode: int, exceptionDescription: string}>}} $exceptionResponse
+     */
+    private static function getExceptionMessage(object $exceptionResponse): ?string
+    {
+        $exceptions = $exceptionResponse->exception->exceptionDetailList;
+
+        $firstException = $exceptions[0] ?? null;
+
+        if ($firstException !== null) {
+            return "{$firstException->exceptionCode} {$firstException->exceptionDescription}";
+        }
+
+        return null;
     }
 }
