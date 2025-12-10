@@ -10,16 +10,19 @@ use Stringable;
 
 final class AmountTo extends AbstractValueObject implements ValueAwareInterface, Stringable
 {
-    public function __construct(public readonly float $value)
+    public readonly string $value;
+
+    public function __construct(float | string $value)
     {
+        $this->value = (string) $value;
     }
 
     public function __toString(): string
     {
-        return (string) $this->value;
+        return $this->value;
     }
 
-    public static function from(float $value): self
+    public static function from(float | string $value): self
     {
         return new self($value);
     }

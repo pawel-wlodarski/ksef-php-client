@@ -14,9 +14,9 @@ use Stringable;
 
 final class P_15ZK extends AbstractValueObject implements ValueAwareInterface, Stringable
 {
-    public readonly float $value;
+    public readonly string $value;
 
-    public function __construct(float $value)
+    public function __construct(float | string $value)
     {
         Validator::validate((string) $value, [
             new RegexRule('/^-?([1-9]\d{0,15}|0)(\.\d{1,2})?$/'),
@@ -24,15 +24,15 @@ final class P_15ZK extends AbstractValueObject implements ValueAwareInterface, S
             new MaxDigitsRule(18),
         ]);
 
-        $this->value = $value;
+        $this->value = (string) $value;
     }
 
     public function __toString(): string
     {
-        return (string) $this->value;
+        return $this->value;
     }
 
-    public static function from(float $value): self
+    public static function from(float | string $value): self
     {
         return new self($value);
     }
