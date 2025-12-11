@@ -45,14 +45,14 @@ final class FakturaZZaplataCzesciowaFixture extends AbstractFakturaFixture
                 'p_6' => '2025-05-11'
             ],
             'p_13_1Group' => [
-                'p_13_1' => 1666.66,
-                'p_14_1' => 383.33,
+                'p_13_1' => '1666.66',
+                'p_14_1' => '383.33',
             ],
             'p_13_3Group' => [
-                'p_13_3' => 0.95,
-                'p_14_3' => 0.05,
+                'p_13_3' => '0.95',
+                'p_14_3' => '0.05',
             ],
-            'p_15' => 2050.99,
+            'p_15' => '2050.99',
             'rodzajFaktury' => 'VAT',
             'faWiersz' => [
                 [
@@ -60,8 +60,8 @@ final class FakturaZZaplataCzesciowaFixture extends AbstractFakturaFixture
                     'p_7' => 'lodówka Zimnotech mk1',
                     'p_8A' => 'szt',
                     'p_8B' => 1,
-                    'p_9A' => 1626.01,
-                    'p_11' => 1626.01,
+                    'p_9A' => '1626.01',
+                    'p_11' => '1626.01',
                     'p_12' => '23'
                 ],
                 [
@@ -69,8 +69,8 @@ final class FakturaZZaplataCzesciowaFixture extends AbstractFakturaFixture
                     'p_7' => 'wniesienie sprzętu',
                     'p_8A' => 'szt',
                     'p_8B' => 1,
-                    'p_9A' => 40.65,
-                    'p_11' => 40.65,
+                    'p_9A' => '40.65',
+                    'p_11' => '40.65',
                     'p_12' => '23'
                 ],
                 [
@@ -78,8 +78,8 @@ final class FakturaZZaplataCzesciowaFixture extends AbstractFakturaFixture
                     'p_7' => 'promocja lodówka pełna mleka',
                     'p_8A' => 'szt',
                     'p_8B' => 1,
-                    'p_9A' => 0.95,
-                    'p_11' => 0.95,
+                    'p_9A' => '0.95',
+                    'p_11' => '0.95',
                     'p_12' => '5'
                 ]
             ],
@@ -87,7 +87,7 @@ final class FakturaZZaplataCzesciowaFixture extends AbstractFakturaFixture
                 'zaplataGroup' => [
                     'zaplataCzesciowa' => [
                         [
-                            'kwotaZaplatyCzesciowej' => 100,
+                            'kwotaZaplatyCzesciowej' => '100',
                             'dataZaplatyCzesciowej' => '2025-05-11'
                         ]
                     ],

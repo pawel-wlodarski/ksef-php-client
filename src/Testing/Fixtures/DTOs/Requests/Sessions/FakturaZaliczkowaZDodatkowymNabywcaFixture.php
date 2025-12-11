@@ -74,7 +74,7 @@ final class FakturaZaliczkowaZDodatkowymNabywcaFixture extends AbstractFakturaFi
                 'rolaGroup' => [
                     'rola' => '4'
                 ],
-                'udzial' => 50
+                'udzial' => '50'
             ]
         ],
         'fa' => [
@@ -86,10 +86,10 @@ final class FakturaZaliczkowaZDodatkowymNabywcaFixture extends AbstractFakturaFi
                 'p_6' => '2025-05-11'
             ],
             'p_13_1Group' => [
-                'p_13_1' => 16260.16,
-                'p_14_1' => 3739.84,
+                'p_13_1' => '16260.16',
+                'p_14_1' => '3739.84',
             ],
-            'p_15' => 20000,
+            'p_15' => '20000',
             'rodzajFaktury' => 'ZAL',
             'dodatkowyOpis' => [
                 [
@@ -106,17 +106,17 @@ final class FakturaZaliczkowaZDodatkowymNabywcaFixture extends AbstractFakturaFi
                 ]
             ],
             'zamowienie' => [
-                'wartoscZamowienia' => 375150,
+                'wartoscZamowienia' => '375150',
                 'zamowienieWiersz' => [
                     [
                         'nrWierszaZam' => 1,
                         'uu_idZ' => 'aaaa111133339990',
                         'p_7Z' => 'mieszkanie 50m^2',
                         'p_8AZ' => 'szt.',
-                        'p_8BZ' => 1,
-                        'p_9AZ' => 300000,
-                        'p_11NettoZ' => 300000,
-                        'p_11VatZ' => 69000,
+                        'p_8BZ' => '1',
+                        'p_9AZ' => '300000',
+                        'p_11NettoZ' => '300000',
+                        'p_11VatZ' => '69000',
                         'p_12Z' => '23',
                     ],
                     [
@@ -124,10 +124,10 @@ final class FakturaZaliczkowaZDodatkowymNabywcaFixture extends AbstractFakturaFi
                         'uu_idZ' => 'aaaa111133339991',
                         'p_7Z' => 'usługi dodatkowe',
                         'p_8AZ' => 'szt.',
-                        'p_8BZ' => 1,
-                        'p_9AZ' => 5000,
-                        'p_11NettoZ' => 5000,
-                        'p_11VatZ' => 1150,
+                        'p_8BZ' => '1',
+                        'p_9AZ' => '5000',
+                        'p_11NettoZ' => '5000',
+                        'p_11VatZ' => '1150',
                         'p_12Z' => '23',
                     ]
                 ]

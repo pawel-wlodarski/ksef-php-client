@@ -44,17 +44,17 @@ final class FakturaZwolnienieVatFixture extends AbstractFakturaFixture
             'p_6Group' => [
                 'p_6' => '2025-11-07',
             ],
-            'p_13_7' => 100.0,
-            'p_15' => 100.0,
+            'p_13_7' => '100.0',
+            'p_15' => '100.0',
             'rodzajFaktury' => 'VAT',
             'faWiersz' => [
                 [
                     'nrWierszaFa' => 1,
                     'p_7' => 'Usługa informatyczna',
                     'p_8A' => 'szt.',
-                    'p_8B' => 1.0,
-                    'p_9A' => 100.0,
-                    'p_11' => 100.0,
+                    'p_8B' => '1.0',
+                    'p_9A' => '100.0',
+                    'p_11' => '100.0',
                     'p_12' => 'zw',
                 ],
             ],

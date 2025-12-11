@@ -47,10 +47,10 @@ final class FakturaUproszczonaFixture extends AbstractFakturaFixture
                 'p_6' => '2025-05-11'
             ],
             'p_13_1Group' => [
-                'p_13_1' => 365.85,
-                'p_14_1' => 84.15,
+                'p_13_1' => '365.85',
+                'p_14_1' => '84.15',
             ],
-            'p_15' => 450,
+            'p_15' => '450',
             'rodzajFaktury' => 'UPR',
             'faWiersz' => [
                 [

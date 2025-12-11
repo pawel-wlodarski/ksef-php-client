@@ -63,10 +63,10 @@ final class FakturaZZalacznikiemFixture extends AbstractFakturaFixture
                 ]
             ],
             'p_13_1Group' => [
-                'p_13_1' => 43.60,
-                'p_14_1' => 10.03,
+                'p_13_1' => '43.60',
+                'p_14_1' => '10.03',
             ],
-            'p_15' => 53.63,
+            'p_15' => '53.63',
             'rodzajFaktury' => 'VAT',
             'dodatkowyOpis' => [
                 [
@@ -78,34 +78,34 @@ final class FakturaZZalacznikiemFixture extends AbstractFakturaFixture
                 [
                     'nrWierszaFa' => 1,
                     'p_7' => 'Razem za energię czynną',
-                    'p_11' => 18.00,
+                    'p_11' => '18.00',
                     'p_12' => '23'
                 ],
                 [
                     'nrWierszaFa' => 2,
                     'p_7' => 'Razem za usługi dystrybucji',
-                    'p_11' => 25.60,
+                    'p_11' => '25.60',
                     'p_12' => '23'
                 ]
             ],
             'rozliczenie' => [
                 'obciazenia' => [
                     [
-                        'kwota' => 0.00,
+                        'kwota' => '0.00',
                         'powod' => 'Odsetki'
                     ]
                 ],
-                'sumaObciazen' => 0.00,
+                'sumaObciazen' => '0.00',
                 'odliczenia' => [
                     [
-                        'kwota' => 0.00,
+                        'kwota' => '0.00',
                         'powod' => 'Nadpłata'
                     ]
                 ],
-                'sumaOdliczen' => 0.00,
+                'sumaOdliczen' => '0.00',
                 'rozliczenieGroup' => [
                     'doGroup' => [
-                        'doZaplaty' => 53.63
+                        'doZaplaty' => '53.63'
                     ]
                 ]
             ],

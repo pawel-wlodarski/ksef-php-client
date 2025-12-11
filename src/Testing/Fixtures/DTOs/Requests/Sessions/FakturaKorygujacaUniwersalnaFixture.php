@@ -60,10 +60,10 @@ final class FakturaKorygujacaUniwersalnaFixture extends AbstractFakturaFixture
                 'p_6' => '2025-05-11'
             ],
             'p_13_1Group' => [
-                'p_13_1' => -162.60,
-                'p_14_1' => -37.40,
+                'p_13_1' => '-162.60',
+                'p_14_1' => '-37.40',
             ],
-            'p_15' => -200,
+            'p_15' => '-200',
             'rodzajFaktury' => 'KOR',
             'korektaGroup' => [
                 'przyczynaKorekty' => 'obniżka ceny o 200 zł z uwagi na uszkodzenia estetyczne',
@@ -85,8 +85,8 @@ final class FakturaKorygujacaUniwersalnaFixture extends AbstractFakturaFixture
                     'p_7' => 'lodówka Zimnotech mk1',
                     'p_8A' => 'szt',
                     'p_8B' => 1,
-                    'p_9A' => 1626.01,
-                    'p_11' => 1626.01,
+                    'p_9A' => '1626.01',
+                    'p_11' => '1626.01',
                     'p_12' => '23',
                     'stanPrzed' => '1'
                 ],
@@ -96,8 +96,8 @@ final class FakturaKorygujacaUniwersalnaFixture extends AbstractFakturaFixture
                     'p_7' => 'lodówka Zimnotech mk1',
                     'p_8A' => 'szt',
                     'p_8B' => 1,
-                    'p_9A' => 1463.41,
-                    'p_11' => 1463.41,
+                    'p_9A' => '1463.41',
+                    'p_11' => '1463.41',
                     'p_12' => '23'
                 ]
             ],

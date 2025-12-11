@@ -57,11 +57,11 @@ final class FakturaWWalucieObcejFixture extends AbstractFakturaFixture
             'p_1M' => 'Warszawa',
             'p_2' => 'FV2022/02/150',
             'p_13_1Group' => [
-                'p_13_1' => 13560,
-                'p_14_1' => 3118.80,
-                'p_14_1W' => 13768.14
+                'p_13_1' => '13560',
+                'p_14_1' => '3118.80',
+                'p_14_1W' => '13768.14'
             ],
-            'p_15' => 16678.80,
+            'p_15' => '16678.80',
             'rodzajFaktury' => 'VAT',
             'faWiersz' => [
                 [
@@ -71,11 +71,11 @@ final class FakturaWWalucieObcejFixture extends AbstractFakturaFixture
                     'p_7' => 'lodówka Zimnotech mk1',
                     'cn' => '8418 21 91',
                     'p_8A' => 'szt.',
-                    'p_8B' => 10,
-                    'p_9A' => 406,
-                    'p_11' => 4060,
+                    'p_8B' => '10',
+                    'p_9A' => '406',
+                    'p_11' => '4060',
                     'p_12' => '23',
-                    'kursWaluty' => 4.4080
+                    'kursWaluty' => '4.4080'
                 ],
                 [
                     'nrWierszaFa' => 2,
@@ -84,11 +84,11 @@ final class FakturaWWalucieObcejFixture extends AbstractFakturaFixture
                     'p_7' => 'zamrażarka Zimnotech mk2',
                     'cn' => '8418 40 20',
                     'p_8A' => 'szt.',
-                    'p_8B' => 20,
-                    'p_9A' => 250,
-                    'p_11' => 5000,
+                    'p_8B' => '20',
+                    'p_9A' => '250',
+                    'p_11' => '5000',
                     'p_12' => '23',
-                    'kursWaluty' => 4.5005
+                    'kursWaluty' => '4.5005'
                 ],
                 [
                     'nrWierszaFa' => 3,
@@ -97,11 +97,11 @@ final class FakturaWWalucieObcejFixture extends AbstractFakturaFixture
                     'p_7' => 'zmywarka Bryza 100',
                     'cn' => '8422 11 00',
                     'p_8A' => 'szt.',
-                    'p_8B' => 15,
-                    'p_9A' => 300,
-                    'p_11' => 4500,
+                    'p_8B' => '15',
+                    'p_9A' => '300',
+                    'p_11' => '4500',
                     'p_12' => '23',
-                    'kursWaluty' => 4.3250
+                    'kursWaluty' => '4.3250'
                 ]
             ],
             'platnosc' => [

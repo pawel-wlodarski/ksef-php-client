@@ -3,10 +3,12 @@
 declare(strict_types=1);
 
 use N1ebieski\KSEFClient\Requests\Sessions\Online\Send\SendRequest;
+use N1ebieski\KSEFClient\Support\Utility;
 use N1ebieski\KSEFClient\Testing\Fixtures\DTOs\Requests\Sessions\FakturaKorygujacaDaneNabywcyFixture;
 use N1ebieski\KSEFClient\Testing\Fixtures\DTOs\Requests\Sessions\FakturaKorygujacaPozaKsefFixture;
 use N1ebieski\KSEFClient\Testing\Fixtures\DTOs\Requests\Sessions\FakturaKorygujacaUniwersalnaFixture;
 use N1ebieski\KSEFClient\Testing\Fixtures\DTOs\Requests\Sessions\FakturaSprzedazyTowaruFixture;
+use N1ebieski\KSEFClient\Testing\Fixtures\DTOs\Requests\Sessions\FakturaSprzedazyTowaruWithFloatsFixture;
 use N1ebieski\KSEFClient\Testing\Fixtures\DTOs\Requests\Sessions\FakturaSprzedazyUslugLeasinguOperacyjnegoFixture;
 use N1ebieski\KSEFClient\Testing\Fixtures\DTOs\Requests\Sessions\FakturaUproszczonaFixture;
 use N1ebieski\KSEFClient\Testing\Fixtures\DTOs\Requests\Sessions\FakturaVatMarzaFixture;
@@ -20,6 +22,9 @@ use N1ebieski\KSEFClient\Testing\Fixtures\Requests\Error\ErrorResponseFixture;
 use N1ebieski\KSEFClient\Testing\Fixtures\Requests\Sessions\Online\Send\SendRequestFixture;
 use N1ebieski\KSEFClient\Testing\Fixtures\Requests\Sessions\Online\Send\SendResponseFixture;
 use N1ebieski\KSEFClient\Tests\Unit\AbstractTestCase;
+use N1ebieski\KSEFClient\Validator\Rules\Xml\SchemaRule;
+use N1ebieski\KSEFClient\Validator\Validator;
+use N1ebieski\KSEFClient\ValueObjects\SchemaPath;
 
 /** @var AbstractTestCase $this */
 
@@ -29,6 +34,7 @@ use N1ebieski\KSEFClient\Tests\Unit\AbstractTestCase;
 dataset('validResponseProvider', function (): array {
     $requests = [
         (new SendRequestFixture())->withFakturaFixture(new FakturaSprzedazyTowaruFixture())->withName('faktura sprzedaży towaru'),
+        (new SendRequestFixture())->withFakturaFixture(new FakturaSprzedazyTowaruWithFloatsFixture())->withName('faktura sprzedaży towaru z floatami'),
         (new SendRequestFixture())->withFakturaFixture(new FakturaKorygujacaDaneNabywcyFixture())->withName('faktura korygująca dane nabywcy'),
         (new SendRequestFixture())->withFakturaFixture(new FakturaKorygujacaUniwersalnaFixture())->withName('faktura korygująca uniwersalna'),
         (new SendRequestFixture())->withFakturaFixture(new FakturaSprzedazyUslugLeasinguOperacyjnegoFixture())->withName('faktura sprzedaży usług leasingu operacyjnego'),
@@ -64,6 +70,10 @@ test('valid response', function (SendRequestFixture $requestFixture, SendRespons
     $clientStub = $this->createClientStub($responseFixture);
 
     $request = SendRequest::from($requestFixture->data);
+
+    Validator::validate($request->toXml(), [
+        new SchemaRule(SchemaPath::from(Utility::basePath('resources/xsd/faktura.xsd')))
+    ]);
 
     expect($request)->toBeFixture($requestFixture->data);
 

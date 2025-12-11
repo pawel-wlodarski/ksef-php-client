@@ -59,11 +59,11 @@ final class FakturaVatMarzaFixture extends AbstractFakturaFixture
                 'p_6' => '2022-02-15',
             ],
             'p_13_1Group' => [
-                'p_13_1' => 813,
-                'p_14_1' => 187,
+                'p_13_1' => '813',
+                'p_14_1' => '187',
             ],
-            'p_13_11' => 2000,
-            'p_15' => 3000,
+            'p_13_11' => '2000',
+            'p_15' => '3000',
             'adnotacje' => [
                 'pMarzy' => [
                     'p_PMarzyGroup' => [
@@ -80,16 +80,16 @@ final class FakturaVatMarzaFixture extends AbstractFakturaFixture
                     'p_7' => 'wycieczka na Mazury usługi obce',
                     'p_8A' => 'szt.',
                     'p_8B' => 1,
-                    'p_9B' => 2000,
-                    'p_11A' => 2000
+                    'p_9B' => '2000',
+                    'p_11A' => '2000'
                 ],
                 [
                     'nrWierszaFa' => 2,
                     'p_7' => 'wycieczka na Mazury usługa własna',
                     'p_8A' => 'szt.',
                     'p_8B' => 1,
-                    'p_9B' => 1000,
-                    'p_11A' => 1000,
+                    'p_9B' => '1000',
+                    'p_11A' => '1000',
                     'p_12' => '23'
                 ]
             ],

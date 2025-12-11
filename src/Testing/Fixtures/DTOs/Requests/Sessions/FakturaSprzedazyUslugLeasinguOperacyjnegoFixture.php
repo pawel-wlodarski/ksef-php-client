@@ -57,7 +57,7 @@ final class FakturaSprzedazyUslugLeasinguOperacyjnegoFixture extends AbstractFak
             'p_1' => '2025-05-11',
             'p_1M' => 'Warszawa',
             'p_2' => 'FK2022/03/200',
-            'p_15' => 0,
+            'p_15' => '0',
             'rodzajFaktury' => 'KOR',
             'korektaGroup' => [
                 'przyczynaKorekty' => 'błędna nazwa nabywcy',
