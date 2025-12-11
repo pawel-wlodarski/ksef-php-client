@@ -17,7 +17,7 @@ final class KRS extends AbstractValueObject implements ValueAwareInterface, Stri
     public function __construct(string $value)
     {
         Validator::validate($value, [
-            new RegexRule('/\d{10}/')
+            new RegexRule('/^\d{10}$/')
         ]);
 
         $this->value = $value;

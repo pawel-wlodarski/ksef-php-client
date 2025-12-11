@@ -17,7 +17,7 @@ final class SWIFT extends AbstractValueObject implements ValueAwareInterface, St
     public function __construct(string $value)
     {
         Validator::validate($value, [
-            new RegexRule('/[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3}){0,1}/'),
+            new RegexRule('/^[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3}){0,1}$/'),
         ]);
 
         $this->value = $value;

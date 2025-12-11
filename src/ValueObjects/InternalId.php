@@ -19,7 +19,7 @@ final class InternalId extends AbstractValueObject implements FromInterface, Str
     {
         Validator::validate($value, [
             // @see https://ksef-test.mf.gov.pl/docs/v2/schemas/authv2.xsd
-            new RegexRule('/[1-9]((\d[1-9])|([1-9]\d))\d{7}-\d{5}/'),
+            new RegexRule('/^[1-9]((\d[1-9])|([1-9]\d))\d{7}-\d{5}$/'),
         ]);
 
         $this->value = $value;

@@ -19,7 +19,7 @@ final class KwotaAkcyzy extends AbstractValueObject implements ValueAwareInterfa
     public function __construct(float $value)
     {
         Validator::validate((string) $value, [
-            new RegexRule('/-?([1-9]\d{0,15}|0)(\.\d{1,2})?/'),
+            new RegexRule('/^-?([1-9]\d{0,15}|0)(\.\d{1,2})?$/'),
             new DecimalRule(0, 2),
             new MaxDigitsRule(18),
         ]);

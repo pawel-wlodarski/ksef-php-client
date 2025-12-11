@@ -18,7 +18,7 @@ final class NIP extends AbstractValueObject implements FromInterface, Stringable
     public function __construct(string $value)
     {
         Validator::validate($value, [
-            new RegexRule('/[1-9]((\\d[1-9])|([1-9]\\d))\\d{7}/'),
+            new RegexRule('/^[1-9]((\\d[1-9])|([1-9]\\d))\\d{7}$/'),
         ]);
 
         $this->value = $value;

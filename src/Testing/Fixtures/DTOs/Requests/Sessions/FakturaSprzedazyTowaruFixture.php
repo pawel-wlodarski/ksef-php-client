@@ -52,7 +52,7 @@ final class FakturaSprzedazyTowaruFixture extends AbstractFakturaFixture
                 'p_13_3' => 0.95,
                 'p_14_3' => 0.05,
             ],
-            'p_15' => 2050.99,
+            'p_15' => '2050.99',
             'rodzajFaktury' => 'VAT',
             'faWiersz' => [
                 [

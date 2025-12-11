@@ -21,7 +21,7 @@ final class IDWew extends AbstractValueObject implements ValueAwareInterface, St
         Validator::validate($value, [
             new MinRule(1),
             new MaxRule(20),
-            new RegexRule('/[1-9]((\d[1-9])|([1-9]\d))\d{7}-\d{5}/'),
+            new RegexRule('/^[1-9]((\d[1-9])|([1-9]\d))\d{7}-\d{5}$/'),
         ]);
 
         $this->value = $value;

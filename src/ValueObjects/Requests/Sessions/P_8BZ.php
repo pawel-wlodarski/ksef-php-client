@@ -19,7 +19,7 @@ final class P_8BZ extends AbstractValueObject implements ValueAwareInterface, St
     public function __construct(float $value)
     {
         Validator::validate((string) $value, [
-            new RegexRule('/-?([1-9]\d{0,15}|0)(\.\d{1,6})?/'),
+            new RegexRule('/^-?([1-9]\d{0,15}|0)(\.\d{1,6})?$/'),
             new DecimalRule(0, 6),
             new MaxDigitsRule(22),
         ]);

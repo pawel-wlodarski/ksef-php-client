@@ -17,7 +17,7 @@ final class NrVatUE extends AbstractValueObject implements ValueAwareInterface, 
     public function __construct(string $value)
     {
         Validator::validate($value, [
-            new RegexRule('/(\d|[A-Z]|\+|\*){1,12}/'),
+            new RegexRule('/^(\d|[A-Z]|\+|\*){1,12}$/'),
         ]);
 
         $this->value = $value;
