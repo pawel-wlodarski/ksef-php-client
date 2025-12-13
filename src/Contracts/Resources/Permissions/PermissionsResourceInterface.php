@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace N1ebieski\KSEFClient\Contracts\Resources\Permissions;
 
+use N1ebieski\KSEFClient\Contracts\Resources\Permissions\Attachments\AttachmentsResourceInterface;
 use N1ebieski\KSEFClient\Contracts\Resources\Permissions\Authorizations\AuthorizationsResourceInterface;
 use N1ebieski\KSEFClient\Contracts\Resources\Permissions\Common\CommonResourceInterface;
 use N1ebieski\KSEFClient\Contracts\Resources\Permissions\Entities\EntitiesResourceInterface;
@@ -33,4 +34,6 @@ interface PermissionsResourceInterface
     public function operations(): OperationsResourceInterface;
 
     public function query(): QueryResourceInterface;
+
+    public function attachments(): AttachmentsResourceInterface;
 }

@@ -98,6 +98,8 @@ Main features:
                 - [Permissions Query Personal Grants](#permissions-query-personal-grants)
         - [Permissions Operations](#permissions-operations)
             - [Permissions Operations Status](#permissions-operations-status)
+        - [Permissions Attachments](#permissions-attachments)
+            - [Permissions Attachments Status](#permissions-attachments-status)            
     - [Certificates](#certificates)
         - [Certificates Limits](#certificates-limits)
         - [Certificates Enrollments](#certificates-enrollments)
@@ -1018,6 +1020,24 @@ https://ksef-test.mf.gov.pl/docs/v2/index.html#tag/Operacje/paths/~1api~1v2~1per
 use N1ebieski\KSEFClient\Requests\Permissions\Operations\Status\StatusRequest;
 
 $response = $client->permissions()->operations()->status(
+    new StatusRequest(...)
+)->object();
+```
+</details>
+
+#### Attachments
+
+<details>
+    <summary>
+        <h5>Attachments Status</h5>
+    </summary>
+
+https://ksef-test.mf.gov.pl/docs/v2/index.html#tag/Operacje/paths/~1api~1v2~1permissions~1attachments~1status/get
+
+```php
+use N1ebieski\KSEFClient\Requests\Attachments\Status\StatusRequest;
+
+$response = $client->permissions()->attachments()->status(
     new StatusRequest(...)
 )->object();
 ```
