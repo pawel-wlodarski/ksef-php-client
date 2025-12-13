@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace N1ebieski\KSEFClient\Contracts\Resources;
 
 use DateTimeInterface;
+use N1ebieski\KSEFClient\Contracts\HttpClient\ResponseInterface;
 use N1ebieski\KSEFClient\Contracts\Resources\Auth\AuthResourceInterface;
 use N1ebieski\KSEFClient\Contracts\Resources\Certificates\CertificatesResourceInterface;
 use N1ebieski\KSEFClient\Contracts\Resources\Invoices\InvoicesResourceInterface;
@@ -36,6 +37,8 @@ interface ClientResourceInterface
     public function auth(): AuthResourceInterface;
 
     public function limits(): LimitsResourceInterface;
+
+    public function rateLimits(): ResponseInterface;
 
     public function security(): SecurityResourceInterface;
 

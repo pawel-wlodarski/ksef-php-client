@@ -9,9 +9,11 @@ use DateTimeInterface;
 use Exception;
 use N1ebieski\KSEFClient\Contracts\Exception\ExceptionHandlerInterface;
 use N1ebieski\KSEFClient\Contracts\HttpClient\HttpClientInterface;
+use N1ebieski\KSEFClient\Contracts\HttpClient\ResponseInterface;
 use N1ebieski\KSEFClient\Contracts\Resources\ClientResourceInterface;
 use N1ebieski\KSEFClient\DTOs\Config;
 use N1ebieski\KSEFClient\Requests\Auth\Token\Refresh\RefreshHandler;
+use N1ebieski\KSEFClient\Requests\RateLimits\RateLimitsHandler;
 use N1ebieski\KSEFClient\Resources\AbstractResource;
 use N1ebieski\KSEFClient\Resources\Auth\AuthResource;
 use N1ebieski\KSEFClient\Resources\Certificates\CertificatesResource;
@@ -133,6 +135,15 @@ final class ClientResource extends AbstractResource implements ClientResourceInt
             $this->refreshTokenIfExpired();
 
             return new LimitsResource($this->client, $this->exceptionHandler);
+        } catch (Throwable $throwable) {
+            throw $this->exceptionHandler->handle($throwable);
+        }
+    }
+
+    public function rateLimits(): ResponseInterface
+    {
+        try {
+            return (new RateLimitsHandler($this->client))->handle();
         } catch (Throwable $throwable) {
             throw $this->exceptionHandler->handle($throwable);
         }

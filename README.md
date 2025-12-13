@@ -49,6 +49,7 @@ Main features:
     - [Limits](#limits)
         - [Limits Context](#limits-context)
         - [Limits Subject](#limits-subject)
+    - [Rate Limits](#rate-limits)
     - [Security](#security)
         - [Security Public Key Certificates](#security-public-key-certificates)
     - [Sessions](#sessions)
@@ -459,7 +460,7 @@ $response = $client->auth()->sessions()->revoke(
 
 <details>
     <summary>
-        <h5>Limits Context</h5>
+        <h4>Limits Context</h4>
     </summary>
 
 https://ksef-test.mf.gov.pl/docs/v2/index.html#tag/Limity-i-ograniczenia/paths/~1api~1v2~1limits~1context/get
@@ -475,7 +476,7 @@ $response = $client->limits()->context(
 
 <details>
     <summary>
-        <h5>Limits Subject</h5>
+        <h4>Limits Subject</h4>
     </summary>
 
 https://ksef-test.mf.gov.pl/docs/v2/index.html#tag/Limity-i-ograniczenia/paths/~1api~1v2~1limits~1subject/get
@@ -486,6 +487,18 @@ use N1ebieski\KSEFClient\Requests\Limits\Subject\SubjectRequest;
 $response = $client->limits()->subject(
     new SubjectRequest(...)
 )->object();
+```
+</details>
+
+<details>
+    <summary>
+        <h3>Rate Limits</h3>
+    </summary>
+
+https://ksef-test.mf.gov.pl/docs/v2/index.html#tag/Limity-i-ograniczenia/paths/~1api~1v2~1rate-limits/get
+
+```php
+$response = $client->rateLimits()->object();
 ```
 </details>
 
