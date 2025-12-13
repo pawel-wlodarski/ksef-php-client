@@ -8,6 +8,7 @@ use N1ebieski\KSEFClient\Contracts\Exception\ExceptionHandlerInterface;
 use N1ebieski\KSEFClient\Contracts\HttpClient\HttpClientInterface;
 use N1ebieski\KSEFClient\Contracts\Resources\Permissions\PermissionsResourceInterface;
 use N1ebieski\KSEFClient\Resources\AbstractResource;
+use N1ebieski\KSEFClient\Resources\Permissions\Attachments\AttachmentsResource;
 use N1ebieski\KSEFClient\Resources\Permissions\Authorizations\AuthorizationsResource;
 use N1ebieski\KSEFClient\Resources\Permissions\Common\CommonResource;
 use N1ebieski\KSEFClient\Resources\Permissions\Entities\EntitiesResource;
@@ -103,6 +104,15 @@ final class PermissionsResource extends AbstractResource implements PermissionsR
     {
         try {
             return new QueryResource($this->client, $this->exceptionHandler);
+        } catch (Throwable $throwable) {
+            throw $this->exceptionHandler->handle($throwable);
+        }
+    }
+
+    public function attachments(): AttachmentsResource
+    {
+        try {
+            return new AttachmentsResource($this->client, $this->exceptionHandler);
         } catch (Throwable $throwable) {
             throw $this->exceptionHandler->handle($throwable);
         }

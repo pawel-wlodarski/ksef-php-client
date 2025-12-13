@@ -49,6 +49,7 @@ Main features:
     - [Limits](#limits)
         - [Limits Context](#limits-context)
         - [Limits Subject](#limits-subject)
+    - [Rate Limits](#rate-limits)
     - [Security](#security)
         - [Security Public Key Certificates](#security-public-key-certificates)
     - [Sessions](#sessions)
@@ -98,6 +99,8 @@ Main features:
                 - [Permissions Query Personal Grants](#permissions-query-personal-grants)
         - [Permissions Operations](#permissions-operations)
             - [Permissions Operations Status](#permissions-operations-status)
+        - [Permissions Attachments](#permissions-attachments)
+            - [Permissions Attachments Status](#permissions-attachments-status)            
     - [Certificates](#certificates)
         - [Certificates Limits](#certificates-limits)
         - [Certificates Enrollments](#certificates-enrollments)
@@ -459,7 +462,7 @@ $response = $client->auth()->sessions()->revoke(
 
 <details>
     <summary>
-        <h5>Limits Context</h5>
+        <h4>Limits Context</h4>
     </summary>
 
 https://ksef-test.mf.gov.pl/docs/v2/index.html#tag/Limity-i-ograniczenia/paths/~1api~1v2~1limits~1context/get
@@ -475,7 +478,7 @@ $response = $client->limits()->context(
 
 <details>
     <summary>
-        <h5>Limits Subject</h5>
+        <h4>Limits Subject</h4>
     </summary>
 
 https://ksef-test.mf.gov.pl/docs/v2/index.html#tag/Limity-i-ograniczenia/paths/~1api~1v2~1limits~1subject/get
@@ -486,6 +489,18 @@ use N1ebieski\KSEFClient\Requests\Limits\Subject\SubjectRequest;
 $response = $client->limits()->subject(
     new SubjectRequest(...)
 )->object();
+```
+</details>
+
+<details>
+    <summary>
+        <h3>Rate Limits</h3>
+    </summary>
+
+https://ksef-test.mf.gov.pl/docs/v2/index.html#tag/Limity-i-ograniczenia/paths/~1api~1v2~1rate-limits/get
+
+```php
+$response = $client->rateLimits()->object();
 ```
 </details>
 
@@ -1018,6 +1033,24 @@ https://ksef-test.mf.gov.pl/docs/v2/index.html#tag/Operacje/paths/~1api~1v2~1per
 use N1ebieski\KSEFClient\Requests\Permissions\Operations\Status\StatusRequest;
 
 $response = $client->permissions()->operations()->status(
+    new StatusRequest(...)
+)->object();
+```
+</details>
+
+#### Attachments
+
+<details>
+    <summary>
+        <h5>Attachments Status</h5>
+    </summary>
+
+https://ksef-test.mf.gov.pl/docs/v2/index.html#tag/Operacje/paths/~1api~1v2~1permissions~1attachments~1status/get
+
+```php
+use N1ebieski\KSEFClient\Requests\Attachments\Status\StatusRequest;
+
+$response = $client->permissions()->attachments()->status(
     new StatusRequest(...)
 )->object();
 ```
