@@ -10,6 +10,9 @@ use N1ebieski\KSEFClient\Overrides\CuyZ\Valinor\Mapper\Source\Modifier\CamelCase
 
 trait HasFromArray
 {
+    /**
+     * @param array<string, mixed> $data
+     */
     public static function from(array $data): static
     {
         return (new MapperBuilder())

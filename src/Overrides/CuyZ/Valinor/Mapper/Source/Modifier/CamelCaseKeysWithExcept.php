@@ -44,8 +44,11 @@ final class CamelCaseKeysWithExcept implements IteratorAggregate
 
             if ( ! is_string($key)) {
                 $result[$key] = $value; //@phpstan-ignore-line
+
                 continue;
             }
+
+            $key = lcfirst($key);
 
             if (array_filter($this->keyTypeExcept, fn (string $except): bool => str_starts_with($key, $except)) !== []) {
                 $result[$key] = $value;

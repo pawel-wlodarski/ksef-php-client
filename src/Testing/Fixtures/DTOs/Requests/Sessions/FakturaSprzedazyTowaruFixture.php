@@ -38,7 +38,7 @@ final class FakturaSprzedazyTowaruFixture extends AbstractFakturaFixture
         ],
         'fa' => [
             'kodWaluty' => 'PLN',
-            'p_1' => '2025-05-11',
+            'P_1' => '2025-05-11',
             'p_1M' => 'Warszawa',
             'p_2' => '1/05/2025',
             'p_6Group' => [
