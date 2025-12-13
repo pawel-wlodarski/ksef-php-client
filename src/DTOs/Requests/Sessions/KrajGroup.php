@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace N1ebieski\KSEFClient\DTOs\Requests\Sessions;
 
 use DOMDocument;
-use N1ebieski\KSEFClient\ValueObjects\Requests\XmlNamespace;
 use N1ebieski\KSEFClient\Contracts\DomSerializableInterface;
-use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\KodKraju;
-use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\NrID;
 use N1ebieski\KSEFClient\Support\AbstractDTO;
 use N1ebieski\KSEFClient\Support\Optional;
+use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\KodKraju;
+use N1ebieski\KSEFClient\ValueObjects\Requests\Sessions\NrID;
+use N1ebieski\KSEFClient\ValueObjects\Requests\XmlNamespace;
 
 final class KrajGroup extends AbstractDTO implements DomSerializableInterface
 {
@@ -33,16 +33,16 @@ final class KrajGroup extends AbstractDTO implements DomSerializableInterface
         $krajGroup = $dom->createElementNS((string) XmlNamespace::Fa3->value, 'KrajGroup');
         $dom->appendChild($krajGroup);
 
-        $nrID = $dom->createElementNS((string) XmlNamespace::Fa3->value, 'NrID');
-        $nrID->appendChild($dom->createTextNode((string) $this->nrID));
-
-        $krajGroup->appendChild($nrID);
-
         if ($this->kodKraju instanceof KodKraju) {
             $kodKraju = $dom->createElementNS((string) XmlNamespace::Fa3->value, 'KodKraju');
             $kodKraju->appendChild($dom->createTextNode((string) $this->kodKraju));
             $krajGroup->appendChild($kodKraju);
         }
+
+        $nrID = $dom->createElementNS((string) XmlNamespace::Fa3->value, 'NrID');
+        $nrID->appendChild($dom->createTextNode((string) $this->nrID));
+
+        $krajGroup->appendChild($nrID);
 
         return $dom;
     }
