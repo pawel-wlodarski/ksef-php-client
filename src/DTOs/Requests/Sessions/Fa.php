@@ -76,8 +76,8 @@ final class Fa extends AbstractDTO implements DomSerializableInterface
      * @param P_15 $p_15 Kwota należności ogółem. W przypadku faktur zaliczkowych kwota zapłaty dokumentowana fakturą. W przypadku faktur o których mowa w art. 106f ust. 3 ustawy kwota pozostała do zapłaty. W przypadku faktur korygujących korekta kwoty wynikającej z faktury korygowanej. W przypadku, o którym mowa w art. 106j ust. 3 ustawy korekta kwot wynikających z faktur korygowanych
      * @param Adnotacje $adnotacje Inne adnotacje na fakturze
      * @param Optional|array<int, ZaliczkaCzesciowa> $zaliczkaCzesciowa Dane dla przypadków faktur dokumentujących otrzymanie więcej niż jednej płatności, o której mowa w art. 106b ust. 1 pkt 4 ustawy. W przypadku, gdy faktura, o której mowa w art. 106f ust. 3 ustawy dokumentuje jednocześnie otrzymanie części zapłaty przed dokonaniem czynności, różnica kwoty w polu P_15 i sumy poszczególnych pól P_15Z stanowi kwotę pozostałą ponad płatności otrzymane przed wykonaniem czynności udokumentowanej fakturą
-     * @param TP|Optional $tp Istniejące powiązania między nabywcą a dokonującym dostawy towarów lub usługodawcą, zgodnie z § 10 ust. 4 pkt 3, z zastrzeżeniem ust. 4b rozporządzenia w sprawie szczegółowego zakresu danych zawartych w deklaracjach podatkowych i w ewidencji w zakresie podatku od towarów i usług
      * @param FP|Optional $fp Faktura, o której mowa w art. 109 ust. 3d ustawy
+     * @param TP|Optional $tp Istniejące powiązania między nabywcą a dokonującym dostawy towarów lub usługodawcą, zgodnie z § 10 ust. 4 pkt 3, z zastrzeżeniem ust. 4b rozporządzenia w sprawie szczegółowego zakresu danych zawartych w deklaracjach podatkowych i w ewidencji w zakresie podatku od towarów i usług
      * @param Optional|array<int, DodatkowyOpis> $dodatkowyOpis Pola przeznaczone dla wykazywania dodatkowych danych na fakturze, w tym wymaganych przepisami prawa, dla których nie przewidziano innych pól/elementów
      * @param Optional|array<int, FakturaZaliczkowa> $fakturaZaliczkowa Numery faktur zaliczkowych lub ich numery KSeF, jeśli zostały wystawione z użyciem KSeF
      * @param ZwrotAkcyzy|Optional $zwrotAkcyzy Informacja dodatkowa niezbędna dla rolników ubiegających się o zwrot podatku akcyzowego zawartego w cenie oleju napędowego
@@ -114,8 +114,8 @@ final class Fa extends AbstractDTO implements DomSerializableInterface
         public readonly RodzajFaktury $rodzajFaktury = RodzajFaktury::Vat,
         public readonly Optional | KorektaGroup $korektaGroup = new Optional(),
         Optional | array $zaliczkaCzesciowa = new Optional(),
-        public readonly Optional | TP $tp = new Optional(),
         public readonly Optional | FP $fp = new Optional(),
+        public readonly Optional | TP $tp = new Optional(),
         Optional | array $dodatkowyOpis = new Optional(),
         Optional | array $fakturaZaliczkowa = new Optional(),
         public readonly Optional | ZwrotAkcyzy $zwrotAkcyzy = new Optional(),
@@ -324,18 +324,18 @@ final class Fa extends AbstractDTO implements DomSerializableInterface
             }
         }
 
-        if ($this->tp instanceof TP) {
-            $tp = $dom->createElementNS((string) XmlNamespace::Fa3->value, 'TP');
-            $tp->appendChild($dom->createTextNode((string) $this->tp->value));
-
-            $fa->appendChild($tp);
-        }
-
         if ($this->fp instanceof FP) {
             $fp = $dom->createElementNS((string) XmlNamespace::Fa3->value, 'FP');
             $fp->appendChild($dom->createTextNode((string) $this->fp->value));
 
             $fa->appendChild($fp);
+        }
+
+        if ($this->tp instanceof TP) {
+            $tp = $dom->createElementNS((string) XmlNamespace::Fa3->value, 'TP');
+            $tp->appendChild($dom->createTextNode((string) $this->tp->value));
+
+            $fa->appendChild($tp);
         }
 
         if ( ! $this->dodatkowyOpis instanceof Optional) {
