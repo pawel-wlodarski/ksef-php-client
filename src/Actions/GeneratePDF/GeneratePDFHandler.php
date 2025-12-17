@@ -16,7 +16,8 @@ final class GeneratePDFHandler extends AbstractHandler
     {
         $documents = array_filter([
             'invoice' => $action->invoiceDocument,
-            'upo' => $action->upoDocument
+            'upo' => $action->upoDocument,
+            'confirmation' => $action->confirmationDocument
         ]);
 
         $pdfs = [];
@@ -42,8 +43,8 @@ final class GeneratePDFHandler extends AbstractHandler
 
             $command = "node {$action->ksefFeInvoiceConverterPath->value} {$key} {$xmlFile} {$pdfFile}";
 
-            if ($key === 'invoice') {
-                if ($action->ksefNumber instanceof KsefNumber) {
+            if (in_array($key, ['invoice', 'confirmation'])) {
+                if ($key === 'invoice' && $action->ksefNumber instanceof KsefNumber) {
                     $command .= " --nr-ksef {$action->ksefNumber->value}";
                 }
 

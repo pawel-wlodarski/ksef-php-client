@@ -23,7 +23,8 @@ final class GenerateQRCodesAction extends AbstractAction
         public readonly ?KsefNumber $ksefNumber = null,
         public readonly ?Certificate $certificate = null,
         public readonly ?CertificateSerialNumber $certificateSerialNumber = null,
-        public readonly ?ContextIdentifierGroup $contextIdentifierGroup = null
+        public readonly ?ContextIdentifierGroup $contextIdentifierGroup = null,
+        public readonly bool $captions = true
     ) {
     }
 }

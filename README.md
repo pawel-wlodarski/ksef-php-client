@@ -139,6 +139,7 @@ Main features:
     - [Generate a KSEF certificate and convert to .p12 file](#generate-a-ksef-certificate-and-convert-to-a-p12-file)
     - [Send an invoice, check for UPO and generate QR code](#send-an-invoice-check-for-upo-and-generate-qr-code)
     - [Generate PDF for the invoice and the UPO file](#generate-pdf-for-the-invoice-and-the-upo-file)
+    - [Generate PDF for the transaction confirmation with both QR codes](#generate-pdf-for-the-transaction-confirmation-with-both-qr-codes)
     - [Batch async send multiple invoices and check for UPO](#batch-async-send-multiple-invoices-and-check-for-upo)
     - [Create an offline invoice and generate both QR codes](#create-an-offline-invoice-and-generate-both-qr-codes)
     - [Generate PDF for the offline invoice file with both QR codes](#generate-pdf-for-the-offline-invoice-file-with-both-qr-codes)
@@ -1614,7 +1615,7 @@ file_put_contents(Utility::basePath("var/qr/code1.png"), $qrCodes->code1->raw);
 [PDF invoice example.pdf](https://github.com/user-attachments/files/23744618/ONLINE.pdf)
 [UPO-example.pdf](https://github.com/user-attachments/files/23747747/UPO-20251124-EE-4148363000-80035B5E1C-6A.pdf)
 
-Install [lukasz-wojtanowski-softvig/ksef-pdf-generator](https://github.com/N1ebieski/ksef-pdf-generator/tree/feature/cli)
+Install [n1ebieski/ksef-pdf-generator](https://github.com/N1ebieski/ksef-pdf-generator/tree/feature/cli)
 
 ```php
 use N1ebieski\KSEFClient\Actions\GeneratePDF\GeneratePDFAction;
@@ -1629,15 +1630,45 @@ use N1ebieski\KSEFClient\ValueObjects\KsefFeInvoiceConverterPath;
 $ksefFeInvoiceConverterPath = KsefFeInvoiceConverterPath::from(Utility::basePath('../ksef-fe-invoice-converter/dist/cli/index.js'));
 
 $pdfs = (new GeneratePDFHandler())->handle(new GeneratePDFAction(
+    ksefFeInvoiceConverterPath: $ksefFeInvoiceConverterPath,    
     invoiceDocument $faktura->toXml(),
     upoDocument: $upo,
-    ksefFeInvoiceConverterPath: $ksefFeInvoiceConverterPath,
     qrCodes: $qrCodes,
     ksefNumber: $ksefNumber
 ));
 
 file_put_contents(Utility::basePath("var/pdf/{$ksefNumber->value}.pdf"), $pdfs->invoice);
 file_put_contents(Utility::basePath("var/pdf/UPO-{$sendResponse->referenceNumber}.pdf"), $pdfs->upo);
+```
+
+</details>
+
+<details>
+    <summary>
+        <h3>Generate PDF for the transaction confirmation with both QR codes</h3>
+    </summary>
+
+Install [n1ebieski/ksef-pdf-generator](https://github.com/N1ebieski/ksef-pdf-generator/tree/feature/cli)
+
+```php
+use N1ebieski\KSEFClient\Actions\GeneratePDF\GeneratePDFAction;
+use N1ebieski\KSEFClient\Actions\GeneratePDF\GeneratePDFHandler;
+use N1ebieski\KSEFClient\Support\Utility;
+use N1ebieski\KSEFClient\ValueObjects\KsefFeInvoiceConverterPath;
+
+// Create an online invoice using example https://github.com/N1ebieski/ksef-php-client?tab=readme-ov-file#send-an-invoice-check-for-upo-and-generate-qr-code
+
+// and then...
+
+$ksefFeInvoiceConverterPath = KsefFeInvoiceConverterPath::from(Utility::basePath('../ksef-fe-invoice-converter/dist/cli/index.js'));
+
+$pdfs = (new GeneratePDFHandler())->handle(new GeneratePDFAction(
+    ksefFeInvoiceConverterPath: $ksefFeInvoiceConverterPath,    
+    confirmationDocument: $faktura->toXml(),
+    qrCodes: $qrCodes
+));
+
+file_put_contents(Utility::basePath("var/pdf/CONFIRMATION-{$faktura->fa->p_2->value}.pdf"), $pdfs->confirmation);
 ```
 
 </details>
@@ -1792,7 +1823,7 @@ file_put_contents(Utility::basePath("var/qr/code2.png"), $qrCodes->code2->raw);
 [PDF offline invoice EC certificate example.pdf](https://github.com/user-attachments/files/23744619/OFFLINE-CERTYFIKAT-EC.pdf)
 [PDF offline invoice RSA certificate example.pdf](https://github.com/user-attachments/files/23744620/OFFLINE-CERTYFIKAT-RSA.pdf)
 
-Install [lukasz-wojtanowski-softvig/ksef-pdf-generator](https://github.com/N1ebieski/ksef-pdf-generator/tree/feature/cli)
+Install [n1ebieski/ksef-pdf-generator](https://github.com/N1ebieski/ksef-pdf-generator/tree/feature/cli)
 
 ```php
 use N1ebieski\KSEFClient\Actions\GeneratePDF\GeneratePDFAction;
@@ -1807,8 +1838,8 @@ use N1ebieski\KSEFClient\ValueObjects\KsefFeInvoiceConverterPath;
 $ksefFeInvoiceConverterPath = KsefFeInvoiceConverterPath::from(Utility::basePath('../ksef-fe-invoice-converter/dist/cli/index.js'));
 
 $pdfs = (new GeneratePDFHandler())->handle(new GeneratePDFAction(
+    ksefFeInvoiceConverterPath: $ksefFeInvoiceConverterPath,    
     invoiceDocument: $faktura->toXml(),
-    ksefFeInvoiceConverterPath: $ksefFeInvoiceConverterPath,
     qrCodes: $qrCodes
 ));
 
