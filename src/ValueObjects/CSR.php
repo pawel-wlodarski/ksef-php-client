@@ -14,4 +14,9 @@ final class CSR extends AbstractValueObject
         public readonly OpenSSLAsymmetricKey $privateKey
     ) {
     }
+
+    public static function from(string $raw, OpenSSLAsymmetricKey $privateKey): self
+    {
+        return new self($raw, $privateKey);
+    }
 }

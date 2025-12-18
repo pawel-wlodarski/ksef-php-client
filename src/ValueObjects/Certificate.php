@@ -21,6 +21,14 @@ final class Certificate extends AbstractValueObject
     ) {
     }
 
+    public static function from(
+        string $certificate,
+        array $info,
+        OpenSSLAsymmetricKey $privateKey
+    ): self {
+        return new self($certificate, $info, $privateKey);
+    }
+
     /**
      * @return array{bits: int, key: string, rsa: array, dsa: array, dh: array, ec: array, type: int}
      */
