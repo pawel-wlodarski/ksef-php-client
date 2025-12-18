@@ -21,6 +21,9 @@ final class Certificate extends AbstractValueObject
     ) {
     }
 
+    /**
+     * @param array{issuer: array<string, string>, serialNumberHex: string} $info
+     */
     public static function from(
         string $certificate,
         array $info,
