@@ -13,6 +13,7 @@ final class GeneratePDFAction extends AbstractAction
 {
     public function __construct(
         public readonly KsefFeInvoiceConverterPath $ksefFeInvoiceConverterPath,
+        public readonly string $nodePath = 'node',
         public readonly ?string $invoiceDocument = null,
         public readonly ?string $upoDocument = null,
         public readonly ?string $confirmationDocument = null,

@@ -41,7 +41,7 @@ final class GeneratePDFHandler extends AbstractHandler
 
             file_put_contents($xmlFile, $document);
 
-            $command = "node {$action->ksefFeInvoiceConverterPath->value} {$key} {$xmlFile} {$pdfFile}";
+            $command = "{$action->nodePath} {$action->ksefFeInvoiceConverterPath->value} {$key} {$xmlFile} {$pdfFile}";
 
             if (in_array($key, ['invoice', 'confirmation'])) {
                 if ($key === 'invoice' && $action->ksefNumber instanceof KsefNumber) {
