@@ -20,5 +20,11 @@ final class GrantsRequestFixture extends AbstractRequestFixture
         ],
         'description' => 'Opis uprawnienia',
         'subunitName' => 'Jednostka 014',
+        'subjectDetails' => [
+            'personById' => [
+                'firstName' => 'Jan',
+                'lastName' => 'Kowalski',
+            ]
+        ]
     ];
 }
