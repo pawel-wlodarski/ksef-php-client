@@ -40,7 +40,10 @@
     "autoload": {
         "psr-4": {
             "N1ebieski\\KSEFClient\\": "src/"
-        } 
+        },
+        "files": [
+            "src/Support/Attributes/SensitiveParameter.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
