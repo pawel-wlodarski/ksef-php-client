@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace N1ebieski\KSEFClient\ValueObjects;
 
+use SensitiveParameter;
 use N1ebieski\KSEFClient\Contracts\ValueAwareInterface;
 use N1ebieski\KSEFClient\Support\AbstractValueObject;
 use Stringable;
@@ -11,7 +12,7 @@ use Stringable;
 final class KsefToken extends AbstractValueObject implements ValueAwareInterface, Stringable
 {
     public function __construct(
-        public readonly string $value
+        #[SensitiveParameter] public readonly string $value
     ) {
     }
 
@@ -20,7 +21,7 @@ final class KsefToken extends AbstractValueObject implements ValueAwareInterface
         return $this->value;
     }
 
-    public static function from(string $value): self
+    public static function from(#[SensitiveParameter] string $value): self
     {
         return new self($value);
     }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace N1ebieski\KSEFClient\Factories;
 
+use SensitiveParameter;
 use Deprecated;
 use N1ebieski\KSEFClient\ValueObjects\Certificate;
 use N1ebieski\KSEFClient\ValueObjects\CertificatePath;
@@ -19,7 +20,7 @@ final class CertificateFactory extends AbstractFactory
     }
 
     #[Deprecated('Use makeFromPkcs8 instead')]
-    public static function makeFromString(string $certificate, OpenSSLAsymmetricKey | string $privateKey, ?string $passphrase = null): Certificate
+    public static function makeFromString(string $certificate, #[SensitiveParameter] OpenSSLAsymmetricKey | string $privateKey, #[SensitiveParameter] ?string $passphrase = null): Certificate
     {
         return self::makeFromPkcs8($certificate, $privateKey, $passphrase);
     }
@@ -35,7 +36,7 @@ final class CertificateFactory extends AbstractFactory
         return self::makeFromPkcs12($pkcs12, $certificatePath->passphrase);
     }
 
-    public static function makeFromPkcs8(string $certificate, OpenSSLAsymmetricKey | string $privateKey, ?string $passphrase = null): Certificate
+    public static function makeFromPkcs8(string $certificate, #[SensitiveParameter] OpenSSLAsymmetricKey | string $privateKey, #[SensitiveParameter] ?string $passphrase = null): Certificate
     {
         if ( ! $privateKey instanceof OpenSSLAsymmetricKey) {
             $privateKey = openssl_pkey_get_private($privateKey, $passphrase);
@@ -59,7 +60,7 @@ final class CertificateFactory extends AbstractFactory
         return new Certificate($certificate, $info, $privateKey);
     }
 
-    public static function makeFromPkcs12(string $certificate, ?string $passphrase = null): Certificate
+    public static function makeFromPkcs12(string $certificate, #[SensitiveParameter] ?string $passphrase = null): Certificate
     {
         $pkcs12read = openssl_pkcs12_read($certificate, $data, $passphrase ?? '');
 
