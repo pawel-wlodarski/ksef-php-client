@@ -22,5 +22,5 @@ enum Procedura: string implements EnumInterface
 
     case BSpvDostawa = 'B_SPV_DOSTAWA';
 
-    case BMpvDostawa = 'B_MPV_DOSTAWA';
+    case BMpvProwizja = 'B_MPV_PROWIZJA';
 }

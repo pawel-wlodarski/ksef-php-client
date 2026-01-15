@@ -14,13 +14,9 @@ enum ProceduraZ: string implements EnumInterface
 
     case TtD = 'TT_D';
 
-    case I42 = 'I_42';
-
-    case I63 = 'I_63';
-
     case BSpv = 'B_SPV';
 
     case BSpvDostawa = 'B_SPV_DOSTAWA';
 
-    case BMpvDostawa = 'B_MPV_DOSTAWA';
+    case BMpvProwizja = 'B_MPV_PROWIZJA';
 }
