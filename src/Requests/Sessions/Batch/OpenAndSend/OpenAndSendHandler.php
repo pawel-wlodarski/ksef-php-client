@@ -58,7 +58,7 @@ final class OpenAndSendHandler extends AbstractHandler
         if (is_array($documents) && $this->config->validateXml) {
             foreach ($documents as $document) {
                 Validator::validate($document, [
-                    new SchemaRule(SchemaPath::from(Utility::basePath('resources/xsd/faktura.xsd')))
+                    new SchemaRule(SchemaPath::from(Utility::basePath('resources/xsd/faktura/schemat.xsd')))
                 ]);
             }
         }

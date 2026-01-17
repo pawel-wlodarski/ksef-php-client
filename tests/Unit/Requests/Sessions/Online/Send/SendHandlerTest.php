@@ -74,7 +74,7 @@ test('valid response', function (SendRequestFixture $requestFixture, SendRespons
     $request = SendRequest::from($requestFixture->data);
 
     Validator::validate($request->toXml(), [
-        new SchemaRule(SchemaPath::from(Utility::basePath('resources/xsd/faktura.xsd')))
+        new SchemaRule(SchemaPath::from(Utility::basePath('resources/xsd/faktura/schemat.xsd')))
     ]);
 
     expect($request)->toBeFixture($requestFixture->data);
