@@ -5,7 +5,6 @@
 /config
 /vendor
 /var
-/bin
 /docs
 .env
 .env.testing

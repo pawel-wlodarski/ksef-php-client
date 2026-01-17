@@ -39,7 +39,7 @@ final class SendHandler extends AbstractHandler
 
         if ($this->config->validateXml) {
             Validator::validate($xml, [
-                new SchemaRule(SchemaPath::from(Utility::basePath('resources/xsd/faktura.xsd')))
+                new SchemaRule(SchemaPath::from(Utility::basePath('resources/xsd/faktura/schemat.xsd')))
             ]);
         }
 

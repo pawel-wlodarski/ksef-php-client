@@ -3,6 +3,7 @@ parameters:
 	phpVersion: 80100
 	paths:
 		- src/
+		- bin/
 		- tests/
 	universalObjectCratesClasses:
 		- N1ebieski\KSEFClient\Contracts\ValueAwareInterface
